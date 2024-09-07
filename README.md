@@ -1,1 +1,1 @@
-# Proyecto Integrador Desarrollo Mobile 2024: Tienda de Campeones
+# Proyecto Intcd egrador Desarrollo Mobile 2024: Tienda de Campeones
