@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">ProyectoIntegradorMobile2024</string>
+    <string name="app_name">Tienda de campeones</string>
+
+
+    <!--  Sección productos  -->
+    <string name="products_title">Nuestros productos</string>
+
+    <!-- Strings de categorías de productos -->
+    <string name="products_germany">Alemania</string>
+    <string name="products_argentina">Argentina</string>
+    <string name="products_brazil">Brasil</string>
+    <string name="products_spain">España</string>
+    <string name="products_france">Francia</string>
+    <string name="products_england">Inglaterra</string>
+    <string name="products_italy">Italia</string>
+    <string name="products_uruguay">Uruguay</string>
+
+
 </resources>
