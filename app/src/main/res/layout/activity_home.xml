@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tiendadecampeones.ui.Home">
+
+    <ImageView
+        android:id="@+id/ImageTienda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/banner" />
+
+    <TextView
+        android:id="@+id/titleConocenos"
+        android:layout_marginLeft="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="Conoce nuestros productos"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/comenzarCompra"
+        style="@style/AppTheme.Button"
+        android:layout_width="200dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="310dp"
+        android:text="Comenzar a Comprar" />
+
+
+    <TextView
+        android:id="@+id/titleConocenos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
+        android:text="Conocenos!"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textViewConocenos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="410dp"
+        android:text="Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de.Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

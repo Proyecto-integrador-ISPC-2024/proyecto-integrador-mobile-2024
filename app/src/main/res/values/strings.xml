@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Tienda de campeones</string>
 
+    <!--  Sección Login  -->
+    <string name="user">Usuario</string>
+    <string name="passware">Contraseña</string>
+
 
     <!--  Sección productos  -->
     <string name="products_title">Nuestros productos</string>
