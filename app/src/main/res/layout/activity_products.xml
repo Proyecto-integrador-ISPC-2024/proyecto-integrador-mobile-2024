@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/colorPrimary"
+        android:background="@color/white_background"
         android:padding="16dp">
 
         <ImageView
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/logo_activities"
+            android:src="@mipmap/logo_activities"
             android:contentDescription="@string/app_name" />
 
     </LinearLayout>
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white_background"
+        android:background=""
         android:padding="10dp"
         android:layout_below="@id/headerLayout">
 
@@ -38,20 +38,31 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Back"
-            android:textColor="@android:color/black"
+            android:text="@string/back_button"
+            android:textColor="@color/white_background"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableLeft="@drawable/ic_back" />
+            android:drawableTop="@drawable/arrow_back_icon_35x35"
+            android:drawablePadding="0dp"
+            android:padding="8dp"
+            android:layout_marginEnd="220dp"
+            android:layout_gravity="center"
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/sideNavButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SideNav"
-            android:textColor="@android:color/black"
+            android:text="@string/menu_button"
+            android:textColor="@color/white_background"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableLeft="@drawable/ic_menu" />
+            android:drawableTop="@drawable/menu_icon_35x35"
+            android:drawablePadding="0dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
     </LinearLayout>
 
@@ -82,30 +93,45 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Home"
+            android:text="@string/home_button"
             android:textColor="@android:color/white"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/home_35dp_E8EAED_FILL0_wght300_GRAD0_opsz40" />
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:drawablePadding="0dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/productsButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Products"
+            android:text="@string/products_button"
             android:textColor="@android:color/white"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/shopping_bag_35dp_E8EAED_FILL0_wght300_GRAD0_opsz40" />
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:drawablePadding="0dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/profileButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Profile"
+            android:text="@string/account_button"
             android:textColor="@android:color/white"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/ic_profile" />
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:drawablePadding="0dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
     </LinearLayout>
 

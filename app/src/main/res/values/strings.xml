@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Tienda de campeones</string>
 
+    <!--  Barra de navegación superior  -->
+    <string name="back_button">Volver</string>
+    <string name="menu_button">Menu</string>
+
+    <!--  Barra de navegación inferior  -->
+    <string name="home_button">Inicio</string>
+    <string name="products_button">Productos</string>
+    <string name="account_button">Mi Cuenta</string>
 
     <!--  Sección productos  -->
     <string name="products_title">Nuestros productos</string>
