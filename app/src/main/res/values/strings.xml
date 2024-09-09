@@ -14,6 +14,15 @@
     <string name="products_england">Inglaterra</string>
     <string name="products_italy">Italia</string>
     <string name="products_uruguay">Uruguay</string>
+    
+    <!-- Sección productos correspodientes a un país específico   -->
+    <string name="product_name">Camiseta Argentina 2021</string>
+    <string name="product_amountLabel">Cantidad:</string>
+    <string name="product_amount">Cantidad</string>
+    <string name="product_sizeLabel">Talle:</string>
+    <string name="product_size">XL</string>
+
+    <string name="product_priceLabel">$12345</string>
 
 
 </resources>
