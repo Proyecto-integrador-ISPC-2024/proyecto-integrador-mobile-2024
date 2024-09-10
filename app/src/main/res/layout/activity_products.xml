@@ -4,7 +4,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_background"
+    android:background="@color/colorPrimary"
     >
 
     <!-- Main Content (Your original layout) -->
@@ -12,13 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Superior View with Logo -->
+        <!-- Logo -->
         <LinearLayout
             android:id="@+id/headerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/white_background"
+            android:background="@color/colorPrimary"
             android:padding="16dp">
 
             <ImageView
@@ -31,15 +31,15 @@
 
         </LinearLayout>
 
-        <!-- Superior Navbar -->
+        <!-- Navbar superior -->
         <LinearLayout
             android:id="@+id/topNavbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/white_background"
+            android:background="@color/colorPrimary"
             android:padding="10dp"
-            android:layout_below="@+id/headerLayout"> <!-- Error at this line -->
+            android:layout_below="@+id/headerLayout">
 
             <Button
                 android:id="@+id/backButton"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/back_button"
-                android:textColor="@color/white_background"
+                android:textColor="@color/colorPrimary"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/arrow_back_icon_35x35"
                 android:drawablePadding="0dp"
@@ -57,14 +57,13 @@
                 style="?android:attr/buttonBarButtonStyle"
                 />
 
-            <!-- SideNav Trigger Button -->
             <Button
                 android:id="@+id/sideNavButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/menu_button"
-                android:textColor="@color/white_background"
+                android:textColor="@color/colorPrimary"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/menu_icon_35x35"
                 android:drawablePadding="0dp"
@@ -74,7 +73,7 @@
 
         </LinearLayout>
 
-        <!-- Products List -->
+        <!-- Lista de productos -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/productsRecyclerView"
             android:layout_width="match_parent"
@@ -86,13 +85,13 @@
             android:paddingBottom="8dp"
             android:scrollbars="vertical"/>
 
-        <!-- Inferior Navbar -->
+        <!-- Navegación inferior -->
         <LinearLayout
             android:id="@+id/bottomNavbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/green"
+            android:background="@color/colorSecondary"
             android:padding="10dp"
             android:layout_alignParentBottom="true">
 
@@ -142,14 +141,14 @@
 
     </RelativeLayout>
 
-    <!-- Navigation Drawer Menu -->
+    <!-- Drawer de navegación lateral -->
     <LinearLayout
         android:id="@+id/sideNav"
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:orientation="vertical"
-        android:background="@color/white_background"
+        android:background="@color/colorPrimary"
         android:padding="16dp">
 
         <TextView
