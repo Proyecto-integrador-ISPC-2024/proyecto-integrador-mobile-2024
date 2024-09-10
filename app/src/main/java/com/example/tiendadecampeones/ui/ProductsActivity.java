@@ -29,10 +29,10 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-        // Initialize DrawerLayout
+        // Inicializo DrawerLayout
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        // Initialize SideNav Button
+        // Inicializo botón de menú de navegación lateral
         Button sideNavButton = findViewById(R.id.sideNavButton);
         sideNavButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,11 +45,11 @@ public class ProductsActivity extends AppCompatActivity {
             }
         });
 
-        // Initialize RecyclerView
+        // Inicializo RecyclerView para renderizar datos dinámicos
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Initialize product list and adapter
+        // Simulación de obtención de datos desde DB
         productList = new ArrayList<>();
         productList.add(new Product("Product 1", "Description 1", 19.99, R.mipmap.argentina_2021_primera));
         productList.add(new Product("Product 2", "Description 2", 29.99, R.mipmap.brasil_2002_primera));
