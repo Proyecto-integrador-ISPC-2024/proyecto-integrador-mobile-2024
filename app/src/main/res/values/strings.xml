@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Tienda de campeones</string>
+
+    <!--  Barra de navegación superior  -->
+    <string name="back_button">Volver</string>
+    <string name="menu_button">Menu</string>
+
+    <!--  Barra de navegación inferior  -->
+    <string name="home_button">Inicio</string>
+    <string name="products_button">Productos</string>
+    <string name="account_button">Mi Cuenta</string>
+
+    <!--  Sección productos  -->
+    <string name="products_title">Nuestros productos</string>
+
+    <!-- Strings de categorías de productos -->
+    <string name="products_germany">Alemania</string>
+    <string name="products_argentina">Argentina</string>
+    <string name="products_brazil">Brasil</string>
+    <string name="products_spain">España</string>
+    <string name="products_france">Francia</string>
+    <string name="products_england">Inglaterra</string>
+    <string name="products_italy">Italia</string>
+    <string name="products_uruguay">Uruguay</string>
+    
+    <!-- Sección productos correspodientes a un país específico   -->
+    <string name="product_name">Camiseta Argentina 2021</string>
+    <string name="product_amountLabel">Cantidad:</string>
+    <string name="product_amount">Cantidad</string>
+    <string name="product_sizeLabel">Talle:</string>
+    <string name="product_size">XL</string>
+    <string name="product_priceLabel">$12345</string>
+    <string name="product_addToCart">Agregar</string>
+
+
+</resources>
