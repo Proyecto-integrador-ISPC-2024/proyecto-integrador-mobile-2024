@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activity_profile">
+
+    <!-- Main Content (Your original layout) -->
+
+    <!-- Drawer de navegación lateral -->
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Logo -->
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/logo_activities" />
+
+        </LinearLayout>
+
+        <!-- Navbar superior -->
+        <LinearLayout
+            android:id="@+id/topNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/headerLayout"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/backButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="220dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/arrow_back_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:text="@string/back_button"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/sideNavButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/menu_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:text="@string/menu_button"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+        <!-- Navegación inferior -->
+
+        <!-- Sección profile-->
+
+        <LinearLayout
+            android:id="@+id/bottomNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="-3dp"
+            android:background="@color/colorSecondary"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/homeButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/home_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:text="@string/home_button"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/productsButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/shopping_bag_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:text="@string/products_button"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/profileButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/account_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:text="@string/account_button"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="81dp"
+            android:layout_height="67dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="163dp"
+            android:layout_marginTop="199dp"
+            app:srcCompat="@mipmap/letra_l" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="278dp"
+            android:layout_marginEnd="156dp"
+            android:text="@string/cl1" />
+
+        <Button
+            android:id="@+id/webtn"
+            android:layout_width="136dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="137dp"
+            android:layout_marginBottom="263dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:textColor="@color/btnText"
+            android:text="@string/webtn" />
+
+        <Button
+            android:id="@+id/Dbtn"
+            android:layout_width="137dp"
+            android:layout_height="37dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="138dp"
+            android:layout_marginBottom="212dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:textColor="@color/btnText"
+            android:text="@string/Dbtn" />
+
+        <Button
+            android:id="@+id/Logoutbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="132dp"
+            android:layout_marginBottom="107dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:textColor="@color/btnText"
+            android:text="@string/Logoutbtn" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/sideNav"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/navTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Sections -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:text="PRODUCTOS"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/productsButtonDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Productos"
+                android:background="@color/gray"
+                android:textColor="@android:color/black"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/cartButtonDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mi carrito"
+                android:background="@color/gray"
+                android:textColor="@android:color/black"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:text="SOBRE NOSOTROS"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/aboutUsButtonDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Conocenos"
+                android:background="@color/gray"
+                android:textColor="@android:color/black"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/contactButtonDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contacto"
+                android:background="@color/gray"
+                android:textColor="@android:color/black"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:text="MI PERFIL"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/profileButtonDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Perfil"
+                android:background="@color/gray"
+                android:textColor="@android:color/black"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/dashboardButtonDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:background="@color/gray"
+                android:textColor="@android:color/black"
+                android:padding="8dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -22,7 +22,7 @@
     <string name="products_england">Inglaterra</string>
     <string name="products_italy">Italia</string>
     <string name="products_uruguay">Uruguay</string>
-    
+
     <!-- Sección productos correspodientes a un país específico   -->
     <string name="product_name">Camiseta Argentina 2021</string>
     <string name="product_amountLabel">Cantidad:</string>
@@ -32,5 +32,11 @@
     <string name="product_priceLabel">$12345</string>
     <string name="product_addToCart">Agregar</string>
 
+    <!-- Botones Profile-->
+    <string name="webtn">¡Conócenos!</string>
+    <string name="Dbtn">Dashboard</string>
+    <string name="profile_btn">Perfil</string>
+    <string name="cl1">María Laura Silva</string>
+    <string name="Logoutbtn">Finalizar Sesión</string>
 
 </resources>
