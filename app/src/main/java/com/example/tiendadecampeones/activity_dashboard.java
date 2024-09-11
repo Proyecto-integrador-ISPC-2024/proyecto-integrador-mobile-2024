@@ -77,4 +77,12 @@ public class activity_dashboard extends AppCompatActivity implements SearchView.
         // Opcional: finalizar la actividad actual
         finish();
     }
+
+    public void profileBtn(View view) {
+        Toast.makeText(this, "Redirigiendo a tu perfil", Toast.LENGTH_SHORT).show();
+        // Intent para iniciar la actividad del dashboard
+        Intent intent = new Intent(this, activity_profile.class);
+        startActivity(intent);
+    }
+
 }
