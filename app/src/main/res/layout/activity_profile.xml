@@ -78,10 +78,7 @@
 
         </LinearLayout>
 
-        <!-- Navegación inferior -->
-
         <!-- Sección profile-->
-
         <LinearLayout
             android:id="@+id/bottomNavbar"
             android:layout_width="match_parent"
@@ -197,6 +194,7 @@
 
     </RelativeLayout>
 
+<!--  Lateral sidenav  -->
     <LinearLayout
         android:id="@+id/sideNav"
         android:layout_width="240dp"

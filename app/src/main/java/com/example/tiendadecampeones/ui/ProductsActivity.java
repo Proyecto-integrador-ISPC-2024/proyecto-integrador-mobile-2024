@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class ProductsActivity extends AppCompatActivity {
 
-    private DrawerLayout drawerLayout;
+
     private RecyclerView productsRecyclerView;
     private ProductsAdapter productsAdapter;
     private List<Product> productList;
@@ -29,21 +28,7 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-        // Inicializo DrawerLayout
-        drawerLayout = findViewById(R.id.drawerLayout);
 
-        // Inicializo botón de menú de navegación lateral
-        Button sideNavButton = findViewById(R.id.sideNavButton);
-        sideNavButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawerLayout.isDrawerOpen(findViewById(R.id.sideNav))) {
-                    drawerLayout.closeDrawer(findViewById(R.id.sideNav));
-                } else {
-                    drawerLayout.openDrawer(findViewById(R.id.sideNav));
-                }
-            }
-        });
 
         // Inicializo RecyclerView para renderizar datos dinámicos
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
