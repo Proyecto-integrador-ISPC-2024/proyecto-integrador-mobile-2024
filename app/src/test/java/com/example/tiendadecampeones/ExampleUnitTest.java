@@ -1,4 +1,4 @@
-package com.example.proyectointegradormobile2024;
+package com.example.tiendadecampeones;
 
 import org.junit.Test;
 

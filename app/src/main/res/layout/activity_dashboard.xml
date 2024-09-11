@@ -1,0 +1,177 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activity_dashboard">
+
+    <!-- Header Layout -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="415dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="6dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/topNavbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/logo_activities" />
+    </LinearLayout>
+
+
+    <!-- Top Navbar -->
+    <LinearLayout
+        android:id="@+id/topNavbar"
+        android:layout_width="416dp"
+        android:layout_height="95dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout">
+
+        <!-- Buttons in Top Navbar -->
+        <Button
+            android:id="@+id/backButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/arrow_back_icon_35x35"
+            android:text="@string/back_button"
+            android:textColor="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/sideNavButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/menu_icon_35x35"
+            android:text="@string/menu_button"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
+
+
+    <!-- Body-->
+
+
+    <!---Bottom Navbar -->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="@string/cl1"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/searchV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topNavbar" />
+
+    <SearchView
+        android:id="@+id/searchV"
+        android:layout_width="406dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+    </SearchView>
+
+    <LinearLayout
+        android:id="@+id/bottomNavbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/colorSecondary"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Logoutbtn">
+
+        <!-- Buttons in Bottom Navbar -->
+        <Button
+            android:id="@+id/homeButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:text="@string/home_button"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/productsButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:text="@string/products_button"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/profileBtn"
+            android:onClick="profileBtn"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:text="@string/account_button"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/Logoutbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchV" />
+
+    <Button
+        android:id="@+id/Logoutbtn"
+        android:onClick="logoutClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:backgroundTint="@color/colorSecondary"
+        android:text="@string/Logoutbtn"
+        android:textColor="@color/btnText"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

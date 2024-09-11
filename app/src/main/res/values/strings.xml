@@ -33,8 +33,14 @@
     <string name="product_amount">Cantidad</string>
     <string name="product_sizeLabel">Talle:</string>
     <string name="product_size">XL</string>
-
     <string name="product_priceLabel">$12345</string>
+    <string name="product_addToCart">Agregar</string>
 
+    <!-- Botones Profile-->
+    <string name="webtn">¡Conócenos!</string>
+    <string name="Dbtn">Dashboard</string>
+    <string name="profile_btn">Perfil</string>
+    <string name="cl1">María Laura Silva</string>
+    <string name="Logoutbtn">Finalizar Sesión</string>
 
 </resources>

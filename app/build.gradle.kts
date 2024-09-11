@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.proyectointegradormobile2024"
+    namespace = "com.example.tiendadecampeones"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.proyectointegradormobile2024"
+        applicationId = "com.example.tiendadecampeones"
         minSdk = 25
         targetSdk = 34
         versionCode = 1
