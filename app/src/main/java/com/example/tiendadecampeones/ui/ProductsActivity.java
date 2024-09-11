@@ -1,5 +1,6 @@
 package com.example.tiendadecampeones.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.ProductsAdapter;
 import com.example.tiendadecampeones.models.Product;
-import com.example.tiendadecampeones.adapters.ProductsAdapter;
-import com.example.tiendadecampeones.models.Product;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +57,17 @@ public class ProductsActivity extends AppCompatActivity {
 
         productsAdapter = new ProductsAdapter(productList);
         productsRecyclerView.setAdapter(productsAdapter);
+
+        // Floating Action Button to navigate to the cart
+        FloatingActionButton fabCart = findViewById(R.id.fabCart);
+        fabCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Navigate to CartActivity
+                Intent intent = new Intent(ProductsActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
