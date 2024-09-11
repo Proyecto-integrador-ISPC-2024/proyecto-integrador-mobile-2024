@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Contacto">
+
+    <!-- Main Content (Your original layout) -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Logo -->
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/logo_activities"
+                android:contentDescription="@string/app_name" />
+
+        </LinearLayout>
+
+        <!-- Navbar superior -->
+        <LinearLayout
+            android:id="@+id/topNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:layout_below="@+id/headerLayout">
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/back_button"
+                android:textColor="@color/colorPrimary"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/arrow_back_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_marginEnd="220dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle"
+                />
+
+            <Button
+                android:id="@+id/sideNavButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/menu_button"
+                android:textColor="@color/colorPrimary"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/menu_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+        </LinearLayout>
+
+        <!-- Información de contacto -->
+        <LinearLayout
+            android:id="@+id/contactInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/topNavbar"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/contactanosLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contactanos!"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Dirección -->
+            <TextView
+                android:id="@+id/addressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dirección: "
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/addressText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Av. Colón 123, Córdoba"
+                android:textSize="16sp" />
+
+            <!-- Teléfono -->
+            <TextView
+                android:id="@+id/phoneLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono: "
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/phoneText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+54 351 1234567"
+                android:textSize="16sp" />
+
+            <!-- Email -->
+            <TextView
+                android:id="@+id/emailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: "
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/emailText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="info@tiendadecampeones.com"
+                android:textSize="16sp" />
+
+            <!-- Botón para enviar correo -->
+            <Button
+                android:id="@+id/emailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enviar correo"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorPrimary" />
+        </LinearLayout>
+
+        <!-- Navegación inferior -->
+        <LinearLayout
+            android:id="@+id/bottomNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorSecondary"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/homeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/home_button"
+                android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/home_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/productsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/products_button"
+                android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/shopping_bag_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/profileButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/account_button"
+                android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/account_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

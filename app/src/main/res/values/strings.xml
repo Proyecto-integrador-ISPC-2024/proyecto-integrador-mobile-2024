@@ -22,7 +22,7 @@
     <string name="products_england">Inglaterra</string>
     <string name="products_italy">Italia</string>
     <string name="products_uruguay">Uruguay</string>
-    
+
     <!-- Sección productos correspodientes a un país específico   -->
     <string name="product_name">Camiseta Argentina 2021</string>
     <string name="product_amountLabel">Cantidad:</string>
