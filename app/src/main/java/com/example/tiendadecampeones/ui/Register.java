@@ -1,4 +1,4 @@
-package com.tiendadecampeones.ui;
+package com.example.tiendadecampeones.ui;
 
 import android.os.Bundle;
 

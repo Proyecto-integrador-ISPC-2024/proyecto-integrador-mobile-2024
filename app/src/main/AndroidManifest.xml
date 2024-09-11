@@ -35,7 +35,7 @@
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name="com.tiendadecampeones.ui.Home"
+            android:name=".ui.Home"
             android:exported="false" />
         <activity
             android:name="com.tiendadecampeones.ui.Login"
