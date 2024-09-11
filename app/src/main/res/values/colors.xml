@@ -8,4 +8,5 @@
     <color name="yellow">#FFD43D</color>
     <color name="purple">#65558F</color>
     <color name="violet">#BF89D7</color>
+    <color name="btnText">#FFFFFF</color>
 </resources>
