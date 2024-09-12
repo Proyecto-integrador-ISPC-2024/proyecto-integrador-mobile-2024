@@ -17,9 +17,8 @@
         <!-- Actividades de la aplicación -->
         <activity
             android:name=".activity_dashboard"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:exported="true"/>
+
 
         <activity
             android:name=".Contacto"
@@ -32,7 +31,20 @@
         <activity
             android:name=".activity_profile"
             android:exported="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".ui.Home"
+            android:exported="false" />
+        <activity
+            android:name="com.tiendadecampeones.ui.Login"
+            android:exported="false" />
+        <activity
+            android:name="com.tiendadecampeones.ui.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Register"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
