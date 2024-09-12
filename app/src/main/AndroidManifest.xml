@@ -14,23 +14,28 @@
         android:supportsRtl="true"
         tools:targetApi="31">
 
+        <!-- Actividades de la aplicación -->
         <activity
-            android:name=".activity_dashboard"
+            android:name=".ui.Dashboard"
             android:exported="true" />
+
         <activity
             android:name=".Contacto"
             android:exported="false" />
+
         <activity
             android:name=".AboutUs"
             android:exported="false" />
         <activity
             android:name=".ui.Profile"
             android:exported="true"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
+
+        <!--
         <activity
             android:name=".ui.Home"
             android:exported="false" />
-        <activity
+      <activity
             android:name="com.tiendadecampeones.ui.Login"
             android:exported="false" />
         <activity
@@ -41,14 +46,24 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>-->
+
         <activity
             android:name=".ui.ProductsActivity"
             android:exported="true"
             android:theme="@style/AppTheme" />
-    </application>
 
+        <activity
+            android:name=".ui.PaymentMethodsActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
 </manifest>

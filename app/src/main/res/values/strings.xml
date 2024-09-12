@@ -43,4 +43,12 @@
     <string name="cl1">María Laura Silva</string>
     <string name="Logoutbtn">Finalizar Sesión</string>
 
+   <!--payment select box-->
+    <string-array name="payment_methods">
+        <item>Seleccionar método de pago</item>
+        <item>Tarjeta de crédito</item>
+        <item>Débito</item>
+        <item>Transferencia bancaria</item>
+    </string-array>
+
 </resources>
