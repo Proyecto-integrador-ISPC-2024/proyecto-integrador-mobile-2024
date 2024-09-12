@@ -17,52 +17,29 @@
         <!-- Actividades de la aplicación -->
         <activity
             android:name=".activity_dashboard"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:exported="true"/>
 
         <activity
-            android:name=".ui.ContactActivity"
+            android:name=".Contacto"
             android:exported="false" />
 
         <activity
-            android:name=".ui.AboutUsActivity"
+            android:name=".AboutUs"
             android:exported="false" />
 
-        <!-- Seteo como actividad principal la actividad de perfil -->
-<!--        <activity-->
-<!--            android:name=".ContactActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".AboutUs"-->
-<!--            android:exported="false" /> -->
-
-<!--        <activity-->
-<!--            android:name=".ui.ProfileActivity"-->
-<!--            android:exported="true"-->
-<!--            android:theme="@style/AppTheme">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-        <!-- Otra actividad de la aplicación -->
-
-        <!-- Seteo como actividad a inicializar la actividad de productos -->
         <activity
-            android:name=".activity_dashboard"
+            android:name=".activity_profile"
             android:exported="true"
             android:theme="@style/AppTheme"/>
 
         <activity
             android:name=".ui.Home"
             android:exported="false" />
-        <activity
-            android:name=".ui.LoginActivity"
+      <activity
+            android:name="com.tiendadecampeones.ui.Login"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.tiendadecampeones.ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.Register"
@@ -79,5 +56,4 @@
             android:theme="@style/AppTheme" />
 
     </application>
-
 </manifest>
