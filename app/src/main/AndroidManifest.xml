@@ -17,9 +17,7 @@
         <!-- Actividades de la aplicación -->
         <activity
             android:name=".activity_dashboard"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:exported="true"/>
 
         <activity
             android:name=".Contacto"
@@ -37,7 +35,7 @@
         <activity
             android:name=".ui.Home"
             android:exported="false" />
-        <activity
+      <activity
             android:name="com.tiendadecampeones.ui.Login"
             android:exported="false" />
         <activity
