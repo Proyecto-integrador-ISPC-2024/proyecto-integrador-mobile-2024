@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.proyectointegradormobile2024.R;
+import com.example.tiendadecampeones.R;
 
 public class Home extends AppCompatActivity {
 

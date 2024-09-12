@@ -27,7 +27,7 @@
             android:name=".AboutUs"
             android:exported="false" />
 
-        <activity
+        <!--<activity
             android:name=".activity_profile"
             android:exported="true"
             android:theme="@style/AppTheme"/>
@@ -48,12 +48,22 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>-->
 
         <activity
             android:name=".ui.ProductsActivity"
             android:exported="true"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.PaymentMethodsActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 </manifest>
