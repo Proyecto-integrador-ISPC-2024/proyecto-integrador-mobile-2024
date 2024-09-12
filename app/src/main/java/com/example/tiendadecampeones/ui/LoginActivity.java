@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_loginActivity);
+        setContentView(R.layout.activity_login);
 
         // Pantalla de Bienvenida a formulario de registro
 
