@@ -16,8 +16,8 @@
 
         <!-- Actividades de la aplicación -->
         <activity
-            android:name=".activity_dashboard"
-            android:exported="true"/>
+            android:name=".ui.Dashboard"
+            android:exported="true" />
 
         <activity
             android:name=".Contacto"
@@ -26,12 +26,12 @@
         <activity
             android:name=".AboutUs"
             android:exported="false" />
-
-        <!--<activity
-            android:name=".activity_profile"
+        <activity
+            android:name=".ui.Profile"
             android:exported="true"
             android:theme="@style/AppTheme"/>
 
+        <!--
         <activity
             android:name=".ui.Home"
             android:exported="false" />
