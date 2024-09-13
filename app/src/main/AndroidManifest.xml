@@ -48,7 +48,11 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+        </activity>
+
+        <activity
+            android:name=".ui.Pedido"
+            android:exported="false" />-->
 
         <activity
             android:name=".ui.ProductsActivity"
@@ -56,7 +60,7 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.PaymentMethodsActivity"
+            android:name=".ui.Order"
             android:exported="true"
             android:theme="@style/AppTheme">
             <intent-filter>
