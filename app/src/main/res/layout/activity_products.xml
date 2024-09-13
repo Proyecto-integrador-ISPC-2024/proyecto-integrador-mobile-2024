@@ -73,34 +73,17 @@
 
         </LinearLayout>
 
-        <!-- Products List and Floating Action Button Container -->
-        <FrameLayout
+        <!-- Lista de productos -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/productsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_below="@id/topNavbar"
             android:layout_above="@id/bottomNavbar"
-            android:padding="10dp">
-
-            <!-- Products RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/productsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"/>
-
-            <!-- Floating Action Button -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabCart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                android:contentDescription="@string/drawer_btn_cart"
-                android:src="@drawable/shopping_cart_icon_35x35"
-                android:tint="@android:color/white"
-                android:backgroundTint="@color/colorPrimary" />
-        </FrameLayout>
-
+            android:layout_margin="10dp"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp"
+            android:scrollbars="vertical"/>
 
         <!-- Navegación inferior -->
         <LinearLayout
@@ -172,7 +155,7 @@
             android:id="@+id/navTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/drawer_title"
+            android:text="Menu"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -188,7 +171,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/gray"
-                android:text="@string/drawer_section_products"
+                android:text="PRODUCTOS"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:padding="8dp" />
@@ -197,7 +180,7 @@
                 android:id="@+id/productsButtonDrawer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/drawer_btn_products"
+                android:text="Productos"
                 android:background="@color/gray"
                 android:textColor="@android:color/black"
                 android:padding="8dp" />
@@ -206,7 +189,7 @@
                 android:id="@+id/cartButtonDrawer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/drawer_btn_cart"
+                android:text="Mi carrito"
                 android:background="@color/gray"
                 android:textColor="@android:color/black"
                 android:padding="8dp" />
@@ -215,7 +198,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/gray"
-                android:text="@string/drawer_section_about"
+                android:text="SOBRE NOSOTROS"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:padding="8dp"
@@ -225,7 +208,7 @@
                 android:id="@+id/aboutUsButtonDrawer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/drawer_btn_knowUs"
+                android:text="Conocenos"
                 android:background="@color/gray"
                 android:textColor="@android:color/black"
                 android:padding="8dp" />
@@ -234,7 +217,7 @@
                 android:id="@+id/contactButtonDrawer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/drawer_btn_contact"
+                android:text="Contacto"
                 android:background="@color/gray"
                 android:textColor="@android:color/black"
                 android:padding="8dp" />
@@ -243,7 +226,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/gray"
-                android:text="@string/drawer_section_account"
+                android:text="MI PERFIL"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:padding="8dp"
@@ -253,7 +236,7 @@
                 android:id="@+id/profileButtonDrawer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/drawer_btn_profile"
+                android:text="Perfil"
                 android:background="@color/gray"
                 android:textColor="@android:color/black"
                 android:padding="8dp" />
@@ -262,7 +245,7 @@
                 android:id="@+id/dashboardButtonDrawer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/drawer_btn_dashboard"
+                android:text="Dashboard"
                 android:background="@color/gray"
                 android:textColor="@android:color/black"
                 android:padding="8dp" />

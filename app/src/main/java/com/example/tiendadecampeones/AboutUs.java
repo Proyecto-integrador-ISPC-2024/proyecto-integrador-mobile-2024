@@ -1,4 +1,4 @@
-package com.example.tiendadecampeones.ui;
+package com.example.tiendadecampeones;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,9 +9,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.tiendadecampeones.R;
-
-public class AboutUsActivity extends Activity {
+public class AboutUs extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +43,7 @@ public class AboutUsActivity extends Activity {
     }
 
     private void openContactActivity() {
-        Intent intent = new Intent(this, Profile.class);
+        Intent intent = new Intent(this, Contacto.class);
         startActivity(intent);
     }
 }

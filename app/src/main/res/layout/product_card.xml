@@ -13,7 +13,6 @@
 
         <ImageView
             android:id="@+id/productImage"
-            android:contentDescription="@string/product_selected_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop" />
@@ -40,19 +39,6 @@
             android:textColor="@android:color/holo_green_dark"
             android:textStyle="bold"
             android:textSize="16sp" />
-
-        <!-- Add to cart button with Google Fonts icon -->
-        <Button
-            android:id="@+id/addToCartButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="8dp"
-            android:text="@string/add_to_cart_btn"
-            android:drawableStart="@drawable/add_icon_35x35"
-            android:drawablePadding="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:textColor="@android:color/black" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

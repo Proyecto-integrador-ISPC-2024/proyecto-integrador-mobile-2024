@@ -27,15 +27,14 @@
     <string name="products_italy">Italia</string>
     <string name="products_uruguay">Uruguay</string>
 
-    <!-- Tarjetas de productos -->
-    <string name="add_to_cart_btn">Agregar al carro</string>
-    <string name="product_selected_image">Imagen de producto</string>
-<!--    <string name="product_amountLabel">Cantidad:</string>-->
-<!--    <string name="product_amount">Cantidad</string>-->
-<!--    <string name="product_sizeLabel">Talle:</string>-->
-<!--    <string name="product_size">XL</string>-->
-<!--    <string name="product_priceLabel">$12345</string>-->
-<!--    <string name="product_addToCart">Agregar</string>-->
+    <!-- Sección productos correspodientes a un país específico   -->
+    <string name="product_name">Camiseta Argentina 2021</string>
+    <string name="product_amountLabel">Cantidad:</string>
+    <string name="product_amount">Cantidad</string>
+    <string name="product_sizeLabel">Talle:</string>
+    <string name="product_size">XL</string>
+    <string name="product_priceLabel">$12345</string>
+    <string name="product_addToCart">Agregar</string>
 
     <!-- Botones Profile-->
     <string name="webtn">¡Conócenos!</string>
@@ -43,21 +42,6 @@
     <string name="profile_btn">Perfil</string>
     <string name="cl1">María Laura Silva</string>
     <string name="Logoutbtn">Finalizar Sesión</string>
-
-    <!--  Secciones drawer de navegación lateral  -->
-    <string name="drawer_title">Menú</string>
-    <string name="drawer_section_products">Productos</string>
-    <string name="drawer_section_about">Acerca de nosotros</string>
-    <string name="drawer_section_account">Mi cuenta</string>
-
-    <!--  Botones drawer lateral  -->
-    <string name="drawer_btn_products">Productos</string>
-    <string name="drawer_btn_cart">Mi carrito</string>
-    <string name="drawer_btn_knowUs">Conocenos</string>
-    <string name="drawer_btn_contact">Contacto</string>
-    <string name="drawer_btn_profile">Mi perfil</string>
-    <string name="drawer_btn_dashboard">Panel de control</string>
-
 
    <!--payment select box-->
     <string-array name="payment_methods">
