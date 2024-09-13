@@ -1,6 +1,6 @@
 package com.example.tiendadecampeones.ui;
 
-public class ProductsCategoriesActivity {
+public class CountryProducts {
 
 
 
