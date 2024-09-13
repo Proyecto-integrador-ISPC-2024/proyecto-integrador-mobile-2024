@@ -14,23 +14,23 @@
       android:layout_height="match_parent">
 
     <!-- Logo -->
-    <LinearLayout
-        android:id="@+id/headerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorPrimary"
-        android:padding="16dp">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/headerLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        android:padding="16dp">-->
 
-      <ImageView
-          android:id="@+id/logoImageView"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:src="@mipmap/logo_activities"
-          android:contentDescription="@string/app_name" />
+<!--      <ImageView-->
+<!--          android:id="@+id/logoImageView"-->
+<!--          android:layout_width="wrap_content"-->
+<!--          android:layout_height="wrap_content"-->
+<!--          android:layout_gravity="center"-->
+<!--          android:src="@mipmap/logo_activities"-->
+<!--          android:contentDescription="@string/app_name" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <!-- Navbar superior -->
     <LinearLayout
@@ -39,8 +39,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/colorPrimary"
-        android:padding="10dp"
-        android:layout_below="@+id/headerLayout">
+        android:padding="10dp">
 
       <Button
           android:id="@+id/backButton"
@@ -53,24 +52,10 @@
           android:drawableTop="@drawable/arrow_back_icon_35x35"
           android:drawablePadding="0dp"
           android:padding="8dp"
-          android:layout_marginEnd="220dp"
+          android:layout_marginEnd="300dp"
           android:layout_gravity="center"
           style="?android:attr/buttonBarButtonStyle"
           />
-
-      <Button
-          android:id="@+id/sideNavButton"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="@string/menu_button"
-          android:textColor="@color/colorPrimary"
-          android:background="?attr/selectableItemBackgroundBorderless"
-          android:drawableTop="@drawable/menu_icon_35x35"
-          android:drawablePadding="0dp"
-          android:padding="8dp"
-          android:layout_gravity="center"
-          style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
 
@@ -79,20 +64,43 @@
         android:id="@+id/aboutUsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¡Conocenos! "
+        android:text="¿QUE ES TIENDA DE CAMPEONES? "
         android:textSize="18sp"
         android:textColor="@android:color/black"
         android:layout_below="@id/topNavbar"
         android:layout_margin="16dp"
-        android:gravity="left" />
+        android:gravity="center"
+        android:textStyle="bold" />
 
-    <!-- Mapa  -->
-    <WebView
-        android:id="@+id/mapWebView"
+    <!-- Información about us  -->
+    <TextView
+        android:id="@+id/nosotrosTextView"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/aboutUsTextView"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Bienvenidos a Tienda de Campeones. Somos un equipo de apasionados por el fútbol y su historia, dedicados a revivir los momentos más icónicos del deporte a través de camisetas auténticas de los países que han ganado la Copa del Mundo. Cada prenda refleja el esfuerzo y la dedicación de los jugadores que hicieron historia. Únete a nosotros para celebrar el legado del fútbol con nuestras camisetas y revive la grandeza de los campeones."
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/aboutUsImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nosotrosTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/ilustracion_copa"
+        android:contentDescription="Imagen relacionada con Tienda de Campeones" />
+<!--    <WebView-->
+<!--        android:id="@+id/mapWebView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:layout_below="@id/nosotrosTextView"-->
+<!--        android:layout_margin="16dp" />-->
 
 
     <!-- Botón para Contacto -->
@@ -101,10 +109,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contacto"
-        android:layout_below="@id/mapWebView"
+        android:layout_below="@id/aboutUsImageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:onClick="openContactActivity" />
+        android:onClick="openContactActivity"
+        android:backgroundTint="@color/colorSecondary"
+        android:textColor="@color/colorPrimary"
+        />
 
     <!-- Navegación inferior -->
     <LinearLayout
@@ -159,6 +170,7 @@
           style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
+
 
   </RelativeLayout>
 
