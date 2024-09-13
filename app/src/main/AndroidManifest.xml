@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,18 +14,49 @@
         android:supportsRtl="true"
         tools:targetApi="31">
 
-        <!-- Seteo como actividad principal la actividad de about -->
-<!--        <activity-->
-<!--            android:name=".Contacto"-->
-<!--            android:exported="true"-->
-<!--            android:theme="@style/AppTheme">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        <!-- Actividades de la aplicación -->
+        <activity
+            android:name=".ui.Dashboard"
+            android:exported="true" />
+
+        <activity
+            android:name=".Contacto"
+            android:exported="false" />
+
         <activity
             android:name=".AboutUs"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Profile"
+            android:exported="true"
+            android:theme="@style/AppTheme"/>
+
+        <!--
+        <activity
+            android:name=".ui.Home"
+            android:exported="false" />
+      <activity
+            android:name="com.tiendadecampeones.ui.Login"
+            android:exported="false" />
+        <activity
+            android:name="com.tiendadecampeones.ui.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Register"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
+
+        <activity
+            android:name=".ui.ProductsActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.PaymentMethodsActivity"
             android:exported="true"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -31,22 +64,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Seteo como actividad principal la actividad de perfil -->
-        <!--<activity
-            android:name=".activity_profile"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> -->
 
-        <!-- Otra actividad de la aplicación -->
-        <!-- <activity
-            android:name=".ui.ProductsActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme" /> -->
     </application>
 
 </manifest>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  Estilo Tañaño de titulo -->
+    <style name="App.Theme.Size" parent="android:Theme">
+        <item name="android:textSize">45sp</item>
+
+    </style>
+
+    <!--  Estilo Botton Fondo verde y letras blanca  -->
+    <style name="AppTheme.Button" parent="android:Widget.Button">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+
+    </style>
+
+    <!--  Estilo margenes  -->
+    <style name="AppTheme.EditTextStyle" parent="android:Widget.EditText">
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+</resources>
