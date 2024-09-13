@@ -8,6 +8,7 @@
     <!--  Barra de navegación superior  -->
     <string name="back_button">Volver</string>
     <string name="menu_button">Menu</string>
+    <string name="cart_button">Ir al carro</string>
 
     <!--  Barra de navegación inferior  -->
     <string name="home_button">Inicio</string>
