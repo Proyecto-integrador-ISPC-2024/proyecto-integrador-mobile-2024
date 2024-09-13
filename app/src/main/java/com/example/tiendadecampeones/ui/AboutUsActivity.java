@@ -45,7 +45,7 @@ public class AboutUsActivity extends Activity {
     }
 
     private void openContactActivity() {
-        Intent intent = new Intent(this, ContactActivity.class);
+        Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
 }

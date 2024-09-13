@@ -1,5 +1,4 @@
-package com.example.tiendadecampeones;
-
+package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.example.tiendadecampeones.R;
 
-public class activity_dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
+
+public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
     SearchView searchV;
     ListView listView;
     ArrayAdapter<String> adapter;
@@ -23,7 +24,7 @@ public class activity_dashboard extends AppCompatActivity implements SearchView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  EdgeToEdge.enable(this);
+        //  EdgeToEdge.enable(this);
 
         setContentView(R.layout.activity_dashboard);
 
@@ -81,8 +82,9 @@ public class activity_dashboard extends AppCompatActivity implements SearchView.
     public void profileBtn(View view) {
         Toast.makeText(this, "Redirigiendo a tu perfil", Toast.LENGTH_SHORT).show();
         // Intent para iniciar la actividad del dashboard
-        Intent intent = new Intent(this, activity_profile.class);
+        Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
 
 }
+
