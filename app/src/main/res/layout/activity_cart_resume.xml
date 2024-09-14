@@ -3,4 +3,157 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Logo -->
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/logo_activities" />
+
+        </LinearLayout>
+
+        <!-- Navbar superior -->
+        <LinearLayout
+            android:id="@+id/topNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/headerLayout"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/backButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="220dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/arrow_back_icon_35x35"
+                android:drawablePadding="0dp"
+                android:onClick="_back"
+                android:padding="8dp"
+                android:text="@string/back_button"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/sideNavButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/menu_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:text="@string/menu_button"
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <!-- Conocenos -->
+        <TextView
+            android:id="@+id/aboutUsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/topNavbar"
+            android:layout_margin="16dp"
+            android:gravity="center_horizontal"
+            android:text="Resumen de compra"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <!-- Mapa  -->
+
+
+        <!-- Botón para Contacto -->
+
+        <!-- Navegación inferior -->
+        <LinearLayout
+            android:id="@+id/bottomNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorSecondary"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/homeButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/home_icon_35x35"
+                android:drawablePadding="0dp"
+                android:onClick="vHome"
+                android:padding="8dp"
+                android:text="@string/home_button"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/productsButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/shopping_bag_icon_35x35"
+                android:drawablePadding="0dp"
+                android:onClick="vProducts"
+                android:padding="8dp"
+                android:text="@string/products_button"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/profileButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/account_icon_35x35"
+                android:drawablePadding="0dp"
+                android:onClick="vProfile"
+                android:padding="8dp"
+                android:text="@string/account_button"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/listPurchaseTextView"
+            android:layout_width="338dp"
+            android:layout_height="54dp"
+            android:layout_below="@+id/aboutUsTextView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="40dp"
+            android:text="TextView" />
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
