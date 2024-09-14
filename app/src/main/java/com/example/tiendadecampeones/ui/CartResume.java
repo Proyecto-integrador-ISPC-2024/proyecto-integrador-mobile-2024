@@ -20,6 +20,7 @@ import java.util.Map;
 public class CartResume extends AppCompatActivity {
 
     private TextView listPurchaseTextView;
+    private TextView totalTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class CartResume extends AppCompatActivity {
         setContentView(R.layout.activity_cart_resume);
 
         listPurchaseTextView = findViewById(R.id.listPurchaseTextView);
+        totalTextView = findViewById(R.id.totalTextView);
 
         // Obtener productos del carrito (simulado)
         Map<Product, Integer> cartItems = getCartItems();
@@ -51,10 +53,11 @@ public class CartResume extends AppCompatActivity {
         return cartItems;
     }
 
-    // Método para formatear y mostrar el resumen de la compra
     private void displayCartSummary(Map<Product, Integer> cartItems) {
         StringBuilder cartSummary = new StringBuilder();
         double totalAmount = 0;
+
+        cartSummary.append("Compra\n");
 
         // Iterar sobre los productos en el carrito
         for (Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
@@ -62,24 +65,29 @@ public class CartResume extends AppCompatActivity {
             int quantity = entry.getValue();
             double itemTotal = product.getPrice() * quantity;
 
-            // Formatear cada producto
-            cartSummary.append(quantity)
-                    .append(" - ")
-                    .append(product.getName())
-                    .append(" - $")
-                    .append(String.format("%.2f", itemTotal))
-                    .append("\n");
+            // Truncar el nombre del producto a 7 caracteres y formatear
+            String productName = product.getName();
+            if (productName.length() > 7) {
+                productName = productName.substring(0, 7);
+            }
+
+            // Ajustar el espaciado para alinear los nombres
+            cartSummary.append(String.format("%d\t%-7s\t\t\t------------------------\t\t$%.2f\n", quantity, productName, itemTotal));
 
             totalAmount += itemTotal;
         }
 
+        StringBuilder total = new StringBuilder();
+
         // Línea separadora y total
-        cartSummary.append("----------------------------\n");
-        cartSummary.append("Total: $").append(String.format("%.2f", totalAmount));
+        total.append("----------------------------\n");
+        total.append("Total: $").append(String.format("%.2f", totalAmount));
 
         // Establecer el resumen en el TextView
         listPurchaseTextView.setText(cartSummary.toString());
+        totalTextView.setText(total.toString());
     }
+
 
     //Lanzar vista Productos
     public void vProducts(View v){
