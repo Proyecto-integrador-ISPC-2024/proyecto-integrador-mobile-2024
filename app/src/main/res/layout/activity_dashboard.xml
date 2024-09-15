@@ -162,11 +162,11 @@
 
     <Button
         android:id="@+id/Logoutbtn"
-        android:onClick="logoutClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="9dp"
-        android:backgroundTint="@color/colorSecondary"
+        android:backgroundTint="@color/red"
+        android:onClick="logoutClick"
         android:text="@string/Logoutbtn"
         android:textColor="@color/btnText"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
