@@ -10,7 +10,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tiendadecampeones.R;
 
-
 public class Register extends AppCompatActivity {
 
     @Override
