@@ -13,23 +13,23 @@
         android:layout_height="match_parent">
 
         <!-- Logo -->
-        <LinearLayout
-            android:id="@+id/headerLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/colorPrimary"
-            android:padding="16dp">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/headerLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:background="@color/colorPrimary"-->
+<!--            android:padding="16dp">-->
 
-            <ImageView
-                android:id="@+id/logoImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@mipmap/logo_activities"
-                android:contentDescription="@string/app_name" />
+<!--            <ImageView-->
+<!--                android:id="@+id/logoImageView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@mipmap/logo_activities"-->
+<!--                android:contentDescription="@string/app_name" />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
         <!-- Navbar superior -->
         <LinearLayout
@@ -38,8 +38,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@color/colorPrimary"
-            android:padding="10dp"
-            android:layout_below="@+id/headerLayout">
+            android:padding="10dp">
 
             <Button
                 android:id="@+id/backButton"
@@ -52,24 +51,11 @@
                 android:drawableTop="@drawable/arrow_back_icon_35x35"
                 android:drawablePadding="0dp"
                 android:padding="8dp"
-                android:layout_marginEnd="220dp"
+                android:layout_marginEnd="300dp"
                 android:layout_gravity="center"
                 style="?android:attr/buttonBarButtonStyle"
                 />
 
-            <Button
-                android:id="@+id/sideNavButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/menu_button"
-                android:textColor="@color/colorPrimary"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:drawableTop="@drawable/menu_icon_35x35"
-                android:drawablePadding="0dp"
-                android:padding="8dp"
-                android:layout_gravity="center"
-                style="?android:attr/buttonBarButtonStyle" />
 
         </LinearLayout>
 
@@ -84,12 +70,14 @@
 
             <TextView
                 android:id="@+id/contactanosLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contactanos!"
-                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:text="CONTACTANOS!"
+                android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginBottom="8dp" />
+                android:textStyle="bold" />
 
             <!-- Dirección -->
             <TextView
@@ -146,7 +134,120 @@
                 android:layout_height="wrap_content"
                 android:text="Enviar correo"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/colorPrimary" />
+                android:backgroundTint="@color/colorSecondary"
+                android:textColor="@color/colorPrimary" />
+
+            <!-- Productos recomendados (Scroll horizontal) -->
+            <TextView
+                android:id="@+id/recommendedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conoce Nuestros Productos"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/black" />
+
+            <HorizontalScrollView
+                android:id="@+id/recommendedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/recommendedProductsLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Producto 1 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@color/colorSecondary">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@mipmap/argentina_1978_primera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Argentina 1978"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <!-- Producto 2 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@color/colorSecondary">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@mipmap/brasil_1958_primera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Brasil 1958"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
+
+
+                    <!-- Producto 3 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@color/colorSecondary">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@mipmap/francia_1998_primera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Francia 1998"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Botón para ir a comprar -->
+            <Button
+                android:id="@+id/comprarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ir a comprar"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorSecondary"
+                android:textColor="@color/colorPrimary"
+                />
+
         </LinearLayout>
 
         <!-- Navegación inferior -->

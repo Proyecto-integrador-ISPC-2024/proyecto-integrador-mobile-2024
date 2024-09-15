@@ -11,6 +11,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.tiendadecampeones.R;
 
+import com.example.tiendadecampeones.R;
+
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -1,22 +1,22 @@
-package com.example.tiendadecampeones;
+package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class activity_profile extends AppCompatActivity {
+import com.example.tiendadecampeones.R;
+
+public class Profile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile);
 
         // Ajustar los insets de la ventana
@@ -32,13 +32,14 @@ public class activity_profile extends AppCompatActivity {
         Toast.makeText(this, "Redireccionando a tu dashboard", Toast.LENGTH_SHORT).show();
 
         // Intent para iniciar la actividad del dashboard
-        Intent intent = new Intent(this, activity_dashboard.class);
+        Intent intent = new Intent(this, Dashboard.class);  // Usa el nombre correcto de la clase
         startActivity(intent);
     }
 
     public void logoutClick(View v) {
         Toast.makeText(this, "Has cerrado la sesión", Toast.LENGTH_SHORT).show();
 
-        // Aquí puedes agregar lógica para cerrar sesión
+
     }
 }
+

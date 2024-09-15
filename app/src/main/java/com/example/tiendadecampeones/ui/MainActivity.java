@@ -12,7 +12,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tiendadecampeones.R;
 
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

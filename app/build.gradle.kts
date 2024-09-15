@@ -37,7 +37,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+<<<<<<< HEAD
     implementation(libs.recyclerview)
+=======
+    implementation(libs.play.services.maps)
+>>>>>>> 66613415d3b9873e46082a3bc48f519d8f483568
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
