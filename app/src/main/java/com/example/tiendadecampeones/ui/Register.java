@@ -8,7 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.proyectointegradormobile2024.R;
+import com.example.tiendadecampeones.R;
 
 public class Register extends AppCompatActivity {
 
