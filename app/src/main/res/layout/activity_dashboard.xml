@@ -1,4 +1,5 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -46,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerLayout">
 
-        <!-- Buttons in Top Navbar -->
+
         <Button
             android:id="@+id/backButton"
             style="?android:attr/buttonBarButtonStyle"
@@ -55,6 +56,7 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/arrow_back_icon_35x35"
+            android:onClick="backButton"
             android:text="@string/back_button"
             android:textColor="@color/colorPrimary" />
 
@@ -71,11 +73,6 @@
     </LinearLayout>
 
 
-    <!-- Body-->
-
-
-    <!---Bottom Navbar -->
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -86,6 +83,7 @@
         app:layout_constraintBottom_toTopOf="@+id/searchV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topNavbar" />
+
 
     <SearchView
         android:id="@+id/searchV"
@@ -121,6 +119,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/home_icon_35x35"
             android:text="@string/home_button"
+            android:onClick="homeButton"
             android:textColor="@android:color/white" />
 
         <Button
@@ -132,6 +131,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/shopping_bag_icon_35x35"
             android:text="@string/products_button"
+            android:onClick="productsButton"
             android:textColor="@android:color/white" />
 
         <Button
@@ -154,6 +154,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="18dp"
+        android:background="@color/green"
         app:layout_constraintBottom_toTopOf="@+id/Logoutbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -162,11 +163,11 @@
 
     <Button
         android:id="@+id/Logoutbtn"
-        android:onClick="logoutClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="9dp"
-        android:backgroundTint="@color/colorSecondary"
+        android:backgroundTint="@color/red"
+        android:onClick="logoutClick"
         android:text="@string/Logoutbtn"
         android:textColor="@color/btnText"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
