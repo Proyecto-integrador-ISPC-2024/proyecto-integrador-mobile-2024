@@ -73,5 +73,10 @@
     <string name="brContactProd">Brasil 1958</string>
     <string name="frContactProd">Francia 1998</string>
 
-
+    <!-- Sección Home-->
+    <string name="homeTitle">LA TIENDA DE LOS AUTENTICOS CAMPEONES</string>
+    <string name="homeDescription">Comprá acá las camisetas retro de los campeones mundiales, desde 1930 hasta 2022, y demostrá que sos parte de la historia del fútbol.</string>
+    <string name="homeTitleTwo">Conocé nuestros productos</string>
+    <string name="homeSubtitle">Vestí tu pasión con un estilo único</string>
+    <string name="homeBtn">Comenzar a comprar</string>
 </resources>
