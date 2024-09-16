@@ -104,7 +104,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
     public void logoutClick(View v) {
         Toast.makeText(this, "Has salido de la aplicación", Toast.LENGTH_SHORT).show();
-        finish();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
 

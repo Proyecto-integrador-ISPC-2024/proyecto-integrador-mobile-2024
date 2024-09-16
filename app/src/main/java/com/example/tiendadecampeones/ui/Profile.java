@@ -38,9 +38,10 @@ public class Profile extends AppCompatActivity {
 
     public void logoutClick(View v) {
         Toast.makeText(this, "Has cerrado la sesión", Toast.LENGTH_SHORT).show();
-
-
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
+
     public void backButton(View v) {
         Toast.makeText(this, "Redireccionando a tu página anterior ", Toast.LENGTH_SHORT).show();
         finish();
@@ -65,7 +66,6 @@ public class Profile extends AppCompatActivity {
         Intent intent = new Intent(this, ProductsActivity.class);
         startActivity(intent);
     }
-
 
 }
 
