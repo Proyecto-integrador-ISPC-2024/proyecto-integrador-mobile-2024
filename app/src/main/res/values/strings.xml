@@ -52,4 +52,26 @@
         <item>Transferencia bancaria</item>
     </string-array>
 
+    <!-- Sección About Us-->
+    <string name="titleAbout">¿QUE ES TIENDA DE CAMPEONES?</string>
+    <string name="description">Bienvenidos a Tienda de Campeones. Somos un equipo de apasionados por el fútbol y su historia, dedicados a revivir los momentos más icónicos del deporte a través de camisetas auténticas de los países que han ganado la Copa del Mundo. Cada prenda refleja el esfuerzo y la dedicación de los jugadores que hicieron historia. Únete a nosotros para celebrar el legado del fútbol con nuestras camisetas y revive la grandeza de los campeones.</string>
+    <string name="contactBtn">CONTACTO</string>
+    <string name="photoAbout">Imagen relacionada con Tienda de Campeones</string>
+
+    <!-- Sección Contacto-->
+    <string name="titleContact">CONTACTANOS!</string>
+    <string name="addressContact">Dirección:</string>
+    <string name="addressNameContact">Av. Colón 123, Córdoba</string>
+    <string name="phoneContact">Teléfono:</string>
+    <string name="numbersContact">+54 351 1234567</string>
+    <string name="mailContact">Email:</string>
+    <string name="emailContact">info@tiendadecampeones.com</string>
+    <string name="knowOurProducts">Conoce Nuestros Productos</string>
+    <string name="sendContactBtn">ENVIAR CORREO</string>
+    <string name="buyContactBtn">IR A COMPRAR</string>
+    <string name="argContactProd">Argentina 1978</string>
+    <string name="brContactProd">Brasil 1958</string>
+    <string name="frContactProd">Francia 1998</string>
+
+
 </resources>

@@ -1,12 +1,17 @@
 package com.example.tiendadecampeones;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.tiendadecampeones.ui.Home;
+import com.example.tiendadecampeones.ui.ProductsActivity;
 
 public class Contacto extends AppCompatActivity {
 
@@ -20,5 +25,10 @@ public class Contacto extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+    public void productClick(View v) {
+        // Intent para abrir la pantalla de Productos
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
     }
 }
