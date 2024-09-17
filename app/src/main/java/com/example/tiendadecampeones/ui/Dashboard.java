@@ -43,13 +43,16 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 {"Pedido 123", "Fecha 11/09/2023"},
                 {"Pedido 456", "Fecha 27/10/2023"},
                 {"Pedido 789", "Fecha 20/12/2023"},
-                {"Pedido 1011", "Fecha 24/05/2024"},
-                {"Pedido 351", "Fecha 22/01/2024"},
+                {"Pedido 1000", "Fecha 24/05/2024"},
+                {"Pedido 1100", "Fecha 22/01/2024"},
                 {"Pedido 3514", "Fecha 25/06/2024"},
-                {"Pedido 8511", "Fecha 13/08/2024"}
+                {"Pedido 8511", "Fecha 13/08/2024"},
+                {"Pedido 8745", "Fecha 22/01/2024"},
+                {"Pedido 9001", "Fecha 01/03/2024"},
+                {"Pedido 9852", "Fecha 13/09/2024"}
         };
 
-        // Crear una lista de títulos para mostrar
+        //  lista de títulos para mostrar
         String[] orderTitles = new String[orders.length];
         for (int i = 0; i < orders.length; i++) {
             orderTitles[i] = orders[i][0] + " - " + orders[i][1]; // Título y fecha del pedido
@@ -69,7 +72,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 String selectedDate = orders[position][1];  // Fecha del pedido seleccionado
 
                 // Mostrar un Toast con los detalles del pedido
-                Toast.makeText(Dashboard.this, "Pedido: " + selectedOrder + "\nFecha: " + selectedDate, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashboard.this, "Pedido: " + selectedOrder + "\n\nFecha: " + selectedDate, Toast.LENGTH_SHORT).show();
 
 
                 //  Intent para iniciar la nueva actividad
