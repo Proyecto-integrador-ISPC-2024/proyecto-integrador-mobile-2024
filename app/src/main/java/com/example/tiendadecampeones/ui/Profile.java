@@ -37,8 +37,8 @@ public class Profile extends AppCompatActivity {
     }
 
     public void logoutClick(View v) {
-        Toast.makeText(this, "Has cerrado la sesión", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, LoginActivity.class);
+        Toast.makeText(this, "Has cerrado tu sesión", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,Home.class);
         startActivity(intent);
     }
 
