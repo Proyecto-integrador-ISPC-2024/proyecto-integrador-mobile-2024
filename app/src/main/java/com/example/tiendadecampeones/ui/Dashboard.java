@@ -106,8 +106,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     // Métodos para manejar los botones
 
     public void logoutClick(View v) {
-        Toast.makeText(this, "Has salido de la aplicación", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, LoginActivity.class);
+        Toast.makeText(this, "Has cerrado tu sesión", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
 
