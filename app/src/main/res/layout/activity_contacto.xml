@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
-                android:text="CONTACTANOS!"
+                android:text="@string/titleContact"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -84,7 +84,7 @@
                 android:id="@+id/addressLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dirección: "
+                android:text="@string/addressContact"
                 android:textSize="16sp"
                 android:layout_marginBottom="8dp" />
 
@@ -92,7 +92,7 @@
                 android:id="@+id/addressText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Av. Colón 123, Córdoba"
+                android:text="@string/addressNameContact"
                 android:textSize="16sp" />
 
             <!-- Teléfono -->
@@ -100,7 +100,7 @@
                 android:id="@+id/phoneLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teléfono: "
+                android:text="@string/phoneContact"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp" />
 
@@ -108,7 +108,7 @@
                 android:id="@+id/phoneText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+54 351 1234567"
+                android:text="@string/numbersContact"
                 android:textSize="16sp" />
 
             <!-- Email -->
@@ -116,7 +116,7 @@
                 android:id="@+id/emailLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email: "
+                android:text="@string/mailContact"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp" />
 
@@ -124,7 +124,7 @@
                 android:id="@+id/emailText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="info@tiendadecampeones.com"
+                android:text="@string/emailContact"
                 android:textSize="16sp" />
 
             <!-- Botón para enviar correo -->
@@ -132,7 +132,7 @@
                 android:id="@+id/emailButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enviar correo"
+                android:text="@string/sendContactBtn"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/colorSecondary"
                 android:textColor="@color/colorPrimary" />
@@ -142,7 +142,7 @@
                 android:id="@+id/recommendedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Conoce Nuestros Productos"
+                android:text="@string/knowOurProducts"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="24dp"
@@ -178,7 +178,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Argentina 1978"
+                            android:text="@string/argContactProd"
                             android:textAlignment="center"
                             android:textSize="16sp"
                             android:layout_marginTop="8dp"
@@ -202,7 +202,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Brasil 1958"
+                            android:text="@string/brContactProd"
                             android:textAlignment="center"
                             android:textSize="16sp"
                             android:layout_marginTop="8dp"
@@ -227,7 +227,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Francia 1998"
+                            android:text="@string/frContactProd"
                             android:textAlignment="center"
                             android:textSize="16sp"
                             android:layout_marginTop="8dp"
@@ -242,10 +242,11 @@
                 android:id="@+id/comprarButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ir a comprar"
+                android:text="@string/buyContactBtn"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/colorSecondary"
                 android:textColor="@color/colorPrimary"
+                android:onClick="productClick"
                 />
 
         </LinearLayout>

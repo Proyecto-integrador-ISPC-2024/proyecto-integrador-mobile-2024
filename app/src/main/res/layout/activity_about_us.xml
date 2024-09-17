@@ -64,7 +64,7 @@
         android:id="@+id/aboutUsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¿QUE ES TIENDA DE CAMPEONES? "
+        android:text="@string/titleAbout"
         android:textSize="18sp"
         android:textColor="@android:color/black"
         android:layout_below="@id/topNavbar"
@@ -82,7 +82,7 @@
         android:layout_marginTop="18dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="Bienvenidos a Tienda de Campeones. Somos un equipo de apasionados por el fútbol y su historia, dedicados a revivir los momentos más icónicos del deporte a través de camisetas auténticas de los países que han ganado la Copa del Mundo. Cada prenda refleja el esfuerzo y la dedicación de los jugadores que hicieron historia. Únete a nosotros para celebrar el legado del fútbol con nuestras camisetas y revive la grandeza de los campeones."
+        android:text="@string/description"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 
@@ -94,7 +94,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:src="@mipmap/ilustracion_copa"
-        android:contentDescription="Imagen relacionada con Tienda de Campeones" />
+        android:contentDescription="@string/photoAbout" />
 <!--    <WebView-->
 <!--        android:id="@+id/mapWebView"-->
 <!--        android:layout_width="match_parent"-->
@@ -108,11 +108,11 @@
         android:id="@+id/contactButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contacto"
+        android:text="@string/contactBtn"
         android:layout_below="@id/aboutUsImageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:onClick="openContactActivity"
+        android:onClick="contactClick"
         android:backgroundTint="@color/colorSecondary"
         android:textColor="@color/colorPrimary"
         />

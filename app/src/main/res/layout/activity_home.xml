@@ -1,53 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.Home">
 
-    <ImageView
-        android:id="@+id/ImageTienda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/banner" />
-
-    <TextView
-        android:id="@+id/titleConocenos"
-        android:layout_marginLeft="12dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:text="Conoce nuestros productos"
-        android:textSize="25sp" />
-
-    <Button
-        android:id="@+id/comenzarCompra"
-        style="@style/AppTheme.Button"
-        android:layout_width="200dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="310dp"
-        android:text="Comenzar a Comprar" />
-
-
-    <TextView
-        android:id="@+id/titleConocenos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="370dp"
-        android:text="Conocenos!"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/textViewConocenos"
+    <!-- Main Content (Your original layout) -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="410dp"
-        android:text="Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de.Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de"
-        android:textSize="16sp" />
+        android:layout_height="match_parent">
+
+        <!-- Logo -->
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/logo_activities"
+                android:contentDescription="@string/app_name" />
+
+        </LinearLayout>
+
+        <!-- Navbar superior -->
+        <LinearLayout
+            android:id="@+id/topNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/headerLayout"
+            android:background="@color/colorPrimary"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/backButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="49dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="300dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/menu_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:text="@string/back_button"
+                android:textColor="@color/colorPrimary" />
+
+            <ImageButton
+                android:id="@+id/cartButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/shopping_cart_icon_35x35"
+                android:contentDescription="@string/cart_button" />
 
 
-</RelativeLayout>
+        </LinearLayout>
+
+        <!-- Mensaje de Bienvenida -->
+        <LinearLayout
+            android:id="@+id/contactInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/topNavbar"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/homeLabel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:text="@string/homeTitle"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:text="@string/homeDescription"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/homeLabelTwo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/homeTitleTwo"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/secondTextHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:text="@string/homeSubtitle"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+
+
+
+            <!-- Productos recomendados (Scroll horizontal) -->
+            <HorizontalScrollView
+                android:id="@+id/recommendedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/recommendedProductsLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Producto 1 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@color/colorSecondary">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@mipmap/argentina_1978_primera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/argContactProd"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <!-- Producto 2 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@color/colorSecondary">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@mipmap/brasil_1958_primera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/brContactProd"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
+
+
+                    <!-- Producto 3 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@color/colorSecondary">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@mipmap/francia_1998_primera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/frContactProd"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Botón para ir a comprar -->
+            <Button
+                android:id="@+id/comprarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/homeBtn"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/colorSecondary"
+                android:textColor="@color/colorPrimary"
+                android:onClick="productClick"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+        <!-- Navegación inferior -->
+        <LinearLayout
+            android:id="@+id/bottomNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorSecondary"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/homeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/home_button"
+                android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/home_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/productsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/products_button"
+                android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/shopping_bag_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/profileButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/account_button"
+                android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/account_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
