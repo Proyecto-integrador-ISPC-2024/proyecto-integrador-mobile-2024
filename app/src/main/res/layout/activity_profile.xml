@@ -18,16 +18,7 @@
         app:layout_constraintBottom_toTopOf="@+id/topNavbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/logoImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/app_name"
-            android:src="@mipmap/logo_activities" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <!-- Top Navbar -->
@@ -35,7 +26,7 @@
         android:id="@+id/topNavbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="34dp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
         android:padding="10dp"
@@ -71,16 +62,15 @@
     </LinearLayout>
 
     <!-- profile section-->
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
+        android:layout_width="168dp"
         android:layout_height="0dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="23dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topNavbar"
         app:srcCompat="@mipmap/letra_l" />
 
@@ -88,12 +78,12 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
         android:layout_marginBottom="20dp"
         android:text="@string/cl1"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/dashClick"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
@@ -117,8 +107,8 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="114dp"
         android:backgroundTint="@color/colorSecondary"
-        android:text="@string/webtn"
         android:onClick="webtn"
+        android:text="@string/webtn"
         android:textColor="@color/btnText"
         app:layout_constraintBottom_toTopOf="@+id/Logoutbtn"
         app:layout_constraintStart_toStartOf="@+id/textView"
@@ -161,8 +151,8 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/home_icon_35x35"
-            android:text="@string/home_button"
             android:onClick="homeButton"
+            android:text="@string/home_button"
             android:textColor="@android:color/white" />
 
         <Button
@@ -173,8 +163,8 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/shopping_bag_icon_35x35"
-            android:text="@string/products_button"
             android:onClick="productsButton"
+            android:text="@string/products_button"
             android:textColor="@android:color/white" />
 
         <Button
