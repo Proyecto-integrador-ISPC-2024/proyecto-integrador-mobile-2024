@@ -17,20 +17,10 @@ public class AboutUs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
-        // Encontrar el botón de contacto
-        Button contactButton = findViewById(R.id.contactButton);
-
-        // Configuro el listener para el botón de contacto
-        contactButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Llamo a la actividad de contacto
-                openContactActivity();
-            }
-        });
     }
 
-    private void openContactActivity() {
+    public void contactClick(View v) {
+        // Intent para abrir la pantalla de Contacto
         Intent intent = new Intent(this, Contacto.class);
         startActivity(intent);
     }
