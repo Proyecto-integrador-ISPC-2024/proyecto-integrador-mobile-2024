@@ -32,4 +32,18 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
+    public void homeButton(View v) {
+        Toast.makeText(this, "¡ Home !", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
+    public void productsButton(View v) {
+        Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, ProductsActivity.class);
+        startActivity(intent);
+    }
+
 }

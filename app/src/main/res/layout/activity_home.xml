@@ -240,6 +240,7 @@
 
             <Button
                 android:id="@+id/homeButton"
+                android:onClick="homeButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -254,6 +255,7 @@
 
             <Button
                 android:id="@+id/productsButton"
+                android:onClick="productsButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
