@@ -24,7 +24,6 @@ import java.util.List;
 
 public class ProductsActivity extends AppCompatActivity {
 
-//    private DrawerLayout drawerLayout;
     private RecyclerView productsRecyclerView;
     private ProductsAdapter productsAdapter;
     private List<Product> productList;
@@ -33,22 +32,6 @@ public class ProductsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
-
-        // Inicializo DrawerLayout - Sidenav no va a ser necesario en esta actividad
-//        drawerLayout = findViewById(R.id.drawerLayout);
-
-        // Side navigation button functionality
-//        Button sideNavButton = findViewById(R.id.sideNavButton);
-//        sideNavButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (drawerLayout.isDrawerOpen(findViewById(R.id.sideNav))) {
-//                    drawerLayout.closeDrawer(findViewById(R.id.sideNav));
-//                } else {
-//                    drawerLayout.openDrawer(findViewById(R.id.sideNav));
-//                }
-//            }
-//        });
 
         // Volver a la actividad anterior
         ImageButton backButton = findViewById(R.id.backButton);
@@ -84,7 +67,7 @@ public class ProductsActivity extends AppCompatActivity {
         productsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //    Navegación a Products - No funcional ya que el usuario estaría en Products
+                //    Navegación a Categorías de productos - No funcional ya que el usuario estaría en Products
             }
         });
 

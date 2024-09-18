@@ -15,11 +15,6 @@
         tools:targetApi="31">
 
         <!-- Actividades de la aplicación - en caso de necesitar testear sus actividades agreguen el filter como atributo de la actividad en la que estén trabajando para inicializar la app en ese punto -->
-        <activity
-            android:name=".ui.Cart"
-            android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
 
         <activity
             android:name=".ui.CartResume"
@@ -43,6 +38,10 @@
             android:name=".ui.Home"
             android:exported="true"
             android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -55,10 +54,7 @@
             android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -79,18 +75,6 @@
             android:theme="@style/AppTheme">
         </activity>
 
-        <!--<activity
-            android:name=".ui.Profile"
-            android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>-->
-
-        <!--<activity
-            android:name=".ui.Register"
-            android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>-->
-
         <activity
             android:name=".AboutUs"
             android:exported="false"
@@ -99,11 +83,12 @@
 
         <activity
             android:name=".ui.ProductsActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true"
+            android:theme="@style/AppTheme">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <activity

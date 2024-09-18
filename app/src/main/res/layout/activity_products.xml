@@ -15,17 +15,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:background="@color/white">
-
-        <!-- App Logo -->
-        <ImageView
-            android:id="@+id/logoImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@mipmap/logo_activities"
-            android:contentDescription="@string/app_name"
-            android:padding="8dp"/>
+        android:background="@color/white"
+        android:padding="8dp">
 
         <!-- Top Navigation -->
         <LinearLayout
@@ -48,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Selección Argentina"
+                android:text="@string/products_title"
                 android:textSize="18sp"
                 android:textColor="@android:color/white"
                 android:gravity="center" />
@@ -120,11 +111,11 @@
 
 <!--<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
 <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:id="@+id/drawerLayout"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/main"-->
 <!--    android:layout_width="match_parent"-->
 <!--    android:layout_height="match_parent"-->
-<!--    android:background="@color/colorPrimary"-->
-<!--    >-->
+<!--    tools:context=".ui.Home">-->
 
 <!--    &lt;!&ndash; Main Content (Your original layout) &ndash;&gt;-->
 <!--    <RelativeLayout-->
@@ -191,74 +182,6 @@
 <!--                style="?android:attr/buttonBarButtonStyle" />-->
 
 <!--        </LinearLayout>-->
-
-<!--        &lt;!&ndash; Lista de productos &ndash;&gt;-->
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/productsRecyclerView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_below="@id/topNavbar"-->
-<!--            android:layout_above="@id/bottomNavbar"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:clipToPadding="false"-->
-<!--            android:paddingBottom="8dp"-->
-<!--            android:scrollbars="vertical"/>-->
-
-<!--        &lt;!&ndash; Navegación inferior &ndash;&gt;-->
-<!--        <LinearLayout-->
-<!--            android:id="@+id/bottomNavbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:background="@color/colorSecondary"-->
-<!--            android:padding="10dp"-->
-<!--            android:layout_alignParentBottom="true">-->
-
-<!--            <Button-->
-<!--                android:id="@+id/homeButton"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="@string/home_button"-->
-<!--                android:textColor="@android:color/white"-->
-<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--                android:drawableTop="@drawable/home_icon_35x35"-->
-<!--                android:drawablePadding="0dp"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                style="?android:attr/buttonBarButtonStyle" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/productsButton"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="@string/products_button"-->
-<!--                android:textColor="@android:color/white"-->
-<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--                android:drawableTop="@drawable/shopping_bag_icon_35x35"-->
-<!--                android:drawablePadding="0dp"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                style="?android:attr/buttonBarButtonStyle" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/profileButton"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="@string/account_button"-->
-<!--                android:textColor="@android:color/white"-->
-<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--                android:drawableTop="@drawable/account_icon_35x35"-->
-<!--                android:drawablePadding="0dp"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                style="?android:attr/buttonBarButtonStyle" />-->
-
-<!--        </LinearLayout>-->
-
-<!--    </RelativeLayout>-->
 
 <!--    &lt;!&ndash; Drawer de navegación lateral &ndash;&gt;-->
 <!--    <LinearLayout-->
@@ -369,7 +292,7 @@
 <!--                android:textColor="@android:color/black"-->
 <!--                android:padding="8dp" />-->
 
-<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
 
 <!--    </LinearLayout>-->
 
