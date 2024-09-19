@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#1C1B1F</color>
+    <color name="colorPrimary">#F8F9Fa</color>
+    <color name="colorSecondary">#376608</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#00000080</color>
+    <color name="red">#7D1010</color>
+    <color name="yellow">#FFD43D</color>
+    <color name="purple">#65558F</color>
+    <color name="violet">#BF89D7</color>
+    <color name="btnText">#FFFFFF</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
+    <color name="green">#f0fff0</color>
+
 </resources>

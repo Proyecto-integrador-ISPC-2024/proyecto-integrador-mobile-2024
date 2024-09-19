@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.proyectointegradormobile2024"
+    namespace = "com.example.tiendadecampeones"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.proyectointegradormobile2024"
+        applicationId = "com.example.tiendadecampeones"
         minSdk = 25
         targetSdk = 34
         versionCode = 1
@@ -37,6 +37,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.recyclerview)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

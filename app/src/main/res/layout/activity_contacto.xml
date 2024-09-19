@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Contact">
+
+    <!-- Main Content (Your original layout) -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Logo -->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/headerLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:background="@color/colorPrimary"-->
+<!--            android:padding="16dp">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/logoImageView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@mipmap/logo_activities"-->
+<!--                android:contentDescription="@string/app_name" />-->
+
+<!--        </LinearLayout>-->
+
+        <!-- Navbar superior -->
+        <LinearLayout
+            android:id="@+id/topNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/back_button"
+                android:textColor="@color/colorPrimary"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/arrow_back_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_marginEnd="300dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle"
+                />
+
+
+        </LinearLayout>
+
+        <!-- Información de contacto -->
+        <LinearLayout
+            android:id="@+id/contactInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/topNavbar"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/contactanosLabel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:text="@string/titleContact"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Dirección -->
+            <TextView
+                android:id="@+id/addressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addressContact"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/addressText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addressNameContact"
+                android:textSize="16sp" />
+
+            <!-- Teléfono -->
+            <TextView
+                android:id="@+id/phoneLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phoneContact"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/phoneText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/numbersContact"
+                android:textSize="16sp" />
+
+            <!-- Email -->
+            <TextView
+                android:id="@+id/emailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mailContact"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/emailText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/emailContact"
+                android:textSize="16sp" />
+
+            <!-- Botón para enviar correo -->
+            <Button
+                android:id="@+id/emailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sendContactBtn"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorSecondary"
+                android:textColor="@color/colorPrimary" />
+
+            <!-- Productos recomendados (Scroll horizontal) -->
+            <TextView
+                android:id="@+id/recommendedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/knowOurProducts"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/black" />
+
+            <HorizontalScrollView
+                android:id="@+id/recommendedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/recommendedProductsLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Producto 1 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@color/colorSecondary">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@mipmap/argentina_1978_primera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/argContactProd"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <!-- Producto 2 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@color/colorSecondary">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@mipmap/brasil_1958_primera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/brContactProd"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
+
+
+                    <!-- Producto 3 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:background="@color/colorSecondary">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@mipmap/francia_1998_primera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/frContactProd"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Botón para ir a comprar -->
+            <Button
+                android:id="@+id/comprarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buyContactBtn"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorSecondary"
+                android:textColor="@color/colorPrimary"
+                android:onClick="productClick"
+                />
+
+        </LinearLayout>
+
+        <!-- Navegación inferior -->
+        <LinearLayout
+            android:id="@+id/bottomNavbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorSecondary"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/homeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/home_button"
+                android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/home_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/productsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/products_button"
+                android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/shopping_bag_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+            <Button
+                android:id="@+id/profileButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/account_button"
+                android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:drawableTop="@drawable/account_icon_35x35"
+                android:drawablePadding="0dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                style="?android:attr/buttonBarButtonStyle" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
