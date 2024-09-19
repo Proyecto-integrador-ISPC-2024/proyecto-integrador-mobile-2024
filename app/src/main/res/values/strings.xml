@@ -79,4 +79,5 @@
     <string name="homeTitleTwo">Conocé nuestros productos</string>
     <string name="homeSubtitle">Vestí tu pasión con un estilo único</string>
     <string name="homeBtn">Comenzar a comprar</string>
+    <string name="finalizar_compra">Finalizar compra</string>
 </resources>
