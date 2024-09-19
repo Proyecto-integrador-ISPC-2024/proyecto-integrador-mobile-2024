@@ -8,524 +8,108 @@
     android:orientation="vertical"
     tools:context=".ui.Cart">
 
-<!--    &lt;!&ndash; Header &ndash;&gt;-->
-<!--    <ImageView-->
-<!--        android:id="@+id/logoTienda"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:src="@drawable/banner" />-->
-
-<!--    &lt;!&ndash; Título del carrito &ndash;&gt;-->
-<!--    <TextView-->
-<!--        android:id="@+id/cartTittle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:paddingTop="16dp"-->
-<!--        android:paddingBottom="16dp"-->
-<!--        android:text="Mi carrito"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="24sp"-->
-<!--        android:textStyle="bold" />-->
-
-<!--    &lt;!&ndash; Productos en carrito &ndash;&gt;-->
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="1">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:layout_margin="16dp">-->
-
-<!--            &lt;!&ndash; Productos &ndash;&gt;-->
-
-<!--            &lt;!&ndash; Producto Camiseta Argentina 78 &ndash;&gt;-->
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/rounded_button2"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginBottom="10dp">-->
-
-<!--                &lt;!&ndash; Imagen del producto &ndash;&gt;-->
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="98dp"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    app:cardCornerRadius="20dp"-->
-<!--                    app:cardElevation="0dp">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:adjustViewBounds="true"-->
-<!--                        android:scaleType="centerInside"-->
-<!--                        android:src="@mipmap/argentina_1978_primera" />-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-<!--            &lt;!&ndash; Detalles del producto &ndash;&gt;-->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="2.5"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    &lt;!&ndash; Nombre del producto &ndash;&gt;-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/productName1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:paddingBottom="5dp"-->
-<!--                        android:text="Camiseta Argentina 78"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="16sp"-->
-<!--                        android:textStyle="bold" />-->
-
-<!--                    &lt;!&ndash; Cantidad de productos &ndash;&gt;-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="160dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="horizontal"-->
-<!--                        android:layout_gravity="center|left">-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/quantityLabel1"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_gravity="center_vertical"-->
-<!--                            android:paddingEnd="8dp"-->
-<!--                            android:text="Cantidad:"-->
-<!--                            android:textColor="@color/black" />-->
-
-
-<!--                        &lt;!&ndash; Cantidad &ndash;&gt;-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/quantityProduct1"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:background="@android:drawable/editbox_background"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="1"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textSize="12sp" />-->
-
-<!--                        &lt;!&ndash; Botón de aumentar cantidad &ndash;&gt;-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/increaseButton1"-->
-<!--                            android:layout_width="15dp"-->
-<!--                            android:layout_height="15dp"-->
-<!--                            android:background="@drawable/circle_button"-->
-<!--                            android:contentDescription="Aumentar cantidad"-->
-<!--                            android:scaleType="centerInside"-->
-<!--                            android:src="@drawable/add_icon_35x35"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:layout_margin="3dp"/>-->
-
-<!--                        &lt;!&ndash; Botón de disminuir cantidad &ndash;&gt;-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/decreaseButton1"-->
-<!--                            android:layout_width="15dp"-->
-<!--                            android:layout_height="15dp"-->
-<!--                            android:background="@drawable/circle_button"-->
-<!--                            android:contentDescription="Disminuir cantidad"-->
-<!--                            android:scaleType="centerInside"-->
-<!--                            android:src="@drawable/remove_icon_35x35"-->
-<!--                            android:layout_gravity="end|center"-->
-<!--                            android:layout_margin="3dp"/>-->
-<!--                    </LinearLayout>-->
-
-<!--                    &lt;!&ndash; Talle &ndash;&gt;-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/sizeProduct1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Talle: S"-->
-<!--                        android:textColor="@color/black" />-->
-
-<!--                    &lt;!&ndash; Precio y delete &ndash;&gt;-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="2dp"-->
-<!--                        android:gravity="center_vertical"-->
-<!--                        android:orientation="horizontal">-->
-
-<!--                        &lt;!&ndash; Precio &ndash;&gt;-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/priceProduct1"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="28dp"-->
-<!--                            android:text="Precio: $50.000"-->
-<!--                            android:textColor="@color/black" />-->
-
-<!--                        &lt;!&ndash; Botón delete derecha &ndash;&gt;-->
-<!--                        <View-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="28dp"-->
-<!--                            android:layout_weight="1" />-->
-
-<!--                        &lt;!&ndash; Botón delete &ndash;&gt;-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/removeButton1"-->
-<!--                            android:layout_width="28dp"-->
-<!--                            android:layout_height="28dp"-->
-<!--                            android:contentDescription="Eliminar producto"-->
-<!--                            android:src="@drawable/vector_drawable" />-->
-<!--                    </LinearLayout>-->
-<!--                </LinearLayout>-->
-
-<!--            </LinearLayout>-->
-
-<!--            &lt;!&ndash; Producto Camiseta Francia 98 &ndash;&gt;-->
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/rounded_button2"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginBottom="10dp">-->
-
-<!--                &lt;!&ndash; Imagen del producto &ndash;&gt;-->
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="98dp"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    app:cardCornerRadius="20dp"-->
-<!--                    app:cardElevation="0dp">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:adjustViewBounds="true"-->
-<!--                        android:scaleType="centerInside"-->
-<!--                        android:src="@mipmap/francia_1998_segunda" />-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-<!--                &lt;!&ndash; Detalles del producto &ndash;&gt;-->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="2.5"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    &lt;!&ndash; Nombre del producto &ndash;&gt;-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/productName1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:paddingBottom="5dp"-->
-<!--                        android:text="Camiseta Francia 98"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="16sp"-->
-<!--                        android:textStyle="bold" />-->
-
-<!--                    &lt;!&ndash; Cantidad de productos &ndash;&gt;-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="160dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="horizontal"-->
-<!--                        android:layout_gravity="center|left">-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/quantityLabel1"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_gravity="center_vertical"-->
-<!--                            android:paddingEnd="8dp"-->
-<!--                            android:text="Cantidad:"-->
-<!--                            android:textColor="@color/black" />-->
-
-
-<!--                        &lt;!&ndash; Cantidad &ndash;&gt;-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/quantityProduct1"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:background="@android:drawable/editbox_background"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="2"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textSize="12sp" />-->
-
-<!--                        &lt;!&ndash; Botón de aumentar cantidad &ndash;&gt;-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/increaseButton1"-->
-<!--                            android:layout_width="15dp"-->
-<!--                            android:layout_height="15dp"-->
-<!--                            android:background="@drawable/circle_button"-->
-<!--                            android:contentDescription="Aumentar cantidad"-->
-<!--                            android:scaleType="centerInside"-->
-<!--                            android:src="@drawable/add_icon_35x35"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:layout_margin="3dp"/>-->
-
-<!--                        &lt;!&ndash; Botón de disminuir cantidad &ndash;&gt;-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/decreaseButton1"-->
-<!--                            android:layout_width="15dp"-->
-<!--                            android:layout_height="15dp"-->
-<!--                            android:background="@drawable/circle_button"-->
-<!--                            android:contentDescription="Disminuir cantidad"-->
-<!--                            android:scaleType="centerInside"-->
-<!--                            android:src="@drawable/remove_icon_35x35"-->
-<!--                            android:layout_gravity="end|center"-->
-<!--                            android:layout_margin="3dp"/>-->
-<!--                    </LinearLayout>-->
-
-<!--                    &lt;!&ndash; Talle &ndash;&gt;-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/sizeProduct1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Talle: S"-->
-<!--                        android:textColor="@color/black" />-->
-
-<!--                    &lt;!&ndash; Precio y delete &ndash;&gt;-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="2dp"-->
-<!--                        android:gravity="center_vertical"-->
-<!--                        android:orientation="horizontal">-->
-
-<!--                        &lt;!&ndash; Precio &ndash;&gt;-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/priceProduct1"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="28dp"-->
-<!--                            android:text="Precio: $20.000"-->
-<!--                            android:textColor="@color/black" />-->
-
-<!--                        &lt;!&ndash; Botón delete derecha &ndash;&gt;-->
-<!--                        <View-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="28dp"-->
-<!--                            android:layout_weight="1" />-->
-
-<!--                        &lt;!&ndash; Botón delete &ndash;&gt;-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/removeButton1"-->
-<!--                            android:layout_width="28dp"-->
-<!--                            android:layout_height="28dp"-->
-<!--                            android:contentDescription="Eliminar producto"-->
-<!--                            android:src="@drawable/vector_drawable" />-->
-<!--                    </LinearLayout>-->
-<!--                </LinearLayout>-->
-
-<!--            </LinearLayout>-->
-
-<!--            &lt;!&ndash; Producto Camiseta Brasil 2002 &ndash;&gt;-->
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/rounded_button2"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginBottom="10dp">-->
-
-<!--                &lt;!&ndash; Imagen del producto &ndash;&gt;-->
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="98dp"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:layout_weight="1"-->
-<!--                    app:cardCornerRadius="20dp"-->
-<!--                    app:cardElevation="0dp">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:adjustViewBounds="true"-->
-<!--                        android:scaleType="centerInside"-->
-<!--                        android:src="@mipmap/brasil_2002_primera" />-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-<!--                &lt;!&ndash; Detalles del producto &ndash;&gt;-->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="2.5"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    &lt;!&ndash; Nombre del producto &ndash;&gt;-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/productName1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:paddingBottom="5dp"-->
-<!--                        android:text="Camiseta Brasil 2002"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="16sp"-->
-<!--                        android:textStyle="bold" />-->
-
-<!--                    &lt;!&ndash; Cantidad de productos &ndash;&gt;-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="160dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="horizontal"-->
-<!--                        android:layout_gravity="center|left">-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/quantityLabel1"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_gravity="center_vertical"-->
-<!--                            android:paddingEnd="8dp"-->
-<!--                            android:text="Cantidad:"-->
-<!--                            android:textColor="@color/black" />-->
-
-
-<!--                        &lt;!&ndash; Cantidad &ndash;&gt;-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/quantityProduct1"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:background="@android:drawable/editbox_background"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="1"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textSize="12sp" />-->
-
-<!--                        &lt;!&ndash; Botón de aumentar cantidad &ndash;&gt;-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/increaseButton1"-->
-<!--                            android:layout_width="15dp"-->
-<!--                            android:layout_height="15dp"-->
-<!--                            android:background="@drawable/circle_button"-->
-<!--                            android:contentDescription="Aumentar cantidad"-->
-<!--                            android:scaleType="centerInside"-->
-<!--                            android:src="@drawable/add_icon_35x35"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:layout_margin="3dp"/>-->
-
-<!--                        &lt;!&ndash; Botón de disminuir cantidad &ndash;&gt;-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/decreaseButton1"-->
-<!--                            android:layout_width="15dp"-->
-<!--                            android:layout_height="15dp"-->
-<!--                            android:background="@drawable/circle_button"-->
-<!--                            android:contentDescription="Disminuir cantidad"-->
-<!--                            android:scaleType="centerInside"-->
-<!--                            android:src="@drawable/remove_icon_35x35"-->
-<!--                            android:layout_gravity="end|center"-->
-<!--                            android:layout_margin="3dp"/>-->
-<!--                    </LinearLayout>-->
-
-<!--                    &lt;!&ndash; Talle &ndash;&gt;-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/sizeProduct1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Talle: S"-->
-<!--                        android:textColor="@color/black" />-->
-
-<!--                    &lt;!&ndash; Precio y delete &ndash;&gt;-->
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="2dp"-->
-<!--                        android:gravity="center_vertical"-->
-<!--                        android:orientation="horizontal">-->
-
-<!--                        &lt;!&ndash; Precio &ndash;&gt;-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/priceProduct1"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="28dp"-->
-<!--                            android:text="Precio: $45.000"-->
-<!--                            android:textColor="@color/black" />-->
-
-<!--                        &lt;!&ndash; Botón delete derecha &ndash;&gt;-->
-<!--                        <View-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="28dp"-->
-<!--                            android:layout_weight="1" />-->
-
-<!--                        &lt;!&ndash; Botón delete &ndash;&gt;-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/removeButton1"-->
-<!--                            android:layout_width="28dp"-->
-<!--                            android:layout_height="28dp"-->
-<!--                            android:contentDescription="Eliminar producto"-->
-<!--                            android:src="@drawable/vector_drawable" />-->
-<!--                    </LinearLayout>-->
-<!--                </LinearLayout>-->
-
-<!--            </LinearLayout>-->
-
-<!--        </LinearLayout>-->
-
-
-<!--    </ScrollView>-->
-
-<!--    &lt;!&ndash; Botón finalizar compra &ndash;&gt;-->
-<!--    <Button-->
-<!--        android:id="@+id/endShop"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="38dp"-->
-<!--        android:backgroundTint="@color/gray_400"-->
-<!--        android:text="FINALIZAR COMPRA"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_marginBottom="16dp"/>-->
-
-<!--    &lt;!&ndash; Nav inferior &ndash;&gt;-->
-<!--    <LinearLayout-->
-<!--        android:id="@+id/bottomNavbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:background="@color/colorSecondary">-->
-
-<!--        <Button-->
-<!--            android:id="@+id/homeButton"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--            android:drawableTop="@drawable/home_icon_35x35"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/home_button"-->
-<!--            android:textColor="@android:color/white" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/productsButton"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--            android:drawableTop="@drawable/shopping_bag_icon_35x35"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/products_button"-->
-<!--            android:textColor="@android:color/white" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/profileButton"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--            android:drawableTop="@drawable/account_icon_35x35"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/account_button"-->
-<!--            android:textColor="@android:color/white" />-->
-<!--    </LinearLayout>-->
+    <!-- Nav superior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:contentDescription="@string/back_button" />
+
+        <TextView
+            android:id="@+id/categoryTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/products_title"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Título del carrito -->
+    <TextView
+        android:id="@+id/cartTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Mi carrito"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- RecyclerView for dynamic product rendering -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="16dp"
+        tools:listitem="@layout/cart_item" />
+
+    <!-- Botón finalizar compra -->
+    <Button
+        android:id="@+id/endShop"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/gray_400"
+        android:text="@string/finalizar_compra"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Nav inferior -->
+    <LinearLayout
+        android:id="@+id/bottomNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorSecondary"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/home_button"
+            android:textColor="@android:color/white"
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <Button
+            android:id="@+id/productsButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/products_button"
+            android:textColor="@android:color/white"
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <Button
+            android:id="@+id/profileButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/account_button"
+            android:textColor="@android:color/white"
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
 
 </LinearLayout>
