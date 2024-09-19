@@ -9,40 +9,23 @@
     tools:context=".ui.ProductsActivity"
     android:background="@color/colorPrimary">
 
-    <!-- Logo and Top Navigation -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/white"
-        android:padding="8dp">
-
-        <!-- Top Navigation -->
+        <!-- Navbar superior -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@color/white"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:padding="8dp">
 
             <ImageButton
                 android:id="@+id/backButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginEnd="300dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/arrow_back_icon_35x35"
                 android:contentDescription="@string/back_button" />
-
-            <TextView
-                android:id="@+id/categoryTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/products_title"
-                android:textSize="18sp"
-                android:textColor="@android:color/white"
-                android:gravity="center" />
 
             <ImageButton
                 android:id="@+id/cartButton"
@@ -52,7 +35,6 @@
                 android:src="@drawable/shopping_cart_icon_35x35"
                 android:contentDescription="@string/cart_button" />
         </LinearLayout>
-    </LinearLayout>
 
     <!-- Products List (RecyclerView) -->
     <androidx.recyclerview.widget.RecyclerView
@@ -109,191 +91,3 @@
 
 </LinearLayout>
 
-<!--<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:id="@+id/main"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context=".ui.Home">-->
-
-<!--    &lt;!&ndash; Main Content (Your original layout) &ndash;&gt;-->
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-
-<!--        &lt;!&ndash; Logo &ndash;&gt;-->
-<!--        <LinearLayout-->
-<!--            android:id="@+id/headerLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:background="@color/colorPrimary"-->
-<!--            android:padding="16dp">-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/logoImageView"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:src="@mipmap/logo_activities"-->
-<!--                android:contentDescription="@string/app_name" />-->
-
-<!--        </LinearLayout>-->
-
-<!--        &lt;!&ndash; Navbar superior &ndash;&gt;-->
-<!--        <LinearLayout-->
-<!--            android:id="@+id/topNavbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:background="@color/colorPrimary"-->
-<!--            android:padding="10dp"-->
-<!--            android:layout_below="@+id/headerLayout">-->
-
-<!--            <Button-->
-<!--                android:id="@+id/backButton"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="@string/back_button"-->
-<!--                android:textColor="@color/colorPrimary"-->
-<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--                android:drawableTop="@drawable/arrow_back_icon_35x35"-->
-<!--                android:drawablePadding="0dp"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_marginEnd="220dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                style="?android:attr/buttonBarButtonStyle"-->
-<!--                />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/sideNavButton"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="@string/menu_button"-->
-<!--                android:textColor="@color/colorPrimary"-->
-<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--                android:drawableTop="@drawable/menu_icon_35x35"-->
-<!--                android:drawablePadding="0dp"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                style="?android:attr/buttonBarButtonStyle" />-->
-
-<!--        </LinearLayout>-->
-
-<!--    &lt;!&ndash; Drawer de navegación lateral &ndash;&gt;-->
-<!--    <LinearLayout-->
-<!--        android:id="@+id/sideNav"-->
-<!--        android:layout_width="240dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="start"-->
-<!--        android:orientation="vertical"-->
-<!--        android:background="@color/colorPrimary"-->
-<!--        android:padding="16dp">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/navTitle"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Menu"-->
-<!--            android:textColor="@android:color/black"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold" />-->
-
-<!--        &lt;!&ndash; Sections &ndash;&gt;-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:layout_marginTop="20dp">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/gray"-->
-<!--                android:text="PRODUCTOS"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textStyle="bold"-->
-<!--                android:padding="8dp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/productsButtonDrawer"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Productos"-->
-<!--                android:background="@color/gray"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:padding="8dp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/cartButtonDrawer"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Mi carrito"-->
-<!--                android:background="@color/gray"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:padding="8dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/gray"-->
-<!--                android:text="SOBRE NOSOTROS"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textStyle="bold"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_marginTop="10dp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/aboutUsButtonDrawer"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Conocenos"-->
-<!--                android:background="@color/gray"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:padding="8dp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/contactButtonDrawer"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Contacto"-->
-<!--                android:background="@color/gray"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:padding="8dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/gray"-->
-<!--                android:text="MI PERFIL"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textStyle="bold"-->
-<!--                android:padding="8dp"-->
-<!--                android:layout_marginTop="10dp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/profileButtonDrawer"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Perfil"-->
-<!--                android:background="@color/gray"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:padding="8dp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/dashboardButtonDrawer"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Dashboard"-->
-<!--                android:background="@color/gray"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:padding="8dp" />-->
-
-<!--    </LinearLayout>-->
-
-<!--    </LinearLayout>-->
-
-<!--</androidx.drawerlayout.widget.DrawerLayout>-->

@@ -1,10 +1,10 @@
+// ProductsActivity.java
 package com.example.tiendadecampeones.ui;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-//import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,11 +13,6 @@ import com.example.tiendadecampeones.adapters.ProductsAdapter;
 import com.example.tiendadecampeones.models.Product;
 import android.content.Intent;
 import android.widget.ImageButton;
-
-import com.example.tiendadecampeones.ui.Home;
-import com.example.tiendadecampeones.ui.Profile;
-
-//import com.example.tiendadecampeones.ui.CartActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,30 +28,25 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-        // Volver a la actividad anterior
+        // Botones de navegación superior
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        // Navegación al carro - CartActivity no definida todavía
-//        ImageButton cartButton = findViewById(R.id.cartButton);
-//        Button cartButton = findViewById(R.id.cartButton);
-//        cartButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ProductsActivity.this, CartActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        ImageButton cartButton = findViewById(R.id.cartButton);
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductsActivity.this, Cart.class);
+                startActivity(intent);
+            }
+        });
 
         // Botones de navegación inferior
         Button homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProductsActivity.this, Home.class);
                 startActivity(intent);
@@ -65,34 +55,30 @@ public class ProductsActivity extends AppCompatActivity {
 
         Button productsButton = findViewById(R.id.productsButton);
         productsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                //    Navegación a Categorías de productos - No funcional ya que el usuario estaría en Products
+                // User is already on the ProductsActivity
             }
         });
 
         Button profileButton = findViewById(R.id.profileButton);
         profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProductsActivity.this, Profile.class);
                 startActivity(intent);
             }
         });
 
-        // Inicializo RecyclerView para renderizar datos dinámicos
+        // Seteo del recycler view
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Simulación de obtención de datos desde DB
+        // Simulando datos obtenidos desde la BD
         productList = new ArrayList<>();
-        productList.add(new Product("Camiseta Argentina 2021", "Description 1", 19.99, R.mipmap.argentina_2021_primera));
-        productList.add(new Product("Camiseta Brasil 2002", "Description 2", 29.99, R.mipmap.brasil_2002_primera));
-        productList.add(new Product("Camiseta Alemania 2014", "Description 3", 39.99, R.mipmap.alemania_2014_segunda));
+        productList.add(new Product("Camiseta Argentina 2021", "Description 1", 19.99, R.mipmap.argentina_2021_primera, 1));
+        productList.add(new Product("Camiseta Brasil 2002", "Description 2", 29.99, R.mipmap.brasil_2002_primera, 2));
+        productList.add(new Product("Camiseta Alemania 2014", "Description 3", 39.99, R.mipmap.alemania_2014_segunda, 2));
 
         productsAdapter = new ProductsAdapter(productList, this);
         productsRecyclerView.setAdapter(productsAdapter);
-
     }
-
 }

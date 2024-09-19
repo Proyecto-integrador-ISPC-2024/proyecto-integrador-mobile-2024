@@ -8,6 +8,26 @@
     android:orientation="vertical"
     tools:context=".ui.Register">
 
+    <!-- Navbar superior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="300dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:contentDescription="@string/back_button" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/registrarme"
         style="@style/App.Theme.Size"

@@ -36,12 +36,23 @@ public class Home extends AppCompatActivity {
             }
         });
 
-    }
+        Button cartButton = findViewById(R.id.cartButton);
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, Cart.class);
+                startActivity(intent);
+            }
+        });
 
-    public void productClick(View v) {
-        // Intent para abrir la pantalla de Productos
-        Intent intent = new Intent(this, CountryProducts.class);
-        startActivity(intent);
+        Button buyButton = findViewById(R.id.buyButton);
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Intent para abrir la pantalla de Productos
+                Intent intent = new Intent(Home.this, ProductCategories.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void profileBtn(View view) {
@@ -50,6 +61,7 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
+
     public void homeButton(View v) {
         Toast.makeText(this, "¡ Home !", Toast.LENGTH_SHORT).show();
 

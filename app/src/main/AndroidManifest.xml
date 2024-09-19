@@ -8,34 +8,17 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_dark"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo_dark"
         android:supportsRtl="true"
         tools:targetApi="31">
 
         <!-- Actividades de la aplicación - en caso de necesitar testear sus actividades agreguen el filter como atributo de la actividad en la que estén trabajando para inicializar la app en ese punto -->
 
+        <!--    Actividad de inicio de aplicación    -->
         <activity
-            android:name=".ui.CartResume"
-            android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity
-            android:name=".ui.Dashboard"
-            android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity
-            android:name=".ui.Profile"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity
-            android:name=".ui.Home"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -51,21 +34,38 @@
         </activity>
 
         <activity
-            android:name=".ui.MainActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-
-        </activity>
-
-        <activity
-            android:name=".ui.Order"
+            android:name=".ui.Register"
             android:exported="false"
             android:theme="@style/AppTheme">
         </activity>
 
         <activity
-            android:name=".ui.Register"
+            android:name=".ui.Home"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.ProductCategories"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.ProductsActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.CartResume"
             android:exported="true"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.Cart"
+            android:exported="false"
             android:theme="@style/AppTheme">
         </activity>
 
@@ -76,27 +76,34 @@
         </activity>
 
         <activity
-            android:name=".AboutUs"
+            android:name=".ui.Contact"
             android:exported="false"
             android:theme="@style/AppTheme">
         </activity>
 
         <activity
-            android:name=".ui.ProductsActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-
-        <activity
-            android:name=".Contacto"
+            android:name=".ui.AboutUs"
             android:exported="false"
             android:theme="@style/AppTheme">
         </activity>
 
+        <activity
+            android:name=".ui.Profile"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.Dashboard"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".ui.Order"
+            android:exported="false"
+            android:theme="@style/AppTheme">
+        </activity>
 
     </application>
 
