@@ -1,393 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    tools:context=".ui.ProductCategories">
 
-    <RelativeLayout
+    <!-- Navbar superior -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="300dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/arrow_back_icon_35x35" />
+
+        <ImageButton
+            android:id="@+id/cartButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cart_button"
+            android:src="@drawable/shopping_cart_icon_35x35" />
+    </LinearLayout>
+
+    <!-- Grid for Country Buttons -->
+
+    <GridLayout
+        android:id="@+id/countryGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:columnCount="2"
+        android:rowCount="4"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <!-- Germany -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp">
+
+            <ImageButton
+                android:id="@+id/buttonGermany"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/alemania"
+                android:contentDescription="@string/products_germany"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_germany"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <!-- Argentina -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonArgentina"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/argentina"
+                android:contentDescription="@string/products_argentina"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_argentina"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <!-- France -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonFrance"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/francia"
+                android:contentDescription="@string/products_france"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_france"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <!-- Uruguay -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonUruguay"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/uruguay"
+                android:contentDescription="@string/products_uruguay"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_uruguay"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonBrazil"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/brasil"
+                android:contentDescription="@string/products_brazil"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_brazil"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonSpain"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/espa_a"
+                android:contentDescription="@string/products_spain"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_spain"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonEngland"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/inglaterra"
+                android:contentDescription="@string/products_england"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_england"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonItaly"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/italia"
+                android:contentDescription="@string/products_italy"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_italy"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </GridLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:background="@color/colorSecondary"
+        android:orientation="horizontal"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/countryGrid">
 
-        <!-- Logo -->
-        <LinearLayout
-            android:id="@+id/headerLayout"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:gravity="center"
+            android:text="@string/home_button"
+            android:textColor="@android:color/white"/>
 
-            <ImageView
-                android:id="@+id/logoImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@string/app_name"
-                android:src="@mipmap/logo_activities" />
-
-        </LinearLayout>
-        <!-- Navbar superior -->
-        <LinearLayout
-            android:id="@+id/topNavbar"
-            android:layout_width="match_parent"
-            android:layout_height="71dp"
-            android:layout_below="@+id/headerLayout"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="-17dp"
-            android:layout_marginEnd="-1dp"
-            android:background="@color/colorPrimary"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <Button
-                android:id="@+id/backButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="220dp"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:drawableTop="@drawable/arrow_back_icon_35x35"
-                android:drawablePadding="0dp"
-                android:padding="8dp"
-                android:text="@string/back_button"
-                android:textColor="@color/black" />
-
-            <Button
-                android:id="@+id/sideNavButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:drawableTop="@drawable/shopping_cart_icon_35x35"
-                android:drawablePadding="0dp"
-                android:padding="8dp"
-                android:text="@string/product_addToCart"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/productsButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="148dp"
-            android:layout_marginBottom="533dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Nuestros Productos"
-            android:textColor="@color/black" />
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:gravity="center"
+            android:text="@string/products_button"
+            android:textColor="@android:color/white" />
 
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="215dp"
-            android:layout_marginTop="521dp"
-            android:clickable="false"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:srcCompat="@mipmap/uruguay" />
-
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="521dp"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:srcCompat="@mipmap/italia"
-
-            />
-
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="213dp"
-            android:layout_marginTop="418dp"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:srcCompat="@mipmap/inglaterra"
-
-            />
-
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="418dp"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:srcCompat="@mipmap/francia"
-
-            />
-
-
-
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="214dp"
-            android:layout_marginTop="315dp"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:srcCompat="@mipmap/espa_a"
-
-            />
-
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="315dp"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:srcCompat="@mipmap/brasil"
-
-            />
-
-
-    <ImageButton
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="212dp"
-        android:scaleType="fitXY"
-        android:visibility="visible"
-        app:srcCompat="@mipmap/alemania"
-
-        />
-
-        <ImageButton
-            android:id="@+id/nav_products"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="214dp"
-            android:layout_marginTop="212dp"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:srcCompat="@mipmap/argentina"
-
-            />
-
-       <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="252dp"
-        android:breakStrategy="high_quality"
-        android:fontFamily="sans-serif-black"
-        android:lineSpacingExtra="16sp"
-        android:text="@string/products_germany"
-        android:textColor="#EFF4F0"
-        android:textColorLink="#EFEBEB"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/profileButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="99dp"
-            android:layout_marginTop="457dp"
-            android:breakStrategy="high_quality"
-            android:fontFamily="sans-serif-black"
-            android:lineSpacingExtra="16sp"
-            android:text="@string/products_france"
-            android:textColor="#EFF4F0"
-            android:textColorLink="#EFEBEB"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:gravity="center"
+            android:text="@string/account_button"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="260dp"
-        android:layout_marginTop="560dp"
-        android:breakStrategy="high_quality"
-        android:fontFamily="sans-serif-black"
-        android:lineSpacingExtra="16sp"
-        android:text="@string/products_uruguay"
-        android:textColor="#EFF4F0"
-        android:textColorLink="#EFEBEB"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="107dp"
-        android:layout_marginTop="559dp"
-        android:breakStrategy="high_quality"
-        android:fontFamily="sans-serif-black"
-        android:lineSpacingExtra="16sp"
-        android:text="@string/products_italy"
-        android:textColor="#EFF4F0"
-        android:textColorLink="#EFEBEB"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="254dp"
-        android:layout_marginTop="457dp"
-        android:breakStrategy="high_quality"
-        android:fontFamily="sans-serif-black"
-        android:lineSpacingExtra="16sp"
-        android:text="@string/products_england"
-        android:textColor="#EFF4F0"
-        android:textColorLink="#EFEBEB"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="263dp"
-        android:layout_marginTop="355dp"
-        android:breakStrategy="high_quality"
-        android:fontFamily="sans-serif-black"
-        android:lineSpacingExtra="16sp"
-        android:text="@string/products_spain"
-        android:textColor="#EFF4F0"
-        android:textColorLink="#EFEBEB"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="355dp"
-        android:breakStrategy="high_quality"
-        android:fontFamily="sans-serif-black"
-        android:lineSpacingExtra="16sp"
-        android:text="@string/products_brazil"
-        android:textColor="#EFF4F0"
-        android:textColorLink="#EFEBEB"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="252dp"
-        android:breakStrategy="high_quality"
-        android:fontFamily="sans-serif-black"
-        android:lineSpacingExtra="16sp"
-        android:text="@string/products_argentina"
-        android:textColor="#EFF4F0"
-        android:textColorLink="#EFEBEB"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-
-
-
-
-
-    <!-- Navegación inferior -->
-
-
-
-        <LinearLayout
-            android:id="@+id/bottomNavbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorSecondary"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <Button
-                android:id="@+id/homeButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:drawableTop="@drawable/home_icon_35x35"
-                android:drawablePadding="0dp"
-                android:padding="8dp"
-                android:text="@string/home_button"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/productsButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:drawableTop="@drawable/shopping_bag_icon_35x35"
-                android:drawablePadding="0dp"
-                android:padding="8dp"
-                android:text="@string/products_button"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/profileButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:drawableTop="@drawable/account_icon_35x35"
-                android:drawablePadding="0dp"
-                android:padding="8dp"
-                android:text="@string/account_button"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-
-
-    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

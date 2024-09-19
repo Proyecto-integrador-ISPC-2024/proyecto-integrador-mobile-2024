@@ -6,10 +6,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.tiendadecampeones.R;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.adapters.CartResumeAdapter;
 import com.example.tiendadecampeones.models.Product;
 
 import java.util.ArrayList;
@@ -19,95 +21,92 @@ import java.util.Map;
 
 public class CartResume extends AppCompatActivity {
 
-    private TextView listPurchaseTextView;
+    private RecyclerView recyclerView;
+    private CartResumeAdapter cartResumeAdapter;
+    private List<Product> productList;
     private TextView totalTextView;
+    private Button confirmPurchaseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cart_resume);
 
-        listPurchaseTextView = findViewById(R.id.listPurchaseTextView);
-        totalTextView = findViewById(R.id.totalTextView);
+        recyclerView = findViewById(R.id.recyclerViewCart);
+        totalTextView = findViewById(R.id.totalPrice);
+        confirmPurchaseButton = findViewById(R.id.confirmPurchaseButton);
 
-        // Obtener productos del carrito (simulado)
+        // Set RecyclerView layout manager
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Get cart items (dummy data for now)
         Map<Product, Integer> cartItems = getCartItems();
+        productList = new ArrayList<>(cartItems.keySet());
 
-        // Mostrar los productos en el TextView
-        displayCartSummary(cartItems);
+        // Initialize adapter and set it to RecyclerView
+        cartResumeAdapter = new CartResumeAdapter(this, productList, cartItems);
+        recyclerView.setAdapter(cartResumeAdapter);
+
+        // Calculate total and set it
+        double totalAmount = calculateTotal(cartItems);
+        totalTextView.setText(String.format("Total: $%.2f", totalAmount));
+
+        // Set up button to navigate to Payment Methods Activity
+        confirmPurchaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToPaymentMethods();
+            }
+        });
     }
 
-    // Simulación de los productos en el carrito con cantidades
+    // Simulated cart items with quantities
     private Map<Product, Integer> getCartItems() {
         Map<Product, Integer> cartItems = new HashMap<>();
 
-        // Creamos algunos productos de ejemplo
-        Product product1 = new Product("Remera 1", "Remera deportiva", 5000.0, R.mipmap.alemania_1954_primera);
-        Product product2 = new Product("Medias", "Medias deportivas", 750.0, R.mipmap.alemania_1974_primera);
+        // Example products
+        Product product1 = new Product("Remera 1", "Remera deportiva", 5000.0, R.mipmap.alemania_1954_primera, 1);
+        Product product2 = new Product("Medias", "Medias deportivas", 750.0, R.mipmap.alemania_1974_primera, 1);
 
-        // Agregamos productos con cantidades
-        cartItems.put(product1, 1); // 1 unidad de Remera
-        cartItems.put(product2, 2); // 2 unidades de Medias
+        // Adding products with their quantities
+        cartItems.put(product1, 1);  // 1 unit of product 1
+        cartItems.put(product2, 2);  // 2 units of product 2
 
         return cartItems;
     }
 
-    private void displayCartSummary(Map<Product, Integer> cartItems) {
-        StringBuilder cartSummary = new StringBuilder();
+    // Calculate total amount
+    private double calculateTotal(Map<Product, Integer> cartItems) {
         double totalAmount = 0;
 
-        cartSummary.append("Compra\n");
-
-        // Iterar sobre los productos en el carrito
         for (Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
             Product product = entry.getKey();
             int quantity = entry.getValue();
-            double itemTotal = product.getPrice() * quantity;
-
-            // Truncar el nombre del producto a 7 caracteres y formatear
-            String productName = product.getName();
-            if (productName.length() > 7) {
-                productName = productName.substring(0, 7);
-            }
-
-            // Ajustar el espaciado para alinear los nombres
-            cartSummary.append(String.format("%d\t%-7s\t\t\t------------------------\t\t$%.2f\n", quantity, productName, itemTotal));
-
-            totalAmount += itemTotal;
+            totalAmount += product.getPrice() * quantity;
         }
 
-        StringBuilder total = new StringBuilder();
-
-        // Línea separadora y total
-        total.append("----------------------------\n");
-        total.append("Total: $").append(String.format("%.2f", totalAmount));
-
-        // Establecer el resumen en el TextView
-        listPurchaseTextView.setText(cartSummary.toString());
-        totalTextView.setText(total.toString());
+        return totalAmount;
     }
 
-
-    //Lanzar vista Productos
-    public void vProducts(View v){
-        Intent intento = new Intent(this, ProductsActivity.class);
-        startActivity(intento);
+    // Navigate to Payment Methods Activity
+    private void navigateToPaymentMethods() {
+        Intent intent = new Intent(CartResume.this, PaymentMethodsActivity.class);
+        startActivity(intent);
     }
 
-    //Cerramos la ventana actual
-    public void _back(View v){
-        finish();
+    // Navigation methods for bottom navbar
+    public void vProducts(View v) {
+        Intent intent = new Intent(this, ProductsActivity.class);
+        startActivity(intent);
     }
 
-    //Lanazamos la ventana Home
-    public void vHome(View v){
-        Intent intento = new Intent(this, Home.class);
-        startActivity(intento);
+    public void vHome(View v) {
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
     }
 
-    public void vProfile(View v){
-        Intent intento = new Intent(this, Profile.class);
-        startActivity(intento);
+    public void vProfile(View v) {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
     }
 }

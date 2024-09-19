@@ -1,12 +1,16 @@
 package com.example.tiendadecampeones.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.tiendadecampeones.R;
 
@@ -53,6 +57,16 @@ public class PaymentMethodsActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {
 
                 paymentFormContainer.setVisibility(View.GONE);
+            }
+        });
+
+
+        Button confirmPaymentButton = findViewById(R.id.confirmPaymentButton);
+        confirmPaymentButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(PaymentMethodsActivity.this, "Gracias por su compra", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PaymentMethodsActivity.this, Home.class);
+                startActivity(intent);
             }
         });
     }
