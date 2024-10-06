@@ -44,19 +44,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Toast.makeText(this, "OnPause", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "OnPause", Toast.LENGTH_SHORT).show();
         // Enfocarse en otra actividad  (esta actividad est� a punto de ser "detenida").
     }
     @Override
     protected void onStop() {
         super.onStop();
-        Toast.makeText(this, "OnStop", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "OnStop", Toast.LENGTH_SHORT).show();
         // La actividad ya no es visible (ahora est� "detenida")
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "OnDestroy", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "OnDestroy", Toast.LENGTH_SHORT).show();
         // La actividad est� a punto de ser destruida.
     }
 }
