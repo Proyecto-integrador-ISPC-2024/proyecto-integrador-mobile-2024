@@ -31,6 +31,7 @@
 
     <Button
         android:id="@+id/button"
+        style="@style/AppTheme.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -42,6 +43,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImageViewLogo"
         app:layout_constraintVertical_bias="0.0" />
+
+<!--    <com.airbnb.lottie.LottieAnimationView-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        app:lottie_rawRes="@raw/estrellas"-->
+<!--        app:lottie_autoPlay="true"-->
+<!--        app:lottie_loop="true"-->
+<!--        android:layout_marginTop="25dp"/>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
