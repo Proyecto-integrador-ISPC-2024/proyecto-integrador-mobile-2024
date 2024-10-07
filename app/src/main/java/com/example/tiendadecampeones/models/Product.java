@@ -6,14 +6,17 @@ public class Product {
     final private double price;
     final private int imageResId;
     private int quantity;
+    private int stock;
 
-    public Product(String name, String description, double price, int imageResId, int quantity) {
+    public Product(String name, String description, double price, int imageResId, int quantity,int stock) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.imageResId = imageResId;
         this.quantity = quantity;
+        this.stock = stock;
     }
+
 
     public String getName() {
         return name;
@@ -37,5 +40,9 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getStock() {
+        return stock;
     }
 }
