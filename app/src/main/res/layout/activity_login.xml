@@ -8,13 +8,14 @@
     android:orientation="vertical"
     tools:context="com.tiendadecampeones.ui.Login">
 
+
     <TextView
         android:id="@+id/bienvenido"
         style="@style/App.Theme.Size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="73dp"
         android:gravity="center"
+        android:layout_marginTop="73dp"
         android:text="Bienvenido" />
 
     <ImageView

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,8 +42,32 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.productQuantity.setText(String.valueOf(product.getQuantity()));
         holder.productImage.setImageResource(product.getImageResId());
 
-        // Optionally: Handle the increment/decrement of quantity here
+        // Incrementar cantidad
+        holder.incrementButton.setOnClickListener(v -> {
+            if (product.getQuantity() < product.getStock()) {
+                product.setQuantity(product.getQuantity() + 1);
+                holder.productQuantity.setText(String.valueOf(product.getQuantity()));
+                notifyItemChanged(position);
+            }
+        });
+
+        // Decrementar cantidad
+        holder.decrementButton.setOnClickListener(v -> {
+            if (product.getQuantity() > 1) {
+                product.setQuantity(product.getQuantity() - 1);
+                holder.productQuantity.setText(String.valueOf(product.getQuantity()));
+                notifyItemChanged(position);
+            }
+        });
+
+        // Botón para eliminar ítems del carrito
+        holder.removeButton.setOnClickListener(v -> {
+            productList.remove(position);
+            notifyItemRemoved(position);
+        });
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -53,6 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         TextView productName, productPrice, productQuantity;
         ImageView productImage;
+        Button incrementButton, decrementButton, removeButton;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +86,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             productPrice = itemView.findViewById(R.id.productPrice);
             productQuantity = itemView.findViewById(R.id.productQuantity);
             productImage = itemView.findViewById(R.id.productImage);
+            incrementButton = itemView.findViewById(R.id.quantityIncrement);
+            decrementButton = itemView.findViewById(R.id.quantityDecrement);
+            removeButton = itemView.findViewById(R.id.removeButton);
         }
     }
 }

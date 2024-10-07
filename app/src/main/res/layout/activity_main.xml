@@ -45,7 +45,7 @@
         app:lottie_rawRes="@raw/estrellas"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        android:layout_marginTop="25dp"/>
+        />
 
 
     </LinearLayout >
