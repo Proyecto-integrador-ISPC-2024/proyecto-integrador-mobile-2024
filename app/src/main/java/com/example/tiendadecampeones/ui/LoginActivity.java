@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Pantalla de Bienvenida a formulario de registro
 
-        Button btn1 = findViewById(R.id.buttonRegister);
+        Button btn1 = findViewById(R.id.registerButton);
         btn1.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, Register.class);
             startActivity(intent);
@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Pantalla de Bienvenida a Conosenos
 
-        Button btn2 = findViewById(R.id.buttonIniciarSecion);
+        Button btn2 = findViewById(R.id.loginButton);
         btn2.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, Home.class);
             startActivity(intent);
