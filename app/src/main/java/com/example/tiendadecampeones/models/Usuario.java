@@ -6,6 +6,7 @@ public class Usuario {
     private String apellido;
     private String email;
     private String domicilio;
+    private String rol;
 
     public Usuario(int idUsuario, String nombre, String apellido, String email, String domicilio) {
         this.idUsuario = idUsuario;
@@ -29,4 +30,7 @@ public class Usuario {
 
     public String getDomicilio() { return domicilio; }
     public void setDomicilio(String domicilio) { this.domicilio = domicilio; }
+
+    public String getRol() { return rol; }
+    public void setRol(String rol) { this.rol = rol; }
 }
