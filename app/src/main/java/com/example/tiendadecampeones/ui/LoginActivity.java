@@ -48,12 +48,12 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-        EditText emailField = findViewById(R.id.editTextText3);
-        EditText passwordField = findViewById(R.id.editTextTextPassword3);
+        EditText emailField = findViewById(R.id.emailInput);
+        EditText passwordField = findViewById(R.id.passwordInput);
 
         // Pantalla de Bienvenida a formulario de registro
 
-        Button btn1 = findViewById(R.id.buttonRegister);
+        Button btn1 = findViewById(R.id.registerButton);
         btn1.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, Register.class);
             startActivity(intent);
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         // });
 
         // Botón de Inicio de Sesión
-        Button btn2 = findViewById(R.id.buttonIniciarSecion);
+        Button btn2 = findViewById(R.id.loginButton);
         btn2.setOnClickListener(v -> {
             String email = emailField.getText().toString().trim();
             String password = passwordField.getText().toString().trim();
