@@ -40,9 +40,9 @@ dependencies {
     implementation(libs.recyclerview)
     implementation(libs.play.services.maps)
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation(libs.android.volley)
+//    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+//    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+//    implementation(libs.android.volley)
 
     // Retrofit dependencies
     implementation(libs.retrofit)
@@ -51,5 +51,6 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+//  Animaciones agregadas
     implementation ("com.airbnb.android:lottie:6.0.0")
 }
