@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Navbar superior -->
     <LinearLayout
         android:id="@id/topNavbar"
         android:layout_width="match_parent"
@@ -16,20 +15,23 @@
         android:padding="8dp">
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="300dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="270dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/back_button"
             android:src="@drawable/arrow_back_icon_35x35" />
 
+        <!-- Delete Account Button -->
         <ImageButton
-            android:id="@+id/cartButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:id="@+id/btn_delete_account"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/cart_button"
-            android:src="@drawable/shopping_cart_icon_35x35" />
+            android:onClick="onDeleteAccountClicked"
+            android:contentDescription="delete_account"
+            android:src="@drawable/no_accounts_35dp_7d1010_fill0_wght400_grad0_opsz40"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -37,90 +39,80 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="32dp">
-        <!-- Title -->
+
         <TextView
             android:id="@+id/edit_profile_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:textStyle="bold"
-            android:textSize="24sp"
+            android:layout_gravity="center"
             android:layout_marginBottom="32dp"
-            android:layout_gravity="center"/>
+            android:text="Editar perfil"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <!-- Name Field -->
         <EditText
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:hint="Nombre"
             android:enabled="false"
-            android:inputType="textPersonName"/>
+            android:hint="Nombre"
+            android:inputType="textPersonName" />
 
-        <!-- Last Name Field -->
         <EditText
             android:id="@+id/et_last_name"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:hint="Apellido"
             android:enabled="false"
-            android:inputType="textPersonName"/>
+            android:hint="Apellido"
+            android:inputType="textPersonName" />
 
-        <!-- Address field -->
         <EditText
             android:id="@+id/et_address"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:hint="Domicilio"
             android:enabled="false"
-            android:inputType="text"/>
+            android:hint="Domicilio"
+            android:inputType="text" />
 
-        <!-- Email Field -->
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:hint="Email"
             android:enabled="false"
-            android:inputType="textEmailAddress"/>
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
-        <!-- Password Field -->
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:hint="Contraseña"
             android:enabled="false"
-            android:inputType="textPassword"/>
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
 
-        <!-- Edit Profile Button -->
         <Button
             android:id="@+id/btn_edit_profile"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:layout_marginTop="32dp"
-            android:text="Editar perfil"
-            android:onClick="onEditProfileClicked"/>
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="64dp"
+            android:onClick="onEditProfileClicked"
+            android:text="Editar perfil" />
 
         <!-- Save Changes Button (Initially Hidden) -->
         <Button
             android:id="@+id/btn_save_changes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar cambios"
-            android:visibility="gone"
-            android:onClick="onSaveChangesClicked"/>
-
-        <!-- Delete Account Button -->
-        <Button
-            android:id="@+id/btn_delete_account"
-            android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:layout_marginTop="32dp"
-            android:text="Desactivar cuenta"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#FF0000"
-            android:onClick="onDeleteAccountClicked"/>
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="64dp"
+            android:onClick="onSaveChangesClicked"
+            android:text="Guardar cambios"
+            android:background="@color/colorSecondary"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone" />
+
+
     </LinearLayout>
 
 
