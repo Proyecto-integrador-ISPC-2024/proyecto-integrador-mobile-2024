@@ -73,6 +73,7 @@
             android:name=".ui.PaymentMethodsActivity"
             android:exported="false"
             android:theme="@style/AppTheme">
+
         </activity>
 
         <activity android:screenOrientation="portrait"
@@ -99,11 +100,12 @@
             android:theme="@style/AppTheme">
         </activity>
 
-        <activity android:screenOrientation="portrait"
-            android:name=".ui.Dashboard"
-            android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
+<!--    Sacar comments al fixear la clase    -->
+<!--        <activity android:screenOrientation="portrait"-->
+<!--            android:name=".ui.Dashboard"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/AppTheme">-->
+<!--        </activity>-->
 
         <activity
             android:name=".ui.OrderActivity"
