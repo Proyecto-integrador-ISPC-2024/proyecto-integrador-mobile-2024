@@ -105,12 +105,11 @@
             android:theme="@style/AppTheme">
         </activity>
 
-        <activity android:screenOrientation="portrait"
-            android:name=".ui.Order"
+        <activity
+            android:name=".ui.OrderActivity"
             android:exported="false"
             android:theme="@style/AppTheme">
         </activity>
-
     </application>
 
 </manifest>

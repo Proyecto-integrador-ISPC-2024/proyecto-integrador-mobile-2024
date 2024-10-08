@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context="com.example.tiendadecampeones.ui.LoginActivity">
 
+
     <!--    <TextView-->
     <!--        android:id="@+id/bienvenido"-->
     <!--        style="@style/App.Theme.Size"-->
