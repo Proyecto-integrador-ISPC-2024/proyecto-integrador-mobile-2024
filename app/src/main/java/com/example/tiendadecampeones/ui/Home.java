@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -21,6 +22,17 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
+
+        // Recibe el nombre del usuario desde el Intent
+        Intent intent = getIntent();
+        String nombreUsuario = intent.getStringExtra("nombreUsuario");
+
+        // Muestra el AlertDialog con el mensaje de bienvenida
+        new AlertDialog.Builder(this)
+                .setTitle("Bienvenido de vuelta")
+                .setMessage("Bienvenido de vuelta, " + nombreUsuario + "!")
+                .setPositiveButton("Aceptar", (dialog, which) -> dialog.dismiss())
+                .show();
 
         //  Barra de navegación lateral
         drawerLayout = findViewById(R.id.main);
