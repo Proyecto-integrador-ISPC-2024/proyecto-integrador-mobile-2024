@@ -35,6 +35,12 @@ public class Profile extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void settingsClick(View v) {
+        // Intent para iniciar la actividad de edición del perfil
+        Intent intent = new Intent(this, ManageProfile.class);
+        startActivity(intent);
+    }
+
     public void logoutClick(View v) {
         Toast.makeText(this, "Has cerrado tu sesión", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this,Home.class);
