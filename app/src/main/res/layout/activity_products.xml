@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:padding="0dp"
     tools:context=".ui.ProductsActivity"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true">
 
         <!-- Navbar superior -->
 
@@ -42,7 +43,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:scrollbars="vertical"
         android:paddingHorizontal="16dp"

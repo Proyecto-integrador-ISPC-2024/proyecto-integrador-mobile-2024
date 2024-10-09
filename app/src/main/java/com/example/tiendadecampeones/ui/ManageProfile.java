@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +28,14 @@ public class ManageProfile extends AppCompatActivity {
         etPassword = findViewById(R.id.et_password);
         btnEditProfile = findViewById(R.id.btn_edit_profile);
         btnSaveChanges = findViewById(R.id.btn_save_changes);
+
+        // Botones de navegación superior
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void onEditProfileClicked(View view) {
@@ -55,16 +64,17 @@ public class ManageProfile extends AppCompatActivity {
         btnSaveChanges.setVisibility(View.GONE);
     }
 
-    public void onDeleteAccountClicked() {
+    public void onDeleteAccountClicked(View view) {
         // Handle delete account logic here (e.g., show confirmation dialog)
         new AlertDialog.Builder(this)
-                .setTitle("Delete Account")
-                .setMessage("Are you sure you want to delete your account? This action cannot be undone.")
-                .setPositiveButton("Delete", (dialog, which) -> {
+                .setTitle("Desactivar cuenta")
+                .setMessage("¿Estás seguro/a que querés desactivar tu cuenta?")
+                .setPositiveButton("Desactivar", (dialog, which) -> {
                     // Perform delete account action here
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton("Volver", null)
                 .show();
     }
+
 
 }

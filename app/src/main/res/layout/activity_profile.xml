@@ -1,10 +1,12 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".ui.Profile">
 
     <!-- Navbar superior -->
@@ -12,49 +14,38 @@
         android:id="@id/topNavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="8dp">
 
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="300dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/back_button"
             android:src="@drawable/arrow_back_icon_35x35" />
 
-        <ImageButton
-            android:id="@+id/cartButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/cart_button"
-            android:src="@drawable/shopping_cart_icon_35x35" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/profileContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topNavbar">
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        >
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            android:padding="16dp"
-            android:layout_margin="32dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_margin="24dp"
+            android:padding="16dp"
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,88 +63,63 @@
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="351dp"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="300dp">
 
-            <Button
-                android:id="@+id/dashboardBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/colorSecondary"
-                android:onClick="dashClick"
-                android:text="@string/Dbtn"
-                android:textColor="@color/btnText"
-                app:layout_constraintBottom_toTopOf="@+id/aboutBtn"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <Button
+            android:id="@+id/dashboardBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:onClick="dashClick"
+            android:text="@string/Dbtn"
+            android:textColor="@color/btnText" />
 
-            <Button
-                android:id="@+id/aboutBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/colorSecondary"
-                android:onClick="webtn"
-                android:text="@string/webtn"
-                android:textColor="@color/btnText"
-                app:layout_constraintBottom_toTopOf="@+id/profileSettings"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/dashClick" />
+        <Button
+            android:id="@+id/aboutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:onClick="webtn"
+            android:text="@string/webtn"
+            android:textColor="@color/btnText"/>
 
-            <Button
-                android:id="@+id/profileSettingsBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/colorSecondary"
-                android:onClick="settingsClick"
-                android:text="Editar perfil"
-                android:textColor="@color/btnText"
-                app:layout_constraintBottom_toTopOf="@+id/logoutBtn"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/dashClick" />
+        <Button
+            android:id="@+id/profileSettingsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:onClick="settingsClick"
+            android:text="Editar perfil"
+            android:textColor="@color/btnText"/>
 
-            <Button
-                android:id="@+id/logoutBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/red"
-                android:onClick="logoutClick"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="16dp"
-                android:layout_gravity="center"
-                android:text="@string/Logoutbtn"
-                android:textColor="@color/btnText"
-                app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileSettingsBtn" />
-
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/red"
+            android:onClick="logoutClick"
+            android:text="@string/Logoutbtn"
+            android:textColor="@color/btnText"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottomNavbar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorSecondary"
         android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileContent">
+        android:padding="8dp">
 
         <!-- Buttons in Bottom Navbar -->
         <Button
@@ -193,5 +159,4 @@
     </LinearLayout>
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
