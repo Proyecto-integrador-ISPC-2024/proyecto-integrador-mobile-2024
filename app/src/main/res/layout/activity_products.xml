@@ -10,31 +10,33 @@
     android:background="@color/colorPrimary">
 
         <!-- Navbar superior -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:padding="8dp">
 
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="300dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/arrow_back_icon_35x35"
-                android:contentDescription="@string/back_button" />
+    <LinearLayout
+        android:id="@id/topNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-            <ImageButton
-                android:id="@+id/cartButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/shopping_cart_icon_35x35"
-                android:contentDescription="@string/cart_button" />
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="270dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/arrow_back_icon_35x35" />
+
+        <ImageButton
+            android:id="@+id/cartButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/shopping_cart_icon_35x35"
+            android:contentDescription="@string/cart_button" />
+    </LinearLayout>
 
     <!-- Products List (RecyclerView) -->
     <androidx.recyclerview.widget.RecyclerView

@@ -80,4 +80,20 @@
     <string name="homeSubtitle">Vestí tu pasión con un estilo único</string>
     <string name="homeBtn">Comenzar a comprar</string>
     <string name="finalizar_compra">Finalizar compra</string>
+
+    <!-- Sección Order-->
+    <string name="order_title">Mi pedido</string>
+    <string name="customer_label">Cliente:</string>
+    <string name="order_label">Número de Pedido:</string>
+    <string name="order_date_label">Fecha:</string>
+    <string name="order_status_label">Estado:</string>
+    <string name="product_details_label">Detalles del Producto:</string>
+    <string name="payment_method_label">Forma de Pago:</string>
+    <string name="total_paid_label">Total Abonado:</string>
+    <string name="order_tracking_msg">Seguí tu pedido acá con tu número de pedido</string>
+    <string name="order_tracking_btn">Seguí tu pedido acá</string>
+    <string name="cancel_button">Arrepentimiento</string>
+
+    <!-- Sección Dashboard-->
+    <string name="searchV">Número de pedido o fecha</string>
 </resources>

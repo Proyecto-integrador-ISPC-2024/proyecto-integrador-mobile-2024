@@ -1,4 +1,4 @@
- <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,120 +7,116 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.Dashboard">
 
-
+    <!-- Navbar superior (con restricciones) -->
     <LinearLayout
         android:id="@+id/topNavbar"
-        android:layout_width="413dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="24dp"
-        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
-
-        <Button
+        <ImageButton
             android:id="@+id/backButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="300dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/arrow_back_icon_35x35"
-            android:onClick="backButton"
-            android:text="@string/back_button"
-            android:textColor="@color/colorPrimary" />
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:contentDescription="@string/back_button" />
 
-        <Button
-            android:id="@+id/sideNavButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/menu_icon_35x35"
-            android:text="@string/menu_button"
-            android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
+    <!-- Botón de Filtrar -->
+    <Button
+        android:id="@+id/filterButton"
+        android:layout_width="78dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="14dp"
+        android:onClick="showFilterDialog"
+        android:text="Filtrar"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toStartOf="@id/searchV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topNavbar"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="152dp"
-        android:layout_height="37dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/cl1"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/searchV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topNavbar" />
-
+    <!-- SearchView -->
     <SearchView
         android:id="@+id/searchV"
-        android:layout_width="397dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/listView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
-
-    </SearchView>
-
-    <LinearLayout
-        android:id="@+id/bottomNavbar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/colorSecondary"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="41dp"
+        android:layout_marginBottom="14dp"
+        android:backgroundTint="@android:color/holo_blue_light"
+        app:iconifiedByDefault="false"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/filterButton"
+        app:layout_constraintTop_toBottomOf="@+id/topNavbar"
+        app:queryBackground="@android:color/transparent"
+        app:queryHint="@string/searchV" />
+
+    <!-- ListView -->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/green"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Logoutbtn">
+        app:layout_constraintTop_toBottomOf="@+id/searchV" />
 
-        <!-- Buttons in Bottom Navbar -->
+    <!-- Bottom Navbar -->
+    <LinearLayout
+        android:id="@+id/bottomNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSecondary"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
         <Button
             android:id="@+id/homeButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/home_icon_35x35"
             android:onClick="homeButton"
             android:text="@string/home_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
         <Button
             android:id="@+id/productsButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/shopping_bag_icon_35x35"
             android:onClick="productsButton"
             android:text="@string/products_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
         <Button
             android:id="@+id/profileBtn"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/account_icon_35x35"
             android:onClick="profileBtn"
             android:text="@string/account_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 
     <ListView
