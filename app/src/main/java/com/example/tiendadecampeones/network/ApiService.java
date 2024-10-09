@@ -1,14 +1,20 @@
 package com.example.tiendadecampeones.network;
 
+import com.example.tiendadecampeones.models.Order;
+import com.example.tiendadecampeones.models.Product;
+import com.example.tiendadecampeones.models.UserLogInResponse;
+
 import java.util.List;
-import retrofit2.Call;  // tipo de retorno
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.DELETE;
-import com.example.tiendadecampeones.models.Product; //importar modelos
-import com.example.tiendadecampeones.models.UserLogInResponse;
+import retrofit2.http.Path;
 
 public interface ApiService {
 
@@ -16,7 +22,21 @@ public interface ApiService {
     @FormUrlEncoded
     Call<UserLogInResponse> login(@Field("email") String email, @Field("password") String password);
 
-    // Aqui definimos los endpoints
     @GET("productos/")
     Call<List<Product>> getProductos();
+
+    @GET("pedidos")
+    Call<List<Order>> getOrders();
+
+    @DELETE("pedidos/{id}")
+    Call<Void> cancelOrder(@Path("id") int id);
+
+    static ApiService create() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://6656d1989f970b3b36c6a331.mockapi.io/") // Base URL
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(ApiService.class);
+    }
 }
