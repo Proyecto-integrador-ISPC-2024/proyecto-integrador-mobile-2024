@@ -93,9 +93,9 @@ public class ProductCategories extends AppCompatActivity {
         });
     }
 
-    private void openProductList(String country) {
+    private void openProductList(String pais) {
         Intent intent = new Intent(ProductCategories.this, ProductsActivity.class);
-        intent.putExtra("country", country);
+        intent.putExtra("pais", pais);
         startActivity(intent);
     }
 }
