@@ -30,8 +30,8 @@ public class Home extends AppCompatActivity {
         // Muestra el AlertDialog con el mensaje de bienvenida
         new AlertDialog.Builder(this)
                 .setTitle("Bienvenido de vuelta")
-                .setMessage("Bienvenido de vuelta, " + nombreUsuario + "!")
-                .setPositiveButton("Aceptar", (dialog, which) -> dialog.dismiss())
+                .setMessage("Hola, " + nombreUsuario + "!")
+                .setPositiveButton("Continuar", (dialog, which) -> dialog.dismiss())
                 .show();
 
         //  Barra de navegación lateral

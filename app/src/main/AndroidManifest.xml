@@ -13,108 +13,98 @@
         android:roundIcon="@mipmap/logo_dark"
         android:supportsRtl="true"
         tools:targetApi="31">
-
         <!-- Actividades de la aplicación - en caso de necesitar testear sus actividades agreguen el filter como atributo de la actividad en la que estén trabajando para inicializar la app en ese punto -->
-
-        <!--    Actividad de inicio de aplicación    -->
-        <activity android:screenOrientation="portrait"
+        <!-- Actividad de inicio de aplicación -->
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.LoginActivity"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.Register"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.Home"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
 
-        <activity android:screenOrientation="portrait"
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
             android:name=".ui.ProductCategories"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.ProductsActivity"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.CartResume"
             android:exported="true"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.Cart"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.PaymentMethodsActivity"
             android:exported="false"
-            android:theme="@style/AppTheme">
-
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.Contact"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.AboutUs"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.Profile"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.ManageProfile"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity
             android:name=".ui.Dashboard"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".ui.OrderActivity"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".ui.AdminOrdersActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
