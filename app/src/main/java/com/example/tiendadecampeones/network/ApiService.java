@@ -2,6 +2,7 @@ package com.example.tiendadecampeones.network;
 
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.Product;
+import com.example.tiendadecampeones.models.Size;
 import com.example.tiendadecampeones.models.UserLogInResponse;
 
 import java.util.List;
@@ -30,6 +31,10 @@ public interface ApiService {
     @GET("productos/")
     Call<List<Product>> getProductosPorPais(@Query("pais") String pais);
 
+    @GET("talles")
+    Call<List<Size>> getTalles();
+
+
     @GET("pedidos")
     Call<List<Order>> getOrders();
 
@@ -38,7 +43,7 @@ public interface ApiService {
 
     static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://6656d1989f970b3b36c6a331.mockapi.io/") // Base URL
+                .baseUrl("https://recdev.pythonanywhere.com/") // Base URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
