@@ -50,6 +50,13 @@
             android:backgroundTint="@color/colorSecondary"
             android:textColor="@android:color/white" />
 
+        <Spinner
+            android:id="@+id/sizeSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

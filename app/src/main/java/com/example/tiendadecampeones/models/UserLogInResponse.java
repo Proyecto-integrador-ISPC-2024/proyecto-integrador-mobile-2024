@@ -1,8 +1,14 @@
 package com.example.tiendadecampeones.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserLogInResponse {
     private Usuario usuario;
     private String token;
+
+
+    @SerializedName("refresh_token")
+    private String refresh;
 
     public void UserLoginResponse(Usuario usuario, String token) {
         this.usuario = usuario;
@@ -14,4 +20,7 @@ public class UserLogInResponse {
 
     public String getToken() { return token; }
     public void setToken(String token) { this.token = token; }
+
+    public String getRefreshToken() { return refresh; }
+    public void setRefreshToken(String refresh) { this.refresh = refresh; }
 }
