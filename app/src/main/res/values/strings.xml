@@ -96,4 +96,16 @@
 
     <!-- Sección Dashboard-->
     <string name="searchV">Número de pedido o fecha</string>
+
+    <!-- Sección Editar perfil -->
+    <string name="disableAccount">desactivar cuenta</string>
+    <string name="editProfile">Editar Perfil</string>
+    <string name="inputName">Nombre</string>
+    <string name="inputLastName">Apellido</string>
+    <string name="inputAddress">Domicilio</string>
+    <string name="inputEmail">Email</string>
+    <string name="inputPassword">Contraseña</string>
+    <string name="saveChangesBtn">Guardar cambios</string>
+
+
 </resources>
