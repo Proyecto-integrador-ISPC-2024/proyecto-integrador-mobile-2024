@@ -1,6 +1,7 @@
 package com.example.tiendadecampeones.network;
 
 import com.example.tiendadecampeones.models.Order;
+import com.example.tiendadecampeones.models.PaymentMethods;
 import com.example.tiendadecampeones.models.Product;
 import com.example.tiendadecampeones.models.UserLogInResponse;
 
@@ -28,12 +29,15 @@ public interface ApiService {
     @GET("pedidos")
     Call<List<Order>> getOrders();
 
+    @GET("pedidos/listar_metodopago")
+    Call<PaymentMethods> getPaymentMethods();
+
     @DELETE("pedidos/{id}")
     Call<Void> cancelOrder(@Path("id") int id);
 
     static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://6656d1989f970b3b36c6a331.mockapi.io/") // Base URL
+                .baseUrl("https://recdev.pythonanywhere.com/") // Base URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
