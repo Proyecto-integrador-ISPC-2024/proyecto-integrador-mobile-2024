@@ -29,7 +29,7 @@
             android:layout_height="64dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:onClick="onDeleteAccountClicked"
-            android:contentDescription="delete_account"
+            android:contentDescription="@string/disableAccount"
             android:src="@drawable/no_accounts_35dp_7d1010_fill0_wght400_grad0_opsz40"
             />
     </LinearLayout>
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="32dp"
-            android:text="Editar perfil"
+            android:text="@string/editProfile"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -55,40 +55,46 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:enabled="false"
-            android:hint="Nombre"
-            android:inputType="textPersonName" />
+            android:hint="@string/inputName"
+            android:inputType="textPersonName"
+            android:autofillHints="name"/>
 
         <EditText
             android:id="@+id/et_last_name"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:enabled="false"
-            android:hint="Apellido"
-            android:inputType="textPersonName" />
+            android:hint="@string/inputLastName"
+            android:inputType="textPersonName"
+            android:autofillHints="name"/>
 
+        <!-- check autofill acá -->
         <EditText
             android:id="@+id/et_address"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:enabled="false"
-            android:hint="Domicilio"
-            android:inputType="text" />
+            android:hint="@string/inputAddress"
+            android:inputType="text"
+            android:autofillHints="postalAddress"/>
 
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:enabled="false"
-            android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:hint="@string/inputEmail"
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress"/>
 
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:enabled="false"
-            android:hint="Contraseña"
-            android:inputType="textPassword" />
+            android:hint="@string/inputPassword"
+            android:inputType="textPassword"
+            android:autofillHints="password"/>
 
         <Button
             android:id="@+id/btn_edit_profile"
@@ -97,7 +103,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginHorizontal="64dp"
             android:onClick="onEditProfileClicked"
-            android:text="Editar perfil" />
+            android:text="@string/editProfile" />
 
         <!-- Save Changes Button (Initially Hidden) -->
         <Button
@@ -107,7 +113,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginHorizontal="64dp"
             android:onClick="onSaveChangesClicked"
-            android:text="Guardar cambios"
+            android:text="@string/saveChangesBtn"
             android:background="@color/colorSecondary"
             android:textColor="@color/colorPrimary"
             android:visibility="gone" />
