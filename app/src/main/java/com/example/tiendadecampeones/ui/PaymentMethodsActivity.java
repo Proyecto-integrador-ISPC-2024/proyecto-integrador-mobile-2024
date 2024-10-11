@@ -47,6 +47,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         Log.d("PaymentMethodsActivity", "Mensaje de depuración"); // Correcta forma de imprimir logs en Android
 
         try {
@@ -101,10 +102,10 @@ public class PaymentMethodsActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     formas_de_pago = response.body().getFormasDePago();
                     tarjetas = response.body().getTarjetas();
-                    Log.d("PaymentMethodsActivity", "Formas de Pago: " + formas_de_pago);
                     setupPaymentMethodSpinner(formas_de_pago);
                 } else {
-                    Toast.makeText(PaymentMethodsActivity.this, "Error al cargar métodos de pago", Toast.LENGTH_SHORT).show();
+                    int errorCode = response.code();
+                    Toast.makeText(PaymentMethodsActivity.this, "Error al cargar métodos de pago: Código " + errorCode, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
