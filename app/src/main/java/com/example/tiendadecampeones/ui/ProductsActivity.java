@@ -81,7 +81,7 @@ public class ProductsActivity extends AppCompatActivity {
             }
         });
 
-        // Seteo del recycler view
+
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 

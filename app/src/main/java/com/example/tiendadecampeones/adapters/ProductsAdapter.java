@@ -1,6 +1,7 @@
 package com.example.tiendadecampeones.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import com.bumptech.glide.Glide;
+
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
 
@@ -44,7 +47,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.productName.setText(product.getName());
         holder.productDescription.setText(product.getDescription());
         holder.productPrice.setText("$" + product.getPrice());
-        holder.productImage.setImageResource(product.getImageResId());
+
+        Log.d("Product", "Nombre: " + product.getName());
+        Log.d("Product", "Imagen URL: " + product.getImageUrl());
+
+
+        Glide.with(context)
+                .load(product.getImageUrl())
+                .placeholder(R.drawable.placeholder_image)
+                .error(R.drawable.error_image)
+                .into(holder.productImage);
 
         // Configurar el Spinner con los talles
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
@@ -73,7 +85,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productDescription, productPrice;
         ImageView productImage;
-        Button btnAddToCart; // Add reference to the "Add to Cart" button
+        Button btnAddToCart;
         Spinner sizeSpinner;
 
         public ProductViewHolder(@NonNull View itemView) {
