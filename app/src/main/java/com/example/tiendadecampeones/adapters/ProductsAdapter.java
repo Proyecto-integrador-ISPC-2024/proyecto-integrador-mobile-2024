@@ -1,6 +1,7 @@
 package com.example.tiendadecampeones.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.models.Product;
 import java.util.List;
+import com.bumptech.glide.Glide;
+
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
 
@@ -34,23 +37,28 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = products.get(position);
+
+
         holder.productName.setText(product.getName());
-        holder.productDescription.setText(product.getDescription());
         holder.productPrice.setText("$" + product.getPrice());
-        holder.productImage.setImageResource(product.getImageResId());
 
-        // Handle "Add to Cart" button click
-        holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Show a toast message
-                Toast.makeText(context, product.getName() + " was added to the cart.", Toast.LENGTH_SHORT).show();
+        Log.d("Product", "Nombre: " + product.getName());
+        Log.d("Product", "Imagen URL: " + product.getImageUrl());
 
-                // Here you can also add logic to actually add the product to the cart.
-                // For now, it's just a toast.
-            }
+
+        Glide.with(context)
+                .load(product.getImageUrl())
+                .placeholder(R.drawable.placeholder_image)
+                .error(R.drawable.error_image)
+                .into(holder.productImage);
+
+        holder.btnAddToCart.setOnClickListener(v -> {
+            Toast.makeText(context, product.getName() + " fue agregado al carrito.", Toast.LENGTH_SHORT).show();
         });
     }
+
+
+
 
     @Override
     public int getItemCount() {
@@ -60,7 +68,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productDescription, productPrice;
         ImageView productImage;
-        Button btnAddToCart; // Add reference to the "Add to Cart" button
+        Button btnAddToCart;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);

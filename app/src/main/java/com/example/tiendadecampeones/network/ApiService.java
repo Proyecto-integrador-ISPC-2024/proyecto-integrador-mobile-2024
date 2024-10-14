@@ -38,7 +38,7 @@ public interface ApiService {
 
     static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://6656d1989f970b3b36c6a331.mockapi.io/") // Base URL
+                .baseUrl("https://recdev.pythonanywhere.com/") // Base URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

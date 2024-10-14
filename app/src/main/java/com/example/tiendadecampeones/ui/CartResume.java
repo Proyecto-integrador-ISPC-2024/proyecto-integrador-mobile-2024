@@ -65,12 +65,10 @@ public class CartResume extends AppCompatActivity {
         Map<Product, Integer> cartItems = new HashMap<>();
 
         // Example products
-        Product product1 = new Product("Remera 1", "Remera deportiva", 5000.0, R.mipmap.alemania_1954_primera, 1,10);
-        Product product2 = new Product("Medias", "Medias deportivas", 750.0, R.mipmap.alemania_1974_primera, 1, 10);
 
         // Adding products with their quantities
-        cartItems.put(product1, 1);  // 1 unit of product 1
-        cartItems.put(product2, 2);  // 2 units of product 2
+       // cartItems.put(product1, 1);  // 1 unit of product 1
+        //cartItems.put(product2, 2);  // 2 units of product 2
 
         return cartItems;
     }

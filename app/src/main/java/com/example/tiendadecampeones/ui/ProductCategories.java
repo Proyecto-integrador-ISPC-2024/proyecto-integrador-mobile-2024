@@ -67,7 +67,7 @@ public class ProductCategories extends AppCompatActivity {
         buttonGermany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openProductList("Germany");
+                openProductList("Alemania");
             }
         });
 
@@ -81,7 +81,7 @@ public class ProductCategories extends AppCompatActivity {
         buttonFrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openProductList("France");
+                openProductList("Francia");
             }
         });
 
