@@ -1,7 +1,10 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.models.UserLogInResponse;
+import com.example.tiendadecampeones.network.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // métodos para validar que los campos no esten vacíos, mail y contrasña
     private boolean isValidEmail(String email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean isValidPassword(String password) {
@@ -88,6 +92,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void saveTokens(String token, String refresh) {
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("accessToken", token);
+        editor.putString("refresh", refresh);
+        editor.apply();
+
+        // Imprime el token en Logcat
+        Log.d("TokenDebug", "Token guardado: " + token);
+        Log.d("TokenRefreshDebug", "Refresh Token: " + refresh);
+    }
+
     private void showAlert(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
@@ -96,26 +112,40 @@ public class LoginActivity extends AppCompatActivity {
         builder.create().show();
     }
 
+
     // Método para hacer login
     private void loginUser(String email, String password) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://recdev.pythonanywhere.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiService apiService = retrofit.create(ApiService.class);
-
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://recdev.pythonanywhere.com/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        ApiService apiService = retrofit.create(ApiService.class);
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         Call<UserLogInResponse> call = apiService.login(email, password);
         call.enqueue(new Callback<UserLogInResponse>() {
             @Override
             public void onResponse(Call<UserLogInResponse> call, Response<UserLogInResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    String token = response.body().getToken();
+                    String refreshToken = response.body().getRefreshToken();
                     String nombreUsuario = response.body().getUsuario().getNombre();
-                    // Login exitoso, redirigir a la pantalla principal
-                    Intent intent = new Intent(LoginActivity.this, Home.class);
-                    intent.putExtra("nombreUsuario", nombreUsuario);
+                    String rol = response.body().getUsuario().getRol();
+
+                    // Guardar tokens en SharedPreferences
+                    saveTokens(token, refreshToken);
+
+                    // Redirigir según el rol
+                    Intent intent;
+                    if ("ADMIN".equals(rol)) {
+                        intent = new Intent(LoginActivity.this, AdminOrdersActivity.class);
+                    } else {
+                        intent = new Intent(LoginActivity.this, Home.class);
+                    }
+                    intent.putExtra("nombreUsuario", nombreUsuario); // Agrega el nombre de usuario al Intent
                     startActivity(intent);
                     finish();
+
                 } else {
                     // Toast.makeText(LoginActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
                     showAlert("Error", "Credenciales incorrectas");
