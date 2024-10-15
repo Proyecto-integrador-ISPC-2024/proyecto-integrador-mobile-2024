@@ -8,6 +8,7 @@ public class Product {
     private List<SizeDetails> talles;
     private int quantity;
     private int stock;
+    private String description;
 
     public Product(String name, String description, double price, String imageUrl, int quantity, int stock) {
         this.productos = new ProductDetails(name, price, imageUrl);
@@ -49,6 +50,14 @@ public class Product {
         return stock;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public List<SizeDetails> getTalles() {
+        return talles;
+    }
+
     // detalles del producto
     public static class ProductDetails {
         private String nombre_producto;
@@ -71,6 +80,25 @@ public class Product {
 
         public String getImagen() {
             return imagen;
+        }
+    }
+
+    // Clase interna para los detalles de los talles
+    public static class SizeDetails {
+        private int id_talle;
+        private String talle;
+        private int stock;
+
+        public int getIdTalle() {
+            return id_talle;
+        }
+
+        public String getTalle() {
+            return talle;
+        }
+
+        public int getStock() {
+            return stock;
         }
     }
 }
