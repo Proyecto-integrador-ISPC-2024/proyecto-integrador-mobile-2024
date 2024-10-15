@@ -54,6 +54,10 @@ public class Product {
         return description;
     }
 
+    public List<SizeDetails> getTalles() {
+        return talles;
+    }
+
     // detalles del producto
     public static class ProductDetails {
         private String nombre_producto;

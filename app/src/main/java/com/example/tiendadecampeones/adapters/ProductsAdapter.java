@@ -26,12 +26,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     private final List<Product> products;
     private final Context context; // Context to use for Toast messages
-    private List<String> tallesStringList = Collections.emptyList();
+    //private List<String> tallesStringList = Collections.emptyList();
 
     public ProductsAdapter(List<Product> products, Context context) {
         this.products = products;
         this.context = context;
-        this.tallesStringList = tallesStringList; // Inicializa tallesStringList
+        //this.tallesStringList = tallesStringList; // Inicializa tallesStringList
     }
 
     @NonNull
@@ -58,9 +58,20 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 .error(R.drawable.error_image)
                 .into(holder.productImage);
 
-        // Configurar el Spinner con los talles
+        /* Configurar el Spinner con los talles
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, tallesStringList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        holder.sizeSpinner.setAdapter(adapter);*/
+
+        // Prepare the sizes for the spinner
+        List<String> sizes = new ArrayList<>();
+        for (Product.SizeDetails sizeDetail : product.getTalles()) {
+            sizes.add(sizeDetail.getTalle());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
+                android.R.layout.simple_spinner_item, sizes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.sizeSpinner.setAdapter(adapter);
 
