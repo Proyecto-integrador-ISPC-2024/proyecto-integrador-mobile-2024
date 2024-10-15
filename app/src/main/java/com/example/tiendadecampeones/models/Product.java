@@ -1,5 +1,7 @@
 package com.example.tiendadecampeones.models;
 
+import java.io.Serializable;
+
 public class Product {
     final private String name;
     final private String description;

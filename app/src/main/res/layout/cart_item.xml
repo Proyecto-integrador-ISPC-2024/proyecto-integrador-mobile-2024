@@ -52,8 +52,17 @@
             android:id="@+id/productPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Precio: $50.000"
+            android:text="Precio: $50.00"
             android:textColor="@color/black" />
+
+        <!-- Total Price -->
+        <TextView
+            android:id="@+id/productTotalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total: $50.00"
+            android:textColor="@color/black" />
+
 
         <!-- Quantity Selector -->
         <LinearLayout
@@ -72,12 +81,13 @@
             <!-- Decrement Button -->
             <Button
                 android:id="@+id/quantityDecrement"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:text=""
                 android:textColor="@color/white"
                 android:background="@drawable/remove_icon_35x35"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Disminuir cantidad"/>
 
             <!-- Quantity Display -->
             <TextView
@@ -92,12 +102,13 @@
             <!-- Increment Button -->
             <Button
                 android:id="@+id/quantityIncrement"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:text=""
                 android:textColor="@color/white"
                 android:background="@drawable/add_icon_35x35"
-                android:layout_marginStart="8dp" />
+                android:layout_marginStart="8dp"
+                android:contentDescription="Aumentar cantidad" />
 
         </LinearLayout>
         <!-- Remove Button -->

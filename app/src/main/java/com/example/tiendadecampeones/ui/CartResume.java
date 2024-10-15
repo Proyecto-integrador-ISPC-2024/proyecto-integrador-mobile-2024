@@ -36,61 +36,58 @@ public class CartResume extends AppCompatActivity {
         totalTextView = findViewById(R.id.totalPrice);
         confirmPurchaseButton = findViewById(R.id.confirmPurchaseButton);
 
-        // Set RecyclerView layout manager
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Obtener los productos del carrito desde el Intent
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
 
-        // Get cart items (dummy data for now)
-        Map<Product, Integer> cartItems = getCartItems();
-        productList = new ArrayList<>(cartItems.keySet());
+        if (bundle != null) {
+            productList = (ArrayList<Product>) bundle.getSerializable("cart_items");
+            ArrayList<Integer> quantityList = bundle.getIntegerArrayList("cart_item_quantities");
 
-        // Initialize adapter and set it to RecyclerView
-        cartResumeAdapter = new CartResumeAdapter(this, productList, cartItems);
-        recyclerView.setAdapter(cartResumeAdapter);
+            // Verificar si las listas están nulas o vacías antes de proceder
+            if (productList != null && quantityList != null && !productList.isEmpty() && !quantityList.isEmpty()) {
 
-        // Calculate total and set it
-        double totalAmount = calculateTotal(cartItems);
-        totalTextView.setText(String.format("Total: $%.2f", totalAmount));
+                // Crear el mapa para productos y sus cantidades
+                Map<Product, Integer> cartItemsMap = new HashMap<>();
+                for (int i = 0; i < productList.size(); i++) {
+                    cartItemsMap.put(productList.get(i), quantityList.get(i));  // Mapear el producto a su cantidad
+                }
 
-        // Set up button to navigate to Payment Methods Activity
-        confirmPurchaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToPaymentMethods();
+                // Configurar el adaptador con el contexto, lista de productos y el mapa de cantidades
+                cartResumeAdapter = new CartResumeAdapter(this, productList, cartItemsMap);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                recyclerView.setAdapter(cartResumeAdapter);
+
+                // Calcular el total
+                double totalAmount = calculateTotal(productList, quantityList);
+                totalTextView.setText(String.format("Total: $%.2f", totalAmount));
+            } else {
+                // Si no hay productos, mostrar mensaje o manejar el estado vacío
+                totalTextView.setText("No hay artículos en el carrito..");
             }
-        });
-    }
 
-    // Simulated cart items with quantities
-    private Map<Product, Integer> getCartItems() {
-        Map<Product, Integer> cartItems = new HashMap<>();
-
-        // Example products
-        Product product1 = new Product("Remera 1", "Remera deportiva", 5000.0, R.mipmap.alemania_1954_primera, 1,10);
-        Product product2 = new Product("Medias", "Medias deportivas", 750.0, R.mipmap.alemania_1974_primera, 1, 10);
-
-        // Adding products with their quantities
-        cartItems.put(product1, 1);  // 1 unit of product 1
-        cartItems.put(product2, 2);  // 2 units of product 2
-
-        return cartItems;
-    }
-
-    // Calculate total amount
-    private double calculateTotal(Map<Product, Integer> cartItems) {
-        double totalAmount = 0;
-
-        for (Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
-            Product product = entry.getKey();
-            int quantity = entry.getValue();
-            totalAmount += product.getPrice() * quantity;
         }
 
+        // Botón de confirmar compra (navega a la actividad de métodos de pago)
+        confirmPurchaseButton.setOnClickListener(v -> navigateToPaymentMethods());
+    }
+
+    // Calcular el total basado en los productos
+    private double calculateTotal(List<Product> products, List<Integer> quantities){
+        double totalAmount = 0;
+        for (int i = 0; i < products.size(); i++) {
+            totalAmount += products.get(i).getPrice() * quantities.get(i);
+        }
         return totalAmount;
     }
 
-    // Navigate to Payment Methods Activity
+    // Navegar a la actividad de métodos de pago
     private void navigateToPaymentMethods() {
         Intent intent = new Intent(CartResume.this, PaymentMethodsActivity.class);
+
+        // Obtener el total desde el TextView
+        String total = totalTextView.getText().toString();
+        intent.putExtra("TOTAL_PRICE", total);
         startActivity(intent);
     }
 
@@ -110,3 +107,5 @@ public class CartResume extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+
