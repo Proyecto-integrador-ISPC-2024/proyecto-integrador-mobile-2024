@@ -8,6 +8,7 @@ public class Product {
     private List<SizeDetails> talles;
     private int quantity;
     private int stock;
+    private String description;
 
     public Product(String name, String description, double price, String imageUrl, int quantity, int stock) {
         this.productos = new ProductDetails(name, price, imageUrl);
@@ -47,6 +48,10 @@ public class Product {
     // stock
     public int getStock() {
         return stock;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     // detalles del producto
