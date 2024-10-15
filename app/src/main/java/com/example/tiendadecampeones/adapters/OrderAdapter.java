@@ -8,20 +8,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.example.tiendadecampeones.R;
-import com.example.tiendadecampeones.models.DashboardOrder;
+import com.example.tiendadecampeones.models.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderAdapter extends ArrayAdapter<DashboardOrder> implements Filterable {
-    private List<DashboardOrder> orders;
-    private List<DashboardOrder> filteredOrders;
+public class OrderAdapter extends ArrayAdapter<Order> implements Filterable {
+    private List<Order> orders;
+    private List<Order> filteredOrders;
     private Filter orderFilter;
     private String currentStatusFilter = "TODOS LOS ESTADOS";
 
-    public OrderAdapter(Context context, List<DashboardOrder> orders) {
+    public OrderAdapter(Context context, List<Order> orders) {
         super(context, 0, orders);
         this.orders = orders;
         this.filteredOrders = new ArrayList<>(orders);
@@ -29,7 +30,7 @@ public class OrderAdapter extends ArrayAdapter<DashboardOrder> implements Filter
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        DashboardOrder order = getItem(position);
+        Order order = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_order, parent, false);
@@ -41,17 +42,8 @@ public class OrderAdapter extends ArrayAdapter<DashboardOrder> implements Filter
         orderIdTextView.setText("Pedido " + order.getIdPedido());
         orderDateTextView.setText(order.getFecha());
 
+        Log.d("OrderAdapter", "Mostrando pedido con ID: " + order.getIdPedido() );
         return convertView;
-    }
-
-    @Override
-    public int getCount() {
-        return filteredOrders.size();
-    }
-
-    @Override
-    public DashboardOrder getItem(int position) {
-        return filteredOrders.get(position);
     }
 
     @Override
@@ -60,17 +52,18 @@ public class OrderAdapter extends ArrayAdapter<DashboardOrder> implements Filter
             orderFilter = new Filter() {
                 @Override
                 protected FilterResults performFiltering(CharSequence constraint) {
-                    List<DashboardOrder> filteredResults = new ArrayList<>();
+                    List<Order> filteredResults = new ArrayList<>();
                     String filterPattern = constraint.toString().toLowerCase().trim();
                     boolean isNumber = filterPattern.matches("\\d+");
 
-                    for (DashboardOrder order : orders) {
+                    for (Order order : orders) {
                         boolean matchesStatus = currentStatusFilter.equals("TODOS LOS ESTADOS") ||
                                 order.getEstado().equalsIgnoreCase(currentStatusFilter);
 
                         boolean matchesQuery = isNumber
                                 ? String.valueOf(order.getIdPedido()).contains(filterPattern)
-                                : order.getFecha().toLowerCase().contains(filterPattern) || order.getEstado().toLowerCase().contains(filterPattern);
+                                : order.getFecha().toLowerCase().contains(filterPattern) ||
+                                order.getEstado().toLowerCase().contains(filterPattern);
 
                         if (matchesStatus && matchesQuery) {
                             filteredResults.add(order);
@@ -86,7 +79,7 @@ public class OrderAdapter extends ArrayAdapter<DashboardOrder> implements Filter
                 @Override
                 protected void publishResults(CharSequence constraint, FilterResults results) {
                     filteredOrders.clear();
-                    filteredOrders.addAll((List<DashboardOrder>) results.values);
+                    filteredOrders.addAll((List<Order>) results.values);
                     notifyDataSetChanged();
                 }
             };
@@ -94,13 +87,17 @@ public class OrderAdapter extends ArrayAdapter<DashboardOrder> implements Filter
         return orderFilter;
     }
 
-    public void filterByStatus(String status) {
-        currentStatusFilter = status;
-        updateOrders(orders);
-        getFilter().filter("");
+    @Override
+    public int getCount() {
+        return filteredOrders.size();
     }
 
-    public void updateOrders(List<DashboardOrder> newOrders) {
+    @Override
+    public Order getItem(int position) {
+        return filteredOrders.get(position);
+    }
+
+    public void updateOrders(List<Order> newOrders) {
         this.orders = newOrders;
         this.filteredOrders.clear();
         this.filteredOrders.addAll(newOrders);
