@@ -44,15 +44,16 @@ public interface ApiService {
     @GET("talles")
     Call<List<Size>> getTalles();
 
-
-    @GET("pedidos")
-    Call<List<Order>> getOrders();
-
-    @GET("pedidos/listar_metodopago")
-    Call<PaymentMethods> getPaymentMethods();
+    @GET("pedidos/")
+    Call<List<Order>> getOrders(
+            @Header("Authorization") String authToken
+    );
 
     @DELETE("pedidos/{id}")
-    Call<Void> cancelOrder(@Path("id") int id);
+    Call<Void> cancelOrder(
+            @Header("Authorization") String authToken,
+            @Path("id") int id_pedido
+    );
 
     static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()

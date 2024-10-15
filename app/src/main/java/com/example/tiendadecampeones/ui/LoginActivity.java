@@ -92,11 +92,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void saveTokens(String token, String refresh) {
+    private void saveTokens(String token, String refresh, int id_usuario) {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("accessToken", token);
         editor.putString("refresh", refresh);
+        editor.putInt("id_usuario", id_usuario);
         editor.apply();
 
         // Imprime el token en Logcat
@@ -131,10 +132,12 @@ public class LoginActivity extends AppCompatActivity {
                     String refreshToken = response.body().getRefreshToken();
                     String nombreUsuario = response.body().getUsuario().getNombre();
                     String rol = response.body().getUsuario().getRol();
-
+                    int id_usuario = response.body().getUsuario().getIdUsuario();
                     // Guardar tokens en SharedPreferences
-                    saveTokens(token, refreshToken);
+                    saveTokens(token, refreshToken, id_usuario);
 
+                    // Imprime el id_usuario en Logcat
+                    Log.d("UserIdDebug", "ID de usuario recuperado: " + id_usuario);
                     // Redirigir según el rol
                     Intent intent;
                     if ("ADMIN".equals(rol)) {
