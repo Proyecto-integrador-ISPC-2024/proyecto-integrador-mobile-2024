@@ -8,29 +8,30 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.OrderActivity">
 
+    <!-- Título de la página -->
     <LinearLayout
         android:id="@+id/topNavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/white"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="8dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="300dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="270dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/arrow_back_icon_35x35"
-            android:contentDescription="@string/back_button" />
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/arrow_back_icon_35x35" />
     </LinearLayout>
 
-    <!-- Título de la página -->
     <TextView
         android:id="@+id/pageTitle"
         android:layout_width="wrap_content"
@@ -44,203 +45,203 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Layout para los detalles de la orden -->
-    <RelativeLayout
-        android:id="@+id/orderDetailLayout"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/card_background"
-        android:elevation="4dp"
-        android:padding="16dp"
+    <!-- ScrollView para detalles de la orden y botones -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/pageTitle"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/productImageView"
-            android:layout_width="93dp"
-            android:layout_height="79dp"
-            android:layout_alignParentTop="true"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/customerName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/productImageView"
-            android:text="@string/customer_label"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/orderNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/customerName"
-            android:text="@string/order_label"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            <!-- Layout para los detalles de la orden -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="16dp">
 
-        <TextView
-            android:id="@+id/orderDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/orderNumber"
-            android:text="@string/order_date_label"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/orderNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/order_label"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/orderStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/orderDate"
-            android:text="@string/order_status_label"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/orderDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_date_label"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/productDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/orderStatus"
-            android:text="@string/product_details_label"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/orderStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_status_label"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/paymentMethod"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/productDetails"
-            android:text="@string/payment_method_label"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/productDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/orderStatus"
+                    android:text="@string/product_details_label"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/totalAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/paymentMethod"
-            android:text="@string/total_paid_label"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/productsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <TextView
+                    android:id="@+id/paymentMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_method_label"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/cardMethods"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cardMethods"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/totalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_paid_label"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
 
-    <!-- Botones inferiores -->
-    <LinearLayout
-        android:id="@+id/bottomButtons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/orderDetailLayout">
+            <!-- Botones inferiores -->
+            <LinearLayout
+                android:id="@+id/bottomButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
-        <Button
-            android:id="@+id/volverBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button_default"
-            android:text="@string/back_button"
-            android:textColor="#000000" />
+                <Button
+                    android:id="@+id/volverBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_button_default"
+                    android:text="@string/back_button"
+                    android:textColor="#000000" />
 
-        <Button
-            android:id="@+id/cancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/rounded_button_red"
-            android:text="@string/cancel_button"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
+                <Button
+                    android:id="@+id/cancelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/rounded_button_red"
+                    android:text="@string/cancel_button"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/orderTrackingContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:elevation="4dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/bottomButtons"
+                tools:layout_editor_absoluteX="-16dp">
 
-    <!-- Seguimiento del pedido -->
-    <LinearLayout
-        android:id="@+id/orderTrackingContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:elevation="4dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/bottomButtons"
-        tools:layout_editor_absoluteX="0dp">
+                <TextView
+                    android:id="@+id/orderTrackingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/order_tracking_msg"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/orderTrackingText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/order_tracking_msg"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+                <Button
+                    android:id="@+id/trackOrderButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/rounded_button_default"
+                    android:text="@string/order_tracking_btn"
+                    android:textColor="#000000" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
-        <Button
-            android:id="@+id/trackOrderButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_button_default"
-            android:text="@string/order_tracking_btn"
-            android:textColor="#000000" />
-    </LinearLayout>
-
-    <!-- Navbar inferior -->
+    <!-- Bottom Navbar -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorSecondary"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/homeButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/home_icon_35x35"
             android:onClick="homeButton"
             android:text="@string/home_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
         <Button
             android:id="@+id/productsButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/shopping_bag_icon_35x35"
             android:onClick="productsButton"
             android:text="@string/products_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
         <Button
             android:id="@+id/profileBtn"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/account_icon_35x35"
             android:onClick="profileBtn"
             android:text="@string/account_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
