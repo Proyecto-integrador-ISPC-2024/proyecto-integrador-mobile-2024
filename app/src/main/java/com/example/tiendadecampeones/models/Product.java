@@ -73,4 +73,23 @@ public class Product {
             return imagen;
         }
     }
+
+    // Clase interna para los detalles de los talles
+    public static class SizeDetails {
+        private int id_talle;
+        private String talle;
+        private int stock;
+
+        public int getIdTalle() {
+            return id_talle;
+        }
+
+        public String getTalle() {
+            return talle;
+        }
+
+        public int getStock() {
+            return stock;
+        }
+    }
 }
