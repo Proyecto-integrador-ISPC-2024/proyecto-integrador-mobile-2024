@@ -56,9 +56,9 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-    kapt("com.github.bumptech.glide:compiler:4.15.1")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
 
 //  Animaciones agregadas
-    implementation ("com.airbnb.android:lottie:6.0.0")
+    implementation ("com.airbnb.android:lottie:6.5.2")
 }

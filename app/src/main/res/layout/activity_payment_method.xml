@@ -74,21 +74,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="TOTAL A PAGAR: $1500,00" />
+            android:text="TOTAL A PAGAR: $0.00" />
 
         <!-- Spinners -->
         <Spinner
             android:id="@+id/paymentMethodSpinner"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_marginTop="16dp" />
 
         <Spinner
             android:id="@+id/cardTypeSpinner"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_marginTop="8dp"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <!-- Payment Form -->
         <LinearLayout
@@ -97,40 +97,73 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="1dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
-            <!-- Card Number Input -->
+            <TextView
+                android:id="@+id/transferMessageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transfiere a este alias o CBU indicando tu mail de usuario:"
+                android:visibility="gone" />
+
             <EditText
                 android:id="@+id/cardNumberEditText"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:inputType="text"
+                android:layout_height="74dp"
+                android:inputType="number"
                 android:hint="Número de tarjeta"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
-            <!-- Last 4 Digits Input -->
             <EditText
                 android:id="@+id/cardLast4DigitsEditText"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="74dp"
+                android:inputType="number"
                 android:hint="Últimos 4 dígitos"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
-            <!-- Alias Input for Transfer -->
+            <TextView
+                android:id="@+id/cbuLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CBU:"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/transferNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:hint="CBU de la empresa"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:cursorVisible="false"
+                android:longClickable="true"
+                android:selectAllOnFocus="true"
+                android:visibility="gone" />
+
+            <!-- Etiqueta para Alias -->
+            <TextView
+                android:id="@+id/aliasLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alias de la empresa:"
+                android:visibility="gone" /> <!-- Oculto por defecto -->
+
             <EditText
                 android:id="@+id/aliasEditText"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:hint="Alias"
-                android:visibility="visible" />
+                android:textStyle="bold"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:cursorVisible="false"
+                android:longClickable="true"
+                android:selectAllOnFocus="true"
+                android:visibility="gone" />
 
-            <!-- Transfer Number Input -->
-            <EditText
-                android:id="@+id/transferNumberEditText"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:hint="Cbu de la empresa"
-                android:visibility="visible" />
         </LinearLayout>
 
         <!-- Confirm Payment Button -->
