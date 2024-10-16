@@ -1,23 +1,23 @@
 package com.example.tiendadecampeones.models;
 
 public class Usuario {
-    private int idUsuario;
+    private int id_usuario;
     private String nombre;
     private String apellido;
     private String email;
     private String domicilio;
     private String rol;
 
-    public Usuario(int idUsuario, String nombre, String apellido, String email, String domicilio) {
-        this.idUsuario = idUsuario;
+    public Usuario(int id_usuario, String nombre, String apellido, String email, String domicilio) {
+        this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.domicilio = domicilio;
     }
 
-    public int getIdUsuario() { return idUsuario; }
-    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
+    public int getIdUsuario() { return id_usuario; }
+    public void setIdUsuario(int id_usuario) { this.id_usuario = id_usuario; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }

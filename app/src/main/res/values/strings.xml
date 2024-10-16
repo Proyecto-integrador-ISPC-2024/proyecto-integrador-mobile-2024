@@ -44,7 +44,7 @@
     <string name="cl1">María Laura Silva</string>
     <string name="Logoutbtn">Finalizar Sesión</string>
 
-   <!--payment select box-->
+    <!--payment select box-->
     <string-array name="payment_methods">
         <item>Seleccionar método de pago</item>
         <item>Tarjeta de crédito</item>
@@ -89,6 +89,7 @@
     <string name="order_status_label">Estado:</string>
     <string name="product_details_label">Detalles del Producto:</string>
     <string name="payment_method_label">Forma de Pago:</string>
+    <string name="cardMethods">Tarjeta:</string>
     <string name="total_paid_label">Total Abonado:</string>
     <string name="order_tracking_msg">Seguí tu pedido acá con tu número de pedido</string>
     <string name="order_tracking_btn">Seguí tu pedido acá</string>
@@ -96,4 +97,18 @@
 
     <!-- Sección Dashboard-->
     <string name="searchV">Número de pedido o fecha</string>
+    <string name="order_title_dashboard">Pedidos</string>
+    <string name="no_orders_message">No tienes pedidos</string>
+
+    <!-- Sección Editar perfil -->
+    <string name="disableAccount">desactivar cuenta</string>
+    <string name="editProfile">Editar Perfil</string>
+    <string name="inputName">Nombre</string>
+    <string name="inputLastName">Apellido</string>
+    <string name="inputAddress">Domicilio</string>
+    <string name="inputEmail">Email</string>
+    <string name="inputPassword">Contraseña</string>
+    <string name="saveChangesBtn">Guardar cambios</string>
+
+
 </resources>

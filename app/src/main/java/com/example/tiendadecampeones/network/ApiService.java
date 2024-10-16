@@ -1,11 +1,13 @@
 package com.example.tiendadecampeones.network;
 
 import com.example.tiendadecampeones.models.Order;
+import com.example.tiendadecampeones.models.PaymentMethods;
 import com.example.tiendadecampeones.models.Product;
+import com.example.tiendadecampeones.models.Size;
 import com.example.tiendadecampeones.models.UserLogInResponse;
-import com.example.tiendadecampeones.models.UserProfile;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -15,9 +17,11 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
+import retrofit2.http.Query;
 import retrofit2.http.Path;
+
 
 public interface ApiService {
 
@@ -25,28 +29,35 @@ public interface ApiService {
     @FormUrlEncoded
     Call<UserLogInResponse> login(@Field("email") String email, @Field("password") String password);
 
+//    @POST("api/login/")
+//    Call<UserLogInResponse> token(@Body Map<String, String> loginData);
+
+    @POST("api/token/refresh/")
+    Call<UserLogInResponse> refreshToken(@Header("Authorization") String refresh);
+
     @GET("productos/")
     Call<List<Product>> getProductos();
 
-    @GET("pedidos")
-    Call<List<Order>> getOrders();
+    @GET("productos/")
+    Call<List<Product>> getProductosPorPais(@Query("pais") String pais);
+
+    @GET("talles")
+    Call<List<Size>> getTalles();
+
+    @GET("pedidos/")
+    Call<List<Order>> getOrders(
+            @Header("Authorization") String authToken
+    );
 
     @DELETE("pedidos/{id}")
-    Call<Void> cancelOrder(@Path("id") int id);
-
-    @GET("user/profile/{email}")
-    Call<UserProfile> getUserProfile(@Path("email") String email);
-
-    @PUT("user/profile/{email}")
-    Call<Void> updateUserProfile(@Path("email") String email, @Body UserProfile userProfile);
-
-    @DELETE("user/profile/{email}")
-    Call<Void> deleteUserProfile(@Path("email") String email);
-
+    Call<Void> cancelOrder(
+            @Header("Authorization") String authToken,
+            @Path("id") int id_pedido
+    );
 
     static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://6656d1989f970b3b36c6a331.mockapi.io/") // Base URL
+                .baseUrl("https://recdev.pythonanywhere.com/") // Base URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

@@ -1,5 +1,4 @@
 package com.example.tiendadecampeones.models;
-
 import java.util.List;
 
 public class Order {
@@ -8,50 +7,44 @@ public class Order {
     private double total;
     private int id_usuario;
     private String estado;
-    private List<OrderDetail> detalle;
-//    private List<PaymentMethod> formadepago;
+    private List<OrderDetail> detalles;
+    private List<PaymentMethods.FormaDePago> formas_de_pago;
+    private List<PaymentMethods.Tarjeta> tarjetas;
 
-//    Agregar como parámetro: List<PaymentMethod> formadepago
-    public Order(int id_pedido, String fecha, double total, int id_usuario, String estado, List<OrderDetail> detalle) {
+    public Order(int id_pedido, String fecha, double total, int id_usuario, String estado, List<OrderDetail> detalles, List<PaymentMethods.FormaDePago> formas_de_pago, List<PaymentMethods.Tarjeta> tarjetas) {
         this.id_pedido = id_pedido;
         this.fecha = fecha;
         this.total = total;
         this.id_usuario = id_usuario;
         this.estado = estado;
-        this.detalle = detalle;
-//        this.formadepago = formadepago;
+        this.detalles = detalles;
+        this.formas_de_pago = formas_de_pago;
+        this.tarjetas = tarjetas;
     }
 
-    // Getters
-    public int getIdPedido() {
-        return id_pedido;
-    }
+    // Getters y Setters
+    public int getIdPedido() { return id_pedido; }
+    public void setIdPedido(int id_pedido) { this.id_pedido = id_pedido; }
 
-    public String getFecha() {
-        return fecha;
-    }
+    public String getFecha() { return fecha; }
+    public void setFecha(String fecha) { this.fecha = fecha; }
 
-    public double getTotal() {
-        return total;
-    }
+    public double getTotal() { return total; }
+    public void setTotal(double total) { this.total = total; }
 
-    public int getIdUsuario() {
-        return id_usuario;
-    }
+    public int getIdUsuario() { return id_usuario; }
+    public void setIdUsuario(int id_usuario) { this.id_usuario = id_usuario; }
 
-    public String getEstado() {
-        return estado;
-    }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
-    public List<OrderDetail> getDetalle() {
-        return detalle;
-    }
+    public List<OrderDetail> getDetalles() { return detalles; }
+    public void setDetalles(List<OrderDetail> detalles) { this.detalles = detalles; }
 
-//    public List<PaymentMethod> getFormaDePago() {
-//        return formadepago;
-//    }
+    public List<PaymentMethods.FormaDePago> getFormasDePago() { return formas_de_pago; }
+    public void setFormasDePago(List<PaymentMethods.FormaDePago> formas_de_pago) { this.formas_de_pago = formas_de_pago; }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+    public List<PaymentMethods.Tarjeta> getTarjetas() { return tarjetas; }
+    public void setTarjetas(List<PaymentMethods.Tarjeta> tarjetas) { this.tarjetas = tarjetas; }
+
 }
