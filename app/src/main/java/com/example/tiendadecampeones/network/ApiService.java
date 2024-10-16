@@ -49,7 +49,7 @@ public interface ApiService {
     );
 
     @DELETE("pedidos/{id}")
-    Call<Void> cancelOrder(
+    Call<Void> deleteOrder(
             @Header("Authorization") String authToken,
             @Path("id") int id_pedido
     );
