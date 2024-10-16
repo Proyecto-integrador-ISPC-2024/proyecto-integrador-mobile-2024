@@ -67,11 +67,18 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
+        // verificamos si hay talles disponibles
+        if (!sizes.isEmpty()) {
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, sizes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.sizeSpinner.setAdapter(adapter);
 
+        } else {
+            // Si no hay tallas disponibles :
+            holder.sizeSpinner.setVisibility(View.GONE);
+        }
 
         // Handle "Add to Cart" button click
         holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
