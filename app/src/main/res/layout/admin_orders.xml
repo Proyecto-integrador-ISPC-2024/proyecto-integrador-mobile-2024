@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp"
-    android:layout_marginBottom="8dp">
+    android:padding="4dp"
+    android:layout_marginBottom="8dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -13,7 +15,10 @@
         app:cardElevation="4dp"
         android:backgroundTint="@color/gray_400"
         android:layout_gravity="center_vertical"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:contentDescription="Detalles del pedido"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,43 +32,49 @@
                 android:layout_height="wrap_content"
                 android:text="ID de Pedido: "
                 android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:contentDescription="Identificación del pedido" />
 
             <TextView
                 android:id="@+id/orderAdminClient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cliente:"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:contentDescription="Nombre del cliente" />
 
             <TextView
                 android:id="@+id/orderAdminDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fecha:"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:contentDescription="Fecha del pedido" />
 
             <TextView
                 android:id="@+id/orderAdminStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Estado:"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:contentDescription="Estado del pedido" />
 
             <TextView
                 android:id="@+id/orderAdminTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total Pagado: $"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:contentDescription="Total pagado en pesos" />
 
             <TextView
                 android:id="@+id/orderAdminProducts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Productos:"
-                android:textColor="@color/black" />
-
+                android:textColor="@color/black"
+                android:contentDescription="Lista de productos comprados" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
+
