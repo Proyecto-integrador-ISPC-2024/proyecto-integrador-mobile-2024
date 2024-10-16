@@ -8,11 +8,14 @@ public class Product {
     //private List<SizeDetails> talles;
     private int quantity;
     private int stock;
+    private String description;
 
-    public Product(String name, String description, double price, String imageUrl, int quantity, int stock) {
+    public Product(String name, String description, double price, String imageUrl, int quantity, int stock , List<SizeDetails> talles) {
         this.productos = new ProductDetails(name, price, imageUrl);
         this.quantity = quantity;
         this.stock = stock;
+        this.talles = talles;
+        this.description = description;
     }
 
     // detalles del producto
@@ -49,6 +52,18 @@ public class Product {
         return stock;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public List<SizeDetails> getTalles() {
+        return talles;
+    }
+
+    public void setTalles(List<SizeDetails> talles) {
+        this.talles = talles; // Método para establecer talles
+    }
+
     // detalles del producto
     public static class ProductDetails {
         private String nombre_producto;
@@ -73,4 +88,31 @@ public class Product {
             return imagen;
         }
     }
+
+    // Clase interna para los detalles de los talles
+    public static class SizeDetails {
+        private int id_talle;
+        private String talle;
+        private int stock;
+
+        // Constructor
+        public SizeDetails(int id_talle, String talle, int stock) {
+            this.id_talle = id_talle;
+            this.talle = talle;
+            this.stock = stock;
+        }
+
+        public int getIdTalle() {
+            return id_talle;
+        }
+
+        public String getTalle() {
+            return talle;
+        }
+
+        public int getStock() {
+            return stock;
+        }
+    }
 }
+

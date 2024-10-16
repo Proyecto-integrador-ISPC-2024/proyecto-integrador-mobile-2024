@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.ProductsAdapter;
 import com.example.tiendadecampeones.models.Product;
-import com.example.tiendadecampeones.models.Size;
+
 import com.example.tiendadecampeones.network.ApiService;
 
 import java.util.ArrayList;
@@ -30,11 +30,12 @@ public class ProductsActivity extends AppCompatActivity {
 
     private RecyclerView productsRecyclerView;
     private ProductsAdapter productsAdapter;
-    private List<Product> carrito = new ArrayList<>();
-    private List<String> tallesStringList = new ArrayList<>();
+
     private String selectedPais;
 
+    private List<Product> carrito = new ArrayList<>();
 
+    private List<String> tallesStringList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,11 +90,6 @@ public class ProductsActivity extends AppCompatActivity {
         Log.d("ProductsActivity", "País seleccionado: " + selectedPais);
         getProductosPorPais(selectedPais);
 
-        selectedPais = getIntent().getStringExtra("pais");
-        Log.d("ProductsActivity", "País seleccionado: " + selectedPais);
-
-
-        getTalles();
     }
 
 
@@ -111,19 +107,23 @@ public class ProductsActivity extends AppCompatActivity {
                     Log.d("ProductsActivity", "Productos recibidos: " + productList.size());
                     productsAdapter = new ProductsAdapter(productList, ProductsActivity.this);
                     productsRecyclerView.setAdapter(productsAdapter);
+
+                    /* getTalles();*/
+
                 } else {
                     Log.e("ProductsActivity", "Error en la respuesta: " + response.message());
                     Toast.makeText(ProductsActivity.this, "No hay producto " + pais, Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 Toast.makeText(ProductsActivity.this, "Error producto: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
-
-    private void getTalles() {
+}
+  /*  private void getTalles() {
         ApiService apiService = ApiService.create();
         Call<List<Size>> call = apiService.getTalles();
 
@@ -133,21 +133,31 @@ public class ProductsActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Size> tallesList = response.body();
 
+                    // Limpiar la lista de talles antes de agregar nuevos
+                    tallesStringList.clear();
+
                     // Convertir la lista de objetos Size a una lista de Strings
                     for (Size size : tallesList) {
-                        tallesStringList.add(size.getTalle());
+                        String talle = size.getTalle(); // Use size to get the talle value
+                        if (talle != null) {
+                            tallesStringList.add(talle);
+                        } else {
+                            Log.e("ProductsActivity", "Talle es null para el objeto: " + size.toString());
+                        }
                     }
-                    // Cargar productos después de obtener los talles
-                    getProductosPorPais(selectedPais);
+
+                    Log.d("ProductsActivity", "Talles recibidos: " + tallesStringList);
+
+
                 } else {
-                    Toast.makeText(ProductsActivity.this, "Error al obtener los talles", Toast.LENGTH_SHORT).show();
+                  Log.e("ProductsActivity", "Error al obtener talles: " + response.message());
+                    Toast.makeText(ProductsActivity.this, "Error al obtener talles", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<List<Size>> call, Throwable t) {
                 Toast.makeText(ProductsActivity.this, "Error en la solicitud: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
-}
+}*/

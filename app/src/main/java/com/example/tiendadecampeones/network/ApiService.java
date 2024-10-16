@@ -42,12 +42,8 @@ public interface ApiService {
     @GET("productos/")
     Call<List<Product>> getProductosPorPais(@Query("pais") String pais);
 
-    @GET("talles")
-    Call<List<Size>> getTalles();
-
-
-    @GET("pedidos")
-    Call<List<Order>> getOrders();
+    /*@GET("talles")
+    Call<List<Size>> getTalles();*/
 
     @POST("pedidos")
     Call<Pedido> realizarPedido(@Header("Authorization") String authToken, @Body Pedido pedido);
@@ -55,9 +51,16 @@ public interface ApiService {
     @GET("pedidos/listar_metodopago")
     Call<PaymentMethods> getPaymentMethods(@Header("Authorization") String token);
 
+    @GET("pedidos/")
+    Call<List<Order>> getOrders(
+            @Header("Authorization") String authToken
+    );
 
     @DELETE("pedidos/{id}")
-    Call<Void> cancelOrder(@Path("id") int id);
+    Call<Void> deleteOrder(
+            @Header("Authorization") String authToken,
+            @Path("id") int id_pedido
+    );
 
     static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -67,4 +70,6 @@ public interface ApiService {
 
         return retrofit.create(ApiService.class);
     }
+
+    Call<PaymentMethods> getPaymentMethods();
 }
