@@ -92,17 +92,31 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void saveTokens(String token, String refresh, int id_usuario) {
+    private void saveTokens(String token, String refresh, int id_usuario, String nombre, String apellido, String email, String domicilio, String rol) {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("accessToken", token);
-        editor.putString("refresh", refresh);
+        editor.putString("refreshToken", refresh);
         editor.putInt("id_usuario", id_usuario);
+        editor.putString("nombre", nombre);
+        editor.putString("apellido", apellido);
+        editor.putString("domicilio", domicilio);
+        editor.putString("email", email);
+        editor.putString("rol", rol);
+
         editor.apply();
 
-        // Imprime el token en Logcat
+        // Data debug - here the data logs properly
         Log.d("TokenDebug", "Token guardado: " + token);
         Log.d("TokenRefreshDebug", "Refresh Token: " + refresh);
+        Log.d("TokenDebug", "Access Token saved: " + token);
+        Log.d("TokenDebug", "Refresh Token saved: " + refresh);
+        Log.d("UserInfoDebug", "User ID: " + id_usuario);
+        Log.d("UserInfoDebug", "nombre: " + nombre);
+        Log.d("UserInfoDebug", "apellido: " + apellido);
+        Log.d("UserInfoDebug", "email: " + email);
+        Log.d("UserInfoDebug", "domicilio: " + domicilio);
+        Log.d("UserInfoDebug", "Rol: " + rol);
     }
 
     private void showAlert(String title, String message) {
@@ -112,7 +126,6 @@ public class LoginActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
         builder.create().show();
     }
-
 
     // Método para hacer login
     private void loginUser(String email, String password) {
@@ -130,11 +143,17 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     String token = response.body().getToken();
                     String refreshToken = response.body().getRefreshToken();
-                    String nombreUsuario = response.body().getUsuario().getNombre();
+                    String nombre = response.body().getUsuario().getNombre();
+                    String apellido = response.body().getUsuario().getApellido();
+                    String email = response.body().getUsuario().getEmail();
+                    String domicilio = response.body().getUsuario().getDomicilio();
+
                     String rol = response.body().getUsuario().getRol();
                     int id_usuario = response.body().getUsuario().getIdUsuario();
+
+
                     // Guardar tokens en SharedPreferences
-                    saveTokens(token, refreshToken, id_usuario);
+                    saveTokens(token, refreshToken, id_usuario, nombre, apellido, email, domicilio, rol);
 
                     // Imprime el id_usuario en Logcat
                     Log.d("UserIdDebug", "ID de usuario recuperado: " + id_usuario);
@@ -145,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         intent = new Intent(LoginActivity.this, Home.class);
                     }
-                    intent.putExtra("nombreUsuario", nombreUsuario); // Agrega el nombre de usuario al Intent
+                    intent.putExtra("nombreUsuario", nombre); // Agrega el nombre de usuario al Intent
                     startActivity(intent);
                     finish();
 

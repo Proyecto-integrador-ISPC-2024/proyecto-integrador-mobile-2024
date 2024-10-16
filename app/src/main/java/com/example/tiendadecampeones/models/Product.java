@@ -5,7 +5,7 @@ import java.util.List;
 public class Product {
 
     private ProductDetails productos;
-//    private List<SizeDetails> talles;
+    private List<SizeDetails> talles;
     private int quantity;
     private int stock;
     private String description;
