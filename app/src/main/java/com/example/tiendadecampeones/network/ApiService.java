@@ -3,7 +3,6 @@ package com.example.tiendadecampeones.network;
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.PaymentMethods;
 import com.example.tiendadecampeones.models.Product;
-import com.example.tiendadecampeones.models.Size;
 import com.example.tiendadecampeones.models.UserLogInResponse;
 
 import java.util.List;
@@ -41,8 +40,8 @@ public interface ApiService {
     @GET("productos/")
     Call<List<Product>> getProductosPorPais(@Query("pais") String pais);
 
-    @GET("talles")
-    Call<List<Size>> getTalles();
+    /*@GET("talles")
+    Call<List<Size>> getTalles();*/
 
     @GET("pedidos/")
     Call<List<Order>> getOrders(

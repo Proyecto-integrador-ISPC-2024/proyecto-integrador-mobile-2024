@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.ProductsAdapter;
 import com.example.tiendadecampeones.models.Product;
-import com.example.tiendadecampeones.models.Size;
+
 import com.example.tiendadecampeones.network.ApiService;
 
 import java.util.ArrayList;
@@ -34,6 +34,7 @@ public class ProductsActivity extends AppCompatActivity {
     private String selectedPais;
 
     private List<Product> carrito = new ArrayList<>();
+
     private List<String> tallesStringList = new ArrayList<>();
 
     @Override
@@ -107,21 +108,22 @@ public class ProductsActivity extends AppCompatActivity {
                     productsAdapter = new ProductsAdapter(productList, ProductsActivity.this);
                     productsRecyclerView.setAdapter(productsAdapter);
 
-                    getTalles();
+                    /* getTalles();*/
 
                 } else {
                     Log.e("ProductsActivity", "Error en la respuesta: " + response.message());
                     Toast.makeText(ProductsActivity.this, "No hay producto " + pais, Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 Toast.makeText(ProductsActivity.this, "Error producto: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
-
-    private void getTalles() {
+}
+  /*  private void getTalles() {
         ApiService apiService = ApiService.create();
         Call<List<Size>> call = apiService.getTalles();
 
@@ -158,4 +160,4 @@ public class ProductsActivity extends AppCompatActivity {
             }
         });
     }
-}
+}*/
