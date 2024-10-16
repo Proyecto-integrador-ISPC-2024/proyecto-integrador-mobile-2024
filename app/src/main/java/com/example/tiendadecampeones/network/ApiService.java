@@ -3,17 +3,20 @@ package com.example.tiendadecampeones.network;
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.Product;
 import com.example.tiendadecampeones.models.UserLogInResponse;
+import com.example.tiendadecampeones.models.UserProfile;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiService {
@@ -30,6 +33,16 @@ public interface ApiService {
 
     @DELETE("pedidos/{id}")
     Call<Void> cancelOrder(@Path("id") int id);
+
+    @GET("user/profile/{email}")
+    Call<UserProfile> getUserProfile(@Path("email") String email);
+
+    @PUT("user/profile/{email}")
+    Call<Void> updateUserProfile(@Path("email") String email, @Body UserProfile userProfile);
+
+    @DELETE("user/profile/{email}")
+    Call<Void> deleteUserProfile(@Path("email") String email);
+
 
     static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
