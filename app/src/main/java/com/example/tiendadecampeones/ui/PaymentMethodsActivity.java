@@ -71,7 +71,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
         // Cargo los métodos de pago
-        loadPaymentMethods();
+//        loadPaymentMethods();
 
         paymentMethodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -92,28 +92,28 @@ public class PaymentMethodsActivity extends AppCompatActivity {
         });
     }
 
-    private void loadPaymentMethods() {
-        ApiService apiService = ApiService.create();
-        Call<PaymentMethods> call = apiService.getPaymentMethods();
-
-        call.enqueue(new Callback<PaymentMethods>() {
-            @Override
-            public void onResponse(Call<PaymentMethods> call, Response<PaymentMethods> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    formas_de_pago = response.body().getFormasDePago();
-                    tarjetas = response.body().getTarjetas();
-                    setupPaymentMethodSpinner(formas_de_pago);
-                } else {
-                    int errorCode = response.code();
-                    Toast.makeText(PaymentMethodsActivity.this, "Error al cargar métodos de pago: Código " + errorCode, Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<PaymentMethods> call, Throwable t) {
-                Toast.makeText(PaymentMethodsActivity.this, "Fallo en la conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void loadPaymentMethods() {
+//        ApiService apiService = ApiService.create();
+//        Call<PaymentMethods> call = apiService.getPaymentMethods();
+//
+//        call.enqueue(new Callback<PaymentMethods>() {
+//            @Override
+//            public void onResponse(Call<PaymentMethods> call, Response<PaymentMethods> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    formas_de_pago = response.body().getFormasDePago();
+//                    tarjetas = response.body().getTarjetas();
+//                    setupPaymentMethodSpinner(formas_de_pago);
+//                } else {
+//                    int errorCode = response.code();
+//                    Toast.makeText(PaymentMethodsActivity.this, "Error al cargar métodos de pago: Código " + errorCode, Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<PaymentMethods> call, Throwable t) {
+//                Toast.makeText(PaymentMethodsActivity.this, "Fallo en la conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     private void setupPaymentMethodSpinner(List<PaymentMethods.FormaDePago> formas_de_pago) {
         // Crear un adaptador para mostrar solo la descripción de las formas de pago
