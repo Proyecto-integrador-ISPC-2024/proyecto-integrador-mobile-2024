@@ -58,22 +58,20 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 .error(R.drawable.error_image)
                 .into(holder.productImage);
 
-        /* Configurar el Spinner con los talles
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
-                android.R.layout.simple_spinner_item, tallesStringList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        holder.sizeSpinner.setAdapter(adapter);*/
 
         // Prepare the sizes for the spinner
         List<String> sizes = new ArrayList<>();
         for (Product.SizeDetails sizeDetail : product.getTalles()) {
-            sizes.add(sizeDetail.getTalle());
+            if (sizeDetail.getStock() > 0) { // Solo talles disponibles
+                sizes.add(sizeDetail.getTalle());
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, sizes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.sizeSpinner.setAdapter(adapter);
+
 
         // Handle "Add to Cart" button click
         holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
