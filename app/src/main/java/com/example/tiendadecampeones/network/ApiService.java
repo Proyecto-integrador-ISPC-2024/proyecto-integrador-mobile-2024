@@ -63,4 +63,6 @@ public interface ApiService {
 
         return retrofit.create(ApiService.class);
     }
+
+    Call<PaymentMethods> getPaymentMethods();
 }
