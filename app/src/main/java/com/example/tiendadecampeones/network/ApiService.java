@@ -2,6 +2,7 @@ package com.example.tiendadecampeones.network;
 
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.PaymentMethods;
+import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
 import com.example.tiendadecampeones.models.Size;
 import com.example.tiendadecampeones.models.UserLogInResponse;
@@ -48,8 +49,12 @@ public interface ApiService {
     @GET("pedidos")
     Call<List<Order>> getOrders();
 
+    @POST("pedidos")
+    Call<Pedido> realizarPedido(@Header("Authorization") String authToken, @Body Pedido pedido);
+
     @GET("pedidos/listar_metodopago")
-    Call<PaymentMethods> getPaymentMethods();
+    Call<PaymentMethods> getPaymentMethods(@Header("Authorization") String token);
+
 
     @DELETE("pedidos/{id}")
     Call<Void> cancelOrder(@Path("id") int id);
