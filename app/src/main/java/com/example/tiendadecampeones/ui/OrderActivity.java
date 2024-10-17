@@ -54,15 +54,11 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-
         initializeViews();
-
         Intent intent = getIntent();
-        id_pedido = intent.getIntExtra("ORDER_ID", -1);
-
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        id_pedido = intent.getIntExtra("ORDER_ID", -1);
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         authToken = preferences.getString("accessToken", null);
         id_usuario = preferences.getInt("id_usuario", -1);

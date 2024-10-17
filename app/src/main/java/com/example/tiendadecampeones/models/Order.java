@@ -41,13 +41,8 @@ public class Order {
     public List<OrderDetail> getDetalles() { return detalles; }
     public void setDetalles(List<OrderDetail> detalles) { this.detalles = detalles; }
 
-    public List<FormaDePago> getFormaDePago() {
-        return forma_de_pago;
-    }
-
-    public void setFormaDePago(List<FormaDePago> forma_de_pago) {
-        this.forma_de_pago = forma_de_pago;
-    }
+    public List<FormaDePago> getFormaDePago() { return forma_de_pago; }
+    public void setFormaDePago(List<FormaDePago> forma_de_pago) { this.forma_de_pago = forma_de_pago; }
 
     public static class FormaDePago {
         private String forma_de_pago_descripcion;
@@ -59,21 +54,11 @@ public class Order {
         }
 
         // Getters y Setters
-        public String getFormaDePagoDescripcion() {
-            return forma_de_pago_descripcion;
-        }
+        public String getFormaDePagoDescripcion() { return forma_de_pago_descripcion; }
+        public void setFormaDePagoDescripcion(String forma_de_pago_descripcion) { this.forma_de_pago_descripcion = forma_de_pago_descripcion; }
 
-        public void setFormaDePagoDescripcion(String forma_de_pago_descripcion) {
-            this.forma_de_pago_descripcion = forma_de_pago_descripcion;
-        }
-
-        public String getTarjeta() {
-            return tarjeta_nombre;
-        }
-
-        public void setTarjeta(String tarjeta_nombre) {
-            this.tarjeta_nombre = tarjeta_nombre;
-        }
+        public String getTarjeta() { return tarjeta_nombre; }
+        public void setTarjeta(String tarjeta_nombre) { this.tarjeta_nombre = tarjeta_nombre; }
     }
 
     public static class OrderDetail {

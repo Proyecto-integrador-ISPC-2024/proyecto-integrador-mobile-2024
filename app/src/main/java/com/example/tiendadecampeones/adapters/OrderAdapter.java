@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import android.util.Log;
 
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.models.Order;
@@ -24,7 +23,7 @@ public class OrderAdapter extends ArrayAdapter<Order> implements Filterable {
 
     public OrderAdapter(Context context, List<Order> orders) {
         super(context, 0, orders);
-        this.orders = orders;
+        this.orders = new ArrayList<>(orders);
         this.filteredOrders = new ArrayList<>(orders);
     }
 
@@ -41,8 +40,6 @@ public class OrderAdapter extends ArrayAdapter<Order> implements Filterable {
 
         orderIdTextView.setText("Pedido " + order.getIdPedido());
         orderDateTextView.setText(order.getFecha());
-
-        Log.d("OrderAdapter", "Mostrando pedido con ID: " + order.getIdPedido() );
         return convertView;
     }
 
@@ -79,7 +76,11 @@ public class OrderAdapter extends ArrayAdapter<Order> implements Filterable {
                 @Override
                 protected void publishResults(CharSequence constraint, FilterResults results) {
                     filteredOrders.clear();
-                    filteredOrders.addAll((List<Order>) results.values);
+                    if (results.values instanceof List<?>) {
+                        @SuppressWarnings("unchecked")
+                        List<Order> ordersList = (List<Order>) results.values;
+                        filteredOrders.addAll(ordersList);
+                    }
                     notifyDataSetChanged();
                 }
             };
@@ -98,7 +99,8 @@ public class OrderAdapter extends ArrayAdapter<Order> implements Filterable {
     }
 
     public void updateOrders(List<Order> newOrders) {
-        this.orders = newOrders;
+        this.orders.clear();
+        this.orders.addAll(newOrders);
         this.filteredOrders.clear();
         this.filteredOrders.addAll(newOrders);
         notifyDataSetChanged();
