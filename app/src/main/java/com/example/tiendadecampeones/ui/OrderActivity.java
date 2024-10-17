@@ -10,14 +10,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.models.Order;
-import com.example.tiendadecampeones.models.PaymentMethods;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.network.RetrofitClient;
 import com.example.tiendadecampeones.adapters.OrderProductAdapter;
@@ -131,31 +129,24 @@ public class OrderActivity extends AppCompatActivity {
             ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
             String fullAuthToken = "Bearer " + authToken;
 
-            Log.d("OrderActivity", "Intentando cancelar el pedido con ID: " + id_pedido);
-
             Call<Void> deleteOrderCall = apiService.deleteOrder(fullAuthToken, id_pedido);
             deleteOrderCall.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    Log.d("OrderActivity", "Respuesta de la API: " + response.code());
                     if (response.isSuccessful()) {
-                        Log.d("OrderActivity", "Pedido cancelado exitosamente");
                         showToast("Pedido cancelado exitosamente");
                         volverAlDashboard(null);
                     } else {
-                        Log.d("OrderActivity", "Error al cancelar el pedido: " + response.errorBody());
                         handleErrorResponse(response);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Log.d("OrderActivity", "Fallo de conexión al cancelar el pedido: " + t.getMessage());
                     showToast("Fallo de conexión al cancelar el pedido");
                 }
             });
         } else {
-            Log.d("OrderActivity", "Usuario no autenticado");
             showToast("Usuario no autenticado");
         }
     }
@@ -163,7 +154,6 @@ public class OrderActivity extends AppCompatActivity {
     private void handleErrorResponse(Response<Void> response) {
         try {
             String errorBody = response.errorBody().string();
-            Log.d("OrderActivity", "Error Body: " + errorBody);
             if (response.code() == 404) {
                 showToast("El pedido no se encontró o ya estaba cancelado.");
             } else if (response.code() == 403) {

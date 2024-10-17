@@ -56,7 +56,7 @@ public interface ApiService {
             @Header("Authorization") String authToken
     );
 
-    @DELETE("pedidos/{id}")
+    @DELETE("pedidos/{id}/")
     Call<Void> deleteOrder(
             @Header("Authorization") String authToken,
             @Path("id") int id_pedido
