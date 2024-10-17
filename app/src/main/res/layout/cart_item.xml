@@ -61,63 +61,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total: $50.00"
+            android:layout_marginTop="5dp"
             android:textColor="@color/black" />
-
 
         <!-- Quantity Selector -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="258dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cantidad:"
-                android:textColor="@color/black"
-                android:paddingEnd="8dp" />
+                android:textSize="20dp"
+                android:textColor="@color/black" />
 
             <!-- Decrement Button -->
             <Button
                 android:id="@+id/quantityDecrement"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:text=""
-                android:textColor="@color/white"
+
                 android:background="@drawable/remove_icon_35x35"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="Disminuir cantidad"/>
+                android:contentDescription="Disminuir cantidad"
+                android:text=""
+                android:textColor="@color/white" />
 
             <!-- Quantity Display -->
             <TextView
                 android:id="@+id/productQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="1"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:gravity="center" />
+                android:textSize="26sp" />
 
             <!-- Increment Button -->
             <Button
                 android:id="@+id/quantityIncrement"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:text=""
-                android:textColor="@color/white"
                 android:background="@drawable/add_icon_35x35"
-                android:layout_marginStart="8dp"
-                android:contentDescription="Aumentar cantidad" />
+                android:contentDescription="Aumentar cantidad"
+                android:text=""
+                android:textColor="@color/white" />
+
+            <!-- Remove Button -->
+            <Button
+                android:id="@+id/removeButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="Eliminar producto"
+                android:background="@drawable/delete_icon_28x28" />
 
         </LinearLayout>
-        <!-- Remove Button -->
-        <Button
-            android:id="@+id/removeButton"
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eliminar"
-            android:textColor="@color/red"
-            android:layout_marginTop="8dp"/>
+            android:text="Talle: "
+            android:textColor="@color/black"
+            android:paddingEnd="8dp" />
     </LinearLayout>
 </LinearLayout>

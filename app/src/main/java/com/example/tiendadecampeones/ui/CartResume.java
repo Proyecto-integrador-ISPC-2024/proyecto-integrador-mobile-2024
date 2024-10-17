@@ -44,16 +44,16 @@ public class CartResume extends AppCompatActivity {
             productList = (ArrayList<Product>) bundle.getSerializable("cart_items");
             ArrayList<Integer> quantityList = bundle.getIntegerArrayList("cart_item_quantities");
 
-            // Verificar si las listas están nulas o vacías antes de proceder
+            // Verificar si las listas están vacías
             if (productList != null && quantityList != null && !productList.isEmpty() && !quantityList.isEmpty()) {
 
-                // Crear el mapa para productos y sus cantidades
+                // Crear el mapa de productos con cantidades
                 Map<Product, Integer> cartItemsMap = new HashMap<>();
                 for (int i = 0; i < productList.size(); i++) {
-                    cartItemsMap.put(productList.get(i), quantityList.get(i));  // Mapear el producto a su cantidad
+                    cartItemsMap.put(productList.get(i), quantityList.get(i));  // Mapear producto con su cantidad
                 }
 
-                // Configurar el adaptador con el contexto, lista de productos y el mapa de cantidades
+                // Configurar el adaptador con productos y el mapa de cantidades
                 cartResumeAdapter = new CartResumeAdapter(this, productList, cartItemsMap);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 recyclerView.setAdapter(cartResumeAdapter);
@@ -62,15 +62,20 @@ public class CartResume extends AppCompatActivity {
                 double totalAmount = calculateTotal(productList, quantityList);
                 totalTextView.setText(String.format("Total: $%.2f", totalAmount));
             } else {
-                // Si no hay productos, mostrar mensaje o manejar el estado vacío
-                totalTextView.setText("No hay artículos en el carrito..");
+                // Si el carrito está vacío, mostrar mensaje y cambiar funcionalidad del botón
+                totalTextView.setText("No tienes productos seleccionados.");
+                confirmPurchaseButton.setText("Ver productos");
+                confirmPurchaseButton.setOnClickListener(v -> vProducts(v));
             }
-
+        } else {
+            // Manejar el caso donde el Bundle es nulo
+            totalTextView.setText("Error retrieving cart items.");
+            confirmPurchaseButton.setText("Ver productos");
+            confirmPurchaseButton.setOnClickListener(v -> vProducts(v));
         }
-
-        // Botón de confirmar compra (navega a la actividad de métodos de pago)
-        confirmPurchaseButton.setOnClickListener(v -> navigateToPaymentMethods());
     }
+
+
 
     // Calcular el total basado en los productos
     private double calculateTotal(List<Product> products, List<Integer> quantities){
