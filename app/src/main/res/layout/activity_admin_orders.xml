@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.AdminOrdersActivity">
+
+
+    <!-- Título de la pantalla -->
+    <TextView
+        android:id="@+id/cartTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Nuestros Pedidos"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:contentDescription="Título de la sección: Nuestros Pedidos"/>
+
+    <!-- RecyclerView para la lista de pedidos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="16dp"
+        tools:listitem="@layout/admin_orders"
+        android:contentDescription="Lista de pedidos de clientes" />
+
+    <!-- Nav inferior -->
+    <LinearLayout
+        android:id="@+id/bottomNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorSecondary"
+        android:padding="8dp"
+        android:contentDescription="Barra de navegación inferior">
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/home_button"
+            android:textColor="@android:color/white"
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Ir a la pantalla de inicio"
+            android:nextFocusRight="@id/profileButton"/>
+
+        <Button
+            android:id="@+id/profileButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/account_button"
+            android:textColor="@android:color/white"
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Ir a la pantalla de perfil"
+            android:nextFocusLeft="@id/homeButton"/>
+    </LinearLayout>
+
+</LinearLayout>

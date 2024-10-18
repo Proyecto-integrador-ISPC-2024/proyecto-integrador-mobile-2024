@@ -1,29 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
+
+        <!-- Sección de Productos -->
         <item
-            android:id="@+id/nav_products"
-            android:icon="@drawable/shopping_bag_icon_35x35"
-            android:title="Productos" />
+            android:id="@+id/nav_productos"
+            android:title="PRODUCTOS"
+            android:icon="@drawable/shopping_bag_icon_35x35">
+            <menu>
+                <item
+                    android:id="@+id/nav_products"
+                    android:title="Productos"
+                    android:icon="@drawable/shopping_bag_icon_35x35" />
+                <item
+                    android:id="@+id/nav_cart"
+                    android:title="Mi carrito"
+                    android:icon="@drawable/shopping_cart_icon_35x35" />
+            </menu>
+        </item>
+
+        <!-- Sección Sobre Nosotros -->
         <item
-            android:id="@+id/nav_cart"
-            android:icon="@drawable/shopping_cart_icon_35x35"
-            android:title="Mi carrito" />
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/search_icon_35x35"
-            android:title="Conócenos" />
-        <item
-            android:id="@+id/nav_contact"
-            android:icon="@drawable/search_icon_35x35"
-            android:title="Contacto" />
+            android:id="@+id/nav_about_us"
+            android:title="SOBRE NOSOTROS"
+            android:icon="@drawable/search_icon_35x35">
+            <menu>
+                <item
+                    android:id="@+id/nav_conocenos"
+                    android:title="Conócenos"
+                    android:icon="@drawable/search_icon_35x35" />
+                <item
+                    android:id="@+id/nav_contacto"
+                    android:title="Contacto"
+                    android:icon="@drawable/search_icon_35x35" />
+            </menu>
+        </item>
+
+        <!-- Sección Mi Perfil -->
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/account_icon_35x35"
-            android:title="Perfil" />
-        <item
-            android:id="@+id/nav_dashboard"
-            android:icon="@drawable/menu_icon_35x35"
-            android:title="Dashboard" />
+            android:title="MI PERFIL"
+            android:icon="@drawable/account_icon_35x35">
+            <menu>
+                <item
+                    android:id="@+id/nav_perfil"
+                    android:title="Perfil"
+                    android:icon="@drawable/account_icon_35x35" />
+                <item
+                    android:id="@+id/nav_dashboard"
+                    android:title="Dashboard"
+                    android:icon="@drawable/menu_icon_35x35" />
+            </menu>
+        </item>
+
     </group>
 </menu>

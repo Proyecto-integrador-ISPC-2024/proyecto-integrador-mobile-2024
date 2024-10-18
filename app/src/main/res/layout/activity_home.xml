@@ -5,10 +5,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Home">
+    tools:context=".ui.Home"
+    android:fitsSystemWindows="true">
 
     <!-- Main Content (Your original layout) -->
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,69 +18,77 @@
             android:id="@+id/headerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:background="@color/colorPrimary"
-            android:padding="16dp">
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/logoImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@mipmap/logo_activities"
-                android:contentDescription="@string/app_name" />
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/logo_activities" />
 
         </LinearLayout>
 
-        <!-- Navbar superior -->
+        <!-- Navegación superior -->
+
         <LinearLayout
             android:id="@+id/topNavbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:background="@color/colorPrimary"
-            android:padding="8dp"
-            android:layout_below="@+id/headerLayout">
+            android:orientation="horizontal"
+            android:padding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerLayout">
 
             <Button
                 android:id="@+id/sideNavButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="280dp"
                 android:layout_weight="1"
-                android:text="@string/menu_button"
-                android:textColor="@color/colorPrimary"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/menu_icon_35x35"
                 android:drawablePadding="0dp"
                 android:padding="8dp"
-                android:layout_marginEnd="280dp"
-                android:layout_gravity="center"
-                style="?android:attr/buttonBarButtonStyle" />
+                android:text="Menu"
+                android:textColor="@color/colorPrimary" />
 
             <Button
                 android:id="@+id/cartButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="@string/back_button"
-                android:textColor="@color/colorPrimary"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/shopping_cart_icon_35x35"
                 android:drawablePadding="0dp"
                 android:padding="8dp"
-                android:layout_gravity="center"
-                style="?android:attr/buttonBarButtonStyle"/>
+                android:text="Carro"
+                android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
 
-        <!-- Mensaje de Bienvenida -->
         <LinearLayout
             android:id="@+id/contactInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/topNavbar"
-            android:padding="16dp">
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topNavbar">
 
             <TextView
                 android:id="@+id/homeLabel"
@@ -100,8 +109,7 @@
                 android:text="@string/homeDescription"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/homeLabelTwo"
@@ -123,8 +131,7 @@
                 android:text="@string/homeSubtitle"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <!-- Productos recomendados (Scroll horizontal) -->
             <HorizontalScrollView
@@ -144,10 +151,10 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="16dp"
-                        android:padding="8dp"
-                        android:background="@color/colorSecondary">
+                        android:background="@color/colorSecondary"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
                         <ImageView
                             android:layout_width="120dp"
@@ -157,21 +164,21 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:text="@string/argContactProd"
                             android:textAlignment="center"
-                            android:textSize="16sp"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <!-- Producto 2 -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="16dp"
-                        android:padding="8dp"
-                        android:background="@color/colorSecondary">
+                        android:background="@color/colorSecondary"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
                         <ImageView
                             android:layout_width="120dp"
@@ -181,11 +188,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:text="@string/brContactProd"
                             android:textAlignment="center"
-                            android:textSize="16sp"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/colorPrimary"/>
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
 
@@ -193,10 +200,10 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="16dp"
-                        android:padding="8dp"
-                        android:background="@color/colorSecondary">
+                        android:background="@color/colorSecondary"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
                         <ImageView
                             android:layout_width="120dp"
@@ -206,11 +213,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:text="@string/frContactProd"
                             android:textAlignment="center"
-                            android:textSize="16sp"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/colorPrimary"/>
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -221,187 +228,84 @@
                 android:id="@+id/buyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/homeBtn"
+                android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/colorSecondary"
-                android:textColor="@color/colorPrimary"
                 android:onClick="productClick"
-                android:layout_gravity="center"
-                />
+                android:text="@string/homeBtn"
+                android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
 
-        <!-- Navegación inferior -->
         <LinearLayout
             android:id="@+id/bottomNavbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:background="@color/colorSecondary"
+            android:orientation="horizontal"
             android:padding="10dp"
-            android:layout_alignParentBottom="true">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <Button
                 android:id="@+id/homeButton"
-                android:onClick="homeButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="@string/home_button"
-                android:textColor="@android:color/white"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/home_icon_35x35"
                 android:drawablePadding="0dp"
+                android:onClick="homeButton"
                 android:padding="8dp"
-                android:layout_gravity="center"
-                style="?android:attr/buttonBarButtonStyle" />
+                android:text="@string/home_button"
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/productsButton"
-                android:onClick="productsButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="@string/products_button"
-                android:textColor="@android:color/white"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/shopping_bag_icon_35x35"
                 android:drawablePadding="0dp"
+                android:onClick="productsButton"
                 android:padding="8dp"
-                android:layout_gravity="center"
-                style="?android:attr/buttonBarButtonStyle" />
+                android:text="@string/products_button"
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/profileBtn"
-                android:onClick="profileBtn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="@string/account_button"
-                android:textColor="@android:color/white"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/account_icon_35x35"
                 android:drawablePadding="0dp"
+                android:onClick="profileBtn"
                 android:padding="8dp"
-                android:layout_gravity="center"
-                style="?android:attr/buttonBarButtonStyle" />
+                android:text="@string/account_button"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--  Navegación lateral  -->
-    <LinearLayout
-        android:id="@+id/sideNav"
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:orientation="vertical"
-        android:background="@color/colorPrimary"
-        android:padding="16dp">
+        app:menu="@menu/drawer_menu"
+        android:background="@color/colorPrimary" />
 
-        <TextView
-            android:id="@+id/navTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Menu"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
-        <!-- Sections -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray"
-                android:text="PRODUCTOS"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:padding="8dp" />
-
-            <Button
-                android:id="@+id/productsButtonDrawer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Productos"
-                android:background="@color/gray"
-                android:textColor="@android:color/black"
-                android:padding="8dp" />
-
-            <Button
-                android:id="@+id/cartButtonDrawer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mi carrito"
-                android:background="@color/gray"
-                android:textColor="@android:color/black"
-                android:padding="8dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray"
-                android:text="SOBRE NOSOTROS"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:padding="8dp"
-                android:layout_marginTop="10dp" />
-
-            <Button
-                android:id="@+id/aboutUsButtonDrawer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Conocenos"
-                android:background="@color/gray"
-                android:textColor="@android:color/black"
-                android:padding="8dp" />
-
-            <Button
-                android:id="@+id/contactButtonDrawer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Contacto"
-                android:background="@color/gray"
-                android:textColor="@android:color/black"
-                android:padding="8dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray"
-                android:text="MI PERFIL"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:padding="8dp"
-                android:layout_marginTop="10dp" />
-
-            <Button
-                android:id="@+id/profileButtonDrawer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Perfil"
-                android:background="@color/gray"
-                android:textColor="@android:color/black"
-                android:padding="8dp" />
-
-            <Button
-                android:id="@+id/dashboardButtonDrawer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Dashboard"
-                android:background="@color/gray"
-                android:textColor="@android:color/black"
-                android:padding="8dp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

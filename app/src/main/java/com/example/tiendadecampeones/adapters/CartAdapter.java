@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
+import com.bumptech.glide.Glide;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,7 +48,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.productName.setText(product.getName());
         holder.productPrice.setText(String.format("Precio: $%.2f", product.getPrice()));
         holder.productQuantity.setText(String.valueOf(product.getQuantity()));
-        holder.productImage.setImageResource(product.getImageResId());
+        Glide.with(context)
+                .load(product.getProductDetails().getImagen())
+                .placeholder(R.drawable.placeholder_image)  // Imagen por defecto mientras carga
+                .error(R.drawable.error_image)  // Imagen si falla la carga
+                .into(holder.productImage);  // Establece la imagen en el ImageView
 
         // Actualizar el precio total
         updateTotalPrice(holder, product);

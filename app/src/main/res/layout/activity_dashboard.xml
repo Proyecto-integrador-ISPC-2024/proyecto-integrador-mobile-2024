@@ -1,4 +1,5 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,145 +8,136 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.Dashboard">
 
-
     <LinearLayout
         android:id="@+id/topNavbar"
-        android:layout_width="413dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="24dp"
-        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
-
-        <Button
+        <ImageButton
             android:id="@+id/backButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="270dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/arrow_back_icon_35x35"
-            android:onClick="backButton"
-            android:text="@string/back_button"
-            android:textColor="@color/colorPrimary" />
-
-        <Button
-            android:id="@+id/sideNavButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/menu_icon_35x35"
-            android:text="@string/menu_button"
-            android:textColor="@color/colorPrimary" />
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:contentDescription="@string/back_button" />
     </LinearLayout>
 
-
+    <!-- Título "Mis pedidos" -->
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="152dp"
-        android:layout_height="37dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/cl1"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/searchV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topNavbar" />
+        android:id="@+id/pageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:text="@string/order_title_dashboard"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/topNavbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón de Filtrar -->
+    <Button
+        android:id="@+id/filterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:onClick="showFilterDialog"
+        android:text="Filtrar"
+        app:layout_constraintTop_toBottomOf="@id/pageTitle"
+        app:layout_constraintEnd_toStartOf="@id/searchV"
+        app:layout_constraintStart_toStartOf="@id/topNavbar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <SearchView
         android:id="@+id/searchV"
-        android:layout_width="397dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/listView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
-
-    </SearchView>
-
-    <LinearLayout
-        android:id="@+id/bottomNavbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/colorSecondary"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@android:color/holo_blue_light"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/filterButton"
+        app:layout_constraintTop_toBottomOf="@id/pageTitle"
+        app:queryBackground="@android:color/transparent"
+        app:queryHint="@string/searchV" />
+
+    <TextView
+        android:id="@+id/no_orders_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_orders_message"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/searchV"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Logoutbtn">
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Buttons in Bottom Navbar -->
-        <Button
-            android:id="@+id/homeButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/home_icon_35x35"
-            android:onClick="homeButton"
-            android:text="@string/home_button"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/productsButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/shopping_bag_icon_35x35"
-            android:onClick="productsButton"
-            android:text="@string/products_button"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/profileBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/account_icon_35x35"
-            android:onClick="profileBtn"
-            android:text="@string/account_button"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
-
+    <!-- ListView -->
     <ListView
         android:id="@+id/listView"
-        android:layout_width="394dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="15dp"
         android:background="@color/green"
-        app:layout_constraintBottom_toTopOf="@+id/Logoutbtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchV" />
-
-    <Button
-        android:id="@+id/Logoutbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
-        android:backgroundTint="@color/red"
-        android:onClick="logoutClick"
-        android:text="@string/Logoutbtn"
-        android:textColor="@color/btnText"
+        app:layout_constraintTop_toBottomOf="@id/no_orders_message"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Bottom Navbar -->
+    <LinearLayout
+        android:id="@+id/bottomNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSecondary"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:onClick="homeButton"
+            android:text="@string/home_button"
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <Button
+            android:id="@+id/productsButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:onClick="productsButton"
+            android:text="@string/products_button"
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <Button
+            android:id="@+id/profileBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:onClick="profileBtn"
+            android:text="@string/account_button"
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

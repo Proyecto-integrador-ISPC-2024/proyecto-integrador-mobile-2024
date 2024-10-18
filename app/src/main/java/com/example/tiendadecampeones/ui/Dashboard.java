@@ -1,149 +1,211 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.models.Order;
+import com.example.tiendadecampeones.adapters.OrderAdapter;
+import com.example.tiendadecampeones.network.ApiService;
+import com.example.tiendadecampeones.network.RetrofitClient;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
-    SearchView searchV;
-    ListView listView;
-    ArrayAdapter<String> adapter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class Dashboard extends AppCompatActivity {
+    private ListView listView;
+    private OrderAdapter orderAdapter;
+    private List<Order> orders = new ArrayList<>();
+    private ImageButton backButton;
+    private SearchView searchInput;
+    private String authToken;
+    private ApiService apiService;
+    private TextView noOrdersTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         EdgeToEdge.enable(this);
-
         setContentView(R.layout.activity_dashboard);
 
-
-        searchV = findViewById(R.id.searchV);
-        searchV.setOnQueryTextListener(this);
-
-
         listView = findViewById(R.id.listView);
+        searchInput = findViewById(R.id.searchV);
+        backButton = findViewById(R.id.backButton);
+        noOrdersTextView = findViewById(R.id.no_orders_message);
 
-        // Datos a mostrar en la lista
-        String[][] orders = {
-                {"Pedido 123", "Fecha 11/09/2023"},
-                {"Pedido 456", "Fecha 27/10/2023"},
-                {"Pedido 789", "Fecha 20/12/2023"},
-                {"Pedido 1000", "Fecha 24/05/2024"},
-                {"Pedido 1100", "Fecha 22/01/2024"},
-                {"Pedido 3514", "Fecha 25/06/2024"},
-                {"Pedido 8511", "Fecha 13/08/2024"},
-                {"Pedido 8745", "Fecha 22/01/2024"},
-                {"Pedido 9001", "Fecha 01/03/2024"},
-                {"Pedido 9852", "Fecha 13/09/2024"}
-        };
+        apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
-        //  lista de títulos para mostrar
-        String[] orderTitles = new String[orders.length];
-        for (int i = 0; i < orders.length; i++) {
-            orderTitles[i] = orders[i][0] + " - " + orders[i][1]; // Título y fecha del pedido
-        }
+        searchInput.setQueryHint(getString(R.string.searchV));
 
+        orderAdapter = new OrderAdapter(this, orders);
+        listView.setAdapter(orderAdapter);
 
-        //ArrayAdapter para mostrar los títulos en el ListView
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, orderTitles);
-        listView.setAdapter(adapter);
+        fetchOrders();
 
-        // Configuracion de la acción de clic en cada ítem del ListView
+        backButton.setOnClickListener(v -> finish());
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedOrder = orders[position][0]; // Título del pedido seleccionado
-                String selectedDate = orders[position][1];  // Fecha del pedido seleccionado
+                Order selectedOrder = orderAdapter.getItem(position);
+                Toast.makeText(Dashboard.this, "Pedido: " + selectedOrder.getIdPedido() + "\n\nFecha: " + selectedOrder.getFecha(), Toast.LENGTH_SHORT).show();
 
-                // Mostrar un Toast con los detalles del pedido
-                Toast.makeText(Dashboard.this, "Pedido: " + selectedOrder + "\n\nFecha: " + selectedDate, Toast.LENGTH_SHORT).show();
-
-
-                //  Intent para iniciar la nueva actividad
-                Intent intent = new Intent(Dashboard.this, Order.class);
-                // Pasar los datos del pedido seleccionado a la nueva actividad
-                intent.putExtra("ORDER_TITLE", selectedOrder);
-                intent.putExtra("ORDER_DATE", selectedDate);
+                Intent intent = new Intent(Dashboard.this, OrderActivity.class);
+                intent.putExtra("ORDER_ID", selectedOrder.getIdPedido());
+                intent.putExtra("ORDER_DATE", selectedOrder.getFecha());
                 startActivity(intent);
             }
         });
 
-        // Ajustar los insets de la ventana
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        searchInput.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                orderAdapter.getFilter().filter(newText);
+                return true;
+            }
         });
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
+    private void fetchOrders() {
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        authToken = preferences.getString("accessToken", null);
+        int id_usuario = preferences.getInt("id_usuario", -1);
+
+        if (authToken == null) {
+            Toast.makeText(this, "No autenticado. Inicie sesión.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+        String fullAuthToken = "Bearer " + authToken;
+
+        if (id_usuario == -1) {
+            Toast.makeText(Dashboard.this, "ID de usuario no válido.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Call<List<Order>> call = apiService.getOrders(fullAuthToken);
+        call.enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    orders.clear();
+                    for (Order order : response.body()) {
+                        if (order.getIdUsuario() == id_usuario) {
+                            orders.add(order);
+                        }
+                    }
+                    updateOrderDisplay();
+                } else {
+                    Toast.makeText(Dashboard.this, "Error en la respuesta: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Toast.makeText(Dashboard.this, "Error al cargar pedidos: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        adapter.getFilter().filter(newText);
-        return true;
+    private void filterOrdersByStatus(String status) {
+        Toast.makeText(this, "Filtrando por: " + status, Toast.LENGTH_SHORT).show();
+        List<Order> filteredList = new ArrayList<>();
+
+        if (status.equals("TODOS LOS ESTADOS")) {
+            filteredList.addAll(orders);
+        } else {
+            for (Order order : orders) {
+                if (order.getEstado() != null && order.getEstado().equalsIgnoreCase(status)) {
+                    filteredList.add(order);
+                }
+            }
+        }
+        orderAdapter.updateOrders(filteredList);
     }
 
-    // Métodos para manejar los botones
+    public void showFilterDialog(View view) {
+        String[] statuses = {"TODOS LOS ESTADOS", "ACEPTADO", "PENDIENTE", "CANCELADO"};
 
-    public void logoutClick(View v) {
-        Toast.makeText(this, "Has cerrado tu sesión", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
+        new AlertDialog.Builder(this)
+                .setTitle("Filtrar por estado")
+                .setItems(statuses, (dialog, which) -> {
+                    String selectedStatus = statuses[which];
+                    filterOrdersByStatus(selectedStatus);
+                })
+                .show();
     }
 
+    private void updateOrderDisplay() {
+        Collections.sort(orders, new Comparator<Order>() {
+            @Override
+            public int compare(Order o1, Order o2) {
+                return getOrderPriority(o1.getEstado()) - getOrderPriority(o2.getEstado());
+            }
+
+            private int getOrderPriority(String estado) {
+                switch (estado) {
+                    case "ACEPTADO":
+                        return 1;
+                    case "PENDIENTE":
+                        return 2;
+                    case "CANCELADO":
+                        return 3;
+                    default:
+                        return 4;
+                }
+            }
+        });
+
+        if (orders.isEmpty()) {
+            Toast.makeText(Dashboard.this, "No tienes pedidos", Toast.LENGTH_SHORT).show();
+            listView.setVisibility(View.GONE);
+            noOrdersTextView.setVisibility(View.VISIBLE);
+        } else {
+            listView.setVisibility(View.VISIBLE);
+            noOrdersTextView.setVisibility(View.GONE);
+        }
+        orderAdapter.updateOrders(orders);
+    }
 
     public void profileBtn(View view) {
-        Toast.makeText(this, "Redirigiendo a tu perfil", Toast.LENGTH_SHORT).show();
-        // Intent para iniciar la actividad del dashboard
+        Toast.makeText(this, "Redireccionando a tu perfil", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
 
-    public void backButton(View v) {
-        Toast.makeText(this, "Redireccionando a tu página anterior ", Toast.LENGTH_SHORT).show();
-        finish();
+    public void homeButton(View v) {
+        Toast.makeText(this, "Redireccionando a home", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
     }
 
-//botones de la barra de navegacion inferior
-public void webtn(View v) {
-    Toast.makeText(this, "¡ Conócenos !", Toast.LENGTH_SHORT).show();
-
-    Intent intent = new Intent(this, AboutUs.class);
-    startActivity(intent);
+    public void productsButton(View v) {
+        Toast.makeText(this, "Redireccionando a productos", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductsActivity.class);
+        startActivity(intent);
+    }
 }
-
-public void homeButton(View v) {
-    Toast.makeText(this, "¡ Home !", Toast.LENGTH_SHORT).show();
-
-    Intent intent = new Intent(this, Home.class);
-    startActivity(intent);
-}
-
-public void productsButton(View v) {
-    Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
-
-    Intent intent = new Intent(this, ProductsActivity.class);
-    startActivity(intent);
-}
-
-}
-

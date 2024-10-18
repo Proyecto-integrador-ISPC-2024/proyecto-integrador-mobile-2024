@@ -1,26 +1,23 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/activity_payment_method"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
+    android:orientation="vertical"
     tools:context=".ui.PaymentMethodsActivity">
 
     <!-- Header Layout -->
     <LinearLayout
         android:id="@+id/headerLayout"
-        android:layout_width="415dp"
-        android:layout_height="132dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="6dp"
         android:background="@color/colorPrimary"
         android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/topNavbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/logoImageView"
@@ -31,149 +28,165 @@
             android:src="@mipmap/logo_activities" />
     </LinearLayout>
 
-
     <!-- Top Navbar -->
     <LinearLayout
         android:id="@+id/topNavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="182dp"
         android:background="@color/colorPrimary"
         android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="10dp">
 
-        <!-- Buttons in Top Navbar -->
         <Button
             android:id="@+id/backButton"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableStart="@drawable/arrow_back_icon_35x35"
             android:text="@string/back_button"
             android:textColor="@color/colorPrimary" />
-
-
     </LinearLayout>
 
-
-    <!-- Body-->
-
-
-    <!---Bottom Navbar -->
-
-    <TextView
-        android:id="@+id/paymentMethodTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="134dp"
-        android:layout_marginTop="74dp"
-        android:layout_marginEnd="130dp"
-        android:text="Método de pago"
-        android:textColor="@color/black"
-        android:textFontWeight="600"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/topNavbar" />
-
-
-    <TextView
-        android:id="@+id/totalTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TOTAL A PAGAR:$1500,00"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paymentMethodTextView">
-
-    </TextView>
-
-    <Spinner
-        android:id="@+id/paymentMethodSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="53dp"
-        android:layout_below="@id/totalTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/totalTextView" />
-
+    <!-- Contenido principal -->
     <LinearLayout
-        android:id="@+id/paymentFormContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/paymentMethodSpinner"
-        android:background="@color/colorSecondary"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/confirmPaymentButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paymentMethodSpinner">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/cardNameEditText"
+        <!-- Payment Method Text -->
+        <TextView
+            android:id="@+id/paymentMethodTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginTop="16dp"
+            android:text="Método de pago"
+            android:textColor="@color/black"
+            android:textFontWeight="600"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/totalTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="TOTAL A PAGAR: $0.00" />
+
+        <!-- Spinners -->
+        <Spinner
+            android:id="@+id/paymentMethodSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="16dp" />
+
+        <Spinner
+            android:id="@+id/cardTypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
+
+        <!-- Payment Form -->
+        <LinearLayout
+            android:id="@+id/paymentFormContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Por favor,ingrese el Nombre de la tarjeta"
-            android:background="@drawable/edit_text_border"
-            android:visibility="gone"
-            android:layout_marginBottom="20dp"/>
+            android:orientation="vertical"
+            android:padding="1dp"
+            android:visibility="gone">
 
-        <EditText
-            android:id="@+id/cardNumberEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Número de la tarjeta"
-            android:inputType="number"
-            android:background="@drawable/edit_text_border"
-            android:visibility="gone"
-            android:layout_marginBottom="20dp"/>
+            <TextView
+                android:id="@+id/transferMessageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transfiere a este alias o CBU indicando tu mail de usuario:"
+                android:visibility="gone" />
 
-        <EditText
-            android:id="@+id/cardCVVEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ingrese los últimos 3 dígitos"
-            android:inputType="numberPassword"
-            android:background="@drawable/edit_text_border"
-            android:visibility="gone"
-            android:layout_marginBottom="20dp"/>
+            <EditText
+                android:id="@+id/cardNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:inputType="number"
+                android:hint="Número de tarjeta"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/cardLast4DigitsEditText"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:inputType="number"
+                android:hint="Últimos 4 dígitos"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cbuLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CBU:"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/transferNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:hint="CBU de la empresa"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:cursorVisible="false"
+                android:longClickable="true"
+                android:selectAllOnFocus="true"
+                android:visibility="gone" />
+
+            <!-- Etiqueta para Alias -->
+            <TextView
+                android:id="@+id/aliasLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alias de la empresa:"
+                android:visibility="gone" /> <!-- Oculto por defecto -->
+
+            <EditText
+                android:id="@+id/aliasEditText"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Alias"
+                android:textStyle="bold"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:cursorVisible="false"
+                android:longClickable="true"
+                android:selectAllOnFocus="true"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- Confirm Payment Button -->
+        <Button
+            android:id="@+id/confirmPaymentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Confirmar pago"
+            android:backgroundTint="@color/colorSecondary"
+            android:textColor="@color/btnText" />
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/confirmPaymentButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/paymentFormContainer"
-        android:backgroundTint="@color/black"
-        android:text="confirmar pago"
-        android:textColor="@color/btnText"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+    <!-- Footer (Bottom Navbar) -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorSecondary"
         android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:padding="10dp">
 
-        <!-- Buttons in Bottom Navbar -->
         <Button
             android:id="@+id/homeButton"
             style="?android:attr/buttonBarButtonStyle"
@@ -182,6 +195,9 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/home_icon_35x35"
+            android:drawablePadding="0dp"
+            android:onClick="vHome"
+            android:padding="8dp"
             android:text="@string/home_button"
             android:textColor="@android:color/white" />
 
@@ -193,20 +209,25 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:drawablePadding="0dp"
+            android:onClick="vProducts"
+            android:padding="8dp"
             android:text="@string/products_button"
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/profileBtn"
+            android:id="@+id/profileButton"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/account_icon_35x35"
-            android:onClick="profileBtn"
+            android:drawablePadding="0dp"
+            android:onClick="vProfile"
+            android:padding="8dp"
             android:text="@string/account_button"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
