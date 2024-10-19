@@ -1,36 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/adminActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.AdminOrdersActivity">
 
-
-    <!-- Título de la pantalla -->
-    <TextView
-        android:id="@+id/cartTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@id/topNavbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text="Nuestros Pedidos"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:contentDescription="Título de la sección: Nuestros Pedidos"/>
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!--        Título de la pantalla-->
+        <TextView
+            android:id="@+id/cartTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="120dp"
+            android:text="@string/order_screen_title"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:contentDescription="@string/order_screen_title"/>
+
+        <!-- Delete Account Button -->
+        <ImageButton
+            android:id="@+id/btn_delete_account"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="onDeleteAccountClicked"
+            android:contentDescription="@string/disableAccount"
+            android:src="@drawable/no_accounts_35dp_7d1010_fill0_wght400_grad0_opsz40"
+            />
+    </LinearLayout>
+
+
+    <!--    &lt;!&ndash; Título de la pantalla &ndash;&gt;-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/cartTitle"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:paddingTop="16dp"-->
+    <!--        android:paddingBottom="16dp"-->
+    <!--        android:text="Nuestros Pedidos"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="24sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:contentDescription="Título de la sección: Nuestros Pedidos"/>-->
 
     <!-- RecyclerView para la lista de pedidos -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cartRecyclerView"
+    <ListView
+        android:id="@+id/ordersListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_margin="16dp"
         tools:listitem="@layout/admin_orders"
-        android:contentDescription="Lista de pedidos de clientes" />
+        android:contentDescription="@string/contdes_orders_list" />
 
     <!-- Nav inferior -->
     <LinearLayout
@@ -40,7 +78,7 @@
         android:orientation="horizontal"
         android:background="@color/colorSecondary"
         android:padding="8dp"
-        android:contentDescription="Barra de navegación inferior">
+        android:contentDescription="@string/bottom_navbar_description">
 
         <Button
             android:id="@+id/homeButton"
@@ -52,7 +90,7 @@
             android:drawableTop="@drawable/home_icon_35x35"
             android:gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Ir a la pantalla de inicio"
+            android:contentDescription="@string/contdes_home_button"
             android:nextFocusRight="@id/profileButton"/>
 
         <Button
@@ -65,7 +103,7 @@
             android:drawableTop="@drawable/account_icon_35x35"
             android:gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Ir a la pantalla de perfil"
+            android:contentDescription="@string/contdes_profile_button"
             android:nextFocusLeft="@id/homeButton"/>
     </LinearLayout>
 
