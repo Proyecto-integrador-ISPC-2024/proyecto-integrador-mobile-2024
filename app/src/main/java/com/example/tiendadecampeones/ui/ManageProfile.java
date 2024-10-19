@@ -7,10 +7,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.models.UserProfile;
+import com.example.tiendadecampeones.network.ApiService;
+import com.example.tiendadecampeones.network.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ManageProfile extends AppCompatActivity {
 
@@ -58,11 +66,7 @@ public class ManageProfile extends AppCompatActivity {
 
         // Botones de navegación superior
         ImageButton backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        backButton.setOnClickListener(v -> finish());
     }
 
     public void onEditProfileClicked(View view) {
@@ -78,30 +82,76 @@ public class ManageProfile extends AppCompatActivity {
     }
 
     public void onSaveChangesClicked(View view) {
-        // Save changes logic here
+        // Create the updated user profile object
+        UserProfile updatedProfile = new UserProfile(
+                1, // Replace with actual user ID
+                etName.getText().toString(),
+                etLastName.getText().toString(),
+                etEmail.getText().toString(),
+                etDomicilio.getText().toString(),
+                etPassword.getText().toString()
+        );
 
-        // After saving, disable fields again
-        etName.setEnabled(false);
-        etLastName.setEnabled(false);
-        etEmail.setEnabled(false);
-        etPassword.setEnabled(false);
+        // Get the refresh token
+        String token = getRefreshToken();
 
-        // Show edit button and hide save button
-        btnEditProfile.setVisibility(View.VISIBLE);
-        btnSaveChanges.setVisibility(View.GONE);
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+        Call<UserProfile> call = apiService.updateProfile(updatedProfile.getId(), "Bearer " + token, updatedProfile);
+
+        call.enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(ManageProfile.this, "Cambios guardados exitosamente", Toast.LENGTH_SHORT).show();
+                    updateSharedPreferences(updatedProfile);
+                } else {
+                    Toast.makeText(ManageProfile.this, "Error al guardar cambios: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+                disableEditingFields();
+            }
+
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+                Toast.makeText(ManageProfile.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                disableEditingFields();
+            }
+        });
     }
 
     public void onDeleteAccountClicked(View view) {
-        // Handle delete account logic here (e.g., show confirmation dialog)
         new AlertDialog.Builder(this)
                 .setTitle("Desactivar cuenta")
                 .setMessage("¿Estás seguro/a que querés desactivar tu cuenta?")
                 .setPositiveButton("Desactivar", (dialog, which) -> {
-                    // Perform delete account action here
+                    // Handle delete account action here
                 })
                 .setNegativeButton("Volver", null)
                 .show();
     }
 
+    private String getRefreshToken() {
+        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        return sharedPref.getString("refresh_token", "");
+    }
 
+    private void updateSharedPreferences(UserProfile profile) {
+        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("nombre", profile.getNombre());
+        editor.putString("apellido", profile.getApellido());
+        editor.putString("email", profile.getEmail());
+        editor.putString("domicilio", profile.getDomicilio());
+        editor.putString("contraseña", profile.getContraseña());
+        editor.apply();
+    }
+
+    private void disableEditingFields() {
+        etName.setEnabled(false);
+        etLastName.setEnabled(false);
+        etEmail.setEnabled(false);
+        etPassword.setEnabled(false);
+
+        btnEditProfile.setVisibility(View.VISIBLE);
+        btnSaveChanges.setVisibility(View.GONE);
+    }
 }

@@ -1,56 +1,80 @@
 package com.example.tiendadecampeones.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserProfile {
-    private String name;
-    private String lastName;
+
+    @SerializedName("id")
+    private int id;
+
+    @SerializedName("nombre")
+    private String nombre;
+
+    @SerializedName("apellido")
+    private String apellido;
+
+    @SerializedName("email")
     private String email;
-    private String password;
-    private String address;
 
-    // Constructor, getters y setters
-    public UserProfile(String name, String lastName, String email, String password, String address) {
-        this.name = name;
-        this.lastName = lastName;
+    @SerializedName("domicilio")
+    private String domicilio;
+
+    @SerializedName("contraseña")
+    private String contraseña;
+
+    // Constructor
+    public UserProfile(int id, String nombre, String apellido, String email, String domicilio, String contraseña) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
-        this.password = password;
-        this.address = address;
+        this.domicilio = domicilio;
+        this.contraseña = contraseña;
     }
 
-    public String getName() {
-        return name;
+    // Getters
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getApellido() {
+        return apellido;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    // Setters
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAddress() { return address;
-    }
-    public void setAddress(String address) { this.address = address;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 }
-
