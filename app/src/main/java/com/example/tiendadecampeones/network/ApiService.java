@@ -6,6 +6,7 @@ import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
 import com.example.tiendadecampeones.models.Size;
 import com.example.tiendadecampeones.models.UserLogInResponse;
+import com.example.tiendadecampeones.models.UserProfile;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Path;
@@ -60,6 +62,11 @@ public interface ApiService {
     Call<Void> deleteOrder(
             @Header("Authorization") String authToken,
             @Path("id") int id_pedido
+    );
+    @PATCH("profiles/{id}")
+    Call<UserProfile> updateProfile(@Path("id") int id,
+            @Header("Authorization") String token,
+            @Body UserProfile profile
     );
 
     static ApiService create() {

@@ -13,6 +13,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.models.UserProfile;
+import com.example.tiendadecampeones.network.ApiService;
+import com.example.tiendadecampeones.network.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ManageProfile extends AppCompatActivity {
 
@@ -93,40 +100,40 @@ public class ManageProfile extends AppCompatActivity {
     }
 
     public void onSaveChangesClicked(View view) {
-        // Get updated data from the fields
-        String updatedName = etName.getText().toString();
-        String updatedLastName = etLastName.getText().toString();
-        String updatedEmail = etEmail.getText().toString();
-        String updatedDomicilio = etDomicilio.getText().toString();
-        String updatedPassword = etPassword.getText().toString();
+        // Create the updated user profile object
+        UserProfile updatedProfile = new UserProfile(
+                1, // Replace with actual user ID
+                etName.getText().toString(),
+                etLastName.getText().toString(),
+                etEmail.getText().toString(),
+                etDomicilio.getText().toString(),
+                etPassword.getText().toString()
+        );
 
-        Log.d(TAG, "Updated Name: " + updatedName);
-        Log.d(TAG, "Updated Last Name: " + updatedLastName);
-        Log.d(TAG, "Updated Email: " + updatedEmail);
-        Log.d(TAG, "Updated Domicilio: " + updatedDomicilio);
-        Log.d(TAG, "Updated Password: " + updatedPassword);
+        // Get the refresh token
+        String token = getRefreshToken();
 
-        // Save updated data in SharedPreferences
-        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("nombre", updatedName);
-        editor.putString("apellido", updatedLastName);
-        editor.putString("email", updatedEmail);
-        editor.putString("domicilio", updatedDomicilio);
-        editor.putString("contraseña", updatedPassword);
-        editor.apply();
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+        Call<UserProfile> call = apiService.updateProfile(updatedProfile.getId(), "Bearer " + token, updatedProfile);
 
-        Log.d(TAG, "User information saved to SharedPreferences successfully.");
+        call.enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(ManageProfile.this, "Cambios guardados exitosamente", Toast.LENGTH_SHORT).show();
+                    updateSharedPreferences(updatedProfile);
+                } else {
+                    Toast.makeText(ManageProfile.this, "Error al guardar cambios: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+                disableEditingFields();
+            }
 
-        // Show confirmation message
-        Toast.makeText(this, "Información actualizada con éxito", Toast.LENGTH_SHORT).show();
-
-        // Disable fields after saving
-        setFieldsEditable(false);
-
-        // Show edit button and hide save button
-        btnEditProfile.setVisibility(View.VISIBLE);
-        btnSaveChanges.setVisibility(View.GONE);
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+                Toast.makeText(ManageProfile.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                disableEditingFields();
+            }
+        });
     }
 
     public void onDeleteAccountClicked(View view) {
@@ -140,5 +147,31 @@ public class ManageProfile extends AppCompatActivity {
                 })
                 .setNegativeButton("Volver", null)
                 .show();
+    }
+
+    private String getRefreshToken() {
+        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        return sharedPref.getString("refresh_token", "");
+    }
+
+    private void updateSharedPreferences(UserProfile profile) {
+        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("nombre", profile.getNombre());
+        editor.putString("apellido", profile.getApellido());
+        editor.putString("email", profile.getEmail());
+        editor.putString("domicilio", profile.getDomicilio());
+        editor.putString("contraseña", profile.getContraseña());
+        editor.apply();
+    }
+
+    private void disableEditingFields() {
+        etName.setEnabled(false);
+        etLastName.setEnabled(false);
+        etEmail.setEnabled(false);
+        etPassword.setEnabled(false);
+
+        btnEditProfile.setVisibility(View.VISIBLE);
+        btnSaveChanges.setVisibility(View.GONE);
     }
 }
