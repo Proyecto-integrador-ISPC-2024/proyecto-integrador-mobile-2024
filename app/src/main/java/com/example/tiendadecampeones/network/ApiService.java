@@ -2,6 +2,7 @@ package com.example.tiendadecampeones.network;
 
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.PaymentMethods;
+import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
 import com.example.tiendadecampeones.models.Size;
 import com.example.tiendadecampeones.models.UserLogInResponse;
@@ -43,16 +44,22 @@ public interface ApiService {
     @GET("productos/")
     Call<List<Product>> getProductosPorPais(@Query("pais") String pais);
 
-    @GET("talles")
-    Call<List<Size>> getTalles();
+    /*@GET("talles")
+    Call<List<Size>> getTalles();*/
+
+    @POST("pedidos")
+    Call<Pedido> realizarPedido(@Header("Authorization") String authToken, @Body Pedido pedido);
+
+    @GET("pedidos/listar_metodopago")
+    Call<PaymentMethods> getPaymentMethods(@Header("Authorization") String token);
 
     @GET("pedidos/")
     Call<List<Order>> getOrders(
             @Header("Authorization") String authToken
     );
 
-    @DELETE("pedidos/{id}")
-    Call<Void> cancelOrder(
+    @DELETE("pedidos/{id}/")
+    Call<Void> deleteOrder(
             @Header("Authorization") String authToken,
             @Path("id") int id_pedido
     );
@@ -62,10 +69,6 @@ public interface ApiService {
             @Body UserProfile profile
     );
 
-    @GET("ruta/a/payment/methods")
-    Call<PaymentMethods> getPaymentMethods();
-
-
     static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://recdev.pythonanywhere.com/") // Base URL
@@ -74,4 +77,6 @@ public interface ApiService {
 
         return retrofit.create(ApiService.class);
     }
+
+    Call<PaymentMethods> getPaymentMethods();
 }

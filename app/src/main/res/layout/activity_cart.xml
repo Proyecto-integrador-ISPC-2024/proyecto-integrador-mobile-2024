@@ -49,6 +49,17 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <!-- TextView para mostrar el total -->
+    <TextView
+        android:id="@+id/totalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Total: $0.00"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="16dp" />
+
     <!-- RecyclerView for dynamic product rendering -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerView"

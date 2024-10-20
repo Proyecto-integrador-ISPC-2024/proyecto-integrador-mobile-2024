@@ -3,7 +3,6 @@ package com.example.tiendadecampeones.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -92,10 +91,8 @@ public class Dashboard extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         authToken = preferences.getString("accessToken", null);
         int id_usuario = preferences.getInt("id_usuario", -1);
-        Log.d("UserIdDebug", "ID de usuario recuperado: " + id_usuario);
 
         if (authToken == null) {
-            Log.e("AuthTokenDebug", "No se encontró el token de autenticación.");
             Toast.makeText(this, "No autenticado. Inicie sesión.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -106,36 +103,29 @@ public class Dashboard extends AppCompatActivity {
         String fullAuthToken = "Bearer " + authToken;
 
         if (id_usuario == -1) {
-            Log.e("UserIdDebug", "ID de usuario no válido.");
             Toast.makeText(Dashboard.this, "ID de usuario no válido.", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        Log.d("AuthTokenDebug", "Token completo para API: " + fullAuthToken);
-        Log.d("APICallDebug", "Llamando a la API con el ID de usuario: " + id_usuario);
 
         Call<List<Order>> call = apiService.getOrders(fullAuthToken);
         call.enqueue(new Callback<List<Order>>() {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                Log.d("APIResponseDebug", "Código de respuesta: " + response.code());
                 if (response.isSuccessful() && response.body() != null) {
                     orders.clear();
                     for (Order order : response.body()) {
                         if (order.getIdUsuario() == id_usuario) {
-                            orders.add(order); // Añade directamente el objeto Order
+                            orders.add(order);
                         }
                     }
                     updateOrderDisplay();
                 } else {
-                    Log.e("APIResponseError", "Error en la respuesta de la API: " + response.message());
                     Toast.makeText(Dashboard.this, "Error en la respuesta: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
-                Log.e("APIFailureDebug", "Error al cargar pedidos: " + t.getMessage());
                 Toast.makeText(Dashboard.this, "Error al cargar pedidos: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -154,8 +144,6 @@ public class Dashboard extends AppCompatActivity {
                 }
             }
         }
-
-        // Actualiza el adaptador con la lista filtrada
         orderAdapter.updateOrders(filteredList);
     }
 
@@ -192,7 +180,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        // Actualiza la visibilidad de la lista de pedidos
         if (orders.isEmpty()) {
             Toast.makeText(Dashboard.this, "No tienes pedidos", Toast.LENGTH_SHORT).show();
             listView.setVisibility(View.GONE);
@@ -201,8 +188,6 @@ public class Dashboard extends AppCompatActivity {
             listView.setVisibility(View.VISIBLE);
             noOrdersTextView.setVisibility(View.GONE);
         }
-
-        // Actualiza el adaptador con todos los pedidos
         orderAdapter.updateOrders(orders);
     }
 

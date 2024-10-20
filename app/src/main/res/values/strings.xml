@@ -87,9 +87,10 @@
     <string name="order_label">Número de Pedido:</string>
     <string name="order_date_label">Fecha:</string>
     <string name="order_status_label">Estado:</string>
-    <string name="product_details_label">Detalles del Producto:</string>
+    <string name="product_details_label">Detalles de Productos:</string>
     <string name="payment_method_label">Forma de Pago:</string>
-    <string name="cardMethods">Tarjeta:</string>
+    <string name="cards_method">Tarjeta:</string>
+    <string name="no_cards">No se han utilizado tarjeta</string>
     <string name="total_paid_label">Total Abonado:</string>
     <string name="order_tracking_msg">Seguí tu pedido acá con tu número de pedido</string>
     <string name="order_tracking_btn">Seguí tu pedido acá</string>

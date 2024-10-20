@@ -45,7 +45,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = products.get(position);
         holder.productName.setText(product.getName());
-        holder.productDescription.setText(product.getDescription());
+//        holder.productDescription.setText(product.getDescription());
         holder.productPrice.setText("$" + product.getPrice());
 
         Log.d("Product", "Nombre: " + product.getName());
@@ -58,22 +58,27 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 .error(R.drawable.error_image)
                 .into(holder.productImage);
 
-        /* Configurar el Spinner con los talles
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
-                android.R.layout.simple_spinner_item, tallesStringList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        holder.sizeSpinner.setAdapter(adapter);*/
 
         // Prepare the sizes for the spinner
         List<String> sizes = new ArrayList<>();
         for (Product.SizeDetails sizeDetail : product.getTalles()) {
-            sizes.add(sizeDetail.getTalle());
+            if (sizeDetail.getStock() > 0) { // Solo talles disponibles
+                sizes.add(sizeDetail.getTalle());
+            }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
+        // verificamos si hay talles disponibles
+        if (!sizes.isEmpty()) {
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, sizes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.sizeSpinner.setAdapter(adapter);
+
+        } else {
+            // Si no hay tallas disponibles :
+            holder.sizeSpinner.setVisibility(View.GONE);
+        }
 
         // Handle "Add to Cart" button click
         holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
