@@ -44,8 +44,10 @@ public interface ApiService {
     @GET("talles")
     Call<List<Size>> getTalles();
 
+    @POST("pedidos/")
+    Call<Void> addToCart(@Body Product product);
 
-    @GET("pedidos")
+    @GET("pedidos/")
     Call<List<Order>> getOrders();
 
     @GET("pedidos/listar_metodopago")
