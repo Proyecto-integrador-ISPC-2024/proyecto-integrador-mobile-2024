@@ -107,9 +107,6 @@ public class ProductsActivity extends AppCompatActivity {
                     Log.d("ProductsActivity", "Productos recibidos: " + productList.size());
                     productsAdapter = new ProductsAdapter(productList, ProductsActivity.this);
                     productsRecyclerView.setAdapter(productsAdapter);
-
-                    /* getTalles();*/
-
                 } else {
                     Log.e("ProductsActivity", "Error en la respuesta: " + response.message());
                     Toast.makeText(ProductsActivity.this, "No hay producto " + pais, Toast.LENGTH_SHORT).show();
@@ -123,41 +120,3 @@ public class ProductsActivity extends AppCompatActivity {
         });
     }
 }
-  /*  private void getTalles() {
-        ApiService apiService = ApiService.create();
-        Call<List<Size>> call = apiService.getTalles();
-
-        call.enqueue(new Callback<List<Size>>() {
-            @Override
-            public void onResponse(Call<List<Size>> call, Response<List<Size>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Size> tallesList = response.body();
-
-                    // Limpiar la lista de talles antes de agregar nuevos
-                    tallesStringList.clear();
-
-                    // Convertir la lista de objetos Size a una lista de Strings
-                    for (Size size : tallesList) {
-                        String talle = size.getTalle(); // Use size to get the talle value
-                        if (talle != null) {
-                            tallesStringList.add(talle);
-                        } else {
-                            Log.e("ProductsActivity", "Talle es null para el objeto: " + size.toString());
-                        }
-                    }
-
-                    Log.d("ProductsActivity", "Talles recibidos: " + tallesStringList);
-
-
-                } else {
-                  Log.e("ProductsActivity", "Error al obtener talles: " + response.message());
-                    Toast.makeText(ProductsActivity.this, "Error al obtener talles", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<List<Size>> call, Throwable t) {
-                Toast.makeText(ProductsActivity.this, "Error en la solicitud: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-}*/
