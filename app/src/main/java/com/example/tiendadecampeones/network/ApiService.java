@@ -4,7 +4,7 @@ import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.PaymentMethods;
 import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
-import com.example.tiendadecampeones.models.Size;
+//import com.example.tiendadecampeones.models.Product.Talle;
 import com.example.tiendadecampeones.models.UserLogInResponse;
 import com.example.tiendadecampeones.models.UserProfile;
 
