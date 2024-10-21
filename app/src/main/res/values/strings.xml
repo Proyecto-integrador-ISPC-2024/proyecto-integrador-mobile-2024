@@ -4,6 +4,10 @@
     <!--  Sección Login  -->
     <string name="user">Usuario</string>
     <string name="passware">Contraseña</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button_text">Iniciar Sesión</string>
+    <string name="register_button_text">Registrate</string>
 
     <!--  Barra de navegación superior  -->
     <string name="back_button">Volver</string>
@@ -87,8 +91,10 @@
     <string name="order_label">Número de Pedido:</string>
     <string name="order_date_label">Fecha:</string>
     <string name="order_status_label">Estado:</string>
-    <string name="product_details_label">Detalles del Producto:</string>
+    <string name="product_details_label">Detalles de Productos:</string>
     <string name="payment_method_label">Forma de Pago:</string>
+    <string name="cards_method">Tarjeta:</string>
+    <string name="no_cards">No se han utilizado tarjeta</string>
     <string name="total_paid_label">Total Abonado:</string>
     <string name="order_tracking_msg">Seguí tu pedido acá con tu número de pedido</string>
     <string name="order_tracking_btn">Seguí tu pedido acá</string>
@@ -96,6 +102,8 @@
 
     <!-- Sección Dashboard-->
     <string name="searchV">Número de pedido o fecha</string>
+    <string name="order_title_dashboard">Pedidos</string>
+    <string name="no_orders_message">No tienes pedidos</string>
 
     <!-- Sección Editar perfil -->
     <string name="disableAccount">desactivar cuenta</string>
@@ -107,5 +115,18 @@
     <string name="inputPassword">Contraseña</string>
     <string name="saveChangesBtn">Guardar cambios</string>
 
+    <!-- Sección Administrador -->
+    <string name="order_screen_title">Nuestros Pedidos</string>
+
+    <!-- Descripción de contenido accesible -->
+    <string name="contdes_logo">Logotipo de Tienda de Campeones</string>
+    <string name="contdes_email_input">Campo de entrada de correo electrónico</string>
+    <string name="contdes_password_input">Campo de entrada de contraseña</string>
+    <string name="contdes_login_button">Botón para iniciar sesión</string>
+    <string name="contdes_register_button">Botón para registrarse</string>
+    <string name="contdes_orders_list">Lista de pedidos de clientes</string>
+    <string name="bottom_navbar_description">Barra de navegación inferior</string>
+    <string name="contdes_home_button">Ir a la pantalla de inicio</string>
+    <string name="contdes_profile_button">Ir a la pantalla de perfil</string>
 
 </resources>

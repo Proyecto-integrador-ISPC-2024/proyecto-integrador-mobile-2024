@@ -1,4 +1,4 @@
-package com.example.tiendadecampeones.models;
+/*package com.example.tiendadecampeones.models;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -32,4 +32,4 @@ public class Size {
     public void setTalle(String talle) {
         this.talle = talle;
     }
-}
+}*/

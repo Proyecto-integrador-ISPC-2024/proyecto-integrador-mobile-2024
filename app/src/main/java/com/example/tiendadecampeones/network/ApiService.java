@@ -2,9 +2,11 @@ package com.example.tiendadecampeones.network;
 
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.PaymentMethods;
+import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
-import com.example.tiendadecampeones.models.Size;
+//import com.example.tiendadecampeones.models.Product.Talle;
 import com.example.tiendadecampeones.models.UserLogInResponse;
+import com.example.tiendadecampeones.models.UserProfile;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Path;
@@ -41,20 +44,30 @@ public interface ApiService {
     @GET("productos/")
     Call<List<Product>> getProductosPorPais(@Query("pais") String pais);
 
-    @GET("talles")
-    Call<List<Size>> getTalles();
+    /*@GET("talles")
+    Call<List<Size>> getTalles();*/
 
-    @POST("pedidos/")
-    Call<Void> addToCart(@Body Product product);
-
-    @GET("pedidos/")
-    Call<List<Order>> getOrders();
+    @POST("pedidos")
+    Call<Pedido> realizarPedido(@Header("Authorization") String authToken, @Body Pedido pedido);
 
     @GET("pedidos/listar_metodopago")
-    Call<PaymentMethods> getPaymentMethods();
+    Call<PaymentMethods> getPaymentMethods(@Header("Authorization") String token);
 
-    @DELETE("pedidos/{id}")
-    Call<Void> cancelOrder(@Path("id") int id);
+    @GET("pedidos/")
+    Call<List<Order>> getOrders(
+            @Header("Authorization") String authToken
+    );
+
+    @DELETE("pedidos/{id}/")
+    Call<Void> deleteOrder(
+            @Header("Authorization") String authToken,
+            @Path("id") int id_pedido
+    );
+    @PATCH("profiles/{id}")
+    Call<UserProfile> updateProfile(@Path("id") int id,
+            @Header("Authorization") String token,
+            @Body UserProfile profile
+    );
 
     static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -64,4 +77,6 @@ public interface ApiService {
 
         return retrofit.create(ApiService.class);
     }
+
+    Call<PaymentMethods> getPaymentMethods();
 }

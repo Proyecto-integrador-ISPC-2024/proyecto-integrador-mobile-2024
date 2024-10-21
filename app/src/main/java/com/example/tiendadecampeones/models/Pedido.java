@@ -2,56 +2,133 @@ package com.example.tiendadecampeones.models;
 import java.util.List;
 
 public class Pedido {
-    private int idPedido;
-    private String fecha;
+    private int id_usuario;
     private double total;
-    private int idUsuario;
-    private String estado;
     private List<Detalle> detalles;
-    private List<FormaDePago> formasDePago;
+    private List<FormaDePago> forma_de_pago;
 
-    public Pedido(int idPedido, String fecha, double total, int idUsuario, String estado, List<Detalle> detalles, List<FormaDePago> formasDePago) {
-        this.idPedido = idPedido;
-        this.fecha = fecha;
+    public Pedido(int id_usuario, double total, List<Detalle> detalles, List<FormaDePago> forma_de_pago) {
+        this.id_usuario = id_usuario;
         this.total = total;
-        this.idUsuario = idUsuario;
-        this.estado = estado;
         this.detalles = detalles;
-        this.formasDePago = formasDePago;
+        this.forma_de_pago = forma_de_pago;
     }
-    public int getIdPedido() { return idPedido; }
-    public void setIdPedido(int idPedido) { this.idPedido = idPedido; }
 
-    public String getFecha() { return fecha; }
-    public void setFecha(String fecha) { this.fecha = fecha; }
+    public Pedido() {
+    }
 
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
+    // Getters y Setters
+    public int getIdUsuario() {
+        return id_usuario;
+    }
 
-    public int getIdUsuario() { return idUsuario; }
-    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
+    public void setIdUsuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
 
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
+    public double getTotal() {
+        return total;
+    }
 
-    public List<Detalle> getDetalles() { return detalles; }
-    public void setDetalles(List<Detalle> detalles) { this.detalles = detalles; }
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
-    public List<FormaDePago> getFormasDePago() { return formasDePago; }
-    public void setFormasDePago(List<FormaDePago> formasDePago) { this.formasDePago = formasDePago; }
+    public List<Detalle> getDetalles() {
+        return detalles;
+    }
 
-    public static class FormaDePago {
-        private String forma_pago_descripcion;
-        private String tarjeta_nombre;
+    public void setDetalles(List<Detalle> detalles) {
+        this.detalles = detalles;
+    }
 
-        public FormaDePago(String forma_pago_descripcion, String tarjeta_nombre) {
-            this.forma_pago_descripcion = forma_pago_descripcion;
-            this.tarjeta_nombre = tarjeta_nombre;
+    public List<FormaDePago> getFormaDePago() {
+        return forma_de_pago;
+    }
+
+    public void setFormaDePago(List<FormaDePago> forma_de_pago) {
+        this.forma_de_pago = forma_de_pago;
+    }
+
+    // Clase interna para Detalle del pedido
+    public static class Detalle {
+        private int id_producto;
+        private int id_talle;
+        private int cantidad;
+        private double subtotal;
+
+        public Detalle(int id_producto, int id_talle, int cantidad, double subtotal) {
+            this.id_producto = id_producto;
+            this.id_talle = id_talle;
+            this.cantidad = cantidad;
+            this.subtotal = subtotal;
         }
 
-        public String getFormaPagoDescripcion() { return forma_pago_descripcion; }
-        public String getTarjetaNombre() { return tarjeta_nombre; }
+        public Detalle() {
+        }
+
+        // Getters y Setters
+        public int getIdProducto() {
+            return id_producto;
+        }
+
+        public void setIdProducto(int id_producto) {
+            this.id_producto = id_producto;
+        }
+
+        public int getIdTalle() {
+            return id_talle;
+        }
+
+        public void setIdTalle(int id_talle) {
+            this.id_talle = id_talle;
+        }
+
+        public int getCantidad() {
+            return cantidad;
+        }
+
+        public void setCantidad(int cantidad) {
+            this.cantidad = cantidad;
+        }
+
+        public double getSubtotal() {
+            return subtotal;
+        }
+
+        public void setSubtotal(double subtotal) {
+            this.subtotal = subtotal;
+        }
+    }
+
+    // Clase interna para la Forma de Pago
+    public static class FormaDePago {
+        private Integer id_forma_de_pago;
+        private Integer id_tarjeta;
+
+        public FormaDePago(int id_forma_de_pago, Integer id_tarjeta) {
+            this.id_forma_de_pago = id_forma_de_pago;
+            this.id_tarjeta = id_tarjeta;
+        }
+
+        public FormaDePago() {
+        }
+
+        // Getters y Setters
+        public Integer getIdFormaDePago() {
+            return id_forma_de_pago;
+        }
+
+        public void setIdFormaDePago(Integer id_forma_de_pago) {
+            this.id_forma_de_pago = id_forma_de_pago;
+        }
+
+        public int getIdTarjeta() {
+            return id_tarjeta;
+        }
+
+        public void setIdTarjeta(Integer id_tarjeta) {
+            this.id_tarjeta = id_tarjeta;
+        }
     }
 }
-
-

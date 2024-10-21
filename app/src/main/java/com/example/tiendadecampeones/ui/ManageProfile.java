@@ -3,16 +3,27 @@ package com.example.tiendadecampeones.ui;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.models.UserProfile;
+import com.example.tiendadecampeones.network.ApiService;
+import com.example.tiendadecampeones.network.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ManageProfile extends AppCompatActivity {
+
+    private static final String TAG = "ManageProfile"; // Log tag
 
     private EditText etName, etLastName, etEmail, etPassword, etDomicilio;
     private Button btnEditProfile, btnSaveChanges;
@@ -32,12 +43,25 @@ public class ManageProfile extends AppCompatActivity {
         btnSaveChanges = findViewById(R.id.btn_save_changes);
 
         // Retrieve user data from SharedPreferences
-        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+
         String nombre = sharedPref.getString("nombre", "");
         String apellido = sharedPref.getString("apellido", "");
         String email = sharedPref.getString("email", "");
         String domicilio = sharedPref.getString("domicilio", "");
         String password = sharedPref.getString("contraseña", "");
+
+        // Logging to debug the values fetched from SharedPreferences
+        Log.d(TAG, "Nombre: " + nombre);
+        Log.d(TAG, "Apellido: " + apellido);
+        Log.d(TAG, "Email: " + email);
+        Log.d(TAG, "Domicilio: " + domicilio);
+        Log.d(TAG, "Contraseña: " + password);
+
+        // Check if any values are null or empty and log accordingly
+        if (nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || domicilio.isEmpty() || password.isEmpty()) {
+            Log.e(TAG, "Some user fields are empty, possibly indicating an issue with SharedPreferences.");
+        }
 
         // Populate the fields with user data
         etName.setText(nombre);
@@ -47,30 +71,28 @@ public class ManageProfile extends AppCompatActivity {
         etPassword.setText(password);
 
         // Disable editing fields initially
-        etName.setEnabled(false);
-        etLastName.setEnabled(false);
-        etEmail.setEnabled(false);
-        etPassword.setEnabled(false);
+        setFieldsEditable(false);
 
         // Handle Edit and Save button logic
         btnEditProfile.setOnClickListener(this::onEditProfileClicked);
         btnSaveChanges.setOnClickListener(this::onSaveChangesClicked);
 
-        // Botones de navegación superior
+        // Botón de navegación superior
         ImageButton backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        backButton.setOnClickListener(v -> finish());
+    }
+
+    private void setFieldsEditable(boolean editable) {
+        etName.setEnabled(editable);
+        etLastName.setEnabled(editable);
+        etEmail.setEnabled(editable);
+        etDomicilio.setEnabled(editable);
+        etPassword.setEnabled(editable);
     }
 
     public void onEditProfileClicked(View view) {
         // Enable fields for editing
-        etName.setEnabled(true);
-        etLastName.setEnabled(true);
-        etEmail.setEnabled(true);
-        etPassword.setEnabled(true);
+        setFieldsEditable(true);
 
         // Show save button and hide edit button
         btnEditProfile.setVisibility(View.GONE);
@@ -78,17 +100,40 @@ public class ManageProfile extends AppCompatActivity {
     }
 
     public void onSaveChangesClicked(View view) {
-        // Save changes logic here
+        // Create the updated user profile object
+        UserProfile updatedProfile = new UserProfile(
+                1, // Replace with actual user ID
+                etName.getText().toString(),
+                etLastName.getText().toString(),
+                etEmail.getText().toString(),
+                etDomicilio.getText().toString(),
+                etPassword.getText().toString()
+        );
 
-        // After saving, disable fields again
-        etName.setEnabled(false);
-        etLastName.setEnabled(false);
-        etEmail.setEnabled(false);
-        etPassword.setEnabled(false);
+        // Get the refresh token
+        String token = getRefreshToken();
 
-        // Show edit button and hide save button
-        btnEditProfile.setVisibility(View.VISIBLE);
-        btnSaveChanges.setVisibility(View.GONE);
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+        Call<UserProfile> call = apiService.updateProfile(updatedProfile.getId(), "Bearer " + token, updatedProfile);
+
+        call.enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(ManageProfile.this, "Cambios guardados exitosamente", Toast.LENGTH_SHORT).show();
+                    updateSharedPreferences(updatedProfile);
+                } else {
+                    Toast.makeText(ManageProfile.this, "Error al guardar cambios: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+                disableEditingFields();
+            }
+
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+                Toast.makeText(ManageProfile.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                disableEditingFields();
+            }
+        });
     }
 
     public void onDeleteAccountClicked(View view) {
@@ -98,10 +143,35 @@ public class ManageProfile extends AppCompatActivity {
                 .setMessage("¿Estás seguro/a que querés desactivar tu cuenta?")
                 .setPositiveButton("Desactivar", (dialog, which) -> {
                     // Perform delete account action here
+                    Log.d(TAG, "Account deactivation confirmed.");
                 })
                 .setNegativeButton("Volver", null)
                 .show();
     }
 
+    private String getRefreshToken() {
+        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        return sharedPref.getString("refresh_token", "");
+    }
 
+    private void updateSharedPreferences(UserProfile profile) {
+        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("nombre", profile.getNombre());
+        editor.putString("apellido", profile.getApellido());
+        editor.putString("email", profile.getEmail());
+        editor.putString("domicilio", profile.getDomicilio());
+        editor.putString("contraseña", profile.getContraseña());
+        editor.apply();
+    }
+
+    private void disableEditingFields() {
+        etName.setEnabled(false);
+        etLastName.setEnabled(false);
+        etEmail.setEnabled(false);
+        etPassword.setEnabled(false);
+
+        btnEditProfile.setVisibility(View.VISIBLE);
+        btnSaveChanges.setVisibility(View.GONE);
+    }
 }
