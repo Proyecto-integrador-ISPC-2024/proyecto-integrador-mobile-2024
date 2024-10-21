@@ -1,6 +1,7 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -45,9 +46,15 @@ public class Profile extends AppCompatActivity {
     }
 
     public void logoutClick(View v) {
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
         Toast.makeText(this, "Has cerrado tu sesión", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this,Home.class);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 
     public void backButton(View v) {
