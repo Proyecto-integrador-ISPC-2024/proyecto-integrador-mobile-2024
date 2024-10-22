@@ -58,11 +58,4 @@ public class AboutUs extends AppCompatActivity {
             }
         });
     }
-
-//    Pendiente para refactorizar
-//    public void contactClick(View v) {
-//        // Intent para abrir la pantalla de Contacto
-//        Intent intent = new Intent(this, Contact.class);
-//        startActivity(intent);
-//    }
 }

@@ -1,19 +1,23 @@
 package com.example.tiendadecampeones.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Button;
-import com.bumptech.glide.Glide;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.models.Product;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -22,6 +26,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private List<Product> productList;
     private Context context;
 
+    // Constructor for CartAdapter
     public CartAdapter(List<Product> productList, Context context) {
         this.productList = productList;
         this.context = context;
@@ -30,58 +35,59 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.cart_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false);
         return new CartViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-
-        // Get the current product
         Product product = productList.get(position);
-        Product.Producto producto = product.getProductos();  // Access the Producto details
+        Product.Producto productoDetails = product.getProductos();
 
         // Set product name and price
-        holder.productName.setText(producto.getNombreProducto());
-        holder.productPrice.setText(String.format("Precio: $%.2f", producto.getPrecio()));
+        holder.productName.setText(productoDetails.getNombreProducto());
+        holder.productPrice.setText("Precio: $" + productoDetails.getPrecio());
 
-        // Set product quantity based on the size of the 'talles' list
-        int quantity = product.getTalles().size();
-        holder.productQuantity.setText(String.valueOf(quantity));
+        // Set product image dynamically using the image URL
+        String imageUrl = productoDetails.getImagen(); // URL of the product image
 
-        // Load product image using Glide
         Glide.with(context)
-                .load(producto.getImagen())
-                .placeholder(R.drawable.placeholder_image)  // Placeholder while loading
-                .error(R.drawable.error_image)  // Error image in case loading fails
+                .load(imageUrl)
+                .placeholder(R.drawable.placeholder_image) // Optional placeholder
+                .error(R.drawable.error_image) // Optional error image
                 .into(holder.productImage);
 
-        // Increment button click listener
-        holder.incrementButton.setOnClickListener(v -> {
-            if (quantity < product.getStock()) {  // Check if the quantity is less than the available stock
-                // Add one more to the quantity
-                product.getTalles().add(new Product.Talle(0, "Nuevo Talle", 1));  // Example of adding a Talle
-                holder.productQuantity.setText(String.valueOf(product.getTalles().size()));  // Update quantity display
-                notifyItemChanged(position);  // Notify adapter of data change
-            }
+        // Show the selected quantity and size (talle)
+        StringBuilder talleInfo = new StringBuilder();
+        for (Product.Talle talle : product.getTalles()) {
+            talleInfo.append(talle.getTalle());
+        }
+        holder.productSize.setText(talleInfo.toString());
+
+        // Calculate and display subtotal for the current product (price * quantity for each talle)
+        double subtotal = 0;
+        for (Product.Talle talle : product.getTalles()) {
+            subtotal += productoDetails.getPrecio() * talle.getCantidad();
+        }
+        holder.productSubtotal.setText("Subtotal: $" + subtotal);
+
+        // Set up quantity change buttons
+        holder.increaseQuantityButton.setOnClickListener(v -> {
+            updateQuantity(holder, product, true); // Increase quantity
         });
 
-        // Decrement button click listener
-        holder.decrementButton.setOnClickListener(v -> {
-            if (quantity > 1) {  // Ensure quantity does not go below 1
-                // Remove one talle from the list
-                product.getTalles().remove(product.getTalles().size() - 1);
-                holder.productQuantity.setText(String.valueOf(product.getTalles().size()));  // Update quantity display
-                notifyItemChanged(position);  // Notify adapter of data change
-            }
+        holder.decreaseQuantityButton.setOnClickListener(v -> {
+            updateQuantity(holder, product, false); // Decrease quantity
         });
 
-        // Remove product from the cart
+        // Set up remove button (trash icon)
         holder.removeButton.setOnClickListener(v -> {
-            productList.remove(position);  // Remove the product from the list
-            notifyItemRemoved(position);  // Notify adapter of item removal
-            notifyItemRangeChanged(position, productList.size());  // Notify adapter of range change
+            removeProduct(position);
         });
+
+        // Display product quantity
+        holder.productQuantity.setText(Integer.toString(product.getTalles().get(1).getCantidad()));
     }
 
     @Override
@@ -89,22 +95,69 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return productList.size();
     }
 
-    public static class CartViewHolder extends RecyclerView.ViewHolder {
+    // Function to update the quantity
+    private void updateQuantity(CartViewHolder holder, Product product, boolean isIncrease) {
+        Product.Talle talle = product.getTalles().get(0); // Assuming single size (talle)
+        int currentQuantity = talle.getCantidad();
 
-        TextView productName, productPrice, productQuantity;
+        if (isIncrease) {
+            if (currentQuantity < talle.getStock()) {
+                talle.setCantidad(currentQuantity + 1); // Increase quantity
+            } else {
+                Toast.makeText(context, "Stock máximo alcanzado", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            if (currentQuantity > 1) {
+                talle.setCantidad(currentQuantity - 1); // Decrease quantity
+            } else {
+                Toast.makeText(context, "Cantidad mínima alcanzada", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        // Update the subtotal for the product
+        double newSubtotal = product.getProductos().getPrecio() * talle.getCantidad();
+        holder.productSubtotal.setText("Subtotal: $" + newSubtotal);
+        holder.productQuantity.setText(Integer.toString(talle.getCantidad()));
+
+        // Save changes in SharedPreferences
+        updateSharedPreferences();
+    }
+
+    // Function to remove a product from the cart
+    private void removeProduct(int position) {
+        productList.remove(position);
+        notifyItemRemoved(position);
+
+        // Update SharedPreferences
+        updateSharedPreferences();
+    }
+
+    // Function to update SharedPreferences with the modified product list
+    private void updateSharedPreferences() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("cart_shared_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String updatedProductsJson = gson.toJson(productList);
+        editor.putString("cart_products", updatedProductsJson);
+        editor.apply();
+    }
+
+    static class CartViewHolder extends RecyclerView.ViewHolder {
+        TextView productName, productPrice, productSize, productSubtotal, productQuantity;
+        Button increaseQuantityButton, decreaseQuantityButton, removeButton;
         ImageView productImage;
-        Button incrementButton, decrementButton, removeButton;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Initialize UI components
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
+            productSize = itemView.findViewById(R.id.productTalle);
             productQuantity = itemView.findViewById(R.id.productQuantity);
-            productImage = itemView.findViewById(R.id.productImage);
-            incrementButton = itemView.findViewById(R.id.quantityIncrement);
-            decrementButton = itemView.findViewById(R.id.quantityDecrement);
+            productSubtotal = itemView.findViewById(R.id.productSubtotal);
+            increaseQuantityButton = itemView.findViewById(R.id.quantityIncrement);
+            decreaseQuantityButton = itemView.findViewById(R.id.quantityDecrement);
             removeButton = itemView.findViewById(R.id.removeButton);
+            productImage = itemView.findViewById(R.id.productImage); // Ensure this matches your layout
         }
     }
 }

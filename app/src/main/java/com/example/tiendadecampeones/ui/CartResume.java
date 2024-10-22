@@ -3,6 +3,7 @@ package com.example.tiendadecampeones.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Button;
 
@@ -12,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.CartResumeAdapter;
+import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
 import com.example.tiendadecampeones.utils.SharedPrefManager;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +35,14 @@ public class CartResume extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_resume);
+
+        // Botón de navegación superior
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         recyclerView = findViewById(R.id.recyclerViewCart);
         totalTextView = findViewById(R.id.totalPrice);
@@ -61,6 +72,11 @@ public class CartResume extends AppCompatActivity {
                 navigateToPaymentMethods();
             }
         });
+
+        Intent intent = getIntent();
+        String pedidoJson = intent.getStringExtra("pedido_data");
+        Pedido pedido = new Gson().fromJson(pedidoJson, Pedido.class);
+
     }
 
     private double calculateTotal(Map<Product, Integer> cartItems) {
@@ -77,7 +93,7 @@ public class CartResume extends AppCompatActivity {
     }
 
     public void vProducts(View v) {
-        Intent intent = new Intent(this, ProductsActivity.class);
+        Intent intent = new Intent(this, ProductCategories.class);
         startActivity(intent);
     }
 
