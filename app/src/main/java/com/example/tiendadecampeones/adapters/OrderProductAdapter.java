@@ -40,11 +40,13 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
 
         holder.productName.setText(product.getNombreProducto());
 
-        holder.productSize.setText("Talle: " + orderDetail.getIdTalle());
+        holder.productSize.setText("Talle: " + orderDetail.getTalleString());
 
         holder.productQuantity.setText("Cantidad: " + orderDetail.getCantidad());
 
-        holder.productPrice.setText("Precio: $" + product.getPrecio());
+        holder.productSubtotal.setText("Subtotal: $" + orderDetail.getSubtotal());
+
+        holder.productPrice.setText("Precio unitario: $" + product.getPrecio());
 
         Glide.with(context)
                 .load(product.getImagen())
@@ -62,6 +64,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
         TextView productName;
         TextView productSize;
         TextView productQuantity;
+        TextView productSubtotal;
         TextView productPrice;
 
         public ProductViewHolder(@NonNull View itemView) {
@@ -70,6 +73,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
             productName = itemView.findViewById(R.id.productName);
             productSize = itemView.findViewById(R.id.productSize);
             productQuantity = itemView.findViewById(R.id.productQuantity);
+            productSubtotal = itemView.findViewById(R.id.productSubtotal);
             productPrice = itemView.findViewById(R.id.productPrice);
         }
     }

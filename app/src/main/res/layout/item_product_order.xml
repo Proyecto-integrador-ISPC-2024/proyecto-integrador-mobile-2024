@@ -8,7 +8,8 @@
         android:id="@+id/productImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:contentDescription="Imagen del producto" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -23,28 +24,35 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:text="Nombre del producto"/>
+            android:text="Nombre del producto" />
 
         <TextView
             android:id="@+id/productSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Talle: S"/>
+            android:text="Talle: S" />
 
         <TextView
             android:id="@+id/productQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Cantidad: 1"/>
+            android:text="Cantidad: 1" />
+
+        <TextView
+            android:id="@+id/productSubtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal: $0.00"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/productPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Precio: $0.00" />
+            android:text="Precio unitario: $0.00" />
 
     </LinearLayout>
 </LinearLayout>
