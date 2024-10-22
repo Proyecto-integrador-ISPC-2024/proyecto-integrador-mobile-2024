@@ -27,15 +27,11 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.DELETE;
 
 public class OrderActivity extends AppCompatActivity {
     private TextView orderNumber;
     private TextView orderDate;
     private TextView orderStatus;
-    private TextView productDetails;
     private TextView totalAmount;
     private TextView paymentMethod;
     private TextView cardsMethod;
@@ -77,7 +73,6 @@ public class OrderActivity extends AppCompatActivity {
         orderNumber = findViewById(R.id.orderNumber);
         orderDate = findViewById(R.id.orderDate);
         orderStatus = findViewById(R.id.orderStatus);
-        productDetails = findViewById(R.id.productDetails);
         paymentMethod = findViewById(R.id.paymentMethod);
         cardsMethod = findViewById(R.id.cardsMethod);
         totalAmount = findViewById(R.id.totalAmount);

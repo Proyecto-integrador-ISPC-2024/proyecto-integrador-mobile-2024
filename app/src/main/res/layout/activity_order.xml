@@ -95,8 +95,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/productsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="104dp"
+                android:layout_width="347dp"
+                android:layout_height="121dp"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <Button
                 android:id="@+id/volverBtn"
@@ -160,7 +160,7 @@
             android:elevation="4dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/orderTrackingText"

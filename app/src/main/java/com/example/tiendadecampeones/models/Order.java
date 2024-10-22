@@ -1,7 +1,8 @@
 package com.example.tiendadecampeones.models;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 public class Order {
     private int id_pedido;
     private String fecha;
@@ -74,21 +75,29 @@ public class Order {
             this.producto = producto;
         }
 
-        // Getters y Setters
-        public int getIdTalle() { return id_talle; }
-        public void setIdTalle(int id_talle) { this.id_talle = id_talle; }
+        private static final Map<Integer, String> TALLE_MAP = new HashMap<>();
 
+        static {
+            TALLE_MAP.put(3, "M");
+            TALLE_MAP.put(4, "L");
+            TALLE_MAP.put(5, "XL");
+        }
+        // Getters y Setters
         public int getCantidad() { return cantidad; }
         public void setCantidad(int cantidad) { this.cantidad = cantidad; }
+
+        public Product getProducto() { return producto; }
 
         public double getSubtotal() { return subtotal; }
         public void setSubtotal(double subtotal) { this.subtotal = subtotal; }
 
-        public Product getProducto() { return producto; }
+        public String getTalleString() {
+            return TALLE_MAP.getOrDefault(id_talle,"S");
+        }
 
         @Override
         public String toString() {
-            return "Talle: " + id_talle + ", Cantidad: " + cantidad + ", Subtotal: $" + subtotal + ", Producto: " + producto;
+            return "Talle: " + getTalleString() + ", Cantidad: " + cantidad + ", Subtotal: $" + subtotal + ", Producto: " + producto;
         }
 
         public static class Product {
@@ -105,7 +114,6 @@ public class Order {
             }
 
             // Getters
-            public int getIdProducto() { return id_producto; }
             public String getNombreProducto() { return nombre_producto; }
             public double getPrecio() { return precio; }
             public String getImagen() { return imagen; }
