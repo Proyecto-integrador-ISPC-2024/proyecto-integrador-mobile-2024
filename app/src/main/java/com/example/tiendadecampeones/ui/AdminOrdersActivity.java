@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.tiendadecampeones.R;
-import com.example.tiendadecampeones.adapters.OrderProductAdapter;
+import com.example.tiendadecampeones.adapters.AdminOrderAdapter;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.network.RetrofitClient;
 import com.example.tiendadecampeones.models.Order;
@@ -27,7 +27,7 @@ import retrofit2.Response;
 public class AdminOrdersActivity extends AppCompatActivity {
 
     private RecyclerView ordersRecyclerView;
-    private OrderProductAdapter orderProductAdapter;
+    private AdminOrderAdapter orderAdminAdapter;
     private ApiService apiService;
 
     @Override
@@ -58,11 +58,13 @@ public class AdminOrdersActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         List<Order> orders = response.body();
                         List<Order.OrderDetail> orderDetails = new ArrayList<>();
+
                         for (Order order : orders) {
                             orderDetails.addAll(order.getDetalles());
                         }
-                        orderProductAdapter = new OrderProductAdapter(AdminOrdersActivity.this, orderDetails);
-                        ordersRecyclerView.setAdapter(orderProductAdapter);
+
+                        orderAdminAdapter = new AdminOrderAdapter(AdminOrdersActivity.this, orderDetails, orders);
+                        ordersRecyclerView.setAdapter(orderAdminAdapter);
                     } else {
                         Log.e("OrdersError", "Error al obtener los pedidos: " + response.code());
                     }
@@ -77,6 +79,7 @@ public class AdminOrdersActivity extends AppCompatActivity {
             Log.e("AuthError", "Token no encontrado");
         }
     }
+
 
     private void logout() {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
