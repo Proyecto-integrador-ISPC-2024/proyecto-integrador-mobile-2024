@@ -140,7 +140,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
     private void loadPaymentMethods() {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         String authToken = preferences.getString("accessToken", null);
-        int id_usuario = preferences.getInt("id_usuario", 1);
+        int id_usuario = preferences.getInt("id_usuario", -1);
 
         if (authToken == null) {
             Log.e("AuthTokenDebug", "No se encontró el token de autenticación.");
@@ -196,7 +196,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, descripcionFormasDePago);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             paymentMethodSpinner.setAdapter(adapter);
-            paymentMethodSpinner.setSelection(0); // Seleccionar por defecto la opción "Seleccione un método de pago"
+            paymentMethodSpinner.setSelection(0);
 
             // Desactivar el botón de confirmación al inicio
             confirmPaymentButton.setEnabled(false);
