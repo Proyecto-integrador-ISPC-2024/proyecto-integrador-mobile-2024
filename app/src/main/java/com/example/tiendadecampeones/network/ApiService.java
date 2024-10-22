@@ -63,7 +63,7 @@ public interface ApiService {
             @Header("Authorization") String authToken,
             @Path("id") int id_pedido
     );
-    @PATCH("profiles/{id}")
+    @PATCH("usuarios/{id}/")
     Call<UserProfile> updateProfile(@Path("id") int id,
             @Header("Authorization") String token,
             @Body UserProfile profile
