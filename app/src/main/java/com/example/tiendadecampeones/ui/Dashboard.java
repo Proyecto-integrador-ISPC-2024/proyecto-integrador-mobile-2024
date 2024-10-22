@@ -205,7 +205,7 @@ public class Dashboard extends AppCompatActivity {
 
     public void productsButton(View v) {
         Toast.makeText(this, "Redireccionando a productos", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, ProductsActivity.class);
+        Intent intent = new Intent(this, ProductCategories.class);
         startActivity(intent);
     }
 }

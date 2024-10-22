@@ -14,7 +14,7 @@ public class Product {
         this.id_producto_talle = id_producto_talle;
         this.productos = productos;
         this.talles = talles;
-        this.stock = stock;  // Inicializar el stock
+//        this.stock = stock; el stock se inicializa en la clase Talle
     }
 
     // Getters y Setters
@@ -100,12 +100,14 @@ public class Product {
         private int id_talle;
         private String talle;
         private int stock;
+        private int cantidad;
 
         // Constructor
         public Talle(int id_talle, String talle, int stock) {
             this.id_talle = id_talle;
             this.talle = talle;
             this.stock = stock;
+            this.cantidad = 1;
         }
 
         // Getters y Setters
@@ -132,5 +134,14 @@ public class Product {
         public void setStock(int stock) {
             this.stock = stock;
         }
+
+        public int getCantidad() {
+            return cantidad;
+        }
+
+        public void setCantidad(int cantidad) {
+            this.cantidad = cantidad;
+        }
+
     }
 }

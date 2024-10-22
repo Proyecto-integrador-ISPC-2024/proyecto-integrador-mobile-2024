@@ -1,11 +1,11 @@
 package com.example.tiendadecampeones.models;
 import java.util.List;
 
-public class Pedido {
+public class Pedido { // se debería crear una instancia de esta clase en el carro para completar los detalles de los atributos con la información de los productos agregados al carro una vez que se confirma el listado de productos al darle click al botón de "Finalizar compra" ubicado en el carro
     private int id_usuario;
     private double total;
-    private List<Detalle> detalles;
-    private List<FormaDePago> forma_de_pago;
+    private List<Detalle> detalles; // Se debería crear una instancia de la clase Detalle para poder completar los atributos de esta clase y así poder empezar a crear el pedido
+    private List<FormaDePago> forma_de_pago; // Esta propiedad debería quedar nula por el momento, en otra actividad se debe definir su valor
 
     public Pedido(int id_usuario, double total, List<Detalle> detalles, List<FormaDePago> forma_de_pago) {
         this.id_usuario = id_usuario;

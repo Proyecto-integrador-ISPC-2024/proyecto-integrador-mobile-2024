@@ -128,5 +128,14 @@
     <string name="bottom_navbar_description">Barra de navegación inferior</string>
     <string name="contdes_home_button">Ir a la pantalla de inicio</string>
     <string name="contdes_profile_button">Ir a la pantalla de perfil</string>
+    <string name="total_50_00">Total: $50.00</string>
+    <string name="precio_50_00">Precio: $50.00</string>
+    <string name="camiseta_argentina_78">Camiseta Argentina 78</string>
+    <string name="cantidad">Cantidad:</string>
+    <string name="disminuir_cantidad">Disminuir cantidad</string>
+    <string name="_1">1</string>
+    <string name="aumentar_cantidad">Aumentar cantidad</string>
+    <string name="talle">Talle:</string>
+    <string name="eliminar_producto">Eliminar producto</string>
 
 </resources>
