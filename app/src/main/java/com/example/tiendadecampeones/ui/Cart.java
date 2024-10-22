@@ -77,7 +77,7 @@ public class Cart extends AppCompatActivity {
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Retrieve products from SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("cart_prefs", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
         String productsJson = sharedPreferences.getString("cart_products", "[]");
 
         // Convert JSON to List<Product>
