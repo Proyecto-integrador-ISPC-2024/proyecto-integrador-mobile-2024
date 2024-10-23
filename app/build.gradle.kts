@@ -34,6 +34,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
 }
 
 dependencies {
@@ -59,6 +61,5 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     kapt("com.github.bumptech.glide:compiler:4.16.0")
 
-//  Animaciones agregadas
-    implementation ("com.airbnb.android:lottie:6.5.2")
+
 }

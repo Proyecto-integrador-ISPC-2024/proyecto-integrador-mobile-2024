@@ -7,6 +7,8 @@ import com.example.tiendadecampeones.models.Product;
 //import com.example.tiendadecampeones.models.Product.Talle;
 import com.example.tiendadecampeones.models.UserLogInResponse;
 import com.example.tiendadecampeones.models.UserProfile;
+import com.example.tiendadecampeones.models.RegisterResponse;
+
 
 import java.util.List;
 import java.util.Map;
@@ -28,12 +30,17 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
+    @POST("usuarios/")
+    Call<RegisterResponse> register(@Body Map<String, String> userData);
+
+
     @POST("login/")
     @FormUrlEncoded
     Call<UserLogInResponse> login(@Field("email") String email, @Field("password") String password);
 
 //    @POST("api/login/")
 //    Call<UserLogInResponse> token(@Body Map<String, String> loginData);
+
 
     @POST("api/token/refresh/")
     Call<UserLogInResponse> refreshToken(@Header("Authorization") String refresh);
