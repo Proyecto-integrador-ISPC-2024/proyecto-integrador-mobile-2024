@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/logo_dark"
         android:supportsRtl="true"
         tools:targetApi="31">
+
         <!-- Actividades de la aplicación - en caso de necesitar testear sus actividades agreguen el filter como atributo de la actividad en la que estén trabajando para inicializar la app en ese punto -->
-        <!-- Actividad de inicio de aplicación -->
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
@@ -22,7 +22,6 @@
             android:theme="@style/AppTheme">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
-
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
@@ -45,7 +44,6 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
-
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -130,7 +128,6 @@
             android:name=".ui.AdminOrdersActivity"
             android:exported="false"
             android:theme="@style/AppTheme">
-
         </activity>
     </application>
 
