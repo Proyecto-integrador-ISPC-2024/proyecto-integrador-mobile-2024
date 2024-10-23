@@ -51,7 +51,14 @@ public class CartResume extends AppCompatActivity {
         setupRecyclerView();
 
         Pedido pedido = createPedidoFromCart();
-        System.out.println(pedido.getDetalles().get(0));
+        // Log the Pedido details
+        Log.d("CartResume", "Pedido created: " + pedido.toString());
+
+        // Log the Detalle objects
+        for (Pedido.Detalle detalle : pedido.getDetalles()) {
+            Log.d("CartResume", "Detalle: " + detalle.toString());
+        }
+
 
         double totalAmount = pedido.getTotal();
         totalTextView.setText(String.format("Total: $%.2f", totalAmount));
@@ -120,9 +127,16 @@ public class CartResume extends AppCompatActivity {
                     detalle.setIdProducto(product.getProductos().getIdProducto());
                     detalle.setIdTalle(talle.getIdTalle());
                     detalles.add(detalle);
+
+                    // Log the details of each "Detalle" instance
+                    Log.d("CartResume", "Detalle added: Cantidad = " + detalle.getCantidad() +
+                            ", Subtotal = " + detalle.getSubtotal());
                 }
             }
         }
+
+        // Optionally, log the full list after building it
+        Log.d("CartResume", "Detalles list built with size: " + detalles.size());
         return detalles;
     }
 
