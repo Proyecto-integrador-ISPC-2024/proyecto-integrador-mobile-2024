@@ -1,11 +1,12 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,13 +16,12 @@ import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.CartResumeAdapter;
 import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
-import com.example.tiendadecampeones.utils.SharedPrefManager;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CartResume extends AppCompatActivity {
 
@@ -36,75 +36,81 @@ public class CartResume extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_resume);
 
-        // Botón de navegación superior
+        initializeUI();
+
+        // Receive product list from the Cart Activity
+        Intent intent = getIntent();
+        String productListJson = intent.getStringExtra("product_list");
+
+        Gson gson = new Gson();
+        Type productListType = new TypeToken<List<Product>>() {}.getType();
+        productList = gson.fromJson(productListJson, productListType);
+
+        setupRecyclerView();
+
+        Pedido pedido = createPedidoFromCart();
+        System.out.println(pedido.getDetalles().get(0));
+
+        double totalAmount = pedido.getTotal();
+        totalTextView.setText(String.format("Total: $%.2f", totalAmount));
+
+        confirmPurchaseButton.setOnClickListener(v -> navigateToPaymentMethods());
+    }
+
+    private void initializeUI() {
         ImageButton backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        backButton.setOnClickListener(v -> finish());
 
         recyclerView = findViewById(R.id.recyclerViewCart);
         totalTextView = findViewById(R.id.totalPrice);
         confirmPurchaseButton = findViewById(R.id.confirmPurchaseButton);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        SharedPrefManager sharedPrefManager = new SharedPrefManager(this);
-        List<Product> cartProducts = sharedPrefManager.getCartProducts();
-
-        Map<Product, Integer> cartItems = new HashMap<>();
-        for (Product product : cartProducts) {
-            cartItems.put(product, 10);
-        }
-
-        productList = new ArrayList<>(cartItems.keySet());
-
-        cartResumeAdapter = new CartResumeAdapter(this, productList, cartItems);
+    private void setupRecyclerView() {
+        cartResumeAdapter = new CartResumeAdapter(this, productList);
         recyclerView.setAdapter(cartResumeAdapter);
+    }
 
-        double totalAmount = calculateTotal(cartItems);
-        totalTextView.setText(String.format("Total: $%.2f", totalAmount));
+    // Create Pedido object with product details
+    private Pedido createPedidoFromCart() {
+        Pedido pedido = new Pedido();
+        pedido.setIdUsuario(getUserIdFromPreferences());
+        pedido.setTotal(calculateTotal(productList));
+        pedido.setDetalles(buildDetallesFromCart(productList));
+        return pedido;
+    }
 
-        confirmPurchaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToPaymentMethods();
+    private int getUserIdFromPreferences() {
+        SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        return sharedPref.getInt("id_usuario", -1);
+    }
+
+    private double calculateTotal(List<Product> productList) {
+        double total = 0;
+        for (Product product : productList) {
+            for (Product.Talle talle : product.getTalles()) {
+                total += product.getProductos().getPrecio() * talle.getCantidadCompra();
             }
-        });
-
-        Intent intent = getIntent();
-        String pedidoJson = intent.getStringExtra("pedido_data");
-        Pedido pedido = new Gson().fromJson(pedidoJson, Pedido.class);
-
-    }
-
-    private double calculateTotal(Map<Product, Integer> cartItems) {
-        double totalAmount = 0;
-
-        for (Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
-            Product product = entry.getKey();
-            int quantity = entry.getValue();
-
-            totalAmount += product.getProductos().getPrecio() * quantity;
         }
-
-        return totalAmount;
+        return total;
     }
 
-    public void vProducts(View v) {
-        Intent intent = new Intent(this, ProductCategories.class);
-        startActivity(intent);
-    }
+    private List<Pedido.Detalle> buildDetallesFromCart(List<Product> productList) {
+        List<Pedido.Detalle> detalles = new ArrayList<>();
 
-    public void vHome(View v) {
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-    }
-
-    public void vProfile(View v) {
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
+        for (Product product : productList) {
+            for (Product.Talle talle : product.getTalles()) {
+                Pedido.Detalle detalle = new Pedido.Detalle();
+                detalle.setCantidad(talle.getCantidadCompra());
+                detalle.setSubtotal(product.getProductos().getPrecio() * talle.getCantidadCompra());
+                // detalle.setIdProductoTalle(product.getIdProductoTalle()); // Assuming we also want to set this for each item.
+                detalles.add(detalle);
+            }
+        }
+        System.out.println(detalles);
+        return detalles;
     }
 
     private void navigateToPaymentMethods() {
