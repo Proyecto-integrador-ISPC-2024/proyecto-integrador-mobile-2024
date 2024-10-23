@@ -77,11 +77,24 @@ public class Cart extends AppCompatActivity {
 
     private void setupCheckoutButton() {
         checkoutButton.setOnClickListener(v -> {
-            if (productList.isEmpty()) {
+            List<Product> filteredProductList = new ArrayList<>();
+            for (Product product : productList) {
+                boolean hasPositiveQuantity = false;
+                for (Product.Talle talle : product.getTalles()) {
+                    if (talle.getCantidadCompra() > 0) {
+                        hasPositiveQuantity = true;
+                        break;
+                    }
+                }
+                if (hasPositiveQuantity) {
+                    filteredProductList.add(product);
+                }
+            }
+            if (filteredProductList.isEmpty()) {
                 Toast.makeText(this, "¡El carro está vacío!", Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(Cart.this, CartResume.class);
-                intent.putExtra("product_list", new Gson().toJson(productList));
+                intent.putExtra("product_list", new Gson().toJson(filteredProductList));
                 startActivity(intent);
             }
         });
@@ -107,5 +120,10 @@ public class Cart extends AppCompatActivity {
             total += subtotal;
         }
         totalTextView.setText("Total: $" + String.format("%.2f", total));
+        if (total == 0 || productList.isEmpty()) {
+            checkoutButton.setEnabled(false);
+        } else {
+            checkoutButton.setEnabled(true);
+        }
     }
 }

@@ -51,13 +51,7 @@ public class CartResume extends AppCompatActivity {
         setupRecyclerView();
 
         Pedido pedido = createPedidoFromCart();
-
-        // Log the Pedido details
-        Log.d("CartResume", "Pedido created: " + pedido.toString());
-        // Log the Detalle objects
-        for (Pedido.Detalle detalle : pedido.getDetalles()) {
-            Log.d("CartResume", "Detalle: " + detalle.toString());
-        }
+        System.out.println(pedido.getDetalles().get(0));
 
         double totalAmount = pedido.getTotal();
         totalTextView.setText(String.format("Total: $%.2f", totalAmount));
@@ -119,25 +113,27 @@ public class CartResume extends AppCompatActivity {
 
         for (Product product : productList) {
             for (Product.Talle talle : product.getTalles()) {
-                Pedido.Detalle detalle = new Pedido.Detalle();
-                detalle.setCantidad(talle.getCantidadCompra());
-                detalle.setSubtotal(product.getProductos().getPrecio() * talle.getCantidadCompra());
-                // detalle.setIdProductoTalle(product.getIdProductoTalle()); // Assuming we also want to set this for each item.
-                detalles.add(detalle);
-
-                // Log the details of each "Detalle" instance
-                Log.d("CartResume", "Detalle added: Cantidad = " + detalle.getCantidad() +
-                        ", Subtotal = " + detalle.getSubtotal());
+                if (talle.getCantidadCompra() > 0) {
+                    Pedido.Detalle detalle = new Pedido.Detalle();
+                    detalle.setCantidad(talle.getCantidadCompra());
+                    detalle.setSubtotal(product.getProductos().getPrecio() * talle.getCantidadCompra());
+                    detalle.setIdProducto(product.getProductos().getIdProducto());
+                    detalle.setIdTalle(talle.getIdTalle());
+                    detalles.add(detalle);
+                }
             }
         }
-
-        // Optionally, log the full list after building it
-        Log.d("CartResume", "Detalles list built with size: " + detalles.size());
         return detalles;
     }
 
     private void navigateToPaymentMethods() {
+        Pedido pedido = createPedidoFromCart();
+        Log.d("CartResume", "Pedido antes de enviar: " + pedido.toString());
+        Gson gson = new Gson();
+        String pedidoJson = gson.toJson(pedido);
         Intent intent = new Intent(CartResume.this, PaymentMethodsActivity.class);
+        intent.putExtra("pedido", pedidoJson);
+
         startActivity(intent);
     }
 }
