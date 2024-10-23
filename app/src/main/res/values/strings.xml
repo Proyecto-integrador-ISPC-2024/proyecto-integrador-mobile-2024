@@ -2,10 +2,11 @@
     <string name="app_name">Tienda de campeones</string>
 
     <!--  Sección Login  -->
-    <string name="user">Usuario</string>
+    <string name="user">Nombre</string>
     <string name="passware">Contraseña</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Contraseña</string>
+    <string name="repeat_password_hint">Repetir Contraseña</string>
     <string name="login_button_text">Iniciar Sesión</string>
     <string name="register_button_text">Registrate</string>
 
