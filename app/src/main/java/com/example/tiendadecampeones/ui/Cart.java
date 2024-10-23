@@ -28,7 +28,7 @@ public class Cart extends AppCompatActivity {
     private RecyclerView cartRecyclerView;
     private CartAdapter cartAdapter;
     private ArrayList<Product> productList;
-    private TextView emptyCartTextView;
+    private TextView emptyCartTextView, totalTextView;
     private Button checkoutButton;
 
     @Override
@@ -41,6 +41,7 @@ public class Cart extends AppCompatActivity {
         setupRecyclerView();
         setupCheckoutButton();
         updateCartUI();
+        calculateTotal();
     }
 
     private void initializeUI() {
@@ -54,6 +55,7 @@ public class Cart extends AppCompatActivity {
         });
 
         emptyCartTextView = findViewById(R.id.emptyCartTextView);
+        totalTextView = findViewById(R.id.totalPrice);
         checkoutButton = findViewById(R.id.endShop);
     }
 
@@ -78,7 +80,6 @@ public class Cart extends AppCompatActivity {
             if (productList.isEmpty()) {
                 Toast.makeText(this, "¡El carro está vacío!", Toast.LENGTH_SHORT).show();
             } else {
-                // Pass the product list to CartResume via intent
                 Intent intent = new Intent(Cart.this, CartResume.class);
                 intent.putExtra("product_list", new Gson().toJson(productList));
                 startActivity(intent);
@@ -94,5 +95,17 @@ public class Cart extends AppCompatActivity {
             emptyCartTextView.setVisibility(View.GONE);
             checkoutButton.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void calculateTotal() {
+        double total = 0;
+        for (Product product : productList) {
+            double subtotal = 0;
+            for (Product.Talle talle : product.getTalles()) {
+                subtotal += product.getProductos().getPrecio() * talle.getCantidadCompra();
+            }
+            total += subtotal;
+        }
+        totalTextView.setText("Total: $" + String.format("%.2f", total));
     }
 }

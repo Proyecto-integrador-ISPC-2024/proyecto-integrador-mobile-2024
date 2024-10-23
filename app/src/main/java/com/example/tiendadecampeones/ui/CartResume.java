@@ -21,7 +21,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CartResume extends AppCompatActivity {
 
@@ -69,7 +71,16 @@ public class CartResume extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        cartResumeAdapter = new CartResumeAdapter(this, productList);
+        Map<Product, Integer> cartItems = new HashMap<>();
+        for (Product product : productList) {
+            for (Product.Talle talle : product.getTalles()) {
+                if (talle.getCantidadCompra() > 0) {
+                    cartItems.put(product, talle.getCantidadCompra());
+                }
+            }
+        }
+
+        cartResumeAdapter = new CartResumeAdapter(this, productList, cartItems);
         recyclerView.setAdapter(cartResumeAdapter);
     }
 

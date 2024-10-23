@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.models.Product;
+import com.example.tiendadecampeones.ui.Cart;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         });
 
         // Display product quantity
-        holder.productQuantity.setText(Integer.toString(product.getTalles().get(position).getCantidadCompra())); // acá cambié
+        holder.productQuantity.setText(Integer.toString(product.getTalles().get(0).getCantidadCompra()));
     }
 
     @Override
@@ -98,29 +99,28 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     // Function to update the quantity
     private void updateQuantity(CartViewHolder holder, Product product, boolean isIncrease) {
-        Product.Talle talle = product.getTalles().get(0); // Assuming single size (talle)
+        Product.Talle talle = product.getTalles().get(0);
         int currentQuantity = talle.getCantidadCompra();
 
         if (isIncrease) {
             if (currentQuantity < talle.getStock()) {
-                talle.setCantidadCompra(currentQuantity + 1); // Increase quantity
+                talle.setCantidadCompra(currentQuantity + 1);
             } else {
                 Toast.makeText(context, "Stock máximo alcanzado", Toast.LENGTH_SHORT).show();
             }
         } else {
             if (currentQuantity > 1) {
-                talle.setCantidadCompra(currentQuantity - 1); // Decrease quantity
+                talle.setCantidadCompra(currentQuantity - 1);
             } else {
                 Toast.makeText(context, "Cantidad mínima alcanzada", Toast.LENGTH_SHORT).show();
             }
         }
 
-        // Update the subtotal for the product
         double newSubtotal = product.getProductos().getPrecio() * talle.getCantidadCompra();
         holder.productSubtotal.setText("Subtotal: $" + newSubtotal);
         holder.productQuantity.setText(Integer.toString(talle.getCantidadCompra()));
 
-        // Save changes in SharedPreferences
+        ((Cart) context).calculateTotal();
         updateSharedPreferences();
     }
 
@@ -128,7 +128,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private void removeProduct(int position) {
         productList.remove(position);
         notifyItemRemoved(position);
-
+        notifyDataSetChanged();
+        ((Cart) context).calculateTotal();
         // Update SharedPreferences
         updateSharedPreferences();
     }
@@ -142,7 +143,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         editor.putString("cart_products", updatedProductsJson);
         editor.apply();
     }
-
     static class CartViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productPrice, productSize, productSubtotal, productQuantity;
         Button increaseQuantityButton, decreaseQuantityButton, removeButton;
