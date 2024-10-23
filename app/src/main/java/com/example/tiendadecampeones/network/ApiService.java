@@ -54,7 +54,7 @@ public interface ApiService {
     /*@GET("talles")
     Call<List<Size>> getTalles();*/
 
-    @POST("pedidos")
+    @POST("pedidos/")
     Call<Pedido> realizarPedido(@Header("Authorization") String authToken, @Body Pedido pedido);
 
     @GET("pedidos/listar_metodopago")

@@ -46,7 +46,6 @@ public class PaymentMethodsActivity extends AppCompatActivity {
     private TextView aliasLabel;
     private TextView totalTextView;
 
-    // Listas para almacenar métodos de pago y tarjetas y lo necesario para el pedido
     private List<PaymentMethods.FormaDePago> formas_de_pago = new ArrayList<>();
     private List<PaymentMethods.Tarjeta> tarjetas = new ArrayList<>();
     private Integer selectedPaymentMethodId = null;
@@ -73,12 +72,11 @@ public class PaymentMethodsActivity extends AppCompatActivity {
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        Pedido pedido = cargarPedidoDesdeIntent();
+        Pedido pedido = orderIntent();
         if (pedido != null) {
             actualizarTotal(pedido.getTotal());
         }
 
-        // Cargo los métodos de pago
         loadPaymentMethods();
         paymentMethodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -94,14 +92,11 @@ public class PaymentMethodsActivity extends AppCompatActivity {
 
      confirmPaymentButton.setOnClickListener(v -> {
         if (pedido != null) {
-            // Crear la forma de pago
             Pedido.FormaDePago formaDePago = crearFormaDePago();
-            // Establecer la forma de pago en el pedido
             List<Pedido.FormaDePago> formasDePago = new ArrayList<>();
             formasDePago.add(formaDePago);
             pedido.setFormaDePago(formasDePago);
 
-            // Realizar la petición POST con el pedido actualizado
             realizarPedido(pedido);
 
             // Feedback al usuario
@@ -114,10 +109,9 @@ public class PaymentMethodsActivity extends AppCompatActivity {
      });
     }
 
-    private Pedido cargarPedidoDesdeIntent() {
+    private Pedido orderIntent() {
         Intent intent = getIntent();
         String pedidoJson = intent.getStringExtra("pedido");
-        Log.d("PaymentMethodsActivity", "JSON recibido: " + pedidoJson);
         if (pedidoJson != null) {
             Gson gson = new Gson();
             return gson.fromJson(pedidoJson, Pedido.class);
@@ -126,7 +120,6 @@ public class PaymentMethodsActivity extends AppCompatActivity {
     }
 
     private void actualizarTotal(double total) {
-        // Actualizar el TextView con el total del pedido
         totalTextView.setText(String.format("Total: $%.2f", total));
     }
 
@@ -144,7 +137,6 @@ public class PaymentMethodsActivity extends AppCompatActivity {
         int id_usuario = preferences.getInt("id_usuario", -1);
 
         if (authToken == null) {
-            Log.e("AuthTokenDebug", "No se encontró el token de autenticación.");
             Toast.makeText(this, "No autenticado. Inicie sesión.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -152,8 +144,6 @@ public class PaymentMethodsActivity extends AppCompatActivity {
             return;
         }
         if (id_usuario == -1) {
-            Log.e("UserIdDebug", "ID de usuario no válido.");
-            System.out.println(id_usuario);
             Toast.makeText(this, "ID de usuario no válido.", Toast.LENGTH_SHORT).show();
             return;
         }
