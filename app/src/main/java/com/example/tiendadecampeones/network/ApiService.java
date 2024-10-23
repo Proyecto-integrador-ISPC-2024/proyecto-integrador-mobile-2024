@@ -76,14 +76,4 @@ public interface ApiService {
             @Body UserProfile profile
     );
 
-    static ApiService create() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://recdev.pythonanywhere.com/") // Base URL
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(ApiService.class);
-    }
-
-    Call<PaymentMethods> getPaymentMethods();
 }
