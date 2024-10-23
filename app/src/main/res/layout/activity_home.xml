@@ -48,34 +48,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/headerLayout">
 
-            <Button
+            <ImageButton
                 android:id="@+id/sideNavButton"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_marginEnd="280dp"
-                android:layout_weight="1"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:drawableTop="@drawable/menu_icon_35x35"
-                android:drawablePadding="0dp"
-                android:padding="8dp"
-                android:text="Menu"
-                android:textColor="@color/colorPrimary" />
+                android:contentDescription="menu"
+                android:src="@drawable/menu_icon_35x35" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/cartButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:drawableTop="@drawable/shopping_cart_icon_35x35"
-                android:drawablePadding="0dp"
-                android:padding="8dp"
-                android:text="Carro"
-                android:textColor="@color/colorPrimary" />
+                android:src="@drawable/shopping_cart_icon_35x35"
+                android:contentDescription="@string/cart_button" />
 
         </LinearLayout>
 

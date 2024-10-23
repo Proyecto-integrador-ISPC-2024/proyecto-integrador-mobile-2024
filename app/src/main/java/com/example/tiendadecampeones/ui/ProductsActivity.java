@@ -34,7 +34,6 @@ public class ProductsActivity extends AppCompatActivity {
     private String selectedPais;
 
     private List<Product> carrito = new ArrayList<>();
-
     private List<String> tallesStringList = new ArrayList<>();
 
     @Override
@@ -70,7 +69,8 @@ public class ProductsActivity extends AppCompatActivity {
         Button productsButton = findViewById(R.id.productsButton);
         productsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // User is already on the ProductsActivity
+                Intent intent = new Intent(ProductsActivity.this, ProductCategories.class);
+                startActivity(intent);
             }
         });
 

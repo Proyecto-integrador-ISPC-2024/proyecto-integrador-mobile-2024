@@ -61,16 +61,16 @@
     <!--        android:contentDescription="Título de la sección: Nuestros Pedidos"/>-->
 
     <!-- RecyclerView para la lista de pedidos -->
-    <ListView
-        android:id="@+id/ordersListView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="16dp"
-        tools:listitem="@layout/admin_orders"
-        android:contentDescription="@string/contdes_orders_list" />
 
     <!-- Nav inferior -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ordersRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/contdes_orders_list" />
+
     <LinearLayout
         android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"

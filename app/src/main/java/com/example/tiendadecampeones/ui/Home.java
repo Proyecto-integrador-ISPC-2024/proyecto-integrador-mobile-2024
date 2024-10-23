@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,7 +46,7 @@ public class Home extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
 
         // Botón para abrir/cerrar el menú lateral
-        Button sideNavButton = findViewById(R.id.sideNavButton);
+        ImageButton sideNavButton = findViewById(R.id.sideNavButton);
         sideNavButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +100,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button cartButton = findViewById(R.id.cartButton);
+        ImageButton cartButton = findViewById(R.id.cartButton);
         cartButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(Home.this, Cart.class);
@@ -136,7 +137,7 @@ public class Home extends AppCompatActivity {
     public void productsButton(View v) {
         Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(this, ProductsActivity.class);
+        Intent intent = new Intent(this, ProductCategories.class);
         startActivity(intent);
     }
 }

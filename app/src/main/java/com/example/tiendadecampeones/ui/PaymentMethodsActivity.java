@@ -73,7 +73,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        Pedido pedido = cargarPedidoDesdePreferences();
+        Pedido pedido = cargarPedidoDesdeIntent();
         if (pedido != null) {
             actualizarTotal(pedido.getTotal());
         }
@@ -114,9 +114,10 @@ public class PaymentMethodsActivity extends AppCompatActivity {
      });
     }
 
-    private Pedido cargarPedidoDesdePreferences() {
-        SharedPreferences preferences = getSharedPreferences("PedidoPrefs", MODE_PRIVATE);
-        String pedidoJson = preferences.getString("pedido", null);
+    private Pedido cargarPedidoDesdeIntent() {
+        Intent intent = getIntent();
+        String pedidoJson = intent.getStringExtra("pedido");
+        Log.d("PaymentMethodsActivity", "JSON recibido: " + pedidoJson);
         if (pedidoJson != null) {
             Gson gson = new Gson();
             return gson.fromJson(pedidoJson, Pedido.class);
@@ -140,7 +141,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
     private void loadPaymentMethods() {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         String authToken = preferences.getString("accessToken", null);
-        int id_usuario = preferences.getInt("id_usuario", 1);
+        int id_usuario = preferences.getInt("id_usuario", -1);
 
         if (authToken == null) {
             Log.e("AuthTokenDebug", "No se encontró el token de autenticación.");
@@ -196,7 +197,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, descripcionFormasDePago);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             paymentMethodSpinner.setAdapter(adapter);
-            paymentMethodSpinner.setSelection(0); // Seleccionar por defecto la opción "Seleccione un método de pago"
+            paymentMethodSpinner.setSelection(0);
 
             // Desactivar el botón de confirmación al inicio
             confirmPaymentButton.setEnabled(false);

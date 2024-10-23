@@ -1,6 +1,7 @@
 package com.example.tiendadecampeones.ui;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,8 @@ public class ManageProfile extends AppCompatActivity {
 
     private EditText etName, etLastName, etEmail, etPassword, etDomicilio;
     private Button btnEditProfile, btnSaveChanges;
+    private String fullAuthToken;
+    private int id_usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,45 +47,51 @@ public class ManageProfile extends AppCompatActivity {
 
         // Retrieve user data from SharedPreferences
         SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String authToken = sharedPref.getString("accessToken", null);
+        id_usuario = sharedPref.getInt("id_usuario", -1);
 
-        String nombre = sharedPref.getString("nombre", "");
-        String apellido = sharedPref.getString("apellido", "");
-        String email = sharedPref.getString("email", "");
-        String domicilio = sharedPref.getString("domicilio", "");
-        String password = sharedPref.getString("contraseña", "");
-
-        // Logging to debug the values fetched from SharedPreferences
-        Log.d(TAG, "Nombre: " + nombre);
-        Log.d(TAG, "Apellido: " + apellido);
-        Log.d(TAG, "Email: " + email);
-        Log.d(TAG, "Domicilio: " + domicilio);
-        Log.d(TAG, "Contraseña: " + password);
-
-        // Check if any values are null or empty and log accordingly
-        if (nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || domicilio.isEmpty() || password.isEmpty()) {
-            Log.e(TAG, "Some user fields are empty, possibly indicating an issue with SharedPreferences.");
+        if (authToken == null) {
+            Log.e(TAG, "Token de autenticación no encontrado");
+            Toast.makeText(this, "Sesión expirada. Inicia sesión de nuevo.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
         }
 
-        // Populate the fields with user data
-        etName.setText(nombre);
-        etLastName.setText(apellido);
-        etEmail.setText(email);
-        etDomicilio.setText(domicilio);
-        etPassword.setText(password);
-
-        // Disable editing fields initially
+        fullAuthToken = "Bearer " + authToken;
+        loadUserData(sharedPref);
         setFieldsEditable(false);
-
-        // Handle Edit and Save button logic
         btnEditProfile.setOnClickListener(this::onEditProfileClicked);
         btnSaveChanges.setOnClickListener(this::onSaveChangesClicked);
-
         // Botón de navegación superior
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
     }
 
-    private void setFieldsEditable(boolean editable) {
+        @Override
+        protected void onResume() {
+            super.onResume();
+            SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+            loadUserData(sharedPref);
+        }
+
+        private void loadUserData(SharedPreferences sharedPref) {
+            String nombre = sharedPref.getString("nombre", "");
+            String apellido = sharedPref.getString("apellido", "");
+            String email = sharedPref.getString("email", "");
+            String domicilio = sharedPref.getString("domicilio", "");
+            String password = sharedPref.getString("contraseña", "");
+
+            etName.setText(nombre);
+            etLastName.setText(apellido);
+            etEmail.setText(email);
+            etDomicilio.setText(domicilio);
+            etPassword.setText(password);
+        }
+
+
+        private void setFieldsEditable(boolean editable) {
         etName.setEnabled(editable);
         etLastName.setEnabled(editable);
         etEmail.setEnabled(editable);
@@ -102,7 +111,7 @@ public class ManageProfile extends AppCompatActivity {
     public void onSaveChangesClicked(View view) {
         // Create the updated user profile object
         UserProfile updatedProfile = new UserProfile(
-                1, // Replace with actual user ID
+                id_usuario,
                 etName.getText().toString(),
                 etLastName.getText().toString(),
                 etEmail.getText().toString(),
@@ -110,11 +119,12 @@ public class ManageProfile extends AppCompatActivity {
                 etPassword.getText().toString()
         );
 
-        // Get the refresh token
-        String token = getRefreshToken();
-
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-        Call<UserProfile> call = apiService.updateProfile(updatedProfile.getId(), "Bearer " + token, updatedProfile);
+        Call<UserProfile> call = apiService.updateProfile(
+                updatedProfile.getId(),
+                fullAuthToken,
+                updatedProfile
+        );
 
         call.enqueue(new Callback<UserProfile>() {
             @Override
@@ -123,7 +133,9 @@ public class ManageProfile extends AppCompatActivity {
                     Toast.makeText(ManageProfile.this, "Cambios guardados exitosamente", Toast.LENGTH_SHORT).show();
                     updateSharedPreferences(updatedProfile);
                 } else {
-                    Toast.makeText(ManageProfile.this, "Error al guardar cambios: " + response.message(), Toast.LENGTH_SHORT).show();
+                    int errorCode = response.code();
+                    String errorMessage = "Error al guardar cambios: " + response.message() + " (Código de error: " + errorCode + ")";
+                    Toast.makeText(ManageProfile.this, errorMessage, Toast.LENGTH_SHORT).show();
                 }
                 disableEditingFields();
             }
@@ -149,13 +161,8 @@ public class ManageProfile extends AppCompatActivity {
                 .show();
     }
 
-    private String getRefreshToken() {
-        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        return sharedPref.getString("refresh_token", "");
-    }
-
     private void updateSharedPreferences(UserProfile profile) {
-        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("nombre", profile.getNombre());
         editor.putString("apellido", profile.getApellido());
@@ -174,4 +181,5 @@ public class ManageProfile extends AppCompatActivity {
         btnEditProfile.setVisibility(View.VISIBLE);
         btnSaveChanges.setVisibility(View.GONE);
     }
+
 }

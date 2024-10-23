@@ -1,10 +1,12 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,9 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.CartResumeAdapter;
+import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
-import com.example.tiendadecampeones.utils.SharedPrefManager;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,66 +38,102 @@ public class CartResume extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_resume);
 
+        initializeUI();
+
+        // Receive product list from the Cart Activity
+        Intent intent = getIntent();
+        String productListJson = intent.getStringExtra("product_list");
+
+        Gson gson = new Gson();
+        Type productListType = new TypeToken<List<Product>>() {}.getType();
+        productList = gson.fromJson(productListJson, productListType);
+
+        setupRecyclerView();
+
+        Pedido pedido = createPedidoFromCart();
+        System.out.println(pedido.getDetalles().get(0));
+
+        double totalAmount = pedido.getTotal();
+        totalTextView.setText(String.format("Total: $%.2f", totalAmount));
+
+        confirmPurchaseButton.setOnClickListener(v -> navigateToPaymentMethods());
+    }
+
+    private void initializeUI() {
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
+
         recyclerView = findViewById(R.id.recyclerViewCart);
         totalTextView = findViewById(R.id.totalPrice);
         confirmPurchaseButton = findViewById(R.id.confirmPurchaseButton);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        SharedPrefManager sharedPrefManager = new SharedPrefManager(this);
-        List<Product> cartProducts = sharedPrefManager.getCartProducts();
-
+    private void setupRecyclerView() {
         Map<Product, Integer> cartItems = new HashMap<>();
-        for (Product product : cartProducts) {
-            cartItems.put(product, 10);
+        for (Product product : productList) {
+            for (Product.Talle talle : product.getTalles()) {
+                if (talle.getCantidadCompra() > 0) {
+                    cartItems.put(product, talle.getCantidadCompra());
+                }
+            }
         }
-
-        productList = new ArrayList<>(cartItems.keySet());
 
         cartResumeAdapter = new CartResumeAdapter(this, productList, cartItems);
         recyclerView.setAdapter(cartResumeAdapter);
+    }
 
-        double totalAmount = calculateTotal(cartItems);
-        totalTextView.setText(String.format("Total: $%.2f", totalAmount));
+    // Create Pedido object with product details
+    private Pedido createPedidoFromCart() {
+        Pedido pedido = new Pedido();
+        pedido.setIdUsuario(getUserIdFromPreferences());
+        pedido.setTotal(calculateTotal(productList));
+        pedido.setDetalles(buildDetallesFromCart(productList));
+        return pedido;
+    }
 
-        confirmPurchaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToPaymentMethods();
+    private int getUserIdFromPreferences() {
+        SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        return sharedPref.getInt("id_usuario", -1);
+    }
+
+    private double calculateTotal(List<Product> productList) {
+        double total = 0;
+        for (Product product : productList) {
+            for (Product.Talle talle : product.getTalles()) {
+                total += product.getProductos().getPrecio() * talle.getCantidadCompra();
             }
-        });
-    }
-
-    private double calculateTotal(Map<Product, Integer> cartItems) {
-        double totalAmount = 0;
-
-        for (Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
-            Product product = entry.getKey();
-            int quantity = entry.getValue();
-
-            totalAmount += product.getProductos().getPrecio() * quantity;
         }
-
-        return totalAmount;
+        return total;
     }
 
-    public void vProducts(View v) {
-        Intent intent = new Intent(this, ProductsActivity.class);
-        startActivity(intent);
-    }
+    private List<Pedido.Detalle> buildDetallesFromCart(List<Product> productList) {
+        List<Pedido.Detalle> detalles = new ArrayList<>();
 
-    public void vHome(View v) {
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-    }
-
-    public void vProfile(View v) {
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
+        for (Product product : productList) {
+            for (Product.Talle talle : product.getTalles()) {
+                if (talle.getCantidadCompra() > 0) {
+                    Pedido.Detalle detalle = new Pedido.Detalle();
+                    detalle.setCantidad(talle.getCantidadCompra());
+                    detalle.setSubtotal(product.getProductos().getPrecio() * talle.getCantidadCompra());
+                    detalle.setIdProducto(product.getProductos().getIdProducto());
+                    detalle.setIdTalle(talle.getIdTalle());
+                    detalles.add(detalle);
+                }
+            }
+        }
+        return detalles;
     }
 
     private void navigateToPaymentMethods() {
+        Pedido pedido = createPedidoFromCart();
+        Log.d("CartResume", "Pedido antes de enviar: " + pedido.toString());
+        Gson gson = new Gson();
+        String pedidoJson = gson.toJson(pedido);
         Intent intent = new Intent(CartResume.this, PaymentMethodsActivity.class);
+        intent.putExtra("pedido", pedidoJson);
+
         startActivity(intent);
     }
 }

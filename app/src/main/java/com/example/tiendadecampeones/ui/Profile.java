@@ -78,7 +78,7 @@ public class Profile extends AppCompatActivity {
     public void productsButton(View v) {
         Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(this, ProductsActivity.class);
+        Intent intent = new Intent(this, ProductCategories.class);
         startActivity(intent);
     }
 
