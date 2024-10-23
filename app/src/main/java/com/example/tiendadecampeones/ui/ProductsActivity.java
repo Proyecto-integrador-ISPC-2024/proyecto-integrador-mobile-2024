@@ -19,6 +19,7 @@ import com.example.tiendadecampeones.adapters.ProductsAdapter;
 import com.example.tiendadecampeones.models.Product;
 
 import com.example.tiendadecampeones.network.ApiService;
+import com.example.tiendadecampeones.network.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +96,7 @@ public class ProductsActivity extends AppCompatActivity {
 
     private void getProductosPorPais(String pais) {
 
-        ApiService apiService = ApiService.create();
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
         Call<List<Product>> call = apiService.getProductosPorPais(pais);
 
