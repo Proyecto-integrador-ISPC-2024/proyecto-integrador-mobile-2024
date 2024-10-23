@@ -73,7 +73,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        Pedido pedido = cargarPedidoDesdePreferences();
+        Pedido pedido = cargarPedidoDesdeIntent();
         if (pedido != null) {
             actualizarTotal(pedido.getTotal());
         }
@@ -114,9 +114,10 @@ public class PaymentMethodsActivity extends AppCompatActivity {
      });
     }
 
-    private Pedido cargarPedidoDesdePreferences() {
-        SharedPreferences preferences = getSharedPreferences("PedidoPrefs", MODE_PRIVATE);
-        String pedidoJson = preferences.getString("pedido", null);
+    private Pedido cargarPedidoDesdeIntent() {
+        Intent intent = getIntent();
+        String pedidoJson = intent.getStringExtra("pedido");
+        Log.d("PaymentMethodsActivity", "JSON recibido: " + pedidoJson);
         if (pedidoJson != null) {
             Gson gson = new Gson();
             return gson.fromJson(pedidoJson, Pedido.class);

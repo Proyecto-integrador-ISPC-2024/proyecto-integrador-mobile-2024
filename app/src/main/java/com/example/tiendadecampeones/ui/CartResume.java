@@ -113,19 +113,27 @@ public class CartResume extends AppCompatActivity {
 
         for (Product product : productList) {
             for (Product.Talle talle : product.getTalles()) {
-                Pedido.Detalle detalle = new Pedido.Detalle();
-                detalle.setCantidad(talle.getCantidadCompra());
-                detalle.setSubtotal(product.getProductos().getPrecio() * talle.getCantidadCompra());
-                // detalle.setIdProductoTalle(product.getIdProductoTalle()); // Assuming we also want to set this for each item.
-                detalles.add(detalle);
+                if (talle.getCantidadCompra() > 0) {
+                    Pedido.Detalle detalle = new Pedido.Detalle();
+                    detalle.setCantidad(talle.getCantidadCompra());
+                    detalle.setSubtotal(product.getProductos().getPrecio() * talle.getCantidadCompra());
+                    detalle.setIdProducto(product.getProductos().getIdProducto());
+                    detalle.setIdTalle(talle.getIdTalle());
+                    detalles.add(detalle);
+                }
             }
         }
-        System.out.println(detalles);
         return detalles;
     }
 
     private void navigateToPaymentMethods() {
+        Pedido pedido = createPedidoFromCart();
+        Log.d("CartResume", "Pedido antes de enviar: " + pedido.toString());
+        Gson gson = new Gson();
+        String pedidoJson = gson.toJson(pedido);
         Intent intent = new Intent(CartResume.this, PaymentMethodsActivity.class);
+        intent.putExtra("pedido", pedidoJson);
+
         startActivity(intent);
     }
 }
