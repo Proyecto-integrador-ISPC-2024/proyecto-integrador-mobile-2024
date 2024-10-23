@@ -1,6 +1,7 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,16 +31,25 @@ public class Home extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
-        // Recibe el nombre del usuario desde el Intent
+        // Recibimos el nombre de usuario
         Intent intent = getIntent();
         String nombreUsuario = intent.getStringExtra("nombreUsuario");
 
-        // Muestra el AlertDialog con el mensaje de bienvenida
-        new AlertDialog.Builder(this)
-                .setTitle("Bienvenido de vuelta")
-                .setMessage("Hola, " + nombreUsuario + "!")
-                .setPositiveButton("Continuar", (dialog, which) -> dialog.dismiss())
-                .show();
+        SharedPreferences sharedPreferences = getSharedPreferences("MiPreferencia", MODE_PRIVATE);
+        boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
+
+        if (isFirstTime) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Bienvenido de vuelta")
+                    .setMessage("Hola, " + nombreUsuario + "!")
+                    .setPositiveButton("Continuar", (dialog, which) -> dialog.dismiss())
+                    .show();
+
+            // Actualizamos el valor a false para indicar que ya se mostró el alerta
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isFirstTime", false);
+            editor.apply();
+        }
 
         //  Barra de navegación lateral
         drawerLayout = findViewById(R.id.main);

@@ -45,7 +45,7 @@
     <string name="webtn">¡Conócenos!</string>
     <string name="Dbtn">Dashboard</string>
     <string name="profile_btn">Perfil</string>
-    <string name="cl1">María Laura Silva</string>
+    <string name="cl1">Tu perfil</string>
     <string name="Logoutbtn">Finalizar Sesión</string>
 
     <!--payment select box-->
@@ -137,5 +137,24 @@
     <string name="aumentar_cantidad">Aumentar cantidad</string>
     <string name="talle">Talle:</string>
     <string name="eliminar_producto">Eliminar producto</string>
+    <string name="contdes_back_btn">Botón para volver</string>
+    <string name="contdes_mail_btn">Botón para enviar correo</string>
+    <string name="contdes_buy_btn">Botón para ir a comprar productos</string>
+    <string name="contdes_title_about">Título: Conocenos!</string>
+    <string name="contdes_contact_btn">Botón de contacto</string>
+    <string name="contdes_products_button">Ir a la pantalla de productos</string>
+    <string name="contdes_productscroll_button">Producto de scroll horizontal</string>
+    <string name="contdes_productname1">Remera de Argentina 1978</string>
+    <string name="contdes_image1">Imagen de Remera de Argentina 1978</string>
+    <string name="contdes_productname2">Remera de Brasil 1958</string>
+    <string name="contdes_image2">Imagen de Remera de Brasil 1958</string>
+    <string name="contdes_productname3">Remera de Francia 1998</string>
+    <string name="contdes_image3">Imagen de Remera de Francia 1998o</string>
+    <string name="contdes_navSup">Navegación superior</string>
+    <string name="contdes_menu_desplegable">Botón de menú desplegable</string>
+    <string name="contdes_dash_btn">Boton para ingresar al dashboard</string>
+    <string name="contdes_about_btn">Boton para conocer de la tienda</string>
+    <string name="contdes_edit_btn">Boton para editar perfil</string>
+    <string name="contdes_logout_btn">Boton para cerrar sesión</string>
 
 </resources>
