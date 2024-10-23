@@ -19,15 +19,16 @@ import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.models.Product;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
-    private List<Product> productList;
+    private ArrayList<Product> productList;
     private Context context;
 
     // Constructor for CartAdapter
-    public CartAdapter(List<Product> productList, Context context) {
+    public CartAdapter(ArrayList<Product> productList, Context context) {
         this.productList = productList;
         this.context = context;
     }
@@ -68,7 +69,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         // Calculate and display subtotal for the current product (price * quantity for each talle)
         double subtotal = 0;
         for (Product.Talle talle : product.getTalles()) {
-            subtotal += productoDetails.getPrecio() * talle.getCantidad();
+            subtotal += productoDetails.getPrecio() * talle.getCantidadCompra();
         }
         holder.productSubtotal.setText("Subtotal: $" + subtotal);
 
@@ -87,7 +88,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         });
 
         // Display product quantity
-        holder.productQuantity.setText(Integer.toString(product.getTalles().get(1).getCantidad()));
+        holder.productQuantity.setText(Integer.toString(product.getTalles().get(position).getCantidadCompra())); // acá cambié
     }
 
     @Override
@@ -98,26 +99,26 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     // Function to update the quantity
     private void updateQuantity(CartViewHolder holder, Product product, boolean isIncrease) {
         Product.Talle talle = product.getTalles().get(0); // Assuming single size (talle)
-        int currentQuantity = talle.getCantidad();
+        int currentQuantity = talle.getCantidadCompra();
 
         if (isIncrease) {
             if (currentQuantity < talle.getStock()) {
-                talle.setCantidad(currentQuantity + 1); // Increase quantity
+                talle.setCantidadCompra(currentQuantity + 1); // Increase quantity
             } else {
                 Toast.makeText(context, "Stock máximo alcanzado", Toast.LENGTH_SHORT).show();
             }
         } else {
             if (currentQuantity > 1) {
-                talle.setCantidad(currentQuantity - 1); // Decrease quantity
+                talle.setCantidadCompra(currentQuantity - 1); // Decrease quantity
             } else {
                 Toast.makeText(context, "Cantidad mínima alcanzada", Toast.LENGTH_SHORT).show();
             }
         }
 
         // Update the subtotal for the product
-        double newSubtotal = product.getProductos().getPrecio() * talle.getCantidad();
+        double newSubtotal = product.getProductos().getPrecio() * talle.getCantidadCompra();
         holder.productSubtotal.setText("Subtotal: $" + newSubtotal);
-        holder.productQuantity.setText(Integer.toString(talle.getCantidad()));
+        holder.productQuantity.setText(Integer.toString(talle.getCantidadCompra()));
 
         // Save changes in SharedPreferences
         updateSharedPreferences();

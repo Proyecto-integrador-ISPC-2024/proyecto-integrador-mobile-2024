@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,15 +53,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         Product product = products.get(position);
         Product.Producto productoDetails = product.getProductos();
 
+        // Asignar nombre y precio del producto
         holder.productName.setText(productoDetails.getNombreProducto());
         holder.productPrice.setText(String.format("$%.2f", productoDetails.getPrecio()));
 
+        // Cargar la imagen del producto usando Glide
         Glide.with(context)
                 .load(productoDetails.getImagen())
                 .placeholder(R.drawable.placeholder_image)
                 .error(R.drawable.error_image)
                 .into(holder.productImage);
-
 
         List<Talle> tallesList = product.getTalles();
         tallesStringList.clear();
@@ -69,24 +70,42 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             tallesStringList.add(talle.getTalle());
         }
 
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, tallesStringList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.sizeSpinner.setAdapter(adapter);
 
-        holder.btnAddToCart.setOnClickListener(v -> {
-            Toast.makeText(context, productoDetails.getNombreProducto() + " fue añadido al carrito.", Toast.LENGTH_SHORT).show();
+        final int[] selectedTallePosition = {0};
+        holder.sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedTallePosition[0] = position;
+            }
 
-            addToCart(product);
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
+
+        holder.btnAddToCart.setOnClickListener(v -> {
+            Talle talleSeleccionado = tallesList.get(selectedTallePosition[0]);
+
+
+            Toast.makeText(context, productoDetails.getNombreProducto() + " (Talle: " + talleSeleccionado.getTalle() + ") fue añadido al carrito.", Toast.LENGTH_SHORT).show();
+
+
+            addToCart(product, selectedTallePosition[0]);
         });
     }
+
 
     @Override
     public int getItemCount() {
         return products.size();
     }
 
-    // ViewHolder para los productos
     class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productPrice;
         ImageView productImage;
@@ -103,21 +122,40 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         }
     }
 
-    private void addToCart(Product product) {
+    private void addToCart(Product product, int selectedTallePosition) {
         SharedPrefManager sharedPrefManager = new SharedPrefManager(context);
+
+        Talle talleSeleccionado = product.getTalles().get(selectedTallePosition);
+
+        product.setIdProductoTalle(talleSeleccionado.getIdTalle());
 
         List<Product> currentCart = sharedPrefManager.getCartProducts();
 
-        currentCart.add(product);
+
+        boolean productExists = false;
+        for (Product cartProduct : currentCart) {
+            if (cartProduct.getProductos().getIdProducto() == product.getProductos().getIdProducto()) {
+                currentCart.remove(cartProduct);
+                currentCart.add(product);
+                productExists = true;
+                break;
+            }
+        }
+
+        if (!productExists) {
+            currentCart.add(product);
+        }
 
         sharedPrefManager.saveCartProducts(currentCart);
 
         Log.d("ProductsAdapter", "Productos en el carrito:");
         for (Product p : currentCart) {
-            Log.d("ProductsAdapter", p.getProductos().getNombreProducto() + " - Precio: " + p.getProductos().getPrecio());
+            Log.d("ProductsAdapter", p.getProductos().getNombreProducto() + " - Talle seleccionado: " + p.getIdProductoTalle());
         }
 
         Toast.makeText(context, product.getProductos().getNombreProducto() + " fue añadido al carrito.", Toast.LENGTH_SHORT).show();
     }
+
+
 }
 
