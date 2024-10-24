@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,6 +72,7 @@ public class Cart extends AppCompatActivity {
     private void loadCartProducts() {
         SharedPreferences sharedPreferences = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
         String productsJson = sharedPreferences.getString("cart_products", "[]");
+        Log.d("Cart", "JSON de productos del carrito: " + productsJson);
 
         Gson gson = new Gson();
         Type productListType = new TypeToken<List<Product>>() {}.getType();
