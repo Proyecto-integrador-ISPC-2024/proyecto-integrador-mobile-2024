@@ -35,20 +35,16 @@ public class Home extends AppCompatActivity {
         Intent intent = getIntent();
         String nombreUsuario = intent.getStringExtra("nombreUsuario");
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MiPreferencia", MODE_PRIVATE);
-        boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
+        boolean mostrarBienvenida = intent.getBooleanExtra("mostrarBienvenida", false);
 
-        if (isFirstTime) {
+        if (mostrarBienvenida) {
             new AlertDialog.Builder(this)
                     .setTitle("Bienvenido de vuelta")
                     .setMessage("Hola, " + nombreUsuario + "!")
                     .setPositiveButton("Continuar", (dialog, which) -> dialog.dismiss())
                     .show();
 
-            // Actualizamos el valor a false para indicar que ya se mostró el alerta
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("isFirstTime", false);
-            editor.apply();
+            intent.removeExtra("mostrarBienvenida");
         }
 
         //  Barra de navegación lateral
