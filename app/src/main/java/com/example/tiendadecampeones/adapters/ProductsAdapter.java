@@ -148,7 +148,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             Log.d("ProductsAdapter", p.getProductos().getNombreProducto() + " - Talle seleccionado: " + p.getIdProductoTalle());
         }
 
-        Toast.makeText(context, product.getProductos().getNombreProducto() + " fue añadido al carrito.", Toast.LENGTH_SHORT).show();
+
     }
 
 
