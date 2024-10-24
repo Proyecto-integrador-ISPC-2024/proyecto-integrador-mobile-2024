@@ -1,0 +1,198 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_payment_method"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context=".ui.PaymentMethodsActivity">
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="6dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/logo_activities" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/topNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <Button
+            android:id="@+id/backButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableStart="@drawable/arrow_back_icon_35x35"
+            android:text="@string/back_button"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/paymentMethodTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Método de pago"
+            android:textColor="@color/black"
+            android:textFontWeight="600"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/totalTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="TOTAL A PAGAR: $0.00" />
+        <Spinner
+            android:id="@+id/paymentMethodSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="16dp" />
+        <Spinner
+            android:id="@+id/cardTypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
+        <LinearLayout
+            android:id="@+id/paymentFormContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="1dp"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/transferMessageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transfiere a este alias o CBU indicando tu mail de usuario:"
+                android:visibility="gone" />
+            <EditText
+                android:id="@+id/cardNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:inputType="number"
+                android:hint="Número de tarjeta"
+                android:visibility="gone" />
+            <EditText
+                android:id="@+id/cardLast4DigitsEditText"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:inputType="number"
+                android:hint="Últimos 4 dígitos"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/cbuLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CBU:"
+                android:visibility="gone" />
+            <EditText
+                android:id="@+id/transferNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:hint="CBU de la empresa"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:cursorVisible="false"
+                android:longClickable="true"
+                android:selectAllOnFocus="true"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/aliasLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alias de la empresa:"
+                android:visibility="gone" />
+            <EditText
+                android:id="@+id/aliasEditText"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Alias"
+                android:textStyle="bold"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:cursorVisible="false"
+                android:longClickable="true"
+                android:selectAllOnFocus="true"
+                android:visibility="gone" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/confirmPaymentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Confirmar pago"
+            android:backgroundTint="@color/colorSecondary"
+            android:textColor="@color/btnText" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bottomNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSecondary"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <Button
+            android:id="@+id/homeButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:drawablePadding="0dp"
+            android:onClick="vHome"
+            android:padding="8dp"
+            android:text="@string/home_button"
+            android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/productsButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:drawablePadding="0dp"
+            android:onClick="vProducts"
+            android:padding="8dp"
+            android:text="@string/products_button"
+            android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/profileButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:drawablePadding="0dp"
+            android:onClick="vProfile"
+            android:padding="8dp"
+            android:text="@string/account_button"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</LinearLayout>

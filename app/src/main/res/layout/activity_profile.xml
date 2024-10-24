@@ -1,0 +1,168 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ui.Profile">
+
+    <!-- Navbar superior -->
+    <LinearLayout
+        android:id="@id/topNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/arrow_back_icon_35x35" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/profileContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topNavbar"
+            app:srcCompat="@mipmap/logo_dark" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/cl1"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/dashClick"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+
+        <Button
+            android:id="@+id/dashboardBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:onClick="dashClick"
+            android:text="@string/Dbtn"
+            android:textColor="@color/btnText"
+            android:contentDescription="@string/contdes_dash_btn"/>
+
+        <Button
+            android:id="@+id/aboutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:onClick="webtn"
+            android:text="@string/webtn"
+            android:textColor="@color/btnText"
+            android:contentDescription="@string/contdes_about_btn"/>
+
+        <Button
+            android:id="@+id/profileSettingsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:onClick="settingsClick"
+            android:text="Editar perfil"
+            android:textColor="@color/btnText"
+            android:contentDescription="@string/contdes_edit_btn"/>
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/red"
+            android:onClick="logoutClick"
+            android:text="@string/Logoutbtn"
+            android:textColor="@color/btnText"
+            android:contentDescription="@string/contdes_logout_btn"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSecondary"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!-- Buttons in Bottom Navbar -->
+        <Button
+            android:id="@+id/homeButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:onClick="homeButton"
+            android:text="@string/home_button"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/productsButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:onClick="productsButton"
+            android:text="@string/products_button"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/profileButton"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:text="@string/account_button"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+</LinearLayout>

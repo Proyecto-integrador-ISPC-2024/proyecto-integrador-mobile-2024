@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.Cart">
+
+    <!-- Nav superior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:contentDescription="@string/back_button" />
+
+        <TextView
+            android:id="@+id/categoryTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/products_title"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Título del carrito -->
+    <TextView
+        android:id="@+id/cartTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Mi carrito"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- TextView para mostrar el total -->
+    <TextView
+        android:id="@+id/totalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Total: $0.00"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="16dp" />
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="16dp"
+        tools:listitem="@layout/cart_item" />
+
+    <TextView
+        android:id="@+id/emptyCartTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your cart is empty"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:id="@+id/endShop"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/gray_400"
+        android:text="@string/finalizar_compra"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/bottomNavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorSecondary"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/home_button"
+            android:textColor="@android:color/white"
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <Button
+            android:id="@+id/productsButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/products_button"
+            android:textColor="@android:color/white"
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <Button
+            android:id="@+id/profileButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/account_button"
+            android:textColor="@android:color/white"
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
+
+</LinearLayout>

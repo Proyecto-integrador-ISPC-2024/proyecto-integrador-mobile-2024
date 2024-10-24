@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ProyectoIntegradorMobile2024"
+rootProject.name = "Tienda de campeones"
 include(":app")

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.Register">
+
+    <!-- Navbar superior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:contentDescription="@string/back_button" />
+    </LinearLayout>
+
+    <!-- REGISTRARME titulo-->
+    <TextView
+        android:id="@+id/registrarme"
+        style="@style/App.Theme.Size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:text="Registrarme" />
+
+    <LinearLayout
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_background"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:elevation="4dp"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:backgroundTint="#e0e0e0"
+        android:layout_marginTop="60dp">
+
+        <!-- Nombre  -->
+        <EditText
+            android:id="@+id/user_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/inputName"
+            android:minHeight="48dp"
+            android:padding="16dp"/>
+
+        <!-- Apellido -->
+        <EditText
+            android:id="@+id/apellido_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/inputLastName"
+            android:minHeight="48dp"
+            android:padding="16dp"/>
+
+        <!--Correo Electronico-->
+        <EditText
+            android:id="@+id/email_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/inputEmail"
+            android:minHeight="48dp"
+            android:padding="16dp"/>
+
+        <!-- Domicilio -->
+        <EditText
+            android:id="@+id/editTextDomicilio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
+            android:hint="@string/inputAddress"
+            android:minHeight="48dp"
+            android:padding="16dp"/>
+
+        <!-- Contraseña -->
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/inputPassword"
+            android:minHeight="48dp"
+            android:padding="16dp"/>
+
+        <!-- Repetir contraseña -->
+        <EditText
+            android:id="@+id/editTextRepeatPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/repeat_password_hint"
+            android:minHeight="48dp"
+            android:padding="16dp"/>
+
+        <!-- Boton de Registrarme -->
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrate"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:textColor="@color/colorPrimary"/>
+    </LinearLayout>
+</LinearLayout>

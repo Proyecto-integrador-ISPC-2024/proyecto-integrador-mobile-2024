@@ -1,9 +1,8 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.ProyectoIntegradorMobile2024" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Tenemos que personalizar un tema acá para que funciones -->
+        <item name="colorPrimary">@color/colorSecondary</item>
+        <item name="colorAccent">@color/colorSecondary</item>
     </style>
-
-    <style name="Theme.ProyectoIntegradorMobile2024" parent="Base.Theme.ProyectoIntegradorMobile2024" />
 </resources>
