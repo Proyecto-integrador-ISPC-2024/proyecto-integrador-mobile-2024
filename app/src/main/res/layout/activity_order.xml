@@ -128,6 +128,7 @@
 
         <LinearLayout
             android:id="@+id/bottomButtons"
+            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -136,6 +137,7 @@
 
             <Button
                 android:id="@+id/volverBtn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button_default"
@@ -144,6 +146,7 @@
 
             <Button
                 android:id="@+id/cancelButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -161,7 +164,6 @@
             android:gravity="center"
             android:orientation="vertical"
             android:padding="8dp">
-
             <TextView
                 android:id="@+id/orderTrackingText"
                 android:layout_width="wrap_content"
@@ -171,7 +173,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
-
             <Button
                 android:id="@+id/trackOrderButton"
                 android:layout_width="wrap_content"
@@ -183,10 +184,9 @@
                 android:textColor="#000000" />
         </LinearLayout>
     </LinearLayout>
-
-    <!-- Bottom Navbar -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorSecondary"
@@ -198,6 +198,7 @@
 
         <Button
             android:id="@+id/homeButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -209,6 +210,7 @@
 
         <Button
             android:id="@+id/productsButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -220,6 +222,7 @@
 
         <Button
             android:id="@+id/profileBtn"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

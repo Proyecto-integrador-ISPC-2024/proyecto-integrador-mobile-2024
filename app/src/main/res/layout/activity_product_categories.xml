@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context=".ui.ProductCategories">
-
-    <!-- Navbar superior -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -20,7 +18,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="64dp"
@@ -29,7 +26,6 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/back_button"
             android:src="@drawable/arrow_back_icon_35x35" />
-
         <ImageButton
             android:id="@+id/cartButton"
             android:layout_width="64dp"
@@ -38,9 +34,6 @@
             android:src="@drawable/shopping_cart_icon_35x35"
             android:contentDescription="@string/cart_button" />
     </LinearLayout>
-
-    <!-- Grid for Country Buttons -->
-
     <GridLayout
         android:id="@+id/countryGrid"
         android:layout_width="match_parent"
@@ -53,13 +46,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <!-- Germany -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="80dp">
-
             <ImageButton
                 android:id="@+id/buttonGermany"
                 android:layout_width="150dp"
@@ -67,7 +57,6 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/alemania"
                 android:contentDescription="@string/products_germany"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,12 +66,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
-
-        <!-- Argentina -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <ImageButton
                 android:id="@+id/buttonArgentina"
                 android:layout_width="150dp"
@@ -90,7 +76,6 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/argentina"
                 android:contentDescription="@string/products_argentina"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,12 +85,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
-
-        <!-- France -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <ImageButton
                 android:id="@+id/buttonFrance"
                 android:layout_width="150dp"
@@ -113,7 +95,6 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/francia"
                 android:contentDescription="@string/products_france"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,12 +104,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
-
-        <!-- Uruguay -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <ImageButton
                 android:id="@+id/buttonUruguay"
                 android:layout_width="150dp"
@@ -136,7 +114,6 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/uruguay"
                 android:contentDescription="@string/products_uruguay"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -146,11 +123,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
-
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <ImageButton
                 android:id="@+id/buttonBrazil"
                 android:layout_width="150dp"
@@ -158,7 +133,6 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/brasil"
                 android:contentDescription="@string/products_brazil"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,11 +142,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
-
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <ImageButton
                 android:id="@+id/buttonSpain"
                 android:layout_width="150dp"
@@ -180,7 +152,6 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/espa_a"
                 android:contentDescription="@string/products_spain"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -190,11 +161,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
-
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <ImageButton
                 android:id="@+id/buttonEngland"
                 android:layout_width="150dp"
@@ -202,7 +171,6 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/inglaterra"
                 android:contentDescription="@string/products_england"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -212,11 +180,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
-
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <ImageButton
                 android:id="@+id/buttonItaly"
                 android:layout_width="150dp"
@@ -224,7 +190,6 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/italia"
                 android:contentDescription="@string/products_italy"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -235,9 +200,9 @@
                 android:textStyle="bold" />
         </FrameLayout>
     </GridLayout>
-
     <LinearLayout
         android:id="@+id/bottomNavbar"
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
@@ -252,6 +217,7 @@
 
         <Button
             android:id="@+id/homeButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -259,10 +225,11 @@
             android:drawableTop="@drawable/home_icon_35x35"
             android:gravity="center"
             android:text="@string/home_button"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/productsButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -274,6 +241,7 @@
 
         <Button
             android:id="@+id/profileButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -283,5 +251,4 @@
             android:text="@string/account_button"
             android:textColor="@android:color/white" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

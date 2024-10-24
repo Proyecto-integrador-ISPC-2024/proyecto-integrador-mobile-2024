@@ -71,36 +71,29 @@ public class Home extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id == R.id.nav_products) {
-                    // Acción para el ítem "Productos"
                     Intent intent = new Intent(Home.this, ProductsActivity.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_cart) {
-                    // Acción para el ítem "Mi carrito"
                     Intent intent = new Intent(Home.this, Cart.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_conocenos) {
-                    // Acción para el ítem "Conócenos"
                     Intent intent = new Intent(Home.this, AboutUs.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_contacto) {
-                    // Acción para el ítem "Contacto"
                     Intent intent = new Intent(Home.this, Contact.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_perfil) {
-                    // Acción para el ítem "Perfil"
                     Intent intent = new Intent(Home.this, Profile.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_dashboard) {
-                    // Acción para el ítem "Dashboard"
                     Intent intent = new Intent(Home.this, Dashboard.class);
                     startActivity(intent);
                 }
-
 
                 return true;
             }
@@ -122,8 +115,6 @@ public class Home extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     public void profileBtn(View view) {

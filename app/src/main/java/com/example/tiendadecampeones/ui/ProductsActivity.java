@@ -31,11 +31,7 @@ public class ProductsActivity extends AppCompatActivity {
 
     private RecyclerView productsRecyclerView;
     private ProductsAdapter productsAdapter;
-
     private String selectedPais;
-
-    private List<Product> carrito = new ArrayList<>();
-    private List<String> tallesStringList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +86,6 @@ public class ProductsActivity extends AppCompatActivity {
         String selectedPais = getIntent().getStringExtra("pais");
         Log.d("ProductsActivity", "País seleccionado: " + selectedPais);
         getProductosPorPais(selectedPais);
-
     }
 
 

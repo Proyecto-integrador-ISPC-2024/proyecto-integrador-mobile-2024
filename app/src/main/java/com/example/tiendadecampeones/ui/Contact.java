@@ -69,11 +69,4 @@ public class Contact extends AppCompatActivity {
         });
 
     }
-
-//    Pendiente para refactorizar
-//    public void productClick(View v) {
-//        // Intent para abrir la pantalla de Productos
-//        Intent intent = new Intent(this, Home.class);
-//        startActivity(intent);
-//    }
 }

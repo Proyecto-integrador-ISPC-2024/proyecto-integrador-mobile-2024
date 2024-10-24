@@ -23,14 +23,13 @@ public class ProductCategories extends AppCompatActivity {
                 finish();
             }
         });
-
         ImageButton cartButton = findViewById(R.id.cartButton);
         cartButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(ProductCategories.this, Cart.class);
+                startActivity(intent);
             }
         });
-
 
         // Botones de navegación inferior
         Button homeButton = findViewById(R.id.homeButton);
@@ -40,7 +39,6 @@ public class ProductCategories extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         Button productsButton = findViewById(R.id.productsButton);
         productsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -48,7 +46,6 @@ public class ProductCategories extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         Button profileButton = findViewById(R.id.profileButton);
         profileButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -114,6 +111,7 @@ public class ProductCategories extends AppCompatActivity {
 
     }
 
+    // Renderizado de lista de productos según país elegido
     private void openProductList(String pais) {
         Intent intent = new Intent(ProductCategories.this, ProductsActivity.class);
         intent.putExtra("pais", pais);

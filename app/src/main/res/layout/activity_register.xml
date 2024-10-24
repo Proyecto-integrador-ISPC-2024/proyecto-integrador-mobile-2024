@@ -16,7 +16,6 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:padding="8dp">
-
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="48dp"
@@ -24,9 +23,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/arrow_back_icon_35x35"
             android:contentDescription="@string/back_button" />
-
     </LinearLayout>
-
 
     <!-- REGISTRARME titulo-->
     <TextView
@@ -113,7 +110,6 @@
             android:padding="16dp"/>
 
         <!-- Boton de Registrarme -->
-
         <Button
             android:id="@+id/btn_register"
             android:layout_width="wrap_content"
@@ -122,9 +118,5 @@
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/colorSecondary"
             android:textColor="@color/colorPrimary"/>
-
     </LinearLayout>
-
-
-
 </LinearLayout>

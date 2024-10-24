@@ -36,7 +36,6 @@ public class ManageProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        // Initialize fields
         etName = findViewById(R.id.et_name);
         etLastName = findViewById(R.id.et_last_name);
         etEmail = findViewById(R.id.et_email);
@@ -45,7 +44,6 @@ public class ManageProfile extends AppCompatActivity {
         btnEditProfile = findViewById(R.id.btn_edit_profile);
         btnSaveChanges = findViewById(R.id.btn_save_changes);
 
-        // Retrieve user data from SharedPreferences
         SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         String authToken = sharedPref.getString("accessToken", null);
         id_usuario = sharedPref.getInt("id_usuario", -1);
@@ -64,11 +62,13 @@ public class ManageProfile extends AppCompatActivity {
         setFieldsEditable(false);
         btnEditProfile.setOnClickListener(this::onEditProfileClicked);
         btnSaveChanges.setOnClickListener(this::onSaveChangesClicked);
+
         // Botón de navegación superior
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
     }
 
+    // Obtención de información de usuario mediante shared preferences
         @Override
         protected void onResume() {
             super.onResume();
@@ -100,16 +100,12 @@ public class ManageProfile extends AppCompatActivity {
     }
 
     public void onEditProfileClicked(View view) {
-        // Enable fields for editing
         setFieldsEditable(true);
-
-        // Show save button and hide edit button
         btnEditProfile.setVisibility(View.GONE);
         btnSaveChanges.setVisibility(View.VISIBLE);
     }
 
     public void onSaveChangesClicked(View view) {
-        // Create the updated user profile object
         UserProfile updatedProfile = new UserProfile(
                 id_usuario,
                 etName.getText().toString(),
@@ -149,12 +145,10 @@ public class ManageProfile extends AppCompatActivity {
     }
 
     public void onDeleteAccountClicked(View view) {
-        // Handle delete account logic here (e.g., show confirmation dialog)
         new AlertDialog.Builder(this)
                 .setTitle("Desactivar cuenta")
                 .setMessage("¿Estás seguro/a que querés desactivar tu cuenta?")
                 .setPositiveButton("Desactivar", (dialog, which) -> {
-                    // Perform delete account action here
                     Log.d(TAG, "Account deactivation confirmed.");
                 })
                 .setNegativeButton("Volver", null)

@@ -44,6 +44,14 @@ public class Cart extends AppCompatActivity {
         calculateTotal();
     }
 
+    // Eliminación de ítems del carro si el usuario no está en esta actividad
+    @Override
+    protected void onResume() {
+        super.onResume();
+        clearCartIfNotInCartActivities();
+    }
+
+    // Inicialización y captura de elementos de UI
     private void initializeUI() {
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
@@ -59,6 +67,7 @@ public class Cart extends AppCompatActivity {
         checkoutButton = findViewById(R.id.endShop);
     }
 
+    // Obtención de productos del carro mediante SharedPreferences
     private void loadCartProducts() {
         SharedPreferences sharedPreferences = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
         String productsJson = sharedPreferences.getString("cart_products", "[]");
@@ -68,6 +77,7 @@ public class Cart extends AppCompatActivity {
         productList = gson.fromJson(productsJson, productListType);
     }
 
+    // Seteo de información para el recycler view
     private void setupRecyclerView() {
         cartRecyclerView = findViewById(R.id.cartRecyclerView);
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -75,6 +85,7 @@ public class Cart extends AppCompatActivity {
         cartRecyclerView.setAdapter(cartAdapter);
     }
 
+    // Verificación de estado del carro antes de avanzar hacia otra actividad
     private void setupCheckoutButton() {
         checkoutButton.setOnClickListener(v -> {
             List<Product> filteredProductList = new ArrayList<>();
@@ -100,6 +111,7 @@ public class Cart extends AppCompatActivity {
         });
     }
 
+    // Dinamismo en la UI del carro dependiendo de la cantidad de productos existentes en el mismo
     public void updateCartUI() {
         if (productList.isEmpty()) {
             emptyCartTextView.setVisibility(View.VISIBLE);
@@ -110,6 +122,7 @@ public class Cart extends AppCompatActivity {
         }
     }
 
+    // Cálculo de monto total
     public void calculateTotal() {
         double total = 0;
         for (Product product : productList) {
@@ -124,6 +137,22 @@ public class Cart extends AppCompatActivity {
             checkoutButton.setEnabled(false);
         } else {
             checkoutButton.setEnabled(true);
+        }
+    }
+
+    // Definición de limpieza de carro si no se está en esta actividad o en las siguientes en la cadena del proceso de compra
+    public void clearCartIfNotInCartActivities() {
+        SharedPreferences cartPrefs = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor cartEditor = cartPrefs.edit();
+
+        String currentActivityName = this.getClass().getSimpleName();
+
+        if (!currentActivityName.equals("Cart") &&
+                !currentActivityName.equals("CartResume") &&
+                !currentActivityName.equals("PaymentMethodsActivity")) {
+
+            cartEditor.clear();
+            cartEditor.apply();
         }
     }
 }
