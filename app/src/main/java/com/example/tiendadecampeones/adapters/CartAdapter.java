@@ -48,55 +48,40 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         Product product = productList.get(position);
         Product.Producto productoDetails = product.getProductos();
 
-        holder.productName.setText(productoDetails.getNombreProducto());
-        holder.productPrice.setText("Total: " + String.format("$%.2f", productoDetails.getPrecio()));
-
-        // Cargar la imagen
+        // Obtención de datos agregados al carro
         String imageUrl = productoDetails.getImagen();
         Glide.with(context)
                 .load(imageUrl)
                 .placeholder(R.drawable.placeholder_image)
                 .error(R.drawable.error_image)
                 .into(holder.productImage);
-
-        // Buscar el talle seleccionado (cantidadCompra > 0)
-        Product.Talle talleSeleccionado = null;
+        StringBuilder talleInfo = new StringBuilder();
         for (Product.Talle talle : product.getTalles()) {
-            if (talle.getCantidadCompra() > 0) {
-                talleSeleccionado = talle;
-                break;
-            }
+            talleInfo.append(talle.getTalle());
+        }
+        double subtotal = 0;
+        for (Product.Talle talle : product.getTalles()) {
+            subtotal += productoDetails.getPrecio() * talle.getCantidadCompra();
         }
 
-        // Crear una copia final de talleSeleccionado
-        final Product.Talle finalTalleSeleccionado = talleSeleccionado;
-
-        // Mostrar solo el talle seleccionado
-        if (finalTalleSeleccionado != null) {
-            holder.productSize.setText(finalTalleSeleccionado.getTalle());
-            holder.productQuantity.setText(Integer.toString(finalTalleSeleccionado.getCantidadCompra()));
-        } else {
-            holder.productSize.setText("Talle no seleccionado");
-            holder.productQuantity.setText("0");
-        }
-
-        // Calcular el subtotal
-        double subtotal = productoDetails.getPrecio() * (finalTalleSeleccionado != null ? finalTalleSeleccionado.getCantidadCompra() : 0);
+        // Seteo en UI de datos
+        holder.productName.setText(productoDetails.getNombreProducto());
+        holder.productPrice.setText("Precio: $" + productoDetails.getPrecio());
+        holder.productSize.setText(talleInfo.toString());
         holder.productSubtotal.setText("Subtotal: $" + subtotal);
 
-        // Configurar botones para manipular la cantidad usando la copia final
+        // Manipulación de cantidades y borrado de productos
         holder.increaseQuantityButton.setOnClickListener(v -> {
-            updateQuantity(holder, product, finalTalleSeleccionado, true); // Aumentar
+            updateQuantity(holder, product, true); // Aumentar
         });
         holder.decreaseQuantityButton.setOnClickListener(v -> {
-            updateQuantity(holder, product, finalTalleSeleccionado, false); // Disminuir
+            updateQuantity(holder, product, false); // Disminuir
         });
         holder.removeButton.setOnClickListener(v -> {
             removeProduct(position); // Eliminar
         });
+        holder.productQuantity.setText(Integer.toString(product.getTalles().get(0).getCantidadCompra()));
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -104,33 +89,31 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     // Actualización de cantidades de productos
-    private void updateQuantity(CartViewHolder holder, Product product, Product.Talle talleSeleccionado, boolean isIncrease) {
-        if (talleSeleccionado == null) return;
-
-        int currentQuantity = talleSeleccionado.getCantidadCompra();
+    private void updateQuantity(CartViewHolder holder, Product product, boolean isIncrease) {
+        Product.Talle talle = product.getTalles().get(0);
+        int currentQuantity = talle.getCantidadCompra();
 
         if (isIncrease) {
-            if (currentQuantity < talleSeleccionado.getStock()) {
-                talleSeleccionado.setCantidadCompra(currentQuantity + 1);
+            if (currentQuantity < talle.getStock()) {
+                talle.setCantidadCompra(currentQuantity + 1);
             } else {
                 Toast.makeText(context, "Stock máximo alcanzado", Toast.LENGTH_SHORT).show();
             }
         } else {
             if (currentQuantity > 1) {
-                talleSeleccionado.setCantidadCompra(currentQuantity - 1);
+                talle.setCantidadCompra(currentQuantity - 1);
             } else {
                 Toast.makeText(context, "Cantidad mínima alcanzada", Toast.LENGTH_SHORT).show();
             }
         }
 
-        double newSubtotal = product.getProductos().getPrecio() * talleSeleccionado.getCantidadCompra();
+        double newSubtotal = product.getProductos().getPrecio() * talle.getCantidadCompra();
         holder.productSubtotal.setText("Subtotal: $" + newSubtotal);
-        holder.productQuantity.setText(Integer.toString(talleSeleccionado.getCantidadCompra()));
+        holder.productQuantity.setText(Integer.toString(talle.getCantidadCompra()));
 
         ((Cart) context).calculateTotal();
         updateSharedPreferences();
     }
-
 
     // Remoción de productos del carro
     private void removeProduct(int position) {
