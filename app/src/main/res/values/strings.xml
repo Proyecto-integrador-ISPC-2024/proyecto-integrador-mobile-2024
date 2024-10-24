@@ -150,12 +150,14 @@
     <string name="contdes_productname2">Remera de Brasil 1958</string>
     <string name="contdes_image2">Imagen de Remera de Brasil 1958</string>
     <string name="contdes_productname3">Remera de Francia 1998</string>
-    <string name="contdes_image3">Imagen de Remera de Francia 1998o</string>
+    <string name="contdes_image3">Imagen de Remera de Francia 1998</string>
     <string name="contdes_navSup">Navegación superior</string>
     <string name="contdes_menu_desplegable">Botón de menú desplegable</string>
     <string name="contdes_dash_btn">Boton para ingresar al dashboard</string>
     <string name="contdes_about_btn">Boton para conocer de la tienda</string>
     <string name="contdes_edit_btn">Boton para editar perfil</string>
     <string name="contdes_logout_btn">Boton para cerrar sesión</string>
+    <string name="contdes_add_cart_btn">Boton para cerrar sesión</string>
+    <string name="contdes_image">Imagen de producto</string>
 
 </resources>

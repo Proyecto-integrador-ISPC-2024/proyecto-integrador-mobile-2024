@@ -48,7 +48,9 @@
             android:layout_marginTop="8dp"
             android:text="Add to Cart"
             android:backgroundTint="@color/colorSecondary"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:focusable="true"
+            android:contentDescription="@string/contdes_add_cart_btn"/>
 
         <Spinner
             android:id="@+id/sizeSpinner"
