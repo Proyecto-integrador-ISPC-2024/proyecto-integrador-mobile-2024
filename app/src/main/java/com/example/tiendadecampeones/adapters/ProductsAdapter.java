@@ -89,8 +89,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.btnAddToCart.setOnClickListener(v -> {
             Talle talleSeleccionado = tallesList.get(selectedTallePosition[0]);
 
-            talleSeleccionado.setCantidadCompra(1);
-
             Toast.makeText(context, productoDetails.getNombreProducto() + " (Talle: " + talleSeleccionado.getTalle() + ") fue añadido al carrito.", Toast.LENGTH_SHORT).show();
 
             addToCart(product, selectedTallePosition[0]);
@@ -123,7 +121,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         SharedPrefManager sharedPrefManager = new SharedPrefManager(context);
 
         Talle talleSeleccionado = product.getTalles().get(selectedTallePosition);
-        Log.d("addToCart", "ID del talle seleccionado: " + talleSeleccionado.getIdTalle());
+
         product.setIdProductoTalle(talleSeleccionado.getIdTalle());
 
         List<Product> currentCart = sharedPrefManager.getCartProducts();
