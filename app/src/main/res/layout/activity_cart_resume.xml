@@ -42,7 +42,6 @@
             android:textColor="@android:color/black"
             android:textSize="24sp" />
 
-        <!-- Card with a list of products added to cart (name and price) -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cartCard"
             android:layout_width="match_parent"
@@ -63,7 +62,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <!-- Precio total -->
                 <TextView
                     android:id="@+id/totalPrice"
                     android:layout_width="wrap_content"
@@ -78,7 +76,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Confirm Purchase Button -->
         <Button
             android:id="@+id/confirmPurchaseButton"
             android:layout_width="wrap_content"

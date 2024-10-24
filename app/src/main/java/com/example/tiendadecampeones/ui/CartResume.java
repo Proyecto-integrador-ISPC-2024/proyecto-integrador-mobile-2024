@@ -40,32 +40,30 @@ public class CartResume extends AppCompatActivity {
 
         initializeUI();
 
-        // Receive product list from the Cart Activity
+        // Recibiendo lista de productos mediante intent desde Cart.java
         Intent intent = getIntent();
         String productListJson = intent.getStringExtra("product_list");
 
+        // Formateo a JSON
         Gson gson = new Gson();
         Type productListType = new TypeToken<List<Product>>() {}.getType();
         productList = gson.fromJson(productListJson, productListType);
 
+        // Seteo de recycler view
         setupRecyclerView();
 
+        // Creación de instancia de Pedido
         Pedido pedido = createPedidoFromCart();
-        // Log the Pedido details
-        Log.d("CartResume", "Pedido created: " + pedido.toString());
 
-        // Log the Detalle objects
-        for (Pedido.Detalle detalle : pedido.getDetalles()) {
-            Log.d("CartResume", "Detalle: " + detalle.toString());
-        }
-
-
+        // Cálculo y renderizado del monto total
         double totalAmount = pedido.getTotal();
         totalTextView.setText(String.format("Total: $%.2f", totalAmount));
 
+        // Confirmación de lista de productos
         confirmPurchaseButton.setOnClickListener(v -> navigateToPaymentMethods());
     }
 
+    // Inicialización y captura de elementos de UI
     private void initializeUI() {
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
@@ -77,6 +75,7 @@ public class CartResume extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    // Seteo de información en el recycler view
     private void setupRecyclerView() {
         Map<Product, Integer> cartItems = new HashMap<>();
         for (Product product : productList) {
@@ -91,7 +90,7 @@ public class CartResume extends AppCompatActivity {
         recyclerView.setAdapter(cartResumeAdapter);
     }
 
-    // Create Pedido object with product details
+    // Declaración de creación de instancia de Pedido - se ejecuta en línea 56
     private Pedido createPedidoFromCart() {
         Pedido pedido = new Pedido();
         pedido.setIdUsuario(getUserIdFromPreferences());
@@ -100,11 +99,13 @@ public class CartResume extends AppCompatActivity {
         return pedido;
     }
 
+    // Obtención del id de usuario desde SharedPreferences
     private int getUserIdFromPreferences() {
         SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         return sharedPref.getInt("id_usuario", -1);
     }
 
+    // Cálculo del precio total de la lista de productos
     private double calculateTotal(List<Product> productList) {
         double total = 0;
         for (Product product : productList) {
@@ -115,6 +116,7 @@ public class CartResume extends AppCompatActivity {
         return total;
     }
 
+    // Creación de la instancia de la clase Detalle
     private List<Pedido.Detalle> buildDetallesFromCart(List<Product> productList) {
         List<Pedido.Detalle> detalles = new ArrayList<>();
 
@@ -127,19 +129,13 @@ public class CartResume extends AppCompatActivity {
                     detalle.setIdProducto(product.getProductos().getIdProducto());
                     detalle.setIdTalle(talle.getIdTalle());
                     detalles.add(detalle);
-
-                    // Log the details of each "Detalle" instance
-                    Log.d("CartResume", "Detalle added: Cantidad = " + detalle.getCantidad() +
-                            ", Subtotal = " + detalle.getSubtotal());
                 }
             }
         }
-
-        // Optionally, log the full list after building it
-        Log.d("CartResume", "Detalles list built with size: " + detalles.size());
         return detalles;
     }
 
+    // Navegación a la selección de métodos de pago
     private void navigateToPaymentMethods() {
         Pedido pedido = createPedidoFromCart();
         Log.d("CartResume", "Pedido antes de enviar: " + pedido.toString());

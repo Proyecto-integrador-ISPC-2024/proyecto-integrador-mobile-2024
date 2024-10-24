@@ -22,7 +22,6 @@
             android:contentDescription="@string/back_button"
             android:src="@drawable/arrow_back_icon_35x35" />
 
-        <!-- Delete Account Button -->
         <ImageButton
             android:id="@+id/btnDeactivateAccount"
             android:layout_width="64dp"
@@ -68,7 +67,6 @@
             android:inputType="textPersonName"
             android:autofillHints="name"/>
 
-        <!-- check autofill acá -->
         <EditText
             android:id="@+id/et_address"
             android:layout_width="match_parent"
@@ -105,7 +103,6 @@
             android:onClick="onEditProfileClicked"
             android:text="@string/editProfile" />
 
-        <!-- Save Changes Button (Initially Hidden) -->
         <Button
             android:id="@+id/btn_save_changes"
             android:layout_width="match_parent"

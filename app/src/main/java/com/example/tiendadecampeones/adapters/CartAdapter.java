@@ -28,7 +28,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private ArrayList<Product> productList;
     private Context context;
 
-    // Constructor for CartAdapter
+    // Constructor
     public CartAdapter(ArrayList<Product> productList, Context context) {
         this.productList = productList;
         this.context = context;
@@ -41,54 +41,45 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return new CartViewHolder(view);
     }
 
+    // agregado de información para el recycler view
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         Product product = productList.get(position);
         Product.Producto productoDetails = product.getProductos();
 
-        // Set product name and price
-        holder.productName.setText(productoDetails.getNombreProducto());
-        holder.productPrice.setText("Precio: $" + productoDetails.getPrecio());
-
-        // Set product image dynamically using the image URL
-        String imageUrl = productoDetails.getImagen(); // URL of the product image
-
+        // Obtención de datos agregados al carro
+        String imageUrl = productoDetails.getImagen();
         Glide.with(context)
                 .load(imageUrl)
-                .placeholder(R.drawable.placeholder_image) // Optional placeholder
-                .error(R.drawable.error_image) // Optional error image
+                .placeholder(R.drawable.placeholder_image)
+                .error(R.drawable.error_image)
                 .into(holder.productImage);
-
-        // Show the selected quantity and size (talle)
         StringBuilder talleInfo = new StringBuilder();
         for (Product.Talle talle : product.getTalles()) {
             talleInfo.append(talle.getTalle());
         }
-        holder.productSize.setText(talleInfo.toString());
-
-        // Calculate and display subtotal for the current product (price * quantity for each talle)
         double subtotal = 0;
         for (Product.Talle talle : product.getTalles()) {
             subtotal += productoDetails.getPrecio() * talle.getCantidadCompra();
         }
+
+        // Seteo en UI de datos
+        holder.productName.setText(productoDetails.getNombreProducto());
+        holder.productPrice.setText("Precio: $" + productoDetails.getPrecio());
+        holder.productSize.setText(talleInfo.toString());
         holder.productSubtotal.setText("Subtotal: $" + subtotal);
 
-        // Set up quantity change buttons
+        // Manipulación de cantidades y borrado de productos
         holder.increaseQuantityButton.setOnClickListener(v -> {
-            updateQuantity(holder, product, true); // Increase quantity
+            updateQuantity(holder, product, true); // Aumentar
         });
-
         holder.decreaseQuantityButton.setOnClickListener(v -> {
-            updateQuantity(holder, product, false); // Decrease quantity
+            updateQuantity(holder, product, false); // Disminuir
         });
-
-        // Set up remove button (trash icon)
         holder.removeButton.setOnClickListener(v -> {
-            removeProduct(position);
+            removeProduct(position); // Eliminar
         });
-
-        // Display product quantity
         holder.productQuantity.setText(Integer.toString(product.getTalles().get(0).getCantidadCompra()));
     }
 
@@ -97,7 +88,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return productList.size();
     }
 
-    // Function to update the quantity
+    // Actualización de cantidades de productos
     private void updateQuantity(CartViewHolder holder, Product product, boolean isIncrease) {
         Product.Talle talle = product.getTalles().get(0);
         int currentQuantity = talle.getCantidadCompra();
@@ -124,17 +115,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         updateSharedPreferences();
     }
 
-    // Function to remove a product from the cart
+    // Remoción de productos del carro
     private void removeProduct(int position) {
         productList.remove(position);
         notifyItemRemoved(position);
         notifyDataSetChanged();
         ((Cart) context).calculateTotal();
-        // Update SharedPreferences
+
+        // Actualización de las sharedpreferences guardadas para el carro
         updateSharedPreferences();
     }
 
-    // Function to update SharedPreferences with the modified product list
+    // Actualización de las shared preferences usadas para gestionar los ítems del carro
     private void updateSharedPreferences() {
         SharedPreferences sharedPreferences = context.getSharedPreferences("cart_shared_prefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -143,6 +135,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         editor.putString("cart_products", updatedProductsJson);
         editor.apply();
     }
+
+    // Captura de los elementos de la UI para poder renderizar los datos de los productos y para poder manipular la información
     static class CartViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productPrice, productSize, productSubtotal, productQuantity;
         Button increaseQuantityButton, decreaseQuantityButton, removeButton;
@@ -158,7 +152,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             increaseQuantityButton = itemView.findViewById(R.id.quantityIncrement);
             decreaseQuantityButton = itemView.findViewById(R.id.quantityDecrement);
             removeButton = itemView.findViewById(R.id.removeButton);
-            productImage = itemView.findViewById(R.id.productImage); // Ensure this matches your layout
+            productImage = itemView.findViewById(R.id.productImage);
         }
     }
 }

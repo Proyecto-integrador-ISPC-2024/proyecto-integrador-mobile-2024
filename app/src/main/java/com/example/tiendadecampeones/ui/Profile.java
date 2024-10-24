@@ -46,11 +46,22 @@ public class Profile extends AppCompatActivity {
     }
 
     public void logoutClick(View v) {
+        // Limpieza de shared preferences de usuario
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.apply();
+
+        // Limpieza del carro
+        SharedPreferences cartPrefs = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor cartEditor = cartPrefs.edit();
+        cartEditor.clear();
+        cartEditor.apply();
+
+        // Alerta de cierre
         Toast.makeText(this, "Has cerrado tu sesión", Toast.LENGTH_SHORT).show();
+
+        // Navegación al login
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
