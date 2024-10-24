@@ -369,8 +369,8 @@ public class PaymentMethodsActivity extends AppCompatActivity {
         }
         return false;
     }
-    private void realizarPedido(Pedido pedido) {
 
+    private void realizarPedido(Pedido pedido) {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         String authToken = preferences.getString("accessToken", null);
         if (authToken == null) {
@@ -385,6 +385,14 @@ public class PaymentMethodsActivity extends AppCompatActivity {
             public void onResponse(Call<Pedido> call, Response<Pedido> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(PaymentMethodsActivity.this, "Pedido realizado exitosamente.", Toast.LENGTH_SHORT).show();
+
+                    // Aquí puedes limpiar el carrito
+                    clearCart();
+
+                    // Opcionalmente, redirigir a la pantalla de inicio o confirmación
+                    Intent homeIntent = new Intent(PaymentMethodsActivity.this, Home.class);
+                    startActivity(homeIntent);
+                    finish();
                 } else {
                     int errorCode = response.code();
                     String errorMessage = response.message();
@@ -399,4 +407,14 @@ public class PaymentMethodsActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Método para limpiar el carrito
+    private void clearCart() {
+        SharedPreferences preferences = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Log.d("CartResume", "CARRO LIMPIADO");
+        editor.clear(); // Esto elimina todas las entradas del carrito
+        editor.apply();
+    }
+
 }

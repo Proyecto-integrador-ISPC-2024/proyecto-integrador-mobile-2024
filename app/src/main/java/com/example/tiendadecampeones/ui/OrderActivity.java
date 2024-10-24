@@ -3,6 +3,7 @@ package com.example.tiendadecampeones.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -69,6 +70,14 @@ public class OrderActivity extends AppCompatActivity {
 
     }
 
+    private void clearCart() {
+        SharedPreferences cartPrefs = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor cartEditor = cartPrefs.edit();
+        cartEditor.clear(); // Limpia todas las preferencias del carrito
+        cartEditor.apply(); // Aplica los cambios
+        Log.d("Cart", "El carrito ha sido limpiado");
+    }
+
     private void initializeViews() {
         orderNumber = findViewById(R.id.orderNumber);
         orderDate = findViewById(R.id.orderDate);
@@ -126,6 +135,7 @@ public class OrderActivity extends AppCompatActivity {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         showToast("Pedido cancelado exitosamente");
+                        clearCart();  // Asegúrate de limpiar el carrito aquí
                         volverAlDashboard(null);
                     } else {
                         handleErrorResponse(response);
@@ -224,11 +234,14 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     public void volverAlDashboard(View view) {
+        Log.d("Cart", "Llamando a clearCart antes de volver al dashboard");
+        clearCart();  // Asegúrate de limpiar el carrito al volver
         showToast("Redireccionando al dashboard");
         Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
         finish();
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
