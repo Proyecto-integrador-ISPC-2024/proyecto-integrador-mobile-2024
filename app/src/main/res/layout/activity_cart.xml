@@ -60,7 +60,7 @@
         android:textColor="@color/black"
         android:padding="16dp" />
 
-    <!-- RecyclerView for dynamic product rendering -->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerView"
         android:layout_width="match_parent"
@@ -78,7 +78,6 @@
         android:layout_gravity="center"
         />
 
-    <!-- Botón finalizar compra -->
     <Button
         android:id="@+id/endShop"
         android:layout_width="200dp"
@@ -89,7 +88,6 @@
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Nav inferior -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"

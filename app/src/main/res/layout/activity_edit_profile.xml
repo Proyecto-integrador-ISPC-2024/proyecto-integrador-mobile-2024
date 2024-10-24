@@ -25,7 +25,6 @@
             android:focusableInTouchMode="true"
             android:nextFocusRight="@id/btnDeactivateAccount"/>
 
-        <!-- Delete Account Button -->
         <ImageButton
             android:id="@+id/btnDeactivateAccount"
             android:layout_width="64dp"
@@ -73,7 +72,6 @@
             android:inputType="textPersonName"
             android:autofillHints="name"/>
 
-        <!-- check autofill acá -->
         <EditText
             android:id="@+id/et_address"
             android:layout_width="match_parent"
@@ -112,7 +110,6 @@
             android:contentDescription="@string/editProfile"
             />
 
-        <!-- Save Changes Button (Initially Hidden) -->
         <Button
             android:id="@+id/btn_save_changes"
             android:layout_width="match_parent"

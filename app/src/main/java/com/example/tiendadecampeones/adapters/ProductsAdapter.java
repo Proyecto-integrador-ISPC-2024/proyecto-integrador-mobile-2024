@@ -53,11 +53,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         Product product = products.get(position);
         Product.Producto productoDetails = product.getProductos();
 
-        // Asignar nombre y precio del producto
         holder.productName.setText(productoDetails.getNombreProducto());
         holder.productPrice.setText(String.format("$%.2f", productoDetails.getPrecio()));
 
-        // Cargar la imagen del producto usando Glide
         Glide.with(context)
                 .load(productoDetails.getImagen())
                 .placeholder(R.drawable.placeholder_image)
@@ -70,13 +68,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             tallesStringList.add(talle.getTalle());
         }
 
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, tallesStringList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.sizeSpinner.setAdapter(adapter);
 
         final int[] selectedTallePosition = {0};
+
         holder.sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -85,16 +83,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
             }
         });
 
         holder.btnAddToCart.setOnClickListener(v -> {
             Talle talleSeleccionado = tallesList.get(selectedTallePosition[0]);
 
+            talleSeleccionado.setCantidadCompra(1);
 
             Toast.makeText(context, productoDetails.getNombreProducto() + " (Talle: " + talleSeleccionado.getTalle() + ") fue añadido al carrito.", Toast.LENGTH_SHORT).show();
-
 
             addToCart(product, selectedTallePosition[0]);
         });
@@ -126,7 +123,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         SharedPrefManager sharedPrefManager = new SharedPrefManager(context);
 
         Talle talleSeleccionado = product.getTalles().get(selectedTallePosition);
-
+        Log.d("addToCart", "ID del talle seleccionado: " + talleSeleccionado.getIdTalle());
         product.setIdProductoTalle(talleSeleccionado.getIdTalle());
 
         List<Product> currentCart = sharedPrefManager.getCartProducts();
@@ -153,7 +150,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             Log.d("ProductsAdapter", p.getProductos().getNombreProducto() + " - Talle seleccionado: " + p.getIdProductoTalle());
         }
 
-        Toast.makeText(context, product.getProductos().getNombreProducto() + " fue añadido al carrito.", Toast.LENGTH_SHORT).show();
+
     }
 
 

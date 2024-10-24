@@ -7,8 +7,6 @@
     android:background="@drawable/rounded_button2"
     android:padding="8dp"
     android:layout_marginVertical="16dp">
-
-    <!-- Product Image -->
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="120dp"
@@ -26,16 +24,12 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/argentina_1978_primera" />
     </androidx.cardview.widget.CardView>
-
-    <!-- Product Details -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2.5"
         android:gravity="center_vertical"
         android:orientation="vertical">
-
-        <!-- Product Name -->
         <TextView
             android:id="@+id/productName"
             android:layout_width="wrap_content"
@@ -45,8 +39,6 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
-
-        <!-- Product Price -->
         <TextView
             android:id="@+id/productPrice"
             android:layout_width="wrap_content"
@@ -54,8 +46,6 @@
             android:text="@string/precio_50_00"
             android:textSize="18sp"
             android:textColor="@color/black" />
-
-        <!-- Total Price -->
         <TextView
             android:id="@+id/productSubtotal"
             android:layout_width="wrap_content"
@@ -64,33 +54,25 @@
             android:layout_marginTop="5dp"
             android:textSize="18sp"
             android:textColor="@color/black" />
-
-        <!-- Quantity Selector -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="24sp"
                 android:textColor="@color/black" />
-
-            <!-- Decrement Button -->
             <Button
                 android:id="@+id/quantityDecrement"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-
                 android:background="@drawable/remove_icon_35x35"
                 android:contentDescription="@string/disminuir_cantidad"
                 android:text=""
                 android:textColor="@color/white" />
-
-            <!-- Quantity Display -->
             <TextView
                 android:id="@+id/productQuantity"
                 android:layout_width="wrap_content"
@@ -99,8 +81,6 @@
                 android:text="@string/_1"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
-
-            <!-- Increment Button -->
             <Button
                 android:id="@+id/quantityIncrement"
                 android:layout_width="48dp"
@@ -110,13 +90,10 @@
                 android:text=""
                 android:textColor="@color/white" />
         </LinearLayout>
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/productTalleLabel"
                 android:layout_width="wrap_content"
@@ -124,17 +101,13 @@
                 android:text="@string/talle"
                 android:textSize="18sp"
                 android:textColor="@color/black" />
-
             <TextView
                 android:id="@+id/productTalle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/black" />
-
         </LinearLayout>
-
-        <!-- Remove Button -->
         <Button
             android:id="@+id/removeButton"
             android:layout_width="48dp"
@@ -142,7 +115,5 @@
             android:layout_marginVertical="16dp"
             android:contentDescription="@string/eliminar_producto"
             android:background="@drawable/delete_icon_28x28" />
-
-
     </LinearLayout>
 </LinearLayout>

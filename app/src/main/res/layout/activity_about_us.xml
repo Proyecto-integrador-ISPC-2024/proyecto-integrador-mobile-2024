@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.AboutUs">
 
-  <!-- Main Content (Your original layout) -->
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent">
@@ -59,7 +58,6 @@
         android:focusableInTouchMode="true"
         android:contentDescription="@string/contdes_title_about"/>
 
-    <!-- Información about us  -->
     <TextView
         android:id="@+id/nosotrosTextView"
         android:layout_width="match_parent"
@@ -86,14 +84,7 @@
         android:src="@mipmap/ilustracion_copa"
         android:contentDescription="@string/photoAbout"
         android:focusable="true"
-        android:focusableInTouchMode="true"/>
-<!--    <WebView-->
-<!--        android:id="@+id/mapWebView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="250dp"-->
-<!--        android:layout_below="@id/nosotrosTextView"-->
-<!--        android:layout_margin="16dp" />-->
-
+        android:focusableInTouchMode="true" />
 
     <!-- Botón para Contacto -->
     <Button
@@ -169,10 +160,6 @@
           android:layout_gravity="center"
           android:contentDescription="@string/contdes_profile_button"
           style="?android:attr/buttonBarButtonStyle" />
-
     </LinearLayout>
-
-
   </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
