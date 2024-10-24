@@ -35,7 +35,6 @@ public class SharedPrefManager {
         editor.apply();
     }
 
-
     public List<Product> getCartProducts() {
         String json = sharedPreferences.getString(CART_PRODUCTS_KEY, null);
         if (json == null) {
@@ -43,8 +42,11 @@ public class SharedPrefManager {
         }
 
         Type type = new TypeToken<List<Product>>() {}.getType();
-        return gson.fromJson(json, type);
+        List<Product> productList = gson.fromJson(json, type);
+
+        return productList;
     }
+
 
     public void clearCart() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
