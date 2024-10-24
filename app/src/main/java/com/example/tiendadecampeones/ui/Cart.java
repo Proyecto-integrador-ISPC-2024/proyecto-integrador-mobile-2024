@@ -47,8 +47,8 @@ public class Cart extends AppCompatActivity {
 
     // Eliminación de ítems del carro si el usuario no está en esta actividad
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onPause() {
+        super.onPause();
         clearCartIfNotInCartActivities();
     }
 
@@ -148,13 +148,16 @@ public class Cart extends AppCompatActivity {
         SharedPreferences.Editor cartEditor = cartPrefs.edit();
 
         String currentActivityName = this.getClass().getSimpleName();
+        Log.d("Cart", "Nombre de la actividad actual: " + currentActivityName);
 
         if (!currentActivityName.equals("Cart") &&
                 !currentActivityName.equals("CartResume") &&
                 !currentActivityName.equals("PaymentMethodsActivity")) {
 
+            Log.d("Cart", "Limpiando el carrito...");
             cartEditor.clear();
             cartEditor.apply();
+            Log.d("Cart", "El carrito ha sido limpiado"); // Confirmación adicional
         }
     }
 }

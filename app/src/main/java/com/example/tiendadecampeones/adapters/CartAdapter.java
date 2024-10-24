@@ -48,6 +48,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         Product product = productList.get(position);
         Product.Producto productoDetails = product.getProductos();
 
+        holder.productName.setText(productoDetails.getNombreProducto());
+        holder.productPrice.setText("Total: " + String.format("$%.2f", productoDetails.getPrecio()));
+
         // Cargar la imagen
         String imageUrl = productoDetails.getImagen();
         Glide.with(context)
