@@ -8,7 +8,7 @@
     tools:context=".ui.Home"
     android:fitsSystemWindows="true">
 
-    <!-- Main Content (Your original layout) -->
+    <!-- Main Content -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -46,7 +46,8 @@
             android:padding="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerLayout">
+            app:layout_constraintTop_toBottomOf="@+id/headerLayout"
+            android:contentDescription="@string/contdes_navSup">
 
             <ImageButton
                 android:id="@+id/sideNavButton"
@@ -55,8 +56,8 @@
                 android:layout_height="64dp"
                 android:layout_marginEnd="280dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="menu"
-                android:src="@drawable/menu_icon_35x35" />
+                android:src="@drawable/menu_icon_35x35"
+                android:contentDescription="@string/contdes_menu_desplegable"/>
 
             <ImageButton
                 android:id="@+id/cartButton"
@@ -88,7 +89,8 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:contentDescription="@string/homeTitle"/>
 
             <TextView
                 android:id="@+id/textHome"
@@ -143,12 +145,17 @@
                         android:layout_marginEnd="16dp"
                         android:background="@color/colorSecondary"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        android:padding="8dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:contentDescription="@string/contdes_productscroll_button"
+                        android:nextFocusRight="@id/product_2">
 
                         <ImageView
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:src="@mipmap/argentina_1978_primera" />
+                            android:src="@mipmap/argentina_1978_primera"
+                            android:contentDescription="@string/contdes_image1"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -157,7 +164,8 @@
                             android:text="@string/argContactProd"
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:contentDescription="@string/contdes_productname1"/>
                     </LinearLayout>
 
                     <!-- Producto 2 -->
@@ -167,12 +175,15 @@
                         android:layout_marginEnd="16dp"
                         android:background="@color/colorSecondary"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        android:padding="8dp"
+                        android:contentDescription="@string/contdes_productscroll_button"
+                        android:nextFocusRight="@id/product_3">
 
                         <ImageView
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:src="@mipmap/brasil_1958_primera" />
+                            android:src="@mipmap/brasil_1958_primera"
+                            android:contentDescription="@string/contdes_image2"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -181,7 +192,8 @@
                             android:text="@string/brContactProd"
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:contentDescription="@string/contdes_productname2"/>
                     </LinearLayout>
 
 
@@ -192,12 +204,14 @@
                         android:layout_marginEnd="16dp"
                         android:background="@color/colorSecondary"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        android:padding="8dp"
+                        android:contentDescription="@string/contdes_productscroll_button">
 
                         <ImageView
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:src="@mipmap/francia_1998_primera" />
+                            android:src="@mipmap/francia_1998_primera"
+                            android:contentDescription="@string/contdes_image3"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -206,7 +220,8 @@
                             android:text="@string/frContactProd"
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:contentDescription="@string/contdes_productname3"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -222,7 +237,8 @@
                 android:backgroundTint="@color/colorSecondary"
                 android:onClick="productClick"
                 android:text="@string/homeBtn"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:contentDescription="@string/contdes_buy_btn"/>
 
         </LinearLayout>
 
@@ -235,7 +251,8 @@
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/bottom_navbar_description">
 
             <Button
                 android:id="@+id/homeButton"
@@ -250,7 +267,10 @@
                 android:onClick="homeButton"
                 android:padding="8dp"
                 android:text="@string/home_button"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:contentDescription="@string/contdes_home_button"
+                android:nextFocusRight="@id/productsButton"
+                />
 
             <Button
                 android:id="@+id/productsButton"
@@ -265,7 +285,9 @@
                 android:onClick="productsButton"
                 android:padding="8dp"
                 android:text="@string/products_button"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:contentDescription="@string/contdes_products_button"
+                android:nextFocusRight="@id/profileButton"/>
 
             <Button
                 android:id="@+id/profileBtn"
@@ -280,7 +302,9 @@
                 android:onClick="profileBtn"
                 android:padding="8dp"
                 android:text="@string/account_button"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:contentDescription="@string/contdes_profile_button"
+                />
 
         </LinearLayout>
 

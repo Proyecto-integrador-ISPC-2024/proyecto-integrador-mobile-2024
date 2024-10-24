@@ -165,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent = new Intent(LoginActivity.this, Home.class);
                     }
                     intent.putExtra("nombreUsuario", nombre); // Agrega el nombre de usuario al Intent
+                    intent.putExtra("mostrarBienvenida", true);
                     startActivity(intent);
                     finish();
 
