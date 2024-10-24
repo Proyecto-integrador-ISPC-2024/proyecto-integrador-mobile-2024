@@ -4,52 +4,62 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:elevation="4dp">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp">
-
         <ImageView
             android:id="@+id/productImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop" />
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter" />
 
-        <TextView
-            android:id="@+id/productName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="16dp">
 
-        <TextView
-            android:id="@+id/productDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp" />
+            <!-- Product Name -->
+            <TextView
+                android:id="@+id/productName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOMBRE DE CAMISETA"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/productPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@android:color/holo_green_dark"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            <!-- Size Selector Spinner -->
+            <Spinner
+                android:id="@+id/sizeSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
 
-        <!-- Add to cart button -->
-        <Button
-            android:id="@+id/addToCartButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Add to Cart"
-            android:backgroundTint="@color/colorSecondary"
-            android:textColor="@android:color/white" />
+            <!-- Product Price -->
+            <TextView
+                android:id="@+id/productPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Precio: $50.000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Add to Cart Button -->
+            <Button
+                android:id="@+id/addToCartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorSecondary"
+                android:text="Agregar"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

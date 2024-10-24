@@ -2,8 +2,13 @@
     <string name="app_name">Tienda de campeones</string>
 
     <!--  Sección Login  -->
-    <string name="user">Usuario</string>
+    <string name="user">Nombre</string>
     <string name="passware">Contraseña</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="repeat_password_hint">Repetir Contraseña</string>
+    <string name="login_button_text">Iniciar Sesión</string>
+    <string name="register_button_text">Registrate</string>
 
     <!--  Barra de navegación superior  -->
     <string name="back_button">Volver</string>
@@ -41,10 +46,10 @@
     <string name="webtn">¡Conócenos!</string>
     <string name="Dbtn">Dashboard</string>
     <string name="profile_btn">Perfil</string>
-    <string name="cl1">María Laura Silva</string>
+    <string name="cl1">Tu perfil</string>
     <string name="Logoutbtn">Finalizar Sesión</string>
 
-   <!--payment select box-->
+    <!--payment select box-->
     <string-array name="payment_methods">
         <item>Seleccionar método de pago</item>
         <item>Tarjeta de crédito</item>
@@ -80,4 +85,81 @@
     <string name="homeSubtitle">Vestí tu pasión con un estilo único</string>
     <string name="homeBtn">Comenzar a comprar</string>
     <string name="finalizar_compra">Finalizar compra</string>
+
+    <!-- Sección Order-->
+    <string name="order_title">Mi pedido</string>
+    <string name="customer_label">Cliente:</string>
+    <string name="order_label">Número de Pedido:</string>
+    <string name="order_date_label">Fecha:</string>
+    <string name="order_status_label">Estado:</string>
+    <string name="product_details_label">Detalles de Productos:</string>
+    <string name="payment_method_label">Forma de Pago:</string>
+    <string name="cards_method">Tarjeta:</string>
+    <string name="no_cards">No se han utilizado tarjeta</string>
+    <string name="total_paid_label">Total Abonado:</string>
+    <string name="order_tracking_msg">Seguí tu pedido acá con tu número de pedido</string>
+    <string name="order_tracking_btn">Seguí tu pedido acá</string>
+    <string name="cancel_button">Arrepentimiento</string>
+
+    <!-- Sección Dashboard-->
+    <string name="searchV">Número de pedido o fecha</string>
+    <string name="order_title_dashboard">Pedidos</string>
+    <string name="no_orders_message">No tienes pedidos</string>
+
+    <!-- Sección Editar perfil -->
+    <string name="disableAccount">desactivar cuenta</string>
+    <string name="editProfile">Editar Perfil</string>
+    <string name="inputName">Nombre</string>
+    <string name="inputLastName">Apellido</string>
+    <string name="inputAddress">Domicilio</string>
+    <string name="inputEmail">Email</string>
+    <string name="inputPassword">Contraseña</string>
+    <string name="saveChangesBtn">Guardar cambios</string>
+
+    <!-- Sección Administrador -->
+    <string name="order_screen_title">Nuestros Pedidos</string>
+
+    <!-- Descripción de contenido accesible -->
+    <string name="contdes_logo">Logotipo de Tienda de Campeones</string>
+    <string name="contdes_email_input">Campo de entrada de correo electrónico</string>
+    <string name="contdes_password_input">Campo de entrada de contraseña</string>
+    <string name="contdes_login_button">Botón para iniciar sesión</string>
+    <string name="contdes_register_button">Botón para registrarse</string>
+    <string name="contdes_orders_list">Lista de pedidos de clientes</string>
+    <string name="bottom_navbar_description">Barra de navegación inferior</string>
+    <string name="contdes_home_button">Ir a la pantalla de inicio</string>
+    <string name="contdes_profile_button">Ir a la pantalla de perfil</string>
+
+    <!--  Carro de compras  -->
+    <string name="total_50_00">Total: $50.00</string>
+    <string name="precio_50_00">Precio: $50.00</string>
+    <string name="camiseta_argentina_78">Camiseta Argentina 78</string>
+    <string name="cantidad">Cantidad:</string>
+    <string name="disminuir_cantidad">Disminuir cantidad</string>
+    <string name="_1">1</string>
+    <string name="aumentar_cantidad">Aumentar cantidad</string>
+    <string name="talle">Talle:</string>
+    <string name="eliminar_producto">Eliminar producto</string>
+    <string name="contdes_back_btn">Botón para volver</string>
+    <string name="contdes_mail_btn">Botón para enviar correo</string>
+    <string name="contdes_buy_btn">Botón para ir a comprar productos</string>
+    <string name="contdes_title_about">Título: Conocenos!</string>
+    <string name="contdes_contact_btn">Botón de contacto</string>
+    <string name="contdes_products_button">Ir a la pantalla de productos</string>
+    <string name="contdes_productscroll_button">Producto de scroll horizontal</string>
+    <string name="contdes_productname1">Remera de Argentina 1978</string>
+    <string name="contdes_image1">Imagen de Remera de Argentina 1978</string>
+    <string name="contdes_productname2">Remera de Brasil 1958</string>
+    <string name="contdes_image2">Imagen de Remera de Brasil 1958</string>
+    <string name="contdes_productname3">Remera de Francia 1998</string>
+    <string name="contdes_image3">Imagen de Remera de Francia 1998</string>
+    <string name="contdes_navSup">Navegación superior</string>
+    <string name="contdes_menu_desplegable">Botón de menú desplegable</string>
+    <string name="contdes_dash_btn">Boton para ingresar al dashboard</string>
+    <string name="contdes_about_btn">Boton para conocer de la tienda</string>
+    <string name="contdes_edit_btn">Boton para editar perfil</string>
+    <string name="contdes_logout_btn">Boton para cerrar sesión</string>
+    <string name="contdes_add_cart_btn">Boton para cerrar sesión</string>
+    <string name="contdes_image">Imagen de producto</string>
+
 </resources>

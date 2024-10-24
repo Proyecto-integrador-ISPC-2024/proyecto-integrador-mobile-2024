@@ -1,41 +1,150 @@
 package com.example.tiendadecampeones.models;
 
+import java.util.List;
+
 public class Product {
-    final private String name;
-    final private String description;
-    final private double price;
-    final private int imageResId;
-    private int quantity;
 
-    public Product(String name, String description, double price, int imageResId, int quantity) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.imageResId = imageResId;
-        this.quantity = quantity;
+    private int id_producto_talle;
+    private Producto productos;
+    private List<Talle> talles;
+    private Talle talleSeleccionado;
+
+    // Constructor
+    public Product(int id_producto_talle, Producto productos, List<Talle> talles, int stock) {
+        this.id_producto_talle = id_producto_talle;
+        this.productos = productos;
+        this.talles = talles;
+        this.talleSeleccionado = null;
     }
 
-    public String getName() {
-        return name;
+    // Getters y Setters
+    public int getIdProductoTalle() {
+        return id_producto_talle;
     }
 
-    public String getDescription() {
-        return description;
+    public void setIdProductoTalle(int id_producto_talle) {
+        this.id_producto_talle = id_producto_talle;
     }
 
-    public double getPrice() {
-        return price;
+    public Producto getProductos() {
+        return productos;
     }
 
-    public int getImageResId() {
-        return imageResId;
+    public void setProductos(Producto productos) {
+        this.productos = productos;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public List<Talle> getTalles() {
+        return talles;
+    }
+    public Talle getTalleSeleccionado() {
+        return talleSeleccionado;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setTalleSeleccionado(Talle talleSeleccionado) {
+        this.talleSeleccionado = talleSeleccionado;
+    }
+
+    public void setTalles(List<Talle> talles) {
+        this.talles = talles;
+    }
+
+    // Clase Producto
+    public static class Producto {
+        private int id_producto;
+        private String nombre_producto;
+        private double precio;
+        private String imagen;
+
+        // Constructor
+        public Producto(int id_producto, String nombre_producto, double precio, String imagen) {
+            this.id_producto = id_producto;
+            this.nombre_producto = nombre_producto;
+            this.precio = precio;
+            this.imagen = imagen;
+        }
+
+        // Getters y Setters
+        public int getIdProducto() {
+            return id_producto;
+        }
+
+        public void setIdProducto(int id_producto) {
+            this.id_producto = id_producto;
+        }
+
+        public String getNombreProducto() {
+            return nombre_producto;
+        }
+
+        public void setNombreProducto(String nombre_producto) {
+            this.nombre_producto = nombre_producto;
+        }
+
+        public double getPrecio() {
+            return precio;
+        }
+
+        public void setPrecio(double precio) {
+            this.precio = precio;
+        }
+
+        public String getImagen() {
+            return imagen;
+        }
+
+        public void setImagen(String imagen) {
+            this.imagen = imagen;
+        }
+    }
+
+    // Clase Talle
+    public static class Talle {
+        private int id_talle;
+        private String talle;
+        private int stock;
+        private int cantidadCompra;
+
+        // Constructor
+        public Talle(int id_talle, String talle, int stock) {
+            this.id_talle = id_talle;
+            this.talle = talle;
+            this.stock = stock;
+            this.cantidadCompra = 1;
+        }
+
+        // Getters y Setters
+        public int getIdTalle() {
+            return id_talle;
+        }
+
+        public void setIdTalle(int id_talle) {
+            this.id_talle = id_talle;
+        }
+
+        public String getTalle() {
+            return talle;
+        }
+
+        public void setTalle(String talle) {
+            this.talle = talle;
+        }
+
+        public int getStock() {
+            return stock;
+        }
+
+        public void setStock(int stock) {
+            this.stock = stock;
+        }
+
+        public int getCantidadCompra() {
+            return cantidadCompra;
+        }
+
+        public void setCantidadCompra(int cantidad) {
+            this.cantidadCompra = cantidad;
+        }
+
     }
 }

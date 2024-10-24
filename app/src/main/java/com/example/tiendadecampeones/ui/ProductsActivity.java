@@ -1,27 +1,37 @@
-// ProductsActivity.java
 package com.example.tiendadecampeones.ui;
 
+import static com.example.tiendadecampeones.R.*;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.ProductsAdapter;
 import com.example.tiendadecampeones.models.Product;
-import android.content.Intent;
-import android.widget.ImageButton;
+
+import com.example.tiendadecampeones.network.ApiService;
+import com.example.tiendadecampeones.network.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProductsActivity extends AppCompatActivity {
 
     private RecyclerView productsRecyclerView;
     private ProductsAdapter productsAdapter;
-    private List<Product> productList;
+    private String selectedPais;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +66,8 @@ public class ProductsActivity extends AppCompatActivity {
         Button productsButton = findViewById(R.id.productsButton);
         productsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // User is already on the ProductsActivity
+                Intent intent = new Intent(ProductsActivity.this, ProductCategories.class);
+                startActivity(intent);
             }
         });
 
@@ -68,17 +79,40 @@ public class ProductsActivity extends AppCompatActivity {
             }
         });
 
-        // Seteo del recycler view
+
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Simulando datos obtenidos desde la BD
-        productList = new ArrayList<>();
-        productList.add(new Product("Camiseta Argentina 2021", "Description 1", 19.99, R.mipmap.argentina_2021_primera, 1));
-        productList.add(new Product("Camiseta Brasil 2002", "Description 2", 29.99, R.mipmap.brasil_2002_primera, 2));
-        productList.add(new Product("Camiseta Alemania 2014", "Description 3", 39.99, R.mipmap.alemania_2014_segunda, 2));
+        String selectedPais = getIntent().getStringExtra("pais");
+        Log.d("ProductsActivity", "País seleccionado: " + selectedPais);
+        getProductosPorPais(selectedPais);
+    }
 
-        productsAdapter = new ProductsAdapter(productList, this);
-        productsRecyclerView.setAdapter(productsAdapter);
+
+    private void getProductosPorPais(String pais) {
+
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+
+        Call<List<Product>> call = apiService.getProductosPorPais(pais);
+
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Product> productList = response.body();
+                    Log.d("ProductsActivity", "Productos recibidos: " + productList.size());
+                    productsAdapter = new ProductsAdapter(productList, ProductsActivity.this);
+                    productsRecyclerView.setAdapter(productsAdapter);
+                } else {
+                    Log.e("ProductsActivity", "Error en la respuesta: " + response.message());
+                    Toast.makeText(ProductsActivity.this, "No hay producto " + pais, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(ProductsActivity.this, "Error producto: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
