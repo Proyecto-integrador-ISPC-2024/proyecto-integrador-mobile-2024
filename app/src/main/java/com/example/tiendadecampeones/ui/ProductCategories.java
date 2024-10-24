@@ -56,6 +56,10 @@ public class ProductCategories extends AppCompatActivity {
 
         // Captura de botones de categorías de países
         ImageButton buttonGermany = findViewById(R.id.buttonGermany);
+        ImageButton buttonBrazil = findViewById(R.id.buttonBrazil);
+        ImageButton buttonSpain = findViewById(R.id.buttonSpain);
+        ImageButton buttonEngland = findViewById(R.id.buttonEngland);
+        ImageButton buttonItaly = findViewById(R.id.buttonItaly);
         ImageButton buttonArgentina = findViewById(R.id.buttonArgentina);
         ImageButton buttonFrance = findViewById(R.id.buttonFrance);
         ImageButton buttonUruguay = findViewById(R.id.buttonUruguay);
@@ -88,6 +92,23 @@ public class ProductCategories extends AppCompatActivity {
                 openProductList("Uruguay");
             }
         });
+        buttonEngland.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { openProductList("Inglaterra");}
+        });
+        buttonItaly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { openProductList("Italia");}
+        });
+        buttonSpain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { openProductList("España");}
+        });
+        buttonBrazil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { openProductList("Brazil");}
+        });
+
     }
 
     // Renderizado de lista de productos según país elegido

@@ -20,7 +20,10 @@
             android:layout_marginEnd="270dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/back_button"
-            android:src="@drawable/arrow_back_icon_35x35" />
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:nextFocusRight="@id/btnDeactivateAccount"/>
 
         <ImageButton
             android:id="@+id/btnDeactivateAccount"
@@ -29,6 +32,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:onClick="onDeleteAccountClicked"
             android:contentDescription="@string/disableAccount"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:src="@drawable/no_accounts_35dp_7d1010_fill0_wght400_grad0_opsz40"
             />
     </LinearLayout>
@@ -101,7 +106,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginHorizontal="64dp"
             android:onClick="onEditProfileClicked"
-            android:text="@string/editProfile" />
+            android:text="@string/editProfile"
+            android:contentDescription="@string/editProfile"
+            />
 
         <Button
             android:id="@+id/btn_save_changes"

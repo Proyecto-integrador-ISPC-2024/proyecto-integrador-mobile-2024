@@ -1,6 +1,7 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,16 +31,21 @@ public class Home extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
-        // Recibe el nombre del usuario desde el Intent
+        // Recibimos el nombre de usuario
         Intent intent = getIntent();
         String nombreUsuario = intent.getStringExtra("nombreUsuario");
 
-        // Muestra el AlertDialog con el mensaje de bienvenida
-        new AlertDialog.Builder(this)
-                .setTitle("Bienvenido de vuelta")
-                .setMessage("Hola, " + nombreUsuario + "!")
-                .setPositiveButton("Continuar", (dialog, which) -> dialog.dismiss())
-                .show();
+        boolean mostrarBienvenida = intent.getBooleanExtra("mostrarBienvenida", false);
+
+        if (mostrarBienvenida) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Bienvenido de vuelta")
+                    .setMessage("Hola, " + nombreUsuario + "!")
+                    .setPositiveButton("Continuar", (dialog, which) -> dialog.dismiss())
+                    .show();
+
+            intent.removeExtra("mostrarBienvenida");
+        }
 
         //  Barra de navegación lateral
         drawerLayout = findViewById(R.id.main);
