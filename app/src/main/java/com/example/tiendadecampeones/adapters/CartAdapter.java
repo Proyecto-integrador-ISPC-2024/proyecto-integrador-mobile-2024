@@ -121,6 +121,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         notifyItemRemoved(position);
         notifyDataSetChanged();
         ((Cart) context).calculateTotal();
+        Toast.makeText(context, "¡Producto eliminado!", Toast.LENGTH_SHORT).show();
 
         // Actualización de las sharedpreferences guardadas para el carro
         updateSharedPreferences();
