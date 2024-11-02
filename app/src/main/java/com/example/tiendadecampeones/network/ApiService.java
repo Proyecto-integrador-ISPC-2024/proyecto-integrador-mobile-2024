@@ -55,10 +55,10 @@ public interface ApiService {
     Call<List<Size>> getTalles();*/
 
     @POST("pedidos/")
-    Call<Pedido> realizarPedido(@Header("Authorization") String authToken, @Body Pedido pedido);
+    Call<Pedido> realizarPedido(@Body Pedido pedido);
 
     @GET("pedidos/listar_metodopago")
-    Call<PaymentMethods> getPaymentMethods(@Header("Authorization") String token);
+    Call<PaymentMethods> getPaymentMethods();
 
     @GET("pedidos/")
     Call<List<Order>> getOrders(

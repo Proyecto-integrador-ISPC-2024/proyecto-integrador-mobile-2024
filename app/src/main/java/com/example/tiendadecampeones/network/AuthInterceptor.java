@@ -1,9 +1,11 @@
 package com.example.tiendadecampeones.network;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.tiendadecampeones.models.UserLogInResponse;
+import com.example.tiendadecampeones.ui.LoginActivity;
 
 import java.io.IOException;
 import okhttp3.Interceptor;
@@ -66,13 +68,16 @@ public class AuthInterceptor implements Interceptor{
                 response.close(); // Cierra la respuesta anterior antes de hacer otra llamada
                 return chain.proceed(newRequest);
             } else {
-                // Si falla, realiza un logout o maneja el error según sea necesario
-                // logoutUser();
+                redirectToLogin();
             }
         }
 
         return response;
     }
-
+    private void redirectToLogin() {
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
 
 }

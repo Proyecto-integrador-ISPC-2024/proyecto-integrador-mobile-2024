@@ -133,23 +133,18 @@ public class PaymentMethodsActivity extends AppCompatActivity {
 
     private void loadPaymentMethods() {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        String authToken = preferences.getString("accessToken", null);
+        String authToken = preferences.getString("token", null);
         int id_usuario = preferences.getInt("id_usuario", -1);
 
-        if (authToken == null) {
+        if (authToken == null || id_usuario == -1) {
             Toast.makeText(this, "No autenticado. Inicie sesión.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
             return;
         }
-        if (id_usuario == -1) {
-            Toast.makeText(this, "ID de usuario no válido.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String fullAuthToken = "Bearer " + authToken;
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-        Call<PaymentMethods> call = apiService.getPaymentMethods(fullAuthToken);
+        Call<PaymentMethods> call = apiService.getPaymentMethods();
 
         call.enqueue(new Callback<PaymentMethods>() {
             @Override
@@ -372,19 +367,20 @@ public class PaymentMethodsActivity extends AppCompatActivity {
     private void realizarPedido(Pedido pedido) {
 
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        String authToken = preferences.getString("accessToken", null);
-        if (authToken == null) {
-            Toast.makeText(this, "No se encontró el token de autenticación.", Toast.LENGTH_SHORT).show();
+        if (preferences.getString("token", null) == null) {
+            Toast.makeText(this, "No se encontró el token de autenticación. Inicie sesión.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
             return;
         }
-        String fullAuthToken = "Bearer " + authToken;
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-        Call<Pedido> call = apiService.realizarPedido(fullAuthToken, pedido);
+        Call<Pedido> call = apiService.realizarPedido(pedido);
         call.enqueue(new Callback<Pedido>() {
             @Override
             public void onResponse(Call<Pedido> call, Response<Pedido> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(PaymentMethodsActivity.this, "Pedido realizado exitosamente.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PaymentMethodsActivity.this, "Pedido realizado exitosamente.puedes darle seguimiento en tu dashboard", Toast.LENGTH_SHORT).show();
                 } else {
                     int errorCode = response.code();
                     String errorMessage = response.message();
