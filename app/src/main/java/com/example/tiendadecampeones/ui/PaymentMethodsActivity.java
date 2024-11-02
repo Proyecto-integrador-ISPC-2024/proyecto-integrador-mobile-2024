@@ -133,7 +133,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
 
     private void loadPaymentMethods() {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        String authToken = preferences.getString("token", null);
+        String authToken = preferences.getString("accessToken", null);
         int id_usuario = preferences.getInt("id_usuario", -1);
 
         if (authToken == null || id_usuario == -1) {
@@ -367,7 +367,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
     private void realizarPedido(Pedido pedido) {
 
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        if (preferences.getString("token", null) == null) {
+        if (preferences.getString("accessToken", null) == null) {
             Toast.makeText(this, "No se encontró el token de autenticación. Inicie sesión.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
