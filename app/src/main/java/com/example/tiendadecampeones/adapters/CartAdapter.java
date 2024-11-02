@@ -47,8 +47,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         Product product = productList.get(position);
         Product.Producto productoDetails = product.getProductos();
-
-        // Obtención de datos agregados al carro
+        holder.productName.setText(productoDetails.getNombreProducto());
+        holder.productPrice.setText("Precio: $" + productoDetails.getPrecio());
+        // Cargar la imagen
         String imageUrl = productoDetails.getImagen();
         Glide.with(context)
                 .load(imageUrl)
@@ -83,6 +84,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.productQuantity.setText(Integer.toString(product.getTalles().get(0).getCantidadCompra()));
     }
 
+
+
     @Override
     public int getItemCount() {
         return productList.size();
@@ -114,6 +117,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         ((Cart) context).calculateTotal();
         updateSharedPreferences();
     }
+
 
     // Remoción de productos del carro
     private void removeProduct(int position) {

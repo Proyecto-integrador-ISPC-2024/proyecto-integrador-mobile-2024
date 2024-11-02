@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.recyclerview)
     implementation(libs.play.services.maps)
+    implementation(libs.lottie)
 
     // Retrofit dependencies
     implementation(libs.retrofit)
