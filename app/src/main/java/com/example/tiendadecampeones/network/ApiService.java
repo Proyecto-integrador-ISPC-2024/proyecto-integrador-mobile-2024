@@ -72,7 +72,6 @@ public interface ApiService {
     );
     @PATCH("usuarios/{id}/")
     Call<UserProfile> updateProfile(@Path("id") int id,
-            @Header("Authorization") String token,
             @Body UserProfile profile
     );
 

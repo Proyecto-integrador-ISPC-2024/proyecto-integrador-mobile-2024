@@ -57,7 +57,7 @@ public class AuthInterceptor implements Interceptor{
                 String newToken = newTokenResponse.getToken();
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("token", newToken);
+                editor.putString("accessToken", newToken);
                 editor.apply();
 
                 // Repite la solicitud original con el nuevo token
