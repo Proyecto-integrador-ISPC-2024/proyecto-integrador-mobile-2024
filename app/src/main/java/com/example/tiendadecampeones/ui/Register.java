@@ -1,5 +1,7 @@
 package com.example.tiendadecampeones.ui;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -74,72 +76,78 @@ public class Register extends AppCompatActivity {
         String password = etPassword.getText().toString().trim();
         String confirmPassword = etConfirmPassword.getText().toString().trim();
 
-        // Validar que el nombre no esté vacío
-        if (nombre.isEmpty()) {
-            etNombre.setError("El nombre no puede estar vacío");
-            return false;
+
+        if (isFieldEmpty(nombre, etNombre, "El nombre no puede estar vacío") ||
+                !isValidText(nombre, etNombre, "El nombre solo debe contener letras y tener un máximo de 40 caracteres",false) ||
+                isFieldEmpty(apellido, etApellido, "El apellido no puede estar vacío") ||
+                !isValidText(apellido, etApellido, "El apellido solo debe contener letras y tener un máximo de 40 caracteres",false) ||
+                isFieldEmpty(domicilio, etDomicilio, "El domicilio no puede estar vacío") ||
+                !isValidText(domicilio, etDomicilio, "El domicilio solo debe contener letras y números y tener un máximo de 40 caracteres", true) ||
+                !isValidEmail(email) ||
+                !isValidPassword(password) ||
+                !arePasswordsMatching(password, confirmPassword)) {
+            return false; // Si alguna validación falla, retorna false
         }
 
-        // Validar que el apellido no esté vacío
-        if (apellido.isEmpty()) {
-            etApellido.setError("El apellido no puede estar vacío");
+        return true;
+    }
+
+    // Método para verificar si un campo está vacío
+    private boolean isFieldEmpty(String field, EditText editText, String errorMessage) {
+        if (field.isEmpty()) {
+            editText.setError(errorMessage);
+            return true;
+        }
+        return false;
+    }
+
+    // Método para validar que los campos solo contengan letras y espacios, y tengan un máximo de 40 caracteres
+    private boolean isValidText(String text, EditText editText, String errorMessage, boolean allowNumbers) {
+        String textPattern = allowNumbers ? "^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\\s]{1,40}$" : "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{1,40}$";
+        if (!text.matches(textPattern)) {
+            editText.setError(errorMessage);
             return false;
         }
+        return true;
+    }
 
-        // Validar que el domicilio no esté vacío
-        if (domicilio.isEmpty()) {
-            etDomicilio.setError("El domicilio no puede estar vacío");
+    // Método para validar el correo electrónico
+    private boolean isValidEmail(String email) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError("El formato del correo electrónico no es válido");
             return false;
         }
+        return true;
+    }
 
-        // Validar que el correo no esté vacío
-        if ( !isValidEmail(email)) {
-            etEmail.setError("El formato del correo electronico no es valido");
-            return false;
-        }
-
-
-        // Validar que la contraseña no esté vacía
+    // Método para validar la contraseña
+    private boolean isValidPassword(String password) {
         if (password.isEmpty()) {
             etPassword.setError("La contraseña no puede estar vacía");
             return false;
         }
-        // Validar formato de la contraseña
-        if (!isValidPassword(password)) {
+        String passwordPattern = "^(?=.*[0-9])(?=.*[!@#$%^&*()\\-_=+{};:,<.>])(?=\\S+$).{8,40}$";
+        if (!password.matches(passwordPattern)) {
             etPassword.setError("La contraseña debe tener al menos 8 caracteres, un número y un símbolo especial");
             return false;
         }
+        return true;
+    }
 
-
-        // Validar que la confirmación de contraseña no esté vacía
-        if (confirmPassword.isEmpty()) {
-            etConfirmPassword.setError("Debes confirmar tu contraseña");
-            return false;
-        }
-
-        // Validar que las contraseñas coincidan
+    // Método para verificar si las contraseñas coinciden
+    private boolean arePasswordsMatching(String password, String confirmPassword) {
         if (!password.equals(confirmPassword)) {
             etConfirmPassword.setError("Las contraseñas no coinciden");
             return false;
         }
-
-        // Si todas las validaciones son correctas, retorna true
         return true;
     }
 
-    // métodos para validar que los campos no esten vacíos, mail y contrasña
-    private boolean isValidEmail(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    private boolean isValidPassword(String password) {
-        String passwordPattern = "^(?=.*[0-9])(?=.*[!@#$%^&*()\\-_=+{};:,<.>])(?=\\S+$).{8,}$";
-        return password.matches(passwordPattern);
-    }
 
     // Método para realizar el POST
     private void makePostRequest() {
         ApiService apiService = ApiService.create();
+
 
         Map<String, String> userData = new HashMap<>();
         userData.put("nombre", etNombre.getText().toString().trim());
@@ -160,7 +168,7 @@ public class Register extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
 
                     RegisterResponse registerResponse = response.body();
-                    Toast.makeText(Register.this, "Registro exitoso" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(Register.this, "Registro exitoso", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(Register.this, LoginActivity.class);
                     startActivity(intent);
