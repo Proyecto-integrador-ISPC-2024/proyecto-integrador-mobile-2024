@@ -123,13 +123,14 @@ public class Register extends AppCompatActivity {
 
     // Método para validar la contraseña
     private boolean isValidPassword(String password) {
-        if (password.isEmpty()) {
-            etPassword.setError("La contraseña no puede estar vacía");
+        if (password.length() < 8 || password.length() > 18) {
+            etPassword.setError("La contraseña debe tener entre 8 y 18 caracteres");
             return false;
         }
-        String passwordPattern = "^(?=.*[0-9])(?=.*[!@#$%^&*()\\-_=+{};:,<.>])(?=\\S+$).{8,40}$";
+
+        String passwordPattern = "^(?=.*[0-9])(?=.*[!@#$%^&*()\\-_=+{};:,<.>])(?=\\S+$).*$";
         if (!password.matches(passwordPattern)) {
-            etPassword.setError("La contraseña debe tener al menos 8 caracteres, un número y un símbolo especial");
+            etPassword.setError("La contraseña debe tener un número y un símbolo especial");
             return false;
         }
         return true;
