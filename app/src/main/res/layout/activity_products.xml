@@ -9,9 +9,6 @@
     tools:context=".ui.ProductsActivity"
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true">
-
-        <!-- Navbar superior -->
-
     <LinearLayout
         android:id="@id/topNavbar"
         android:layout_width="match_parent"
@@ -20,7 +17,6 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="8dp">
-
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="64dp"
@@ -29,7 +25,6 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/back_button"
             android:src="@drawable/arrow_back_icon_35x35" />
-
         <ImageButton
             android:id="@+id/cartButton"
             android:layout_width="64dp"
@@ -38,28 +33,25 @@
             android:src="@drawable/shopping_cart_icon_35x35"
             android:contentDescription="@string/cart_button" />
     </LinearLayout>
-
-    <!-- Products List (RecyclerView) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:scrollbars="vertical"
         android:paddingHorizontal="16dp"
         />
-
-    <!-- Bottom Navigation -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/colorSecondary"
         android:padding="8dp">
-
         <Button
             android:id="@+id/homeButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -68,9 +60,9 @@
             android:drawableTop="@drawable/home_icon_35x35"
             android:gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless" />
-
         <Button
             android:id="@+id/productsButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -79,9 +71,9 @@
             android:drawableTop="@drawable/shopping_bag_icon_35x35"
             android:gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless" />
-
         <Button
             android:id="@+id/profileButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -91,6 +83,5 @@
             android:gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
-
 </LinearLayout>
 

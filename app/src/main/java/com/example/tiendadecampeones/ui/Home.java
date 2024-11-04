@@ -1,6 +1,7 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,16 +31,21 @@ public class Home extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
-        // Recibe el nombre del usuario desde el Intent
+        // Recibimos el nombre de usuario
         Intent intent = getIntent();
         String nombreUsuario = intent.getStringExtra("nombreUsuario");
 
-        // Muestra el AlertDialog con el mensaje de bienvenida
-        new AlertDialog.Builder(this)
-                .setTitle("Bienvenido de vuelta")
-                .setMessage("Hola, " + nombreUsuario + "!")
-                .setPositiveButton("Continuar", (dialog, which) -> dialog.dismiss())
-                .show();
+        boolean mostrarBienvenida = intent.getBooleanExtra("mostrarBienvenida", false);
+
+        if (mostrarBienvenida) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Bienvenido de vuelta")
+                    .setMessage("Hola, " + nombreUsuario + "!")
+                    .setPositiveButton("Continuar", (dialog, which) -> dialog.dismiss())
+                    .show();
+
+            intent.removeExtra("mostrarBienvenida");
+        }
 
         //  Barra de navegación lateral
         drawerLayout = findViewById(R.id.main);
@@ -65,36 +71,29 @@ public class Home extends AppCompatActivity {
                 int id = item.getItemId();
 
                 if (id == R.id.nav_products) {
-                    // Acción para el ítem "Productos"
                     Intent intent = new Intent(Home.this, ProductsActivity.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_cart) {
-                    // Acción para el ítem "Mi carrito"
                     Intent intent = new Intent(Home.this, Cart.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_conocenos) {
-                    // Acción para el ítem "Conócenos"
                     Intent intent = new Intent(Home.this, AboutUs.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_contacto) {
-                    // Acción para el ítem "Contacto"
                     Intent intent = new Intent(Home.this, Contact.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_perfil) {
-                    // Acción para el ítem "Perfil"
                     Intent intent = new Intent(Home.this, Profile.class);
                     startActivity(intent);
 
                 } else if (id == R.id.nav_dashboard) {
-                    // Acción para el ítem "Dashboard"
                     Intent intent = new Intent(Home.this, Dashboard.class);
                     startActivity(intent);
                 }
-
 
                 return true;
             }
@@ -116,8 +115,6 @@ public class Home extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     public void profileBtn(View view) {

@@ -19,6 +19,7 @@ import com.example.tiendadecampeones.adapters.ProductsAdapter;
 import com.example.tiendadecampeones.models.Product;
 
 import com.example.tiendadecampeones.network.ApiService;
+import com.example.tiendadecampeones.network.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +31,7 @@ public class ProductsActivity extends AppCompatActivity {
 
     private RecyclerView productsRecyclerView;
     private ProductsAdapter productsAdapter;
-
     private String selectedPais;
-
-    private List<Product> carrito = new ArrayList<>();
-    private List<String> tallesStringList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +86,12 @@ public class ProductsActivity extends AppCompatActivity {
         String selectedPais = getIntent().getStringExtra("pais");
         Log.d("ProductsActivity", "País seleccionado: " + selectedPais);
         getProductosPorPais(selectedPais);
-
     }
 
 
     private void getProductosPorPais(String pais) {
 
-        ApiService apiService = ApiService.create();
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
         Call<List<Product>> call = apiService.getProductosPorPais(pais);
 

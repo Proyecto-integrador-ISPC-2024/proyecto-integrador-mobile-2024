@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.models.RegisterResponse;
 import com.example.tiendadecampeones.network.ApiService;
+import com.example.tiendadecampeones.network.RetrofitClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -146,7 +147,7 @@ public class Register extends AppCompatActivity {
 
     // Método para realizar el POST
     private void makePostRequest() {
-        ApiService apiService = ApiService.create();
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
 
         Map<String, String> userData = new HashMap<>();

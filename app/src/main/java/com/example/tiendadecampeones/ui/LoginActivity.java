@@ -63,14 +63,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Pantalla de Bienvenida a Conocenos
-
-        // Button btn2 = findViewById(R.id.buttonIniciarSecion);
-        // btn2.setOnClickListener(v -> {
-        //     Intent intent = new Intent(LoginActivity.this, Home.class);
-        //     startActivity(intent);
-        // });
-
         // Botón de Inicio de Sesión
         Button btn2 = findViewById(R.id.loginButton);
         btn2.setOnClickListener(v -> {
@@ -78,13 +70,10 @@ public class LoginActivity extends AppCompatActivity {
             String password = passwordField.getText().toString().trim();
 
             if (!areFieldsNotEmpty(email, password)) {
-                // Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
                 showAlert("Error", "Todos los campos son obligatorios");
             } else if (!isValidEmail(email)) {
-                // Toast.makeText(this, "Email no tiene formato válido", Toast.LENGTH_SHORT).show();
                 showAlert("Error", "Email no tiene formato válido");
             } else if (!isValidPassword(password)) {
-                // Toast.makeText(this, "La contraseña debe tener al menos 8 caracteres, un número y un carácter especial", Toast.LENGTH_SHORT).show();
                 showAlert("Error", "La contraseña debe tener al menos 8 caracteres, un número y un carácter especial");
             } else {
                 loginUser(email, password);
@@ -106,17 +95,6 @@ public class LoginActivity extends AppCompatActivity {
 
         editor.apply();
 
-        // Data debug - here the data logs properly
-        Log.d("TokenDebug", "Token guardado: " + token);
-        Log.d("TokenRefreshDebug", "Refresh Token: " + refresh);
-        Log.d("TokenDebug", "Access Token saved: " + token);
-        Log.d("TokenDebug", "Refresh Token saved: " + refresh);
-        Log.d("UserInfoDebug", "User ID: " + id_usuario);
-        Log.d("UserInfoDebug", "nombre: " + nombre);
-        Log.d("UserInfoDebug", "apellido: " + apellido);
-        Log.d("UserInfoDebug", "email: " + email);
-        Log.d("UserInfoDebug", "domicilio: " + domicilio);
-        Log.d("UserInfoDebug", "Rol: " + rol);
     }
 
     private void showAlert(String title, String message) {
@@ -129,12 +107,6 @@ public class LoginActivity extends AppCompatActivity {
 
     // Método para hacer login
     private void loginUser(String email, String password) {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://recdev.pythonanywhere.com/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        ApiService apiService = retrofit.create(ApiService.class);
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         Call<UserLogInResponse> call = apiService.login(email, password);
         call.enqueue(new Callback<UserLogInResponse>() {
@@ -151,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
                     String rol = response.body().getUsuario().getRol();
                     int id_usuario = response.body().getUsuario().getIdUsuario();
 
-
                     // Guardar tokens en SharedPreferences
                     saveTokens(token, refreshToken, id_usuario, nombre, apellido, email, domicilio, rol);
 
@@ -165,18 +136,16 @@ public class LoginActivity extends AppCompatActivity {
                         intent = new Intent(LoginActivity.this, Home.class);
                     }
                     intent.putExtra("nombreUsuario", nombre); // Agrega el nombre de usuario al Intent
+                    intent.putExtra("mostrarBienvenida", true);
                     startActivity(intent);
                     finish();
-
                 } else {
-                    // Toast.makeText(LoginActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
                     showAlert("Error", "Credenciales incorrectas");
                 }
             }
 
             @Override
             public void onFailure(Call<UserLogInResponse> call, Throwable t) {
-                // Toast.makeText(LoginActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
                 showAlert("Error", "Error de conexión");
             }
         });
