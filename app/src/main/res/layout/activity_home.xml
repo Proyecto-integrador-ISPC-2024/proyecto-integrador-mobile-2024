@@ -5,14 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Home"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".ui.Home">
 
+    <!-- Main content layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Logo -->
+        <!-- Header with logo -->
         <LinearLayout
             android:id="@+id/headerLayout"
             android:layout_width="match_parent"
@@ -20,8 +21,6 @@
             android:background="@color/colorPrimary"
             android:orientation="vertical"
             android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -31,10 +30,9 @@
                 android:layout_gravity="center"
                 android:contentDescription="@string/app_name"
                 android:src="@mipmap/logo_activities" />
-
         </LinearLayout>
 
-        <!-- Navegación superior -->
+        <!--    Navegación superior    -->
         <LinearLayout
             android:id="@+id/topNavbar"
             android:layout_width="match_parent"
@@ -42,20 +40,17 @@
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
             android:padding="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerLayout"
-            android:contentDescription="@string/contdes_navSup">
+            app:layout_constraintTop_toBottomOf="@+id/headerLayout">
 
             <ImageButton
                 android:id="@+id/sideNavButton"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_marginEnd="280dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/menu_icon_35x35"
-                android:contentDescription="@string/contdes_menu_desplegable"/>
+                android:layout_weight="1"
+                android:layout_marginEnd="256dp"
+                android:contentDescription="@string/contdes_menu_desplegable" />
 
             <ImageButton
                 android:id="@+id/cartButton"
@@ -63,256 +58,249 @@
                 android:layout_height="64dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/shopping_cart_icon_35x35"
+                android:layout_weight="1"
                 android:contentDescription="@string/cart_button" />
-
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/contactInfoLayout"
+        <!--    Contenido principal    -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/topNavbar">
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/topNavbar"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
+            tools:ignore="ScrollViewCount">
 
-            <TextView
-                android:id="@+id/homeLabel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
-                android:text="@string/homeTitle"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:contentDescription="@string/homeTitle"/>
-
-            <TextView
-                android:id="@+id/textHome"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:text="@string/homeDescription"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/homeLabelTwo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/homeTitleTwo"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/secondTextHome"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
-                android:text="@string/homeSubtitle"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <HorizontalScrollView
-                android:id="@+id/recommendedScrollView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:scrollbars="none">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <LinearLayout
-                    android:id="@+id/recommendedProductsLayout"
+                <TextView
+                    android:id="@+id/homeLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/homeTitle"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:contentDescription="@string/homeTitle"/>
+
+                <TextView
+                    android:id="@+id/textHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/homeDescription"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/homeLabelTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/homeTitleTwo"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/secondTextHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/homeSubtitle"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/aboutUsImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:src="@mipmap/ilustracion_copa"
+                    android:contentDescription="@string/photoAbout"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true" />
 
-                    <!-- Producto 1 -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:background="@color/colorSecondary"
-                        android:orientation="vertical"
-                        android:padding="8dp"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:contentDescription="@string/contdes_productscroll_button"
-                        android:nextFocusRight="@id/product_2">
+<!--                <HorizontalScrollView-->
+<!--                    android:id="@+id/recommendedScrollView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:scrollbars="none">-->
 
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:src="@mipmap/argentina_1978_primera"
-                            android:contentDescription="@string/contdes_image1"/>
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/recommendedProductsLayout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/argContactProd"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp"
-                            android:contentDescription="@string/contdes_productname1"/>
-                    </LinearLayout>
+<!--                        &lt;!&ndash; Producto 1 &ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="16dp"-->
+<!--                            android:background="@color/colorSecondary"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:focusable="true"-->
+<!--                            android:focusableInTouchMode="true"-->
+<!--                            android:contentDescription="@string/contdes_productscroll_button"-->
+<!--                            android:nextFocusRight="@id/product_2">-->
 
-                    <!-- Producto 2 -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:background="@color/colorSecondary"
-                        android:orientation="vertical"
-                        android:padding="8dp"
-                        android:contentDescription="@string/contdes_productscroll_button"
-                        android:nextFocusRight="@id/product_3">
+<!--                            <ImageView-->
+<!--                                android:layout_width="120dp"-->
+<!--                                android:layout_height="120dp"-->
+<!--                                android:src="@mipmap/argentina_1978_primera"-->
+<!--                                android:contentDescription="@string/contdes_image1"/>-->
 
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:src="@mipmap/brasil_1958_primera"
-                            android:contentDescription="@string/contdes_image2"/>
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:text="@string/argContactProd"-->
+<!--                                android:textAlignment="center"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:contentDescription="@string/contdes_productname1"/>-->
+<!--                        </LinearLayout>-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/brContactProd"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp"
-                            android:contentDescription="@string/contdes_productname2"/>
-                    </LinearLayout>
+<!--                        &lt;!&ndash; Producto 2 &ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="16dp"-->
+<!--                            android:background="@color/colorSecondary"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:contentDescription="@string/contdes_productscroll_button"-->
+<!--                            android:nextFocusRight="@id/product_3">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="120dp"-->
+<!--                                android:layout_height="120dp"-->
+<!--                                android:src="@mipmap/brasil_1958_primera"-->
+<!--                                android:contentDescription="@string/contdes_image2"/>-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:text="@string/brContactProd"-->
+<!--                                android:textAlignment="center"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:contentDescription="@string/contdes_productname2"/>-->
+<!--                        </LinearLayout>-->
 
 
-                    <!-- Producto 3 -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:background="@color/colorSecondary"
-                        android:orientation="vertical"
-                        android:padding="8dp"
-                        android:contentDescription="@string/contdes_productscroll_button">
+<!--                        &lt;!&ndash; Producto 3 &ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="16dp"-->
+<!--                            android:background="@color/colorSecondary"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:contentDescription="@string/contdes_productscroll_button">-->
 
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:src="@mipmap/francia_1998_primera"
-                            android:contentDescription="@string/contdes_image3"/>
+<!--                            <ImageView-->
+<!--                                android:layout_width="120dp"-->
+<!--                                android:layout_height="120dp"-->
+<!--                                android:src="@mipmap/francia_1998_primera"-->
+<!--                                android:contentDescription="@string/contdes_image3"/>-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/frContactProd"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp"
-                            android:contentDescription="@string/contdes_productname3"/>
-                    </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:text="@string/frContactProd"-->
+<!--                                android:textAlignment="center"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:contentDescription="@string/contdes_productname3"/>-->
+<!--                        </LinearLayout>-->
 
-                </LinearLayout>
-            </HorizontalScrollView>
+<!--                    </LinearLayout>-->
+<!--                </HorizontalScrollView>-->
 
-            <!-- Botón para ir a comprar -->
-            <Button
-                android:id="@+id/buyButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="@color/colorSecondary"
-                android:onClick="productClick"
-                android:text="@string/homeBtn"
-                android:textColor="@color/colorPrimary"
-                android:contentDescription="@string/contdes_buy_btn"/>
+                <Button
+                    android:id="@+id/buyButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:text="@string/homeBtn"
+                    android:textColor="@color/colorPrimary"
+                    android:contentDescription="@string/contdes_buy_btn"/>
+            </LinearLayout>
+        </ScrollView>
 
-        </LinearLayout>
-
+        <!--    Navegación inferior    -->
         <LinearLayout
             android:id="@+id/bottomNavbar"
+            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorSecondary"
             android:orientation="horizontal"
             android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:contentDescription="@string/bottom_navbar_description">
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
                 android:id="@+id/homeButton"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/home_icon_35x35"
-                android:drawablePadding="0dp"
-                android:onClick="homeButton"
-                android:padding="8dp"
                 android:text="@string/home_button"
                 android:textColor="@android:color/white"
-                android:contentDescription="@string/contdes_home_button"
-                android:nextFocusRight="@id/productsButton"
-                />
+                android:contentDescription="@string/contdes_home_button" />
 
             <Button
                 android:id="@+id/productsButton"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/shopping_bag_icon_35x35"
-                android:drawablePadding="0dp"
-                android:onClick="productsButton"
-                android:padding="8dp"
                 android:text="@string/products_button"
                 android:textColor="@android:color/white"
-                android:contentDescription="@string/contdes_products_button"
-                android:nextFocusRight="@id/profileButton"/>
+                android:contentDescription="@string/contdes_products_button" />
 
             <Button
                 android:id="@+id/profileBtn"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/account_icon_35x35"
-                android:drawablePadding="0dp"
-                android:onClick="profileBtn"
-                android:padding="8dp"
                 android:text="@string/account_button"
                 android:textColor="@android:color/white"
-                android:contentDescription="@string/contdes_profile_button"
-                />
-
+                android:contentDescription="@string/contdes_profile_button" />
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--    Navegación lateral    -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
-        android:layout_width="240dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/drawer_menu"
-        android:background="@color/colorPrimary" />
+        app:menu="@menu/navigation_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
