@@ -12,14 +12,14 @@ import android.widget.Toast;
 import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.network.RetrofitClient;
 import com.example.tiendadecampeones.adapters.OrderProductAdapter;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,11 +40,8 @@ public class OrderActivity extends AppCompatActivity {
     private Button trackOrderButton;
     private Button cancelButton;
     private int id_pedido;
-    private int id_usuario;
-    private String authToken;
     private RecyclerView productsRecyclerView;
     private OrderProductAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +52,6 @@ public class OrderActivity extends AppCompatActivity {
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         id_pedido = intent.getIntExtra("ORDER_ID", -1);
-        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        authToken = preferences.getString("accessToken", null);
-        id_usuario = preferences.getInt("id_usuario", -1);
 
         if (id_pedido != -1) {
             loadOrderDetails();
@@ -66,7 +60,6 @@ public class OrderActivity extends AppCompatActivity {
         }
 
         setupButtonListeners();
-
     }
 
     private void initializeViews() {
@@ -83,11 +76,14 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     private void loadOrderDetails() {
-        if (id_usuario != -1 && authToken != null) {
-            ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-            String fullAuthToken = "Bearer " + authToken;
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String token = preferences.getString("accessToken", null);
+        int id_usuario = preferences.getInt("id_usuario", -1);
 
-            Call<List<Order>> call = apiService.getOrders(fullAuthToken);
+        if (id_usuario != -1 && token != null) {
+            ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+
+            Call<List<Order>> call = apiService.getOrders();
             call.enqueue(new Callback<List<Order>>() {
                 @Override
                 public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
@@ -104,75 +100,69 @@ public class OrderActivity extends AppCompatActivity {
                         showToast("Error al obtener detalles del pedido");
                     }
                 }
-
                 @Override
                 public void onFailure(Call<List<Order>> call, Throwable t) {
-                    showToast("Fallo de conexión");
+                    showToast("Error al cargar los detalles del pedido: " + t.getMessage());
                 }
             });
         } else {
-            showToast("Usuario no autenticado");
+            showToast("Usuario no autenticado. Inicie sesión.");
         }
     }
 
     private void cancelOrder(int id_pedido) {
-        if (id_usuario != -1 && authToken != null) {
-            ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-            String fullAuthToken = "Bearer " + authToken;
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String token = preferences.getString("accessToken", null);
+        int id_usuario = preferences.getInt("id_usuario", -1);
 
-            Call<Void> deleteOrderCall = apiService.deleteOrder(fullAuthToken, id_pedido);
+        if (id_usuario != -1 && token != null) {
+            ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+
+            Call<Void> deleteOrderCall = apiService.deleteOrder(id_pedido);
             deleteOrderCall.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         showToast("Pedido cancelado exitosamente");
-                        volverAlDashboard(null);
+                        volverAlDashboard();
                     } else {
-                        handleErrorResponse(response);
+                        try {
+                            String errorBody = response.errorBody().string();
+                            if (response.code() == 404) {
+                                showToast("El pedido no se encontró o ya estaba cancelado.");
+                            } else if (response.code() == 403) {
+                                showToast("No tienes permiso para cancelar este pedido.");
+                            } else {
+                                showToast("Error desconocido al cancelar el pedido.");
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    showToast("Fallo de conexión al cancelar el pedido");
+                    showToast("Error al cancelar el pedido: " + t.getMessage());
                 }
             });
         } else {
-            showToast("Usuario no autenticado");
-        }
-    }
-
-    private void handleErrorResponse(Response<Void> response) {
-        try {
-            String errorBody = response.errorBody().string();
-            if (response.code() == 404) {
-                showToast("El pedido no se encontró o ya estaba cancelado.");
-            } else if (response.code() == 403) {
-                showToast("No tienes permiso para cancelar este pedido.");
-            } else {
-                showToast("Error desconocido al cancelar el pedido.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            showToast("Usuario no autenticado. Inicie sesión.");
         }
     }
 
     private void displayOrderDetails(Order order) {
-        //Mostrar número de pedido
         orderNumber.setText(getString(R.string.order_label) + " " + order.getIdPedido());
-        //Mostrar fecha
+
         orderDate.setText(getString(R.string.order_date_label) + " " + (order.getFecha()));
-        //Mostrar estado
+
         orderStatus.setText(getString(R.string.order_status_label) + " " + order.getEstado());
 
-        // Mostrar detalles de productos
         List<Order.OrderDetail> detalles = order.getDetalles();
         if (detalles != null) {
             adapter = new OrderProductAdapter(this, detalles);
             productsRecyclerView.setAdapter(adapter);
         }
 
-        // Mostrar métodos de pago
         List<Order.FormaDePago> formasDePagoList = order.getFormaDePago();
         if (formasDePagoList != null && !formasDePagoList.isEmpty()) {
             StringBuilder formasDePagoStr = new StringBuilder();
@@ -182,9 +172,10 @@ public class OrderActivity extends AppCompatActivity {
                 if (forma.getFormaDePagoDescripcion() != null) {
                     formasDePagoStr.append(forma.getFormaDePagoDescripcion()).append(", ");
                 }
-                if ("Transferencia".equalsIgnoreCase(forma.getFormaDePagoDescripcion())) {
+                if ("Transferencia".equalsIgnoreCase(forma.getFormaDePagoDescripcion()) ||
+                        "Debito".equalsIgnoreCase(forma.getFormaDePagoDescripcion())) {
                     ocultarTarjetas = true;
-                } else if (forma.getTarjeta() != null) {
+                } else if ("Credito".equalsIgnoreCase(forma.getFormaDePagoDescripcion()) && forma.getTarjeta() != null) {
                     tarjetasStr.append(forma.getTarjeta()).append(", ");
                 }
             }
@@ -202,32 +193,10 @@ public class OrderActivity extends AppCompatActivity {
                 cardsMethod.setVisibility(View.VISIBLE);
             }
         } else {
-            paymentMethod.setText("No hay métodos de pago disponibles");
-            cardsMethod.setText("No hay tarjetas disponibles");
             cardsMethod.setVisibility(View.VISIBLE);
         }
 
-        //Mostrar total
         totalAmount.setText("Total Abonado: $" + order.getTotal());
-    }
-
-    private void setupButtonListeners() {
-        volverBtn.setOnClickListener(this::volverAlDashboard);
-        backButton.setOnClickListener(v -> finish());
-
-        trackOrderButton.setOnClickListener(v -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.andreani.com/"));
-            startActivity(browserIntent);
-        });
-
-        cancelButton.setOnClickListener(v -> cancelOrder(id_pedido));
-    }
-
-    public void volverAlDashboard(View view) {
-        showToast("Redireccionando al dashboard");
-        Intent intent = new Intent(this, Dashboard.class);
-        startActivity(intent);
-        finish();
     }
 
     @Override
@@ -239,24 +208,39 @@ public class OrderActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void setupButtonListeners() {
+        volverBtn.setOnClickListener(v -> volverAlDashboard());
+        backButton.setOnClickListener(v -> volverAlDashboard());
+
+        trackOrderButton.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.andreani.com/"));
+            startActivity(browserIntent);
+        });
+
+        cancelButton.setOnClickListener(v -> cancelOrder(id_pedido));
+    }
+
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    public void volverAlDashboard() {
+        Intent intent = new Intent(this, Dashboard.class);
+        startActivity(intent);
+        finish();
+    }
+
     public void homeButton(View view) {
-        showToast("Redireccionando a home");
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
 
     public void productsButton(View view) {
-        showToast("Redireccionando a productos");
         Intent intent = new Intent(this, ProductsActivity.class);
         startActivity(intent);
     }
 
     public void profileBtn(View view) {
-        showToast("Redireccionando a tu perfil");
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
