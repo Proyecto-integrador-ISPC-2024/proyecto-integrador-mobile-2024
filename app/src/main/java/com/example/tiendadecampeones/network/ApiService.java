@@ -63,15 +63,11 @@ public interface ApiService {
     Call<PaymentMethods> getPaymentMethods();
 
     @GET("pedidos/")
-    Call<List<Order>> getOrders(
-            @Header("Authorization") String authToken
-    );
+    Call<List<Order>> getOrders();
 
     @DELETE("pedidos/{id}/")
-    Call<Void> deleteOrder(
-            @Header("Authorization") String authToken,
-            @Path("id") int id_pedido
-    );
+    Call<Void> deleteOrder(@Path("id") int id_pedido);
+
     @PATCH("usuarios/{id}/")
     Call<UserProfile> updateProfile(@Path("id") int id,
             @Body UserProfile profile
