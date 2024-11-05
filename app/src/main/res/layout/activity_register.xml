@@ -97,7 +97,8 @@
             android:inputType="textPassword"
             android:hint="@string/inputPassword"
             android:minHeight="48dp"
-            android:padding="16dp"/>
+            android:padding="16dp"
+            android:maxLength="18"/>
 
         <!-- Repetir contraseña -->
         <EditText
@@ -107,7 +108,8 @@
             android:inputType="textPassword"
             android:hint="@string/repeat_password_hint"
             android:minHeight="48dp"
-            android:padding="16dp"/>
+            android:padding="16dp"
+            android:maxLength="18"/>
 
         <!-- Boton de Registrarme -->
         <Button
