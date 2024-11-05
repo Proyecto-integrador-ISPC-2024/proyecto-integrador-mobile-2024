@@ -1,10 +1,12 @@
 package com.example.tiendadecampeones.network;
 
+import com.example.tiendadecampeones.models.AccessTokenResponse;
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.PaymentMethods;
 import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
 //import com.example.tiendadecampeones.models.Product.Talle;
+import com.example.tiendadecampeones.models.RefreshTokenRequest;
 import com.example.tiendadecampeones.models.UserLogInResponse;
 import com.example.tiendadecampeones.models.UserProfile;
 import com.example.tiendadecampeones.models.RegisterResponse;
@@ -43,7 +45,7 @@ public interface ApiService {
 
 
     @POST("api/token/refresh/")
-    Call<UserLogInResponse> refreshToken(@Header("Authorization") String refresh);
+    Call<AccessTokenResponse> refreshToken(@Body RefreshTokenRequest request);
 
     @GET("productos/")
     Call<List<Product>> getProductos();
@@ -55,24 +57,19 @@ public interface ApiService {
     Call<List<Size>> getTalles();*/
 
     @POST("pedidos/")
-    Call<Pedido> realizarPedido(@Header("Authorization") String authToken, @Body Pedido pedido);
+    Call<Pedido> realizarPedido(@Body Pedido pedido);
 
     @GET("pedidos/listar_metodopago")
-    Call<PaymentMethods> getPaymentMethods(@Header("Authorization") String token);
+    Call<PaymentMethods> getPaymentMethods();
 
     @GET("pedidos/")
-    Call<List<Order>> getOrders(
-            @Header("Authorization") String authToken
-    );
+    Call<List<Order>> getOrders();
 
     @DELETE("pedidos/{id}/")
-    Call<Void> deleteOrder(
-            @Header("Authorization") String authToken,
-            @Path("id") int id_pedido
-    );
+    Call<Void> deleteOrder(@Path("id") int id_pedido);
+
     @PATCH("usuarios/{id}/")
     Call<UserProfile> updateProfile(@Path("id") int id,
-            @Header("Authorization") String token,
             @Body UserProfile profile
     );
 

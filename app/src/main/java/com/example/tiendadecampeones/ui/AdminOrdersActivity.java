@@ -3,19 +3,18 @@ package com.example.tiendadecampeones.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.AdminOrderAdapter;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.network.RetrofitClient;
 import com.example.tiendadecampeones.models.Order;
-import androidx.recyclerview.widget.RecyclerView;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,6 @@ public class AdminOrdersActivity extends AppCompatActivity {
 
     private RecyclerView ordersRecyclerView;
     private AdminOrderAdapter orderAdminAdapter;
-    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +35,6 @@ public class AdminOrdersActivity extends AppCompatActivity {
 
         ordersRecyclerView = findViewById(R.id.ordersRecyclerView);
         ordersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
         getOrders();
 
@@ -49,9 +45,10 @@ public class AdminOrdersActivity extends AppCompatActivity {
     private void getOrders() {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         String token = preferences.getString("accessToken", null);
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
         if (token != null) {
-            Call<List<Order>> call = apiService.getOrders("Bearer " + token);
+            Call<List<Order>> call = apiService.getOrders();
             call.enqueue(new Callback<List<Order>>() {
                 @Override
                 public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
@@ -66,20 +63,22 @@ public class AdminOrdersActivity extends AppCompatActivity {
                         orderAdminAdapter = new AdminOrderAdapter(AdminOrdersActivity.this, orderDetails, orders);
                         ordersRecyclerView.setAdapter(orderAdminAdapter);
                     } else {
-                        Log.e("OrdersError", "Error al obtener los pedidos: " + response.code());
+                        showToast("No se pudieron cargar los pedidos. Intenta nuevamente.");
                     }
                 }
-
                 @Override
                 public void onFailure(Call<List<Order>> call, Throwable t) {
-                    Log.e("OrdersError", "Error en la petición: " + t.getMessage());
+                    showToast("Error al cargar los pedidos: " + t.getMessage());
                 }
             });
         } else {
-            Log.e("AuthError", "Token no encontrado");
+            showToast("Usuario no autenticado. Inicie sesión.");
         }
     }
 
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
     private void logout() {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);

@@ -12,10 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.models.UserLogInResponse;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.network.RetrofitClient;
@@ -23,16 +27,22 @@ import com.example.tiendadecampeones.network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
+
 
 public class LoginActivity extends AppCompatActivity {
 
-    // Métodos para validar que los campos no estén vacíos, email y contraseña
+    // métodos para validar que los campos no esten vacíos, mail y contrasña
     private boolean isValidEmail(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean isValidPassword(String password) {
-        String passwordPattern = "^(?=.*[0-9])(?=.*[!@#$%^&*()\\-_=+{};:,<.>])(?=\\S+$).{8,26}$";
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()\\-_=+{};:,<.>]).{8,18}$";
         return password.matches(passwordPattern);
     }
 
@@ -43,11 +53,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
         EditText emailField = findViewById(R.id.emailInput);
         EditText passwordField = findViewById(R.id.passwordInput);
-        Button btn2 = findViewById(R.id.loginButton);
 
         // Pantalla de Bienvenida a formulario de registro
         Button btn1 = findViewById(R.id.registerButton);
@@ -57,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Botón de Inicio de Sesión
+        Button btn2 = findViewById(R.id.loginButton);
         btn2.setOnClickListener(v -> {
             hideKeyboard(); // Cierra el teclado al hacer clic en el botón
             btn2.setEnabled(false); // Desactiva el botón temporalmente
@@ -71,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 showAlert("Error", "Email no tiene formato válido");
                 btn2.setEnabled(true); // Reactiva el botón
             } else if (!isValidPassword(password)) {
-                showAlert("Error", "La contraseña debe tener al menos 8 caracteres, un número y un carácter especial");
+                showAlert("Error", "La contraseña debe tener un minimo de 8 caracteres y un maximo de 18, un número y un carácter especial");
                 btn2.setEnabled(true); // Reactiva el botón
             } else {
                 loginUser(email, password, btn2);
@@ -118,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<UserLogInResponse> call, Response<UserLogInResponse> response) {
                 loginButton.setEnabled(true); // Reactiva el botón
                 if (response.isSuccessful() && response.body() != null) {
-                    String token = response.body().getToken();
+                    String token = response.body().getAccessToken();
                     String refreshToken = response.body().getRefreshToken();
                     String nombre = response.body().getUsuario().getNombre();
                     String apellido = response.body().getUsuario().getApellido();
