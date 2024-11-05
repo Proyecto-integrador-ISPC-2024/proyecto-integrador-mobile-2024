@@ -56,8 +56,6 @@ public class ManageProfile extends AppCompatActivity {
             finish();
             return;
         }
-
-        fullAuthToken = "Bearer " + authToken;
         loadUserData(sharedPref);
         setFieldsEditable(false);
         btnEditProfile.setOnClickListener(this::onEditProfileClicked);
@@ -118,7 +116,6 @@ public class ManageProfile extends AppCompatActivity {
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         Call<UserProfile> call = apiService.updateProfile(
                 updatedProfile.getId(),
-                fullAuthToken,
                 updatedProfile
         );
 

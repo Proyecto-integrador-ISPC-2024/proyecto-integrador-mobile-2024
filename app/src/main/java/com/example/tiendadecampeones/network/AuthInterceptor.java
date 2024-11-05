@@ -1,9 +1,13 @@
 package com.example.tiendadecampeones.network;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.example.tiendadecampeones.models.AccessTokenResponse;
+import com.example.tiendadecampeones.models.RefreshTokenRequest;
 import com.example.tiendadecampeones.models.UserLogInResponse;
+import com.example.tiendadecampeones.ui.LoginActivity;
 
 import java.io.IOException;
 import okhttp3.Interceptor;
@@ -24,9 +28,9 @@ public class AuthInterceptor implements Interceptor{
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", null);
-        String refreshToken = sharedPreferences.getString("refresh_token", null);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("accessToken", null);
+        String refreshToken = sharedPreferences.getString("refreshToken", null);
 
         Request originalRequest = chain.request();
         Request.Builder builder = originalRequest.newBuilder();
@@ -37,7 +41,7 @@ public class AuthInterceptor implements Interceptor{
 
         Response response = chain.proceed(builder.build());
 
-        // Si el token está expirado, usa el refresh token para obtener uno nuevo
+        // Si el token está expirado, uso el refresh token para obtener uno nuevo
         if (response.code() == 401 && refreshToken != null) {
             // Llama a la API para refrescar el token
             Retrofit retrofit = new Retrofit.Builder()
@@ -46,16 +50,18 @@ public class AuthInterceptor implements Interceptor{
                     .build();
 
             ApiService authService = retrofit.create(ApiService.class);
-            Call<UserLogInResponse> refreshCall = authService.refreshToken("Bearer " + refreshToken);
 
-            retrofit2.Response<UserLogInResponse> refreshResponse = refreshCall.execute();
+            // Creo el cuerpo de la solicitud para el refresh token
+            RefreshTokenRequest refreshTokenRequest = new RefreshTokenRequest(refreshToken);
+            Call<AccessTokenResponse> refreshCall = authService.refreshToken(refreshTokenRequest);
+
+            retrofit2.Response<AccessTokenResponse> refreshResponse = refreshCall.execute();
             if (refreshResponse.isSuccessful()) {
-                // Guarda el nuevo token y repite la solicitud original
-                UserLogInResponse newTokenResponse = refreshResponse.body();
-                String newToken = newTokenResponse.getToken();
+                // Guardo el nuevo token y repito la solicitud original
+                String newToken = refreshResponse.body().getAccessToken();
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("token", newToken);
+                editor.putString("accessToken", newToken);
                 editor.apply();
 
                 // Repite la solicitud original con el nuevo token
@@ -63,16 +69,24 @@ public class AuthInterceptor implements Interceptor{
                         .header("Authorization", "Bearer " + newToken)
                         .build();
 
-                response.close(); // Cierra la respuesta anterior antes de hacer otra llamada
+                response.close(); // Cierro la respuesta anterior antes de hacer otra llamada
                 return chain.proceed(newRequest);
             } else {
-                // Si falla, realiza un logout o maneja el error según sea necesario
-                // logoutUser();
+                redirectToLogin();
             }
         }
 
         return response;
     }
 
+    private void redirectToLogin() {
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
+
+
 
 }
+
+
