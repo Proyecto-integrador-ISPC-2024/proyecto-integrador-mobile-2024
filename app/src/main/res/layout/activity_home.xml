@@ -48,6 +48,8 @@
                 android:layout_height="64dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/menu_icon_35x35"
+                android:layout_weight="1"
+                android:layout_marginEnd="256dp"
                 android:contentDescription="@string/contdes_menu_desplegable" />
 
             <ImageButton
@@ -56,6 +58,7 @@
                 android:layout_height="64dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/shopping_cart_icon_35x35"
+                android:layout_weight="1"
                 android:contentDescription="@string/cart_button" />
         </LinearLayout>
 
@@ -117,107 +120,118 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <HorizontalScrollView
-                    android:id="@+id/recommendedScrollView"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/aboutUsImageView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
-                    android:scrollbars="none">
+                    android:src="@mipmap/ilustracion_copa"
+                    android:contentDescription="@string/photoAbout"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true" />
 
-                    <LinearLayout
-                        android:id="@+id/recommendedProductsLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+<!--                <HorizontalScrollView-->
+<!--                    android:id="@+id/recommendedScrollView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:scrollbars="none">-->
 
-                        <!-- Producto 1 -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:background="@color/colorSecondary"
-                            android:orientation="vertical"
-                            android:padding="8dp"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:contentDescription="@string/contdes_productscroll_button"
-                            android:nextFocusRight="@id/product_2">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/recommendedProductsLayout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
 
-                            <ImageView
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
-                                android:src="@mipmap/argentina_1978_primera"
-                                android:contentDescription="@string/contdes_image1"/>
+<!--                        &lt;!&ndash; Producto 1 &ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="16dp"-->
+<!--                            android:background="@color/colorSecondary"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:focusable="true"-->
+<!--                            android:focusableInTouchMode="true"-->
+<!--                            android:contentDescription="@string/contdes_productscroll_button"-->
+<!--                            android:nextFocusRight="@id/product_2">-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/argContactProd"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
-                                android:contentDescription="@string/contdes_productname1"/>
-                        </LinearLayout>
+<!--                            <ImageView-->
+<!--                                android:layout_width="120dp"-->
+<!--                                android:layout_height="120dp"-->
+<!--                                android:src="@mipmap/argentina_1978_primera"-->
+<!--                                android:contentDescription="@string/contdes_image1"/>-->
 
-                        <!-- Producto 2 -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:background="@color/colorSecondary"
-                            android:orientation="vertical"
-                            android:padding="8dp"
-                            android:contentDescription="@string/contdes_productscroll_button"
-                            android:nextFocusRight="@id/product_3">
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:text="@string/argContactProd"-->
+<!--                                android:textAlignment="center"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:contentDescription="@string/contdes_productname1"/>-->
+<!--                        </LinearLayout>-->
 
-                            <ImageView
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
-                                android:src="@mipmap/brasil_1958_primera"
-                                android:contentDescription="@string/contdes_image2"/>
+<!--                        &lt;!&ndash; Producto 2 &ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="16dp"-->
+<!--                            android:background="@color/colorSecondary"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:contentDescription="@string/contdes_productscroll_button"-->
+<!--                            android:nextFocusRight="@id/product_3">-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/brContactProd"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
-                                android:contentDescription="@string/contdes_productname2"/>
-                        </LinearLayout>
+<!--                            <ImageView-->
+<!--                                android:layout_width="120dp"-->
+<!--                                android:layout_height="120dp"-->
+<!--                                android:src="@mipmap/brasil_1958_primera"-->
+<!--                                android:contentDescription="@string/contdes_image2"/>-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:text="@string/brContactProd"-->
+<!--                                android:textAlignment="center"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:contentDescription="@string/contdes_productname2"/>-->
+<!--                        </LinearLayout>-->
 
 
-                        <!-- Producto 3 -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:background="@color/colorSecondary"
-                            android:orientation="vertical"
-                            android:padding="8dp"
-                            android:contentDescription="@string/contdes_productscroll_button">
+<!--                        &lt;!&ndash; Producto 3 &ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="16dp"-->
+<!--                            android:background="@color/colorSecondary"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:contentDescription="@string/contdes_productscroll_button">-->
 
-                            <ImageView
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
-                                android:src="@mipmap/francia_1998_primera"
-                                android:contentDescription="@string/contdes_image3"/>
+<!--                            <ImageView-->
+<!--                                android:layout_width="120dp"-->
+<!--                                android:layout_height="120dp"-->
+<!--                                android:src="@mipmap/francia_1998_primera"-->
+<!--                                android:contentDescription="@string/contdes_image3"/>-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/frContactProd"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp"
-                                android:contentDescription="@string/contdes_productname3"/>
-                        </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:text="@string/frContactProd"-->
+<!--                                android:textAlignment="center"-->
+<!--                                android:textColor="@color/colorPrimary"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:contentDescription="@string/contdes_productname3"/>-->
+<!--                        </LinearLayout>-->
 
-                    </LinearLayout>
-                </HorizontalScrollView>
+<!--                    </LinearLayout>-->
+<!--                </HorizontalScrollView>-->
 
                 <Button
                     android:id="@+id/buyButton"
