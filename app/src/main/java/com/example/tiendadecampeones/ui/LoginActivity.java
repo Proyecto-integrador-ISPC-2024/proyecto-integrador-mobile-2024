@@ -37,20 +37,9 @@ public class LoginActivity extends AppCompatActivity {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    private boolean isValidPassword(String password,EditText passwordField ) {
-        // Verifica la longitud de la contraseña
-        if (password.length() < 8 || password.length() > 18) {
-            passwordField.setError("La contraseña debe tener entre 8 y 18 caracteres");
-            return false;
-        }
-
-        String passwordPattern = "^(?=.*[0-9])(?=.*[!@#$%^&*()\\-_=+{};:,<.>])(?=\\S+$)";
-        if (!password.matches(passwordPattern)) {
-            passwordField.setError("La contraseña debe tener al menos un número y un carácter especial");
-            return false;
-        }
-
-        return true;
+    private boolean isValidPassword(String password) {
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()\\-_=+{};:,<.>]).{8,18}$";
+        return password.matches(passwordPattern);
     }
 
     private boolean areFieldsNotEmpty(String email, String password) {
@@ -84,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 showAlert("Error", "Todos los campos son obligatorios");
             } else if (!isValidEmail(email)) {
                 showAlert("Error", "Email no tiene formato válido");
-            } else if (!isValidPassword(password,  passwordField)) {
+            } else if (!isValidPassword(password)) {
                 showAlert("Error", "La contraseña debe tener un minimo de 8 caracteres y un maximo de 18, un número y un carácter especial");
             } else {
                 loginUser(email, password);
