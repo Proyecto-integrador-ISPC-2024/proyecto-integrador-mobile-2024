@@ -49,7 +49,7 @@
     <string name="cl1">Tu perfil</string>
     <string name="Logoutbtn">Finalizar Sesión</string>
 
-    <!--payment select box-->
+    <!--Box de método de pago -->
     <string-array name="payment_methods">
         <item>Seleccionar método de pago</item>
         <item>Tarjeta de crédito</item>
@@ -161,5 +161,20 @@
     <string name="contdes_logout_btn">Boton para cerrar sesión</string>
     <string name="contdes_add_cart_btn">Boton para cerrar sesión</string>
     <string name="contdes_image">Imagen de producto</string>
+
+    <!--  Menú lateral  -->
+    <string name="main_menu_title">MENU PRINCIPAL</string>
+    <string name="our_products">NUESTROS PRODUCTOS</string>
+    <string name="products_menu_button">Explorá acá</string>
+    <string name="cart_menu_button">Mi carro</string>
+    <string name="about_us">SOBRE NOSOTROS</string>
+    <string name="know_us_button">Conocenos</string>
+    <string name="contact_us_button">Contactanos</string>
+    <string name="my_profile">GESTIONÁ</string>
+    <string name="profile_button">Mi perfil</string>
+    <string name="dashboard_button">Mis pedidos</string>
+    <string name="argentina_illustration_2021">Argentina_illustration_2021</string>
+    <string name="camisetas_de_argentina_illustration">Camisetas de Argentina_illustration</string>
+    <string name="argentina_illustration">argentina_illustration</string>
 
 </resources>
