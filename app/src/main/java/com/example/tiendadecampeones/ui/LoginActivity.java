@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserLogInResponse> call, Response<UserLogInResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    String token = response.body().getToken();
+                    String token = response.body().getAccessToken();
                     String refreshToken = response.body().getRefreshToken();
                     String nombre = response.body().getUsuario().getNombre();
                     String apellido = response.body().getUsuario().getApellido();

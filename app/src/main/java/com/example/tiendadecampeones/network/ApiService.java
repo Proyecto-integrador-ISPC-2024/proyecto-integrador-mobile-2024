@@ -1,10 +1,12 @@
 package com.example.tiendadecampeones.network;
 
+import com.example.tiendadecampeones.models.AccessTokenResponse;
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.PaymentMethods;
 import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
 //import com.example.tiendadecampeones.models.Product.Talle;
+import com.example.tiendadecampeones.models.RefreshTokenRequest;
 import com.example.tiendadecampeones.models.UserLogInResponse;
 import com.example.tiendadecampeones.models.UserProfile;
 import com.example.tiendadecampeones.models.RegisterResponse;
@@ -43,7 +45,7 @@ public interface ApiService {
 
 
     @POST("api/token/refresh/")
-    Call<UserLogInResponse> refreshToken(@Header("Authorization") String refresh);
+    Call<AccessTokenResponse> refreshToken(@Body RefreshTokenRequest request);
 
     @GET("productos/")
     Call<List<Product>> getProductos();
