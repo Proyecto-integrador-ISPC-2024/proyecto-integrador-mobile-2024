@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isValidPassword(String password) {
-        String passwordPattern = "^(?=.*[0-9])(?=.*[!@#$%^&*()\\-_=+{};:,<.>])(?=\\S+$).{8,}$";
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()\\-_=+{};:,<.>]).{8,18}$";
         return password.matches(passwordPattern);
     }
 
@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
             } else if (!isValidEmail(email)) {
                 showAlert("Error", "Email no tiene formato válido");
             } else if (!isValidPassword(password)) {
-                showAlert("Error", "La contraseña debe tener al menos 8 caracteres, un número y un carácter especial");
+                showAlert("Error", "La contraseña debe tener un minimo de 8 caracteres y un maximo de 18, un número y un carácter especial");
             } else {
                 loginUser(email, password);
             }
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserLogInResponse> call, Response<UserLogInResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    String token = response.body().getToken();
+                    String token = response.body().getAccessToken();
                     String refreshToken = response.body().getRefreshToken();
                     String nombre = response.body().getUsuario().getNombre();
                     String apellido = response.body().getUsuario().getApellido();

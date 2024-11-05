@@ -35,30 +35,23 @@ public class Dashboard extends AppCompatActivity {
     private List<Order> orders = new ArrayList<>();
     private ImageButton backButton;
     private SearchView searchInput;
-    private String authToken;
-    private ApiService apiService;
     private TextView noOrdersTextView;
+    private String origin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        origin = getIntent().getStringExtra("ORIGIN");
 
-        listView = findViewById(R.id.listView);
-        searchInput = findViewById(R.id.searchV);
-        backButton = findViewById(R.id.backButton);
-        noOrdersTextView = findViewById(R.id.no_orders_message);
-
-        apiService = RetrofitClient.getClient(this).create(ApiService.class);
+        initializeViews();
 
         searchInput.setQueryHint(getString(R.string.searchV));
 
         orderAdapter = new OrderAdapter(this, orders);
         listView.setAdapter(orderAdapter);
-
+        setupButtonListeners();
         fetchOrders();
-
-        backButton.setOnClickListener(v -> finish());
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -87,48 +80,46 @@ public class Dashboard extends AppCompatActivity {
         });
     }
 
+    private void initializeViews() {
+        listView = findViewById(R.id.listView);
+        searchInput = findViewById(R.id.searchV);
+        backButton = findViewById(R.id.backButton);
+        noOrdersTextView = findViewById(R.id.no_orders_message);
+    }
+
     private void fetchOrders() {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        authToken = preferences.getString("accessToken", null);
+        String token = preferences.getString("accessToken", null);
         int id_usuario = preferences.getInt("id_usuario", -1);
 
-        if (authToken == null) {
-            Toast.makeText(this, "No autenticado. Inicie sesión.", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+        if (id_usuario != -1 && token != null) {
+            ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
-        String fullAuthToken = "Bearer " + authToken;
+            Call<List<Order>> call = apiService.getOrders();
 
-        if (id_usuario == -1) {
-            Toast.makeText(Dashboard.this, "ID de usuario no válido.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Call<List<Order>> call = apiService.getOrders(fullAuthToken);
-        call.enqueue(new Callback<List<Order>>() {
-            @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    orders.clear();
-                    for (Order order : response.body()) {
-                        if (order.getIdUsuario() == id_usuario) {
-                            orders.add(order);
+            call.enqueue(new Callback<List<Order>>() {
+                @Override
+                public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        orders.clear();
+                        for (Order order : response.body()) {
+                            if (order.getIdUsuario() == id_usuario) {
+                                orders.add(order);
+                            }
                         }
+                        updateOrderDisplay();
+                    } else {
+                        showToast("No se pudieron cargar los pedidos. Verifica tu conexión e intenta nuevamente.");
                     }
-                    updateOrderDisplay();
-                } else {
-                    Toast.makeText(Dashboard.this, "Error en la respuesta: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
-            }
-
-            @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
-                Toast.makeText(Dashboard.this, "Error al cargar pedidos: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<List<Order>> call, Throwable t) {
+                    showToast("Error al cargar los pedidos: " + t.getMessage());
+                }
+            });
+        } else {
+            showToast("Usuario no autenticado. Inicie sesión.");
+        }
     }
 
     private void filterOrdersByStatus(String status) {
@@ -148,7 +139,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void showFilterDialog(View view) {
-        String[] statuses = {"TODOS LOS ESTADOS", "ACEPTADO", "PENDIENTE", "CANCELADO"};
+        String[] statuses = {"TODOS LOS ESTADOS", "ACEPTADO", "ENVIADO", "CANCELADO"};
 
         new AlertDialog.Builder(this)
                 .setTitle("Filtrar por estado")
@@ -170,7 +161,7 @@ public class Dashboard extends AppCompatActivity {
                 switch (estado) {
                     case "ACEPTADO":
                         return 1;
-                    case "PENDIENTE":
+                    case "ENVIADO":
                         return 2;
                     case "CANCELADO":
                         return 3;
@@ -179,7 +170,6 @@ public class Dashboard extends AppCompatActivity {
                 }
             }
         });
-
         if (orders.isEmpty()) {
             Toast.makeText(Dashboard.this, "No tienes pedidos", Toast.LENGTH_SHORT).show();
             listView.setVisibility(View.GONE);
@@ -191,21 +181,39 @@ public class Dashboard extends AppCompatActivity {
         orderAdapter.updateOrders(orders);
     }
 
-    public void profileBtn(View view) {
-        Toast.makeText(this, "Redireccionando a tu perfil", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    public void homeButton(View v) {
-        Toast.makeText(this, "Redireccionando a home", Toast.LENGTH_SHORT).show();
+    private void setupButtonListeners() {
+        backButton.setOnClickListener(v -> volver());
+    }
+
+    private void volver() {
+        if ("PROFILE".equals(origin)) {
+            Intent intent = new Intent(this, Profile.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, Home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    }
+
+    public void homeButton(View view) {
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
 
-    public void productsButton(View v) {
-        Toast.makeText(this, "Redireccionando a productos", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, ProductCategories.class);
+    public void productsButton(View view) {
+        Intent intent = new Intent(this, ProductsActivity.class);
+        startActivity(intent);
+    }
+
+    public void profileBtn(View view) {
+        Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
 }
