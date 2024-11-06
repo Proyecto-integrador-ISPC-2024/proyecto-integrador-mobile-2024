@@ -112,7 +112,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
         holder.btnAddToCart.setOnClickListener(v -> {
             Talle talleSeleccionado = tallesList.get(selectedTallePosition[0]);
-           // talleSeleccionado.setCantidadCompra(1);
+            // talleSeleccionado.setCantidadCompra(1);
 
             Toast.makeText(context, productoDetails.getNombreProducto() + " (Talle: " + talleSeleccionado.getTalle() + ") fue añadido al carrito.", Toast.LENGTH_SHORT).show();
 
@@ -179,4 +179,3 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
 
 }
-

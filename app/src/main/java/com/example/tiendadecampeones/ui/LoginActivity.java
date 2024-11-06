@@ -1,10 +1,13 @@
 package com.example.tiendadecampeones.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.models.UserLogInResponse;
+import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.network.RetrofitClient;
 
 import retrofit2.Call;
@@ -56,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         EditText passwordField = findViewById(R.id.passwordInput);
 
         // Pantalla de Bienvenida a formulario de registro
-
         Button btn1 = findViewById(R.id.registerButton);
         btn1.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, Register.class);
@@ -66,19 +69,32 @@ public class LoginActivity extends AppCompatActivity {
         // Botón de Inicio de Sesión
         Button btn2 = findViewById(R.id.loginButton);
         btn2.setOnClickListener(v -> {
+            hideKeyboard(); // Cierra el teclado al hacer clic en el botón
+            btn2.setEnabled(false); // Desactiva el botón temporalmente
+
             String email = emailField.getText().toString().trim();
             String password = passwordField.getText().toString().trim();
 
             if (!areFieldsNotEmpty(email, password)) {
                 showAlert("Error", "Todos los campos son obligatorios");
+                btn2.setEnabled(true); // Reactiva el botón
             } else if (!isValidEmail(email)) {
                 showAlert("Error", "Email no tiene formato válido");
+                btn2.setEnabled(true); // Reactiva el botón
             } else if (!isValidPassword(password)) {
                 showAlert("Error", "La contraseña debe tener un minimo de 8 caracteres y un maximo de 18, un número y un carácter especial");
+                btn2.setEnabled(true); // Reactiva el botón
             } else {
-                loginUser(email, password);
+                loginUser(email, password, btn2);
             }
         });
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (getCurrentFocus() != null) {
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     private void saveTokens(String token, String refresh, int id_usuario, String nombre, String apellido, String email, String domicilio, String rol) {
@@ -94,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("rol", rol);
 
         editor.apply();
-
     }
 
     private void showAlert(String title, String message) {
@@ -106,12 +121,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // Método para hacer login
-    private void loginUser(String email, String password) {
+    private void loginUser(String email, String password, Button loginButton) {
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         Call<UserLogInResponse> call = apiService.login(email, password);
         call.enqueue(new Callback<UserLogInResponse>() {
             @Override
             public void onResponse(Call<UserLogInResponse> call, Response<UserLogInResponse> response) {
+                loginButton.setEnabled(true); // Reactiva el botón
                 if (response.isSuccessful() && response.body() != null) {
                     String token = response.body().getAccessToken();
                     String refreshToken = response.body().getRefreshToken();
@@ -119,7 +135,6 @@ public class LoginActivity extends AppCompatActivity {
                     String apellido = response.body().getUsuario().getApellido();
                     String email = response.body().getUsuario().getEmail();
                     String domicilio = response.body().getUsuario().getDomicilio();
-
                     String rol = response.body().getUsuario().getRol();
                     int id_usuario = response.body().getUsuario().getIdUsuario();
 
@@ -128,6 +143,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     // Imprime el id_usuario en Logcat
                     Log.d("UserIdDebug", "ID de usuario recuperado: " + id_usuario);
+
                     // Redirigir según el rol
                     Intent intent;
                     if ("ADMIN".equals(rol)) {
@@ -146,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserLogInResponse> call, Throwable t) {
+                loginButton.setEnabled(true);
                 showAlert("Error", "Error de conexión");
             }
         });
