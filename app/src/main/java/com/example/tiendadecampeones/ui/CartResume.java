@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.CartResumeAdapter;
+import com.example.tiendadecampeones.models.CartItem;
 import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
 import com.google.gson.Gson;
@@ -29,7 +30,7 @@ public class CartResume extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private CartResumeAdapter cartResumeAdapter;
-    private List<Product> productList;
+    private List<CartItem> cartItemList;  // Cambiar de Product a CartItem
     private TextView totalTextView;
     private Button confirmPurchaseButton;
 
@@ -40,14 +41,14 @@ public class CartResume extends AppCompatActivity {
 
         initializeUI();
 
-        // Recibiendo lista de productos mediante intent desde Cart.java
-        Intent intent = getIntent();
-        String productListJson = intent.getStringExtra("product_list");
 
-        // Formateo a JSON
+        Intent intent = getIntent();
+        String cartItemListJson = intent.getStringExtra("cart_item_list");
+
+
         Gson gson = new Gson();
-        Type productListType = new TypeToken<List<Product>>() {}.getType();
-        productList = gson.fromJson(productListJson, productListType);
+        Type cartItemListType = new TypeToken<List<CartItem>>() {}.getType();
+        cartItemList = gson.fromJson(cartItemListJson, cartItemListType);
 
         // Seteo de recycler view
         setupRecyclerView();
@@ -63,7 +64,7 @@ public class CartResume extends AppCompatActivity {
         confirmPurchaseButton.setOnClickListener(v -> navigateToPaymentMethods());
     }
 
-    // Inicialización y captura de elementos de UI
+
     private void initializeUI() {
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
@@ -75,62 +76,54 @@ public class CartResume extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    // Seteo de información en el recycler view
+
     private void setupRecyclerView() {
-        Map<Product, Integer> cartItems = new HashMap<>();
-        for (Product product : productList) {
-            for (Product.Talle talle : product.getTalles()) {
-                if (talle.getCantidadCompra() > 0) {
-                    cartItems.put(product, talle.getCantidadCompra());
-                }
-            }
+        Map<CartItem, Integer> cartItems = new HashMap<>();
+        for (CartItem cartItem : cartItemList) {
+            cartItems.put(cartItem, cartItem.getCantidadCompra());
         }
 
-        cartResumeAdapter = new CartResumeAdapter(this, productList, cartItems);
+        // Pasar la lista de CartItem al adaptador
+        cartResumeAdapter = new CartResumeAdapter(this, cartItemList, cartItems);
         recyclerView.setAdapter(cartResumeAdapter);
     }
 
-    // Declaración de creación de instancia de Pedido - se ejecuta en línea 56
+    // Declaración de creación de instancia de Pedido
     private Pedido createPedidoFromCart() {
         Pedido pedido = new Pedido();
         pedido.setIdUsuario(getUserIdFromPreferences());
-        pedido.setTotal(calculateTotal(productList));
-        pedido.setDetalles(buildDetallesFromCart(productList));
+        pedido.setTotal(calculateTotal(cartItemList));
+        pedido.setDetalles(buildDetallesFromCart(cartItemList));
         return pedido;
     }
 
-    // Obtención del id de usuario desde SharedPreferences
+
     private int getUserIdFromPreferences() {
         SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         return sharedPref.getInt("id_usuario", -1);
     }
 
-    // Cálculo del precio total de la lista de productos
-    private double calculateTotal(List<Product> productList) {
+    // Cálculo del precio total de la lista de CartItem
+    private double calculateTotal(List<CartItem> cartItemList) {
         double total = 0;
-        for (Product product : productList) {
-            for (Product.Talle talle : product.getTalles()) {
-                total += product.getProductos().getPrecio() * talle.getCantidadCompra();
-            }
+        for (CartItem cartItem : cartItemList) {
+            total += cartItem.getProducto().getPrecio() * cartItem.getCantidadCompra();  // Usar getProducto() y getCantidadCompra()
         }
         return total;
     }
 
     // Creación de la instancia de la clase Detalle
-    private List<Pedido.Detalle> buildDetallesFromCart(List<Product> productList) {
+    private List<Pedido.Detalle> buildDetallesFromCart(List<CartItem> cartItemList) {
         List<Pedido.Detalle> detalles = new ArrayList<>();
 
-        for (Product product : productList) {
-            for (Product.Talle talle : product.getTalles()) {
-                if (talle.getCantidadCompra() > 0) {
-                    Pedido.Detalle detalle = new Pedido.Detalle();
-                    detalle.setCantidad(talle.getCantidadCompra());
-                    detalle.setSubtotal(product.getProductos().getPrecio() * talle.getCantidadCompra());
-                    detalle.setIdProducto(product.getProductos().getIdProducto());
-                    detalle.setIdTalle(talle.getIdTalle());
-                    detalles.add(detalle);
-                }
-            }
+        for (CartItem cartItem : cartItemList) {
+            Product.Producto producto = cartItem.getProducto();
+            Pedido.Detalle detalle = new Pedido.Detalle();
+            detalle.setCantidad(cartItem.getCantidadCompra());
+            detalle.setSubtotal(producto.getPrecio() * cartItem.getCantidadCompra());
+            detalle.setIdProducto(producto.getIdProducto());
+            detalle.setIdTalle(cartItem.getTalle().getIdTalle());
+            detalles.add(detalle);
         }
         return detalles;
     }

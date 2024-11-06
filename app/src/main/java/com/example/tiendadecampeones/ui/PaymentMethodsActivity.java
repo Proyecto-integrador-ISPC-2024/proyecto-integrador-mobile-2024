@@ -21,6 +21,7 @@ import com.example.tiendadecampeones.models.PaymentMethods;
 import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.network.RetrofitClient;
+import com.example.tiendadecampeones.utils.SharedPrefManager;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -381,6 +382,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
             public void onResponse(Call<Pedido> call, Response<Pedido> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(PaymentMethodsActivity.this, "Pedido realizado exitosamente.puedes darle seguimiento en tu dashboard", Toast.LENGTH_SHORT).show();
+                    SharedPrefManager.getInstance(PaymentMethodsActivity.this).clearCart();
                 } else {
                     int errorCode = response.code();
                     String errorMessage = response.message();
