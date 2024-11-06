@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.tiendadecampeones.models.CartItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.example.tiendadecampeones.models.Product;
@@ -15,42 +16,46 @@ import java.util.List;
 public class SharedPrefManager {
 
     private static final String SHARED_PREFS_NAME = "cart_shared_prefs";
-    private static final String CART_PRODUCTS_KEY = "cart_products";
+    private static final String CART_ITEMS_KEY = "cart_items";
     private SharedPreferences sharedPreferences;
     private Gson gson;
 
-    public SharedPrefManager(Context context) {
+    private static SharedPrefManager instance;
+
+    private SharedPrefManager(Context context) {
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
         gson = new Gson();
     }
 
-    public void saveCartProducts(List<Product> productList) {
+    public static synchronized SharedPrefManager getInstance(Context context) {
+        if (instance == null) {
+            instance = new SharedPrefManager(context);
+        }
+        return instance;
+    }
+
+    // Guardar el carrito con CartItems
+    public void saveCartItems(List<CartItem> cartItemList) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        String json = gson.toJson(productList);
-
-
+        String json = gson.toJson(cartItemList);
         Log.d("SharedPrefManager", "JSON guardado: " + json);
-        editor.putString(CART_PRODUCTS_KEY, json);
+        editor.putString(CART_ITEMS_KEY, json);
         editor.apply();
     }
 
-    public List<Product> getCartProducts() {
-        String json = sharedPreferences.getString(CART_PRODUCTS_KEY, null);
+    // Obtener el carrito con CartItems
+    public List<CartItem> getCartItems() {
+        String json = sharedPreferences.getString(CART_ITEMS_KEY, null);
         if (json == null) {
             return new ArrayList<>();
         }
-
-        Type type = new TypeToken<List<Product>>() {}.getType();
-        List<Product> productList = gson.fromJson(json, type);
-
-        return productList;
+        Type type = new TypeToken<List<CartItem>>() {}.getType();
+        return gson.fromJson(json, type);
     }
-
 
     public void clearCart() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove(CART_PRODUCTS_KEY);
+        editor.remove(CART_ITEMS_KEY);
         editor.apply();
     }
 }

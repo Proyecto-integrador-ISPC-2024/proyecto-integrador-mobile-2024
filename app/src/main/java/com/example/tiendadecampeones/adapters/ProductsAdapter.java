@@ -24,19 +24,18 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.models.CartItem;
 import com.example.tiendadecampeones.models.Product;
 import com.example.tiendadecampeones.models.Product.Talle;
 import com.example.tiendadecampeones.utils.SharedPrefManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
 
     private final List<Product> products;
     private final Context context;
-    private List<String> tallesStringList = new ArrayList<>();
 
     public ProductsAdapter(List<Product> products, Context context) {
         this.products = products;
@@ -52,32 +51,28 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-
         Product product = products.get(position);
         Product.Producto productoDetails = product.getProductos();
 
         holder.productName.setText(productoDetails.getNombreProducto());
         holder.productPrice.setText(String.format("$%.2f", productoDetails.getPrecio()));
 
-        // Mostrar la animación de carga y ocultar la animación de error antes de cargar la imagen
         holder.lottiePlaceholder.setVisibility(View.VISIBLE);
         holder.lottieError.setVisibility(View.GONE);
-        holder.productImage.setVisibility(View.INVISIBLE); // Oculta la imagen hasta que esté cargada
+        holder.productImage.setVisibility(View.INVISIBLE);
 
+        // Cargar la imagen con Glide
         Glide.with(context)
                 .load(productoDetails.getImagen())
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        // Oculta la animación de carga y muestra la animación de error en caso de fallo
                         holder.lottiePlaceholder.setVisibility(View.GONE);
                         holder.lottieError.setVisibility(View.VISIBLE);
                         return false;
                     }
-
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        // Oculta las animaciones y muestra la imagen una vez que se carga
                         holder.lottiePlaceholder.setVisibility(View.GONE);
                         holder.lottieError.setVisibility(View.GONE);
                         holder.productImage.setVisibility(View.VISIBLE);
@@ -87,11 +82,23 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 .into(holder.productImage);
 
         List<Talle> tallesList = product.getTalles();
-        tallesStringList.clear();
+        List<String> tallesStringList = new ArrayList<>();
+
         for (Talle talle : tallesList) {
-            tallesStringList.add(talle.getTalle());
+            if (talle.getTalle() != null && !talle.getTalle().isEmpty()) {
+                tallesStringList.add(talle.getTalle());
+            }
         }
 
+        if (tallesStringList.isEmpty()) {
+            holder.sizeSpinner.setVisibility(View.GONE);
+            holder.btnAddToCart.setEnabled(false);
+        } else {
+            holder.sizeSpinner.setVisibility(View.VISIBLE);
+            holder.btnAddToCart.setEnabled(true);
+        }
+
+        // Crear un ArrayAdapter para el Spinner con los talles disponibles
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, tallesStringList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -102,7 +109,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                selectedTallePosition[0] = position;
+                if (position < tallesStringList.size()) {
+                    selectedTallePosition[0] = position;
+                }
             }
 
             @Override
@@ -112,14 +121,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
         holder.btnAddToCart.setOnClickListener(v -> {
             Talle talleSeleccionado = tallesList.get(selectedTallePosition[0]);
-            // talleSeleccionado.setCantidadCompra(1);
 
-            Toast.makeText(context, productoDetails.getNombreProducto() + " (Talle: " + talleSeleccionado.getTalle() + ") fue añadido al carrito.", Toast.LENGTH_SHORT).show();
-
-            addToCart(product, selectedTallePosition[0]);
+            // Verificar si el talle seleccionado está disponible
+            if (!tallesStringList.contains(talleSeleccionado.getTalle())) {
+                Toast.makeText(context, "Talle no disponible", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, productoDetails.getNombreProducto() + " (Talle: " + talleSeleccionado.getTalle() + ") fue añadido al carrito.", Toast.LENGTH_SHORT).show();
+                addToCart(product, selectedTallePosition[0]);
+            }
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -131,7 +142,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         ImageView productImage;
         Button btnAddToCart;
         Spinner sizeSpinner;
-        LottieAnimationView lottiePlaceholder, lottieError; // Añadir las referencias a las animaciones Lottie
+        LottieAnimationView lottiePlaceholder, lottieError;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -140,42 +151,44 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             productImage = itemView.findViewById(R.id.productImage);
             btnAddToCart = itemView.findViewById(R.id.addToCartButton);
             sizeSpinner = itemView.findViewById(R.id.sizeSpinner);
-            lottiePlaceholder = itemView.findViewById(R.id.lottie_placeholder); // Asociar lottiePlaceholder
-            lottieError = itemView.findViewById(R.id.lottie_error); // Asociar lottieError
+            lottiePlaceholder = itemView.findViewById(R.id.lottie_placeholder);
+            lottieError = itemView.findViewById(R.id.lottie_error);
         }
     }
 
     private void addToCart(Product product, int selectedTallePosition) {
-        SharedPrefManager sharedPrefManager = new SharedPrefManager(context);
-        Talle talleSeleccionado = product.getTalles().get(selectedTallePosition);
+        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(context);
+        List<Talle> tallesList = product.getTalles();
+        if (selectedTallePosition < tallesList.size()) {
+            Talle talleSeleccionado = tallesList.get(selectedTallePosition);
+            CartItem cartItem = new CartItem(talleSeleccionado.getIdTalle(), product.getProductos(), talleSeleccionado);
 
-        product.setIdProductoTalle(talleSeleccionado.getIdTalle());
-        product.setTalleSeleccionado(talleSeleccionado);
-        product.setTalles(Collections.singletonList(talleSeleccionado));
-
-
-        List<Product> currentCart = sharedPrefManager.getCartProducts();
-        boolean productExists = false;
-        for (Product cartProduct : currentCart) {
-            if (cartProduct.getProductos().getIdProducto() == product.getProductos().getIdProducto()) {
-                currentCart.remove(cartProduct);
-                currentCart.add(product);
-                productExists = true;
-                break;
+            List<CartItem> currentCart = sharedPrefManager.getCartItems();
+            boolean itemExists = false;
+            for (CartItem existingItem : currentCart) {
+                if (existingItem.equals(cartItem)) {
+                    existingItem.incrementQuantity();
+                    itemExists = true;
+                    break;
+                }
             }
-        }
+            if (!itemExists) {
+                currentCart.add(cartItem);
+            }
+            sharedPrefManager.saveCartItems(currentCart);
 
-        if (!productExists) {
-            currentCart.add(product);
-        }
-
-        sharedPrefManager.saveCartProducts(currentCart);
-
-        Log.d("ProductsAdapter", "Productos en el carrito:");
-        for (Product p : currentCart) {
-            Log.d("ProductsAdapter", p.getProductos().getNombreProducto() + " - Talle seleccionado: " + p.getIdProductoTalle());
+            Toast.makeText(context, product.getProductos().getNombreProducto() +
+                            " (Talle: " + talleSeleccionado.getTalle() + ") fue añadido al carrito.",
+                    Toast.LENGTH_SHORT).show();
+            Log.d("ProductsAdapter", "Productos en el carrito:");
+            for (CartItem item : currentCart) {
+                Log.d("ProductsAdapter", item.getProducto().getNombreProducto() +
+                        " - Talle seleccionado: " + item.getTalle().getTalle() +
+                        " - Cantidad: " + item.getCantidadCompra());
+            }
+        } else {
+            Log.e("ProductsAdapter", "Índice seleccionado fuera de rango");
         }
     }
-
-
 }
+
