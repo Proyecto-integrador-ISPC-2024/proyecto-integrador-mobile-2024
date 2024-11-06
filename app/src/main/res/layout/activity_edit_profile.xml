@@ -70,7 +70,8 @@
             android:enabled="false"
             android:hint="@string/inputLastName"
             android:inputType="textPersonName"
-            android:autofillHints="name"/>
+            android:autofillHints="name"
+            android:maxLength="40" />
 
         <EditText
             android:id="@+id/et_address"
@@ -79,7 +80,8 @@
             android:enabled="false"
             android:hint="@string/inputAddress"
             android:inputType="text"
-            android:autofillHints="postalAddress"/>
+            android:autofillHints="postalAddress"
+            android:maxLength="40" />
 
         <EditText
             android:id="@+id/et_email"
@@ -88,7 +90,8 @@
             android:enabled="false"
             android:hint="@string/inputEmail"
             android:inputType="textEmailAddress"
-            android:autofillHints="emailAddress"/>
+            android:autofillHints="emailAddress"
+            android:maxLength="40"  />
 
         <EditText
             android:id="@+id/et_password"
@@ -97,7 +100,8 @@
             android:enabled="false"
             android:hint="@string/inputPassword"
             android:inputType="textPassword"
-            android:autofillHints="password"/>
+            android:autofillHints="password"
+            android:maxLength="18"  />
 
         <Button
             android:id="@+id/btn_edit_profile"
