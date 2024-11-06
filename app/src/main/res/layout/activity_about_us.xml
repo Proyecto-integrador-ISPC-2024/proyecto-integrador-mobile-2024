@@ -8,29 +8,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.AboutUs">
 
-  <!-- Main Content (Your original layout) -->
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent">
-
-    <!-- Logo -->
-<!--    <LinearLayout-->
-<!--        android:id="@+id/headerLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:background="@color/colorPrimary"-->
-<!--        android:padding="16dp">-->
-
-<!--      <ImageView-->
-<!--          android:id="@+id/logoImageView"-->
-<!--          android:layout_width="wrap_content"-->
-<!--          android:layout_height="wrap_content"-->
-<!--          android:layout_gravity="center"-->
-<!--          android:src="@mipmap/logo_activities"-->
-<!--          android:contentDescription="@string/app_name" />-->
-
-<!--    </LinearLayout>-->
 
     <!-- Navbar superior -->
     <LinearLayout
@@ -54,6 +34,9 @@
           android:padding="8dp"
           android:layout_marginEnd="300dp"
           android:layout_gravity="center"
+          android:focusable="true"
+          android:focusableInTouchMode="true"
+          android:contentDescription="@string/contdes_back_btn"
           style="?android:attr/buttonBarButtonStyle"
           />
 
@@ -70,9 +53,11 @@
         android:layout_below="@id/topNavbar"
         android:layout_margin="16dp"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:contentDescription="@string/contdes_title_about"/>
 
-    <!-- Información about us  -->
     <TextView
         android:id="@+id/nosotrosTextView"
         android:layout_width="match_parent"
@@ -84,7 +69,10 @@
         android:gravity="center"
         android:text="@string/description"
         android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:contentDescription="@string/description"/>
 
     <ImageView
         android:id="@+id/aboutUsImageView"
@@ -94,14 +82,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:src="@mipmap/ilustracion_copa"
-        android:contentDescription="@string/photoAbout" />
-<!--    <WebView-->
-<!--        android:id="@+id/mapWebView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="250dp"-->
-<!--        android:layout_below="@id/nosotrosTextView"-->
-<!--        android:layout_margin="16dp" />-->
-
+        android:contentDescription="@string/photoAbout"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
     <!-- Botón para Contacto -->
     <Button
@@ -115,6 +98,9 @@
         android:onClick="contactClick"
         android:backgroundTint="@color/colorSecondary"
         android:textColor="@color/colorPrimary"
+        android:contentDescription="@string/contdes_contact_btn"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         />
 
     <!-- Navegación inferior -->
@@ -125,7 +111,8 @@
         android:orientation="horizontal"
         android:background="@color/colorSecondary"
         android:padding="10dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/bottom_navbar_description">
 
       <Button
           android:id="@+id/homeButton"
@@ -139,7 +126,9 @@
           android:drawablePadding="0dp"
           android:padding="8dp"
           android:layout_gravity="center"
-          style="?android:attr/buttonBarButtonStyle" />
+          style="?android:attr/buttonBarButtonStyle"
+          android:contentDescription="@string/contdes_home_button"
+          android:nextFocusRight="@id/productsButton"/>
 
       <Button
           android:id="@+id/productsButton"
@@ -153,7 +142,9 @@
           android:drawablePadding="0dp"
           android:padding="8dp"
           android:layout_gravity="center"
-          style="?android:attr/buttonBarButtonStyle" />
+          style="?android:attr/buttonBarButtonStyle"
+          android:contentDescription="@string/contdes_products_button"
+          android:nextFocusRight="@id/profileButton"/>
 
       <Button
           android:id="@+id/profileButton"
@@ -167,11 +158,8 @@
           android:drawablePadding="0dp"
           android:padding="8dp"
           android:layout_gravity="center"
+          android:contentDescription="@string/contdes_profile_button"
           style="?android:attr/buttonBarButtonStyle" />
-
     </LinearLayout>
-
-
   </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,7 @@ public class CartResumeAdapter extends RecyclerView.Adapter<CartResumeAdapter.Ca
     private List<Product> productList;
     private Map<Product, Integer> cartItems;
 
+    // Constructor actualizado
     public CartResumeAdapter(Context context, List<Product> productList, Map<Product, Integer> cartItems) {
         this.context = context;
         this.productList = productList;
@@ -38,11 +39,17 @@ public class CartResumeAdapter extends RecyclerView.Adapter<CartResumeAdapter.Ca
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         Product product = productList.get(position);
-        int quantity = cartItems.get(product);
+        Product.Producto producto = product.getProductos();
 
-        holder.productName.setText(product.getName());
-        holder.productPrice.setText(String.format("$%.2f", product.getPrice()));
-        holder.productQuantity.setText(String.valueOf(quantity));
+        holder.productName.setText(producto.getNombreProducto());
+        holder.productPrice.setText(String.format("$%.2f", producto.getPrecio()));
+
+        Integer quantity = cartItems.get(product);
+        if (quantity != null) {
+            holder.productQuantity.setText(String.valueOf(quantity));
+        }
+
+        holder.productQuantity.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
     }
 
     @Override
@@ -51,7 +58,6 @@ public class CartResumeAdapter extends RecyclerView.Adapter<CartResumeAdapter.Ca
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-
         TextView productName, productPrice, productQuantity;
 
         public CartViewHolder(@NonNull View itemView) {

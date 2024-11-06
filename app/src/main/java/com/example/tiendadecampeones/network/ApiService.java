@@ -1,10 +1,16 @@
 package com.example.tiendadecampeones.network;
 
+import com.example.tiendadecampeones.models.AccessTokenResponse;
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.models.PaymentMethods;
+import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
-import com.example.tiendadecampeones.models.Size;
+//import com.example.tiendadecampeones.models.Product.Talle;
+import com.example.tiendadecampeones.models.RefreshTokenRequest;
 import com.example.tiendadecampeones.models.UserLogInResponse;
+import com.example.tiendadecampeones.models.UserProfile;
+import com.example.tiendadecampeones.models.RegisterResponse;
+
 
 import java.util.List;
 import java.util.Map;
@@ -18,12 +24,17 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Path;
 
 
 public interface ApiService {
+
+    @POST("usuarios/")
+    Call<RegisterResponse> register(@Body Map<String, String> userData);
+
 
     @POST("login/")
     @FormUrlEncoded
@@ -32,8 +43,9 @@ public interface ApiService {
 //    @POST("api/login/")
 //    Call<UserLogInResponse> token(@Body Map<String, String> loginData);
 
+
     @POST("api/token/refresh/")
-    Call<UserLogInResponse> refreshToken(@Header("Authorization") String refresh);
+    Call<AccessTokenResponse> refreshToken(@Body RefreshTokenRequest request);
 
     @GET("productos/")
     Call<List<Product>> getProductos();
@@ -41,25 +53,24 @@ public interface ApiService {
     @GET("productos/")
     Call<List<Product>> getProductosPorPais(@Query("pais") String pais);
 
-    @GET("talles")
-    Call<List<Size>> getTalles();
+    /*@GET("talles")
+    Call<List<Size>> getTalles();*/
 
-
-    @GET("pedidos")
-    Call<List<Order>> getOrders();
+    @POST("pedidos/")
+    Call<Pedido> realizarPedido(@Body Pedido pedido);
 
     @GET("pedidos/listar_metodopago")
     Call<PaymentMethods> getPaymentMethods();
 
-    @DELETE("pedidos/{id}")
-    Call<Void> cancelOrder(@Path("id") int id);
+    @GET("pedidos/")
+    Call<List<Order>> getOrders();
 
-    static ApiService create() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://recdev.pythonanywhere.com/") // Base URL
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    @DELETE("pedidos/{id}/")
+    Call<Void> deleteOrder(@Path("id") int id_pedido);
 
-        return retrofit.create(ApiService.class);
-    }
+    @PATCH("usuarios/{id}/")
+    Call<UserProfile> updateProfile(@Path("id") int id,
+            @Body UserProfile profile
+    );
+
 }

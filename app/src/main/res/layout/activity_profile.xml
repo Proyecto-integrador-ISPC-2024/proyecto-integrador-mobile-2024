@@ -41,16 +41,16 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center"
-            android:layout_margin="24dp"
+            android:layout_marginTop="24dp"
             android:padding="16dp"
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topNavbar"
-            app:srcCompat="@mipmap/letra_l" />
+            app:srcCompat="@mipmap/logo_dark" />
 
         <TextView
             android:id="@+id/textView"
@@ -61,7 +61,9 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/dashClick"
             app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
 
         <Button
@@ -74,7 +76,8 @@
             android:backgroundTint="@color/colorSecondary"
             android:onClick="dashClick"
             android:text="@string/Dbtn"
-            android:textColor="@color/btnText" />
+            android:textColor="@color/btnText"
+            android:contentDescription="@string/contdes_dash_btn"/>
 
         <Button
             android:id="@+id/aboutBtn"
@@ -86,7 +89,8 @@
             android:backgroundTint="@color/colorSecondary"
             android:onClick="webtn"
             android:text="@string/webtn"
-            android:textColor="@color/btnText"/>
+            android:textColor="@color/btnText"
+            android:contentDescription="@string/contdes_about_btn"/>
 
         <Button
             android:id="@+id/profileSettingsBtn"
@@ -98,7 +102,8 @@
             android:backgroundTint="@color/colorSecondary"
             android:onClick="settingsClick"
             android:text="Editar perfil"
-            android:textColor="@color/btnText"/>
+            android:textColor="@color/btnText"
+            android:contentDescription="@string/contdes_edit_btn"/>
 
         <Button
             android:id="@+id/logoutBtn"
@@ -110,7 +115,8 @@
             android:backgroundTint="@color/red"
             android:onClick="logoutClick"
             android:text="@string/Logoutbtn"
-            android:textColor="@color/btnText"/>
+            android:textColor="@color/btnText"
+            android:contentDescription="@string/contdes_logout_btn"/>
     </LinearLayout>
 
     <LinearLayout

@@ -1,10 +1,13 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.adapters.CartAdapter;
 import com.example.tiendadecampeones.models.Product;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,68 +27,132 @@ public class Cart extends AppCompatActivity {
 
     private RecyclerView cartRecyclerView;
     private CartAdapter cartAdapter;
-    private List<Product> productList;
+    private ArrayList<Product> productList;
+    private TextView emptyCartTextView, totalTextView;
+    private Button checkoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        // Botón de navegación superior
+        initializeUI();
+        loadCartProducts();
+        setupRecyclerView();
+        setupCheckoutButton();
+        updateCartUI();
+        calculateTotal();
+    }
+
+    // Eliminación de ítems del carro si el usuario no está en esta actividad
+    @Override
+    protected void onResume() {
+        super.onResume();
+        clearCartIfNotInCartActivities();
+    }
+
+    // Inicialización y captura de elementos de UI
+    private void initializeUI() {
         ImageButton backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        backButton.setOnClickListener(v -> finish());
 
-        // Botones de navegación inferior
         Button homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Cart.this, Home.class);
-                startActivity(intent);
-            }
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Cart.this, Home.class);
+            startActivity(intent);
         });
 
-        Button productsButton = findViewById(R.id.productsButton);
-        productsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Cart.this, ProductsActivity.class);
-                startActivity(intent);
-            }
-        });
+        emptyCartTextView = findViewById(R.id.emptyCartTextView);
+        totalTextView = findViewById(R.id.totalPrice);
+        checkoutButton = findViewById(R.id.endShop);
+    }
 
-        Button profileButton = findViewById(R.id.profileButton);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Cart.this, Profile.class);
-                startActivity(intent);
-            }
-        });
+    // Obtención de productos del carro mediante SharedPreferences
+    private void loadCartProducts() {
+        SharedPreferences sharedPreferences = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
+        String productsJson = sharedPreferences.getString("cart_products", "[]");
 
-        // Initialize RecyclerView
+        Gson gson = new Gson();
+        Type productListType = new TypeToken<List<Product>>() {}.getType();
+        productList = gson.fromJson(productsJson, productListType);
+    }
+
+    // Seteo de información para el recycler view
+    private void setupRecyclerView() {
         cartRecyclerView = findViewById(R.id.cartRecyclerView);
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize product list (You can replace this with data from your backend)
-        productList = new ArrayList<>();
-        productList.add(new Product("Camiseta Argentina 2021", "Description 1", 19.99, R.mipmap.argentina_2021_primera, 1,10));
-        productList.add(new Product("Camiseta Brasil 2002", "Description 2", 29.99, R.mipmap.brasil_2002_primera, 2,10));
-        productList.add(new Product("Camiseta Alemania 2014", "Description 3", 39.99, R.mipmap.alemania_2014_segunda, 2,10));
-
-        // Set adapter
         cartAdapter = new CartAdapter(productList, this);
         cartRecyclerView.setAdapter(cartAdapter);
+    }
 
-        // Botón de finalización de compra
-        Button endShopButton = findViewById(R.id.endShop);
-        endShopButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+    // Verificación de estado del carro antes de avanzar hacia otra actividad
+    private void setupCheckoutButton() {
+        checkoutButton.setOnClickListener(v -> {
+            List<Product> filteredProductList = new ArrayList<>();
+            for (Product product : productList) {
+                boolean hasPositiveQuantity = false;
+                for (Product.Talle talle : product.getTalles()) {
+                    if (talle.getCantidadCompra() > 0) {
+                        hasPositiveQuantity = true;
+                        break;
+                    }
+                }
+                if (hasPositiveQuantity) {
+                    filteredProductList.add(product);
+                }
+            }
+            if (filteredProductList.isEmpty()) {
+                Toast.makeText(this, "¡El carro está vacío!", Toast.LENGTH_SHORT).show();
+            } else {
                 Intent intent = new Intent(Cart.this, CartResume.class);
+                intent.putExtra("product_list", new Gson().toJson(filteredProductList));
                 startActivity(intent);
             }
         });
+    }
 
+    // Dinamismo en la UI del carro dependiendo de la cantidad de productos existentes en el mismo
+    public void updateCartUI() {
+        if (productList.isEmpty()) {
+            emptyCartTextView.setVisibility(View.VISIBLE);
+            checkoutButton.setVisibility(View.GONE);
+        } else {
+            emptyCartTextView.setVisibility(View.GONE);
+            checkoutButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    // Cálculo de monto total
+    public void calculateTotal() {
+        double total = 0;
+        for (Product product : productList) {
+            double subtotal = 0;
+            for (Product.Talle talle : product.getTalles()) {
+                subtotal += product.getProductos().getPrecio() * talle.getCantidadCompra();
+            }
+            total += subtotal;
+        }
+        totalTextView.setText("Total: $" + String.format("%.2f", total));
+        if (total == 0 || productList.isEmpty()) {
+            checkoutButton.setEnabled(false);
+        } else {
+            checkoutButton.setEnabled(true);
+        }
+    }
+
+    // Definición de limpieza de carro si no se está en esta actividad o en las siguientes en la cadena del proceso de compra
+    public void clearCartIfNotInCartActivities() {
+        SharedPreferences cartPrefs = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor cartEditor = cartPrefs.edit();
+
+        String currentActivityName = this.getClass().getSimpleName();
+
+        if (!currentActivityName.equals("Cart") &&
+                !currentActivityName.equals("CartResume") &&
+                !currentActivityName.equals("PaymentMethodsActivity")) {
+
+            cartEditor.clear();
+            cartEditor.apply();
+        }
     }
 }

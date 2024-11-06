@@ -7,11 +7,6 @@ public class PaymentMethods {
     private List<Tarjeta> tarjetas;
 
 
-    public PaymentMethods(List<FormaDePago> formas_de_pago, List<Tarjeta> tarjetas) {
-        this.formas_de_pago = formas_de_pago;
-        this.tarjetas = tarjetas;
-    }
-
     public PaymentMethods() {
     }
 

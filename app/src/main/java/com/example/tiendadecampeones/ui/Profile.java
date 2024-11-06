@@ -1,6 +1,7 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -35,6 +36,7 @@ public class Profile extends AppCompatActivity {
 
         // Intent para iniciar la actividad del dashboard
         Intent intent = new Intent(this, Dashboard.class);
+        intent.putExtra("ORIGIN", "PROFILE");
         startActivity(intent);
     }
 
@@ -45,9 +47,26 @@ public class Profile extends AppCompatActivity {
     }
 
     public void logoutClick(View v) {
+        // Limpieza de shared preferences de usuario
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+
+        // Limpieza del carro
+        SharedPreferences cartPrefs = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor cartEditor = cartPrefs.edit();
+        cartEditor.clear();
+        cartEditor.apply();
+
+        // Alerta de cierre
         Toast.makeText(this, "Has cerrado tu sesión", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this,Home.class);
+
+        // Navegación al login
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 
     public void backButton(View v) {
@@ -71,7 +90,7 @@ public class Profile extends AppCompatActivity {
     public void productsButton(View v) {
         Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(this, ProductsActivity.class);
+        Intent intent = new Intent(this, ProductCategories.class);
         startActivity(intent);
     }
 

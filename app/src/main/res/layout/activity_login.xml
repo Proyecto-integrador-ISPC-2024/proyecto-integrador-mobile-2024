@@ -7,17 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.tiendadecampeones.ui.LoginActivity">
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/bienvenido"-->
-    <!--        style="@style/App.Theme.Size"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="73dp"-->
-    <!--        android:gravity="center"-->
-    <!--        android:text="Bienvenido" />-->
-
     <ImageView
         android:id="@+id/ImageViewLogo"
         android:layout_width="match_parent"
@@ -26,10 +15,12 @@
         android:layout_marginTop="72dp"
         android:layout_marginEnd="64dp"
         android:src="@drawable/logo"
+        android:contentDescription="@string/contdes_logo"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/emailInput"
         android:layout_width="match_parent"
@@ -37,13 +28,15 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="Email"
+        android:hint="@string/email_hint"
         android:autofillHints="emailAddress"
+        android:nextFocusDown="@id/passwordInput"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImageViewLogo" />
-
     <EditText
         android:id="@+id/passwordInput"
         android:layout_width="match_parent"
@@ -52,13 +45,16 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="32dp"
         android:inputType="textPassword"
-        android:hint="Contraseña"
+        android:hint="@string/password_hint"
         android:autofillHints="password"
+        android:nextFocusUp="@id/emailInput"
+        android:nextFocusDown="@id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailInput" />
-
+        app:layout_constraintTop_toBottomOf="@+id/emailInput"
+        android:maxLength="18"/>
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
@@ -68,29 +64,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput">
-
         <Button
             android:id="@+id/loginButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="bottom|center|center_horizontal|center_vertical"
-            android:text="Iniciar Sesion"
+            android:text="@string/login_button_text"
+            android:contentDescription="@string/contdes_login_button"
+            android:nextFocusUp="@id/passwordInput"
+            android:nextFocusRight="@id/registerButton"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             tools:layout_editor_absoluteX="223dp"
             tools:layout_editor_absoluteY="589dp" />
-
         <Button
             android:id="@+id/registerButton"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="bottom|center|center_horizontal|center_vertical"
-            android:text="Registrate"
+            android:text="@string/register_button_text"
+            android:contentDescription="@string/contdes_register_button"
+            android:nextFocusUp="@id/passwordInput"
+            android:nextFocusLeft="@id/loginButton"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             tools:layout_editor_absoluteX="64dp"
             tools:layout_editor_absoluteY="589dp" />
-
-
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
