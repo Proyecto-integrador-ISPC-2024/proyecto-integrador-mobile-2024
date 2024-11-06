@@ -161,6 +161,7 @@
     <string name="contdes_logout_btn">Boton para cerrar sesión</string>
     <string name="contdes_add_cart_btn">Boton para cerrar sesión</string>
     <string name="contdes_image">Imagen de producto</string>
+    <string name="comenzar">Comenzar</string>
 
     <!--  Menú lateral  -->
     <string name="main_menu_title">MENU PRINCIPAL</string>
