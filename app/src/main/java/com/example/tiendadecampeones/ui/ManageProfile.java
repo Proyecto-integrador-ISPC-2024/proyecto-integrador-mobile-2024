@@ -26,7 +26,7 @@ public class ManageProfile extends AppCompatActivity {
 
     private static final String TAG = "ManageProfile"; // Log tag
 
-    private EditText etName, etLastName, etEmail, etPassword, etDomicilio;
+    private EditText etName, etLastName, etEmail, etPassword, etAddress;
     private Button btnEditProfile, btnSaveChanges;
     private String fullAuthToken;
     private int id_usuario;
@@ -39,7 +39,7 @@ public class ManageProfile extends AppCompatActivity {
         etName = findViewById(R.id.et_name);
         etLastName = findViewById(R.id.et_last_name);
         etEmail = findViewById(R.id.et_email);
-        etDomicilio = findViewById(R.id.et_address);
+        etAddress = findViewById(R.id.et_address);
         etPassword = findViewById(R.id.et_password);
         btnEditProfile = findViewById(R.id.btn_edit_profile);
         btnSaveChanges = findViewById(R.id.btn_save_changes);
@@ -56,8 +56,6 @@ public class ManageProfile extends AppCompatActivity {
             finish();
             return;
         }
-
-        fullAuthToken = "Bearer " + authToken;
         loadUserData(sharedPref);
         setFieldsEditable(false);
         btnEditProfile.setOnClickListener(this::onEditProfileClicked);
@@ -86,7 +84,7 @@ public class ManageProfile extends AppCompatActivity {
             etName.setText(nombre);
             etLastName.setText(apellido);
             etEmail.setText(email);
-            etDomicilio.setText(domicilio);
+            etAddress.setText(domicilio);
             etPassword.setText(password);
         }
 
@@ -95,7 +93,7 @@ public class ManageProfile extends AppCompatActivity {
         etName.setEnabled(editable);
         etLastName.setEnabled(editable);
         etEmail.setEnabled(editable);
-        etDomicilio.setEnabled(editable);
+        etAddress.setEnabled(editable);
         etPassword.setEnabled(editable);
     }
 
@@ -106,19 +104,40 @@ public class ManageProfile extends AppCompatActivity {
     }
 
     public void onSaveChangesClicked(View view) {
+
+        // Validación de longitud con ventana de alerta
+        if (etName.getText().toString().length() > 40) {
+            showAlertDialog("Error de validación", "El nombre no puede tener más de 40 caracteres");
+            return;
+        }
+        if (etLastName.getText().toString().length() > 40) {
+            showAlertDialog("Error de validación", "El apellido no puede tener más de 40 caracteres");
+            return;
+        }
+        if (etAddress.getText().toString().length() > 40) {
+            showAlertDialog("Error de validación", "El domicilio no puede tener más de 40 caracteres");
+            return;
+        }
+        if (etEmail.getText().toString().length() > 40) {
+            showAlertDialog("Error de validación", "El email no puede tener más de 40 caracteres");
+            return;
+        }
+        if (etPassword.getText().toString().length() > 18) {
+            showAlertDialog("Error de validación", "La contraseña no puede tener más de 18 caracteres");
+            return;
+        }
         UserProfile updatedProfile = new UserProfile(
                 id_usuario,
                 etName.getText().toString(),
                 etLastName.getText().toString(),
                 etEmail.getText().toString(),
-                etDomicilio.getText().toString(),
+                etAddress.getText().toString(),
                 etPassword.getText().toString()
         );
 
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         Call<UserProfile> call = apiService.updateProfile(
                 updatedProfile.getId(),
-                fullAuthToken,
                 updatedProfile
         );
 
@@ -138,10 +157,19 @@ public class ManageProfile extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserProfile> call, Throwable t) {
-                Toast.makeText(ManageProfile.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                showAlertDialog("Error", "Error de conexión: " + t.getMessage());
                 disableEditingFields();
             }
         });
+    }
+
+    private void showAlertDialog(String title, String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Aceptar", null)
+                .show();
+
     }
 
     public void onDeleteAccountClicked(View view) {
@@ -169,6 +197,7 @@ public class ManageProfile extends AppCompatActivity {
     private void disableEditingFields() {
         etName.setEnabled(false);
         etLastName.setEnabled(false);
+        etAddress.setEnabled(false);
         etEmail.setEnabled(false);
         etPassword.setEnabled(false);
 

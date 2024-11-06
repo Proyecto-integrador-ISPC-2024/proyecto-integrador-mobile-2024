@@ -3,6 +3,7 @@ package com.example.tiendadecampeones.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.models.CartItem;
 import com.example.tiendadecampeones.models.Product;
 import com.example.tiendadecampeones.ui.Cart;
 import com.google.gson.Gson;
@@ -25,12 +27,12 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
-    private ArrayList<Product> productList;
+    private ArrayList<CartItem> cartItemList;
     private Context context;
 
     // Constructor
-    public CartAdapter(ArrayList<Product> productList, Context context) {
-        this.productList = productList;
+    public CartAdapter(ArrayList<CartItem> cartItemList, Context context) {
+        this.cartItemList = cartItemList;
         this.context = context;
     }
 
@@ -41,103 +43,110 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return new CartViewHolder(view);
     }
 
-    // agregado de información para el recycler view
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        Product product = productList.get(position);
-        Product.Producto productoDetails = product.getProductos();
+        CartItem cartItem = cartItemList.get(position);
+        Product.Producto productoDetails = cartItem.getProducto();
+        holder.productName.setText(productoDetails.getNombreProducto());
+        holder.productPrice.setText("Precio: $" + productoDetails.getPrecio());
 
-        // Obtención de datos agregados al carro
+        // Cargar la imagen
         String imageUrl = productoDetails.getImagen();
         Glide.with(context)
                 .load(imageUrl)
                 .placeholder(R.drawable.placeholder_image)
                 .error(R.drawable.error_image)
                 .into(holder.productImage);
-        StringBuilder talleInfo = new StringBuilder();
-        for (Product.Talle talle : product.getTalles()) {
-            talleInfo.append(talle.getTalle());
-        }
-        double subtotal = 0;
-        for (Product.Talle talle : product.getTalles()) {
-            subtotal += productoDetails.getPrecio() * talle.getCantidadCompra();
-        }
 
-        // Seteo en UI de datos
-        holder.productName.setText(productoDetails.getNombreProducto());
-        holder.productPrice.setText("Precio: $" + productoDetails.getPrecio());
-        holder.productSize.setText(talleInfo.toString());
-        holder.productSubtotal.setText("Subtotal: $" + subtotal);
+        // Obtener detalles del talle seleccionado
+        String talleInfo = cartItem.getTalle().getTalle();
+        double subtotal = productoDetails.getPrecio() * cartItem.getCantidadCompra();
 
-        // Manipulación de cantidades y borrado de productos
+        // Setear los datos en la UI
+        holder.productSize.setText(talleInfo);
+        holder.productSubtotal.setText("Subtotal: $" + String.format("%.2f", subtotal));
+
+        // Manejar la manipulación de cantidades
         holder.increaseQuantityButton.setOnClickListener(v -> {
-            updateQuantity(holder, product, true); // Aumentar
+            updateQuantity(holder, cartItem, true);
         });
         holder.decreaseQuantityButton.setOnClickListener(v -> {
-            updateQuantity(holder, product, false); // Disminuir
+            updateQuantity(holder, cartItem, false);
         });
         holder.removeButton.setOnClickListener(v -> {
-            removeProduct(position); // Eliminar
+            removeProduct(position);
         });
-        holder.productQuantity.setText(Integer.toString(product.getTalles().get(0).getCantidadCompra()));
+
+        holder.productQuantity.setText(Integer.toString(cartItem.getCantidadCompra()));
     }
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return cartItemList.size();
     }
 
-    // Actualización de cantidades de productos
-    private void updateQuantity(CartViewHolder holder, Product product, boolean isIncrease) {
-        Product.Talle talle = product.getTalles().get(0);
-        int currentQuantity = talle.getCantidadCompra();
+    private void updateQuantity(CartViewHolder holder, CartItem cartItem, boolean isIncrease) {
+        Product.Talle talle = cartItem.getTalle();
+        int currentQuantity = cartItem.getCantidadCompra();
+        int stock = talle.getStock();
+        Log.d("CartItem", "Stock disponible: " + stock);
 
+        // Verifica si la cantidad debe aumentar o disminuir
         if (isIncrease) {
-            if (currentQuantity < talle.getStock()) {
-                talle.setCantidadCompra(currentQuantity + 1);
+            if (currentQuantity < stock) {
+                // Aumenta la cantidad si no se supera el stock disponible
+                cartItem.incrementQuantity();
+                Log.d("CartItem", "Cantidad aumentada a: " + cartItem.getCantidadCompra());
             } else {
                 Toast.makeText(context, "Stock máximo alcanzado", Toast.LENGTH_SHORT).show();
+                Log.d("CartItem", "Stock máximo alcanzado: " + stock);
             }
         } else {
             if (currentQuantity > 1) {
-                talle.setCantidadCompra(currentQuantity - 1);
+                // Decrementa la cantidad solo si es mayor a 1 (mínimo permitido)
+                cartItem.setCantidadCompra(currentQuantity - 1);
+                Log.d("CartItem", "Cantidad disminuida a: " + cartItem.getCantidadCompra());
             } else {
                 Toast.makeText(context, "Cantidad mínima alcanzada", Toast.LENGTH_SHORT).show();
+                Log.d("CartItem", "Cantidad mínima alcanzada, no se puede reducir más.");
             }
         }
 
-        double newSubtotal = product.getProductos().getPrecio() * talle.getCantidadCompra();
-        holder.productSubtotal.setText("Subtotal: $" + newSubtotal);
-        holder.productQuantity.setText(Integer.toString(talle.getCantidadCompra()));
+        // Cálculo del subtotal
+        double price = cartItem.getProducto().getPrecio();
+        int quantity = cartItem.getCantidadCompra();
+        double newSubtotal = price * quantity;
 
+        // Actualizar la interfaz con el nuevo subtotal y cantidad
+        holder.productSubtotal.setText("Subtotal: $" + String.format("%.2f", newSubtotal));
+        holder.productQuantity.setText(Integer.toString(quantity));
+
+        // Recalcular el total en el carrito
         ((Cart) context).calculateTotal();
+
+        // Guardar los cambios en SharedPreferences
         updateSharedPreferences();
     }
 
-    // Remoción de productos del carro
     private void removeProduct(int position) {
-        productList.remove(position);
+        cartItemList.remove(position);
         notifyItemRemoved(position);
         notifyDataSetChanged();
         ((Cart) context).calculateTotal();
         Toast.makeText(context, "¡Producto eliminado!", Toast.LENGTH_SHORT).show();
-
-        // Actualización de las sharedpreferences guardadas para el carro
         updateSharedPreferences();
     }
 
-    // Actualización de las shared preferences usadas para gestionar los ítems del carro
     private void updateSharedPreferences() {
         SharedPreferences sharedPreferences = context.getSharedPreferences("cart_shared_prefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String updatedProductsJson = gson.toJson(productList);
-        editor.putString("cart_products", updatedProductsJson);
+        String updatedProductsJson = gson.toJson(cartItemList);
+        editor.putString("cart_items", updatedProductsJson);
         editor.apply();
     }
 
-    // Captura de los elementos de la UI para poder renderizar los datos de los productos y para poder manipular la información
     static class CartViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productPrice, productSize, productSubtotal, productQuantity;
         Button increaseQuantityButton, decreaseQuantityButton, removeButton;

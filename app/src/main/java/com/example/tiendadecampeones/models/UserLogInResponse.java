@@ -3,24 +3,36 @@ package com.example.tiendadecampeones.models;
 import com.google.gson.annotations.SerializedName;
 
 public class UserLogInResponse {
+    @SerializedName("usuario")
     private Usuario usuario;
-    private String token;
 
+    @SerializedName("token")
+    private String accessToken;
 
     @SerializedName("refresh_token")
-    private String refresh;
+    private String refreshToken;
 
-    public void UserLoginResponse(Usuario usuario, String token) {
+    // Constructor vacío (requerido por Gson)
+    public UserLogInResponse() {}
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-        this.token = token;
     }
 
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public String getAccessToken() {
+        return accessToken;
+    }
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
-    public String getToken() { return token; }
-    public void setToken(String token) { this.token = token; }
-
-    public String getRefreshToken() { return refresh; }
-    public void setRefreshToken(String refresh) { this.refresh = refresh; }
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }

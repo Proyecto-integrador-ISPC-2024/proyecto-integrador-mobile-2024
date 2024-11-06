@@ -36,6 +36,7 @@ public class Profile extends AppCompatActivity {
 
         // Intent para iniciar la actividad del dashboard
         Intent intent = new Intent(this, Dashboard.class);
+        intent.putExtra("ORIGIN", "PROFILE");
         startActivity(intent);
     }
 
