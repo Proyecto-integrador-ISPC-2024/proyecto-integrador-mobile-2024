@@ -7,14 +7,14 @@ public class Product {
     private int id_producto_talle;
     private Producto productos;
     private List<Talle> talles;
-    private Talle talleSeleccionado;
+
 
     // Constructor
     public Product(int id_producto_talle, Producto productos, List<Talle> talles, int stock) {
         this.id_producto_talle = id_producto_talle;
         this.productos = productos;
         this.talles = talles;
-        this.talleSeleccionado = null;
+
     }
 
     // Getters y Setters
@@ -37,13 +37,7 @@ public class Product {
     public List<Talle> getTalles() {
         return talles;
     }
-    public Talle getTalleSeleccionado() {
-        return talleSeleccionado;
-    }
 
-    public void setTalleSeleccionado(Talle talleSeleccionado) {
-        this.talleSeleccionado = talleSeleccionado;
-    }
 
     public void setTalles(List<Talle> talles) {
         this.talles = talles;
@@ -133,18 +127,5 @@ public class Product {
         public int getStock() {
             return stock;
         }
-
-        public void setStock(int stock) {
-            this.stock = stock;
-        }
-
-        public int getCantidadCompra() {
-            return cantidadCompra;
-        }
-
-        public void setCantidadCompra(int cantidad) {
-            this.cantidadCompra = cantidad;
-        }
-
     }
 }

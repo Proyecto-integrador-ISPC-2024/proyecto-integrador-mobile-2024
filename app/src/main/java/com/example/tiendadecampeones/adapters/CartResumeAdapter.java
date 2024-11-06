@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.models.CartItem;
 import com.example.tiendadecampeones.models.Product;
 
 import java.util.List;
@@ -19,13 +20,13 @@ import java.util.Map;
 public class CartResumeAdapter extends RecyclerView.Adapter<CartResumeAdapter.CartViewHolder> {
 
     private Context context;
-    private List<Product> productList;
-    private Map<Product, Integer> cartItems;
+    private List<CartItem> cartItemList;
+    private Map<CartItem, Integer> cartItems;
 
     // Constructor actualizado
-    public CartResumeAdapter(Context context, List<Product> productList, Map<Product, Integer> cartItems) {
+    public CartResumeAdapter(Context context, List<CartItem> cartItemList, Map<CartItem, Integer> cartItems) {
         this.context = context;
-        this.productList = productList;
+        this.cartItemList = cartItemList;
         this.cartItems = cartItems;
     }
 
@@ -38,13 +39,13 @@ public class CartResumeAdapter extends RecyclerView.Adapter<CartResumeAdapter.Ca
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        Product product = productList.get(position);
-        Product.Producto producto = product.getProductos();
+        CartItem cartItem = cartItemList.get(position);
+        Product.Producto producto = cartItem.getProducto();
 
         holder.productName.setText(producto.getNombreProducto());
         holder.productPrice.setText(String.format("$%.2f", producto.getPrecio()));
 
-        Integer quantity = cartItems.get(product);
+        Integer quantity = cartItems.get(cartItem);
         if (quantity != null) {
             holder.productQuantity.setText(String.valueOf(quantity));
         }
@@ -54,7 +55,7 @@ public class CartResumeAdapter extends RecyclerView.Adapter<CartResumeAdapter.Ca
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return cartItemList.size();
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
