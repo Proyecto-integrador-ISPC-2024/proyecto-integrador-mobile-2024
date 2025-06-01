@@ -64,67 +64,7 @@
                 android:focusable="true"
                 android:contentDescription="@string/titleContact"/>
 
-            <!-- Dirección -->
-            <TextView
-                android:id="@+id/addressLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/addressContact"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"
-                android:focusable="true"
-                android:contentDescription= "@string/addressContact" />
-
-            <TextView
-                android:id="@+id/addressText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/addressNameContact"
-                android:textSize="16sp"
-                android:focusable="true"
-                android:contentDescription="@string/addressNameContact"/>
-
-            <!-- Teléfono -->
-            <TextView
-                android:id="@+id/phoneLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/phoneContact"
-                android:textSize="16sp"
-                android:layout_marginTop="16dp"
-                android:focusable="true"
-                android:contentDescription="@string/phoneContact"/>
-
-            <TextView
-                android:id="@+id/phoneText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/numbersContact"
-                android:textSize="16sp"
-                android:focusable="true"
-                android:contentDescription="@string/numbersContact"/>
-
-            <!-- Email -->
-            <TextView
-                android:id="@+id/emailLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mailContact"
-                android:textSize="16sp"
-                android:layout_marginTop="16dp"
-                android:focusable="true"
-                android:contentDescription="@string/mailContact"/>
-
-            <TextView
-                android:id="@+id/emailText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/emailContact"
-                android:textSize="16sp"
-                android:focusable="true"
-                android:contentDescription="@string/emailContact"/>
-
-            <!-- Botón para enviar correo -->
+            <!-- Botón para enviar correo
             <Button
                 android:id="@+id/emailButton"
                 android:layout_width="wrap_content"
@@ -134,7 +74,104 @@
                 android:backgroundTint="@color/colorSecondary"
                 android:textColor="@color/colorPrimary"
                 android:focusable="true"
-                android:contentDescription="@string/contdes_mail_btn"/>
+                android:contentDescription="@string/contdes_mail_btn"/> -->
+
+            <!-- Formulario de contacto -->
+
+            <!-- Campo Nombre -->
+            <EditText
+                android:id="@+id/nameContactInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="givenName"
+                android:hint="@string/nameContactInput"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginTop="12dp" />
+
+            <!-- Campo Apellido -->
+            <EditText
+                android:id="@+id/lastnameContactInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="familyName"
+                android:hint="@string/lastnameContactInput"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginTop="12dp" />
+
+            <!-- Campo Correo -->
+            <EditText
+                android:id="@+id/emailContactInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="emailAddress"
+                android:hint="@string/emailContactInput"
+                android:inputType="textEmailAddress"
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginTop="12dp" />
+
+            <!-- Campo Mensaje -->
+            <EditText
+                android:id="@+id/messageContactInput"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="@string/messageContactInput"
+                android:gravity="top"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginTop="12dp" />
+
+            <!-- Botón Enviar -->
+            <Button
+                android:id="@+id/sendFormContactButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/sendFormContactButton"
+                android:textAllCaps="true"
+                android:backgroundTint="@color/colorSecondary"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/contSendContactButton" />
+
+            <!-- Información adicional -->
+            <TextView
+                android:id="@+id/additionalInfoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/additionalInfoTitle"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/black"
+                android:focusable="true"
+                android:contentDescription="@string/additionalInfoTitle" />
+
+            <TextView
+                android:id="@+id/additionalInfoText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/additionalInfoText"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4dp"
+                android:focusable="true"
+                android:contentDescription="@string/additionalInfoText" />
+
 
             <!-- Productos recomendados (Scroll horizontal) -->
             <TextView
@@ -149,7 +186,7 @@
                 android:focusable="true"
                 android:contentDescription=""/>
 
-            <HorizontalScrollView
+            <!-- <HorizontalScrollView
                 android:id="@+id/recommendedScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -162,7 +199,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!-- Producto 1 -->
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -192,7 +229,7 @@
                             android:contentDescription="@string/contdes_productname1"/>
                     </LinearLayout>
 
-                    <!-- Producto 2 -->
+
                     <LinearLayout
                         android:id="@+id/product_2"
                         android:layout_width="wrap_content"
@@ -222,7 +259,7 @@
                     </LinearLayout>
 
 
-                    <!-- Producto 3 -->
+
                     <LinearLayout
                         android:id="@+id/product_3"
                         android:layout_width="wrap_content"
@@ -251,12 +288,12 @@
                     </LinearLayout>
 
                 </LinearLayout>
-            </HorizontalScrollView>
+            </HorizontalScrollView> -->
 
             <!-- Botón para ir a comprar -->
             <Button
                 android:id="@+id/comprarButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/buyContactBtn"
                 android:layout_marginTop="16dp"

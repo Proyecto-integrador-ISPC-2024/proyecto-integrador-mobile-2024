@@ -65,12 +65,14 @@
 
     <!-- Sección Contacto-->
     <string name="titleContact">CONTACTANOS!</string>
-    <string name="addressContact">Dirección:</string>
-    <string name="addressNameContact">Av. Colón 123, Córdoba</string>
-    <string name="phoneContact">Teléfono:</string>
-    <string name="numbersContact">+54 351 1234567</string>
-    <string name="mailContact">Email:</string>
-    <string name="emailContact">info@tiendadecampeones.com</string>
+    <string name="nameContactInput">Nombre</string>
+    <string name="lastnameContactInput">Apellido</string>
+    <string name="emailContactInput">Correo electronico</string>
+    <string name="messageContactInput">Mensaje</string>
+    <string name="additionalInfoTitle">Información adicinal</string>
+    <string name="additionalInfoText">Nos pondremos en contacto contigo dentro de las 24 a 48 horas hábiles. Gracias por confiar en Tienda de Campeones.</string>
+    <string name="sendFormContactButton">ENVIAR</string>
+    <string name="contSendContactButton">ENVIAR</string>
     <string name="knowOurProducts">Conoce Nuestros Productos</string>
     <string name="sendContactBtn">ENVIAR CORREO</string>
     <string name="buyContactBtn">IR A COMPRAR</string>
