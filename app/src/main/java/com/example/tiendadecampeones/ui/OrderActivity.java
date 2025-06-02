@@ -23,6 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import android.widget.LinearLayout;
+import android.app.AlertDialog;
 
 public class OrderActivity extends AppCompatActivity {
     private TextView orderNumber;
@@ -246,7 +247,14 @@ public class OrderActivity extends AppCompatActivity {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.andreani.com/"));
             startActivity(browserIntent);
         });
-        cancelButton.setOnClickListener(v -> cancelOrder(id_pedido));
+        cancelButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Cancelar Pedido")
+                    .setMessage("¿Está seguro que desea cancelar este pedido?")
+                    .setPositiveButton("Sí", (dialog, which) -> cancelOrder(id_pedido))
+                    .setNegativeButton("No", null)
+                    .show();
+        });
     }
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
