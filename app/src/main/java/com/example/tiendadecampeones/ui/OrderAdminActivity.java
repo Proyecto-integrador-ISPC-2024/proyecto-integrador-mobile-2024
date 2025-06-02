@@ -2,7 +2,6 @@ package com.example.tiendadecampeones.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.widget.LinearLayout;
 
-public class OrderActivity extends AppCompatActivity {
+public class OrderAdminActivity extends AppCompatActivity {
     private TextView orderNumber;
     private TextView orderDate;
     private TextView orderStatus;
@@ -32,18 +31,21 @@ public class OrderActivity extends AppCompatActivity {
     private TextView paymentMethod;
     private TextView cardsMethod;
     private ImageButton backButton;
+    private Button sendOrderBtn;
     private Button trackOrderButton;
     private Button cancelButton;
+    private TextView trackingTitle;
     private int id_pedido;
     private RecyclerView productsRecyclerView;
     private OrderProductAdapter adapter;
-    private TextView trackingTitle;
     private LinearLayout orderDetailsLayout;
+    private boolean isFirstLoad = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+        setContentView(R.layout.activity_order_admin);
         initializeViews();
         Intent intent = getIntent();
         productsRecyclerView = findViewById(R.id.productsRecyclerView);
@@ -67,22 +69,23 @@ public class OrderActivity extends AppCompatActivity {
         cardsMethod = findViewById(R.id.cardsMethod);
         totalAmount = findViewById(R.id.totalAmount);
         backButton = findViewById(R.id.backButton);
-        cancelButton = findViewById(R.id.cancelButton);
+        sendOrderBtn = findViewById(R.id.sendOrderBtn);
         trackOrderButton = findViewById(R.id.trackOrderButton);
-        trackingTitle = findViewById(R.id.orderTrackingText);
+        cancelButton = findViewById(R.id.cancelButton);
+        trackingTitle = findViewById(R.id.trackingTitle);
         orderDetailsLayout = findViewById(R.id.orderDetailsLayout);
         orderDetailsLayout.setVisibility(View.GONE);
-        cancelButton.setVisibility(View.GONE);
+        sendOrderBtn.setVisibility(View.GONE);
         trackOrderButton.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.GONE);
         trackingTitle.setVisibility(View.GONE);
     }
 
     private void loadOrderDetails() {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         String token = preferences.getString("accessToken", null);
-        int id_usuario = preferences.getInt("id_usuario", -1);
 
-        if (id_usuario != -1 && token != null) {
+        if (token != null) {
             ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
             Call<List<Order>> call = apiService.getOrders();
@@ -91,13 +94,20 @@ public class OrderActivity extends AppCompatActivity {
                 public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         List<Order> allOrders = response.body();
+                        android.util.Log.d("OrderAdminActivity", "Pedidos recibidos: " + allOrders.size());
+
+                        boolean orderFound = false;
                         for (Order order : allOrders) {
-                            if (order.getIdUsuario() == id_usuario && order.getIdPedido() == id_pedido) {
+                            if (order.getIdPedido() == id_pedido) {
                                 displayOrderDetails(order);
-                                return;
+                                orderFound = true;
+                                break;
                             }
                         }
-                        showToast("Pedido no encontrado");
+
+                        if (!orderFound) {
+                            showToast("Pedido no encontrado");
+                        }
                     } else {
                         showToast("Error al obtener detalles del pedido");
                     }
@@ -112,12 +122,50 @@ public class OrderActivity extends AppCompatActivity {
         }
     }
 
+    private void sendOrder(int id_pedido) {
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String token = preferences.getString("accessToken", null);
+
+        if (token != null) {
+            ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+
+            Call<Void> sendOrderCall = apiService.sendOrder(id_pedido);
+            sendOrderCall.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        showToast("Pedido marcado como enviado exitosamente");
+                        loadOrderDetails();
+                    } else {
+                        try {
+                            String errorBody = response.errorBody().string();
+                            if (response.code() == 400) {
+                                showToast("Este pedido ya ha sido enviado o está cancelado.");
+                            } else if (response.code() == 403) {
+                                showToast("No tienes permisos para enviar pedidos.");
+                            } else {
+                                showToast("Error desconocido al enviar el pedido.");
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    showToast("Error al enviar el pedido: " + t.getMessage());
+                }
+            });
+        } else {
+            showToast("Usuario no autenticado. Inicie sesión.");
+        }
+    }
+
     private void cancelOrder(int id_pedido) {
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         String token = preferences.getString("accessToken", null);
-        int id_usuario = preferences.getInt("id_usuario", -1);
 
-        if (id_usuario != -1 && token != null) {
+        if (token != null) {
             ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
             Call<Void> deleteOrderCall = apiService.deleteOrder(id_pedido);
@@ -126,7 +174,7 @@ public class OrderActivity extends AppCompatActivity {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         showToast("Pedido cancelado exitosamente");
-                        volverAlDashboard();
+                        finish();
                     } else {
                         try {
                             String errorBody = response.errorBody().string();
@@ -162,34 +210,48 @@ public class OrderActivity extends AppCompatActivity {
         orderDate.setText(getString(R.string.order_date_label) + " " + order.getFecha());
         orderStatus.setText(getString(R.string.order_status_label) + " " + order.getEstado());
 
-        showToast("Detalles del pedido " + order.getIdPedido());
+        if (isFirstLoad) {
+            showToast("Detalles del pedido " + order.getIdPedido());
+            isFirstLoad = false;
+        }
 
         // Visibilidad de botones según el estado
         if ("ENVIADO".equalsIgnoreCase(order.getEstado())) {
+            sendOrderBtn.setVisibility(View.GONE);
             cancelButton.setVisibility(View.GONE);
             trackOrderButton.setVisibility(View.VISIBLE);
             trackingTitle.setVisibility(View.VISIBLE);
         } else if ("CANCELADO".equalsIgnoreCase(order.getEstado())) {
+            sendOrderBtn.setVisibility(View.GONE);
             cancelButton.setVisibility(View.GONE);
             trackOrderButton.setVisibility(View.GONE);
             trackingTitle.setVisibility(View.GONE);
+        } else if ("ACEPTADO".equalsIgnoreCase(order.getEstado())) {
+            sendOrderBtn.setVisibility(View.VISIBLE);
+            cancelButton.setVisibility(View.VISIBLE);
+            trackOrderButton.setVisibility(View.GONE);
+            trackingTitle.setVisibility(View.GONE);
         } else {
+            sendOrderBtn.setVisibility(View.VISIBLE);
             cancelButton.setVisibility(View.VISIBLE);
             trackOrderButton.setVisibility(View.GONE);
             trackingTitle.setVisibility(View.GONE);
         }
 
+        // Mostrar detalles de productos
         List<Order.OrderDetail> detalles = order.getDetalles();
-        if (detalles != null) {
+        if (detalles != null && !detalles.isEmpty()) {
             adapter = new OrderProductAdapter(this, detalles);
             productsRecyclerView.setAdapter(adapter);
         }
 
+        // Mostrar formas de pago
         List<Order.FormaDePago> formasDePagoList = order.getFormaDePago();
         if (formasDePagoList != null && !formasDePagoList.isEmpty()) {
             StringBuilder formasDePagoStr = new StringBuilder();
             StringBuilder tarjetasStr = new StringBuilder();
             boolean ocultarTarjetas = false;
+
             for (Order.FormaDePago forma : formasDePagoList) {
                 if (forma.getFormaDePagoDescripcion() != null) {
                     formasDePagoStr.append(forma.getFormaDePagoDescripcion()).append(", ");
@@ -201,12 +263,14 @@ public class OrderActivity extends AppCompatActivity {
                     tarjetasStr.append(forma.getTarjeta()).append(", ");
                 }
             }
+
             if (formasDePagoStr.length() > 0) {
                 formasDePagoStr.setLength(formasDePagoStr.length() - 2);
             }
             if (tarjetasStr.length() > 0) {
                 tarjetasStr.setLength(tarjetasStr.length() - 2);
             }
+
             paymentMethod.setText(getString(R.string.payment_method_label) + " " + formasDePagoStr.toString());
             if (ocultarTarjetas) {
                 cardsMethod.setVisibility(View.GONE);
@@ -215,45 +279,26 @@ public class OrderActivity extends AppCompatActivity {
                 cardsMethod.setVisibility(View.VISIBLE);
             }
         } else {
-            cardsMethod.setVisibility(View.VISIBLE);
+            paymentMethod.setText(getString(R.string.payment_method_label) + " No especificado");
+            cardsMethod.setVisibility(View.GONE);
         }
 
         totalAmount.setText("Total Abonado: $" + order.getTotal());
         orderDetailsLayout.setVisibility(View.VISIBLE);
-
-        View orderTrackingContainer = findViewById(R.id.orderTrackingContainer);
-        if (orderTrackingContainer != null) {
-            if ("ACEPTADO".equalsIgnoreCase(order.getEstado()) || "CANCELADO".equalsIgnoreCase(order.getEstado())) {
-                orderTrackingContainer.setVisibility(View.GONE);
-            } else {
-                orderTrackingContainer.setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setupButtonListeners() {
         backButton.setOnClickListener(v -> finish());
+        sendOrderBtn.setOnClickListener(v -> sendOrder(id_pedido));
         trackOrderButton.setOnClickListener(v -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.andreani.com/"));
             startActivity(browserIntent);
         });
         cancelButton.setOnClickListener(v -> cancelOrder(id_pedido));
     }
+
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    public void volverAlDashboard() {
-        finish();
     }
 
     public void profileBtn(View view) {
@@ -274,4 +319,3 @@ public class OrderActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-
