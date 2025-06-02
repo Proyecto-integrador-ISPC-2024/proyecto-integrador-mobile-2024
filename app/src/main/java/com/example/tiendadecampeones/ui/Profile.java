@@ -32,12 +32,27 @@ public class Profile extends AppCompatActivity {
     }
     // Métodos para manejar  los botones
     public void dashClick(View v) {
-        Toast.makeText(this, "Redireccionando a tu dashboard", Toast.LENGTH_SHORT).show();
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String userRole = preferences.getString("userRole", "");
+        boolean isStaff = preferences.getBoolean("isStaff", false);
+        boolean isSuperuser = preferences.getBoolean("isSuperuser", false);
 
-        // Intent para iniciar la actividad del dashboard
-        Intent intent = new Intent(this, Dashboard.class);
-        intent.putExtra("ORIGIN", "PROFILE");
-        startActivity(intent);
+        // Verificar si el usuario es admin o super admin
+        boolean isAdmin = "ADMIN".equals(userRole) && isStaff;
+        boolean isSuperAdmin = isAdmin && isSuperuser;
+
+        if (isAdmin || isSuperAdmin) {
+            android.util.Log.d("Profile", "Redirigiendo a AdminListUsersActivity");
+            Toast.makeText(this, "Redireccionando al panel de administración", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, AdminListUsersActivity.class);
+            startActivity(intent);
+        } else {
+            android.util.Log.d("Profile", "Redirigiendo a Dashboard");
+            Toast.makeText(this, "Redireccionando a tu dashboard", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Dashboard.class);
+            intent.putExtra("ORIGIN", "PROFILE");
+            startActivity(intent);
+        }
     }
 
     public void settingsClick(View v) {

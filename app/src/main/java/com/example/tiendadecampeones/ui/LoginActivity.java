@@ -107,7 +107,22 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("apellido", apellido);
         editor.putString("domicilio", domicilio);
         editor.putString("email", email);
-        editor.putString("rol", rol);
+        editor.putString("userRole", rol);
+
+        try {
+            String[] parts = token.split("\\.");
+            String payload = parts[1];
+            byte[] decodedBytes = android.util.Base64.decode(payload, android.util.Base64.URL_SAFE);
+            String decoded = new String(decodedBytes, "UTF-8");
+            org.json.JSONObject json = new org.json.JSONObject(decoded);
+            boolean isStaff = json.optBoolean("is_staff", false);
+            boolean isSuperuser = json.optBoolean("is_superuser", false);
+
+            editor.putBoolean("isStaff", isStaff);
+            editor.putBoolean("isSuperuser", isSuperuser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         editor.apply();
     }
@@ -128,6 +143,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserLogInResponse> call, Response<UserLogInResponse> response) {
                 loginButton.setEnabled(true); // Reactiva el botón
+
                 if (response.isSuccessful() && response.body() != null) {
                     String token = response.body().getAccessToken();
                     String refreshToken = response.body().getRefreshToken();
@@ -141,20 +157,8 @@ public class LoginActivity extends AppCompatActivity {
                     // Guardar tokens en SharedPreferences
                     saveTokens(token, refreshToken, id_usuario, nombre, apellido, email, domicilio, rol);
 
-                    // Imprime el id_usuario en Logcat
-                    Log.d("UserIdDebug", "ID de usuario recuperado: " + id_usuario);
-
                     // Redirigir según el rol
-                    Intent intent;
-                    if ("ADMIN".equals(rol)) {
-                        intent = new Intent(LoginActivity.this, AdminOrdersActivity.class);
-                    } else {
-                        intent = new Intent(LoginActivity.this, Home.class);
-                    }
-                    intent.putExtra("nombreUsuario", nombre); // Agrega el nombre de usuario al Intent
-                    intent.putExtra("mostrarBienvenida", true);
-                    startActivity(intent);
-                    finish();
+                    handleLoginSuccess(response.body());
                 } else {
                     showAlert("Error", "Credenciales incorrectas");
                 }
@@ -166,5 +170,11 @@ public class LoginActivity extends AppCompatActivity {
                 showAlert("Error", "Error de conexión");
             }
         });
+    }
+
+    private void handleLoginSuccess(UserLogInResponse response) {
+        Intent intent = new Intent(LoginActivity.this, Home.class);
+        startActivity(intent);
+        finish();
     }
 }

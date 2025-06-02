@@ -9,6 +9,7 @@
     <string name="repeat_password_hint">Repetir Contraseña</string>
     <string name="login_button_text">Iniciar Sesión</string>
     <string name="register_button_text">Registrate</string>
+    <string name="full_name_format">%1$s %2$s</string>
 
     <!--  Barra de navegación superior  -->
     <string name="back_button">Volver</string>
@@ -105,6 +106,17 @@
     <string name="searchV">Número de pedido o fecha</string>
     <string name="order_title_dashboard">Pedidos</string>
     <string name="no_orders_message">No tienes pedidos</string>
+
+    <!-- Sección Admin-->
+    <string name="order_title_admin">Pedido</string>
+    <string name="send_order_button">Enviar Pedido</string>
+    <string name="cancel_order_button">Cancelar Pedido</string>
+    <string name="order_tracking_btn_admin">Ver logistica de envío</string>
+    <string name="search_hint">Buscar por nombre o apellido</string>
+    <string name="user_list_title">Lista de Usuarios</string>
+    <string name="user_name_description">Nombre completo del usuario</string>
+    <string name="user_email_description">Correo electrónico del usuario</string>
+    <string name="user_role_description">Rol del usuario en el sistema</string>
 
     <!-- Sección Editar perfil -->
     <string name="disableAccount">desactivar cuenta</string>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:padding="8dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,19 +25,33 @@
             android:id="@+id/backButton"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginEnd="270dp"
+            android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/arrow_back_icon_35x35"
-            android:contentDescription="@string/back_button" />
+            android:contentDescription="@string/back_button"
+            app:tint="@android:color/black" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/filterButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_filter_list"
+            android:contentDescription="Filtrar pedidos"
+            app:tint="@android:color/black" />
     </LinearLayout>
 
-    <!-- Título "Mis pedidos" -->
     <TextView
         android:id="@+id/pageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:text="@string/order_title_dashboard"
+        android:layout_marginTop="8dp"
+        android:text="Pedidos"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -44,30 +59,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón de Filtrar -->
-    <Button
-        android:id="@+id/filterButton"
+    <TextView
+        android:id="@+id/filterLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:onClick="showFilterDialog"
-        android:text="Filtrar"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:text="Filtrando por: Todos"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/pageTitle"
-        app:layout_constraintEnd_toStartOf="@id/searchV"
-        app:layout_constraintStart_toStartOf="@id/topNavbar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <SearchView
-        android:id="@+id/searchV"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_blue_light"
-        app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/filterButton"
-        app:layout_constraintTop_toBottomOf="@id/pageTitle"
-        app:queryBackground="@android:color/transparent"
-        app:queryHint="@string/searchV" />
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="8dp"
+        android:background="@color/white"
+        android:iconifiedByDefault="false"
+        android:queryHint="Buscar por número de pedido"
+        app:layout_constraintTop_toBottomOf="@id/filterLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ordersRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/no_orders_message"
@@ -79,23 +105,10 @@
         android:layout_gravity="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/searchV"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ListView -->
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
-        android:background="@color/green"
-        app:layout_constraintTop_toBottomOf="@id/no_orders_message"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- Bottom Navbar -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"
@@ -140,4 +153,6 @@
             android:textColor="@android:color/white"
             android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
