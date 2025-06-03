@@ -7,13 +7,17 @@ public class Usuario {
     private String email;
     private String domicilio;
     private String rol;
+    private boolean is_active;
+    private boolean is_staff;
+    private boolean is_superuser;
 
-    public Usuario(int id_usuario, String nombre, String apellido, String email, String domicilio) {
+    public Usuario(int id_usuario, String nombre, String apellido, String email, String domicilio, String rol) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.domicilio = domicilio;
+        this.rol = rol;
     }
 
     public int getIdUsuario() { return id_usuario; }
@@ -33,4 +37,11 @@ public class Usuario {
 
     public String getRol() { return rol; }
     public void setRol(String rol) { this.rol = rol; }
+
+    public boolean isActive() { return is_active; }
+    public void setActive(boolean active) { is_active = active; }
+    public boolean isStaff() { return is_staff; }
+    public void setStaff(boolean staff) { is_staff = staff; }
+    public boolean isSuperuser() { return is_superuser; }
+    public void setSuperuser(boolean superuser) { is_superuser = superuser; }
 }

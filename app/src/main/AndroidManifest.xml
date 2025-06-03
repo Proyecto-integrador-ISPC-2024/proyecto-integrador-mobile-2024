@@ -42,10 +42,10 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.ProductCategories"
@@ -113,10 +113,21 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".ui.AdminOrdersActivity"
+            android:name=".ui.OrderAdminActivity"
             android:exported="false"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".ui.AdminOrdersActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.AdminListUsersActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>
