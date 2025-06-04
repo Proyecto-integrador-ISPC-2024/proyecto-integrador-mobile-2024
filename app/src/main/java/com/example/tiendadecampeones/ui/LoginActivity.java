@@ -21,8 +21,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.models.UserLogInResponse;
-import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.network.RetrofitClient;
+import com.example.tiendadecampeones.utils.UIUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +34,9 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 
+
 public class LoginActivity extends AppCompatActivity {
+    private View mainView; // Declaramos la variable a nivel de clase
 
     // métodos para validar que los campos no esten vacíos, mail y contrasña
     private boolean isValidEmail(String email) {
@@ -56,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
+        mainView = findViewById(android.R.id.content);
+
         EditText emailField = findViewById(R.id.emailInput);
         EditText passwordField = findViewById(R.id.passwordInput);
 
@@ -76,13 +80,13 @@ public class LoginActivity extends AppCompatActivity {
             String password = passwordField.getText().toString().trim();
 
             if (!areFieldsNotEmpty(email, password)) {
-                showAlert("Error", "Todos los campos son obligatorios");
-                btn2.setEnabled(true); // Reactiva el botón
+                UIUtils.showSnackbar(mainView, "Todos los campos son obligatorios");
+                btn2.setEnabled(true);// Reactiva el botón
             } else if (!isValidEmail(email)) {
-                showAlert("Error", "Email no tiene formato válido");
+                UIUtils.showSnackbar(mainView, "Email no tiene formato válido");
                 btn2.setEnabled(true); // Reactiva el botón
             } else if (!isValidPassword(password)) {
-                showAlert("Error", "La contraseña debe tener un minimo de 8 caracteres y un maximo de 18, un número y un carácter especial");
+                UIUtils.showSnackbar(mainView, "La contraseña debe tener un minimo de 8 caracteres y un maximo de 18, un número y un carácter especial");
                 btn2.setEnabled(true); // Reactiva el botón
             } else {
                 loginUser(email, password, btn2);

@@ -1,4 +1,4 @@
-package com.example.tiendadecampeones.ui;
+package com.example.tiendadecampeones.utils;
 
 import android.content.Context;
 import android.graphics.Color;
