@@ -1,5 +1,6 @@
 package com.example.tiendadecampeones.ui;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
@@ -54,6 +55,26 @@ public class AboutUs extends AppCompatActivity {
         contactButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutUs.this, Contact.class);
+                startActivity(intent);
+            }
+        });
+        // Botón para visitar la web
+        Button btnVisitarWeb = findViewById(R.id.btnVisitarWeb);
+        btnVisitarWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://github.com/Proyecto-integrador-ISPC-2024";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        Button termsButton = findViewById(R.id.termsBttn);
+        termsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String url = "https://github.com/Proyecto-integrador-ISPC-2024/proyecto-integrador-web-pp-2025.git";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(android.net.Uri.parse(url));
                 startActivity(intent);
             }
         });

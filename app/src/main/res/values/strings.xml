@@ -9,6 +9,8 @@
     <string name="repeat_password_hint">Repetir Contraseña</string>
     <string name="login_button_text">Iniciar Sesión</string>
     <string name="register_button_text">Registrate</string>
+    <string name="contdes_start_bttn">start_bttn</string>
+    <string name="full_name_format">%1$s %2$s</string>
 
     <!--  Barra de navegación superior  -->
     <string name="back_button">Volver</string>
@@ -22,6 +24,7 @@
 
     <!--  Sección productos  -->
     <string name="products_title">Nuestros productos</string>
+    <string name="contdes_pay">Confirmar pago</string>
 
     <!-- Strings de categorías de productos -->
     <string name="products_germany">Alemania</string>
@@ -61,16 +64,20 @@
     <string name="titleAbout">¿QUE ES TIENDA DE CAMPEONES?</string>
     <string name="description">Bienvenidos a Tienda de Campeones. Somos un equipo de apasionados por el fútbol y su historia, dedicados a revivir los momentos más icónicos del deporte a través de camisetas auténticas de los países que han ganado la Copa del Mundo. Cada prenda refleja el esfuerzo y la dedicación de los jugadores que hicieron historia. Únete a nosotros para celebrar el legado del fútbol con nuestras camisetas y revive la grandeza de los campeones.</string>
     <string name="contactBtn">CONTACTO</string>
+    <string name="VisitarWeb">VISITA NUESTRA WEB</string>
+
     <string name="photoAbout">Imagen relacionada con Tienda de Campeones</string>
 
     <!-- Sección Contacto-->
     <string name="titleContact">CONTACTANOS!</string>
-    <string name="addressContact">Dirección:</string>
-    <string name="addressNameContact">Av. Colón 123, Córdoba</string>
-    <string name="phoneContact">Teléfono:</string>
-    <string name="numbersContact">+54 351 1234567</string>
-    <string name="mailContact">Email:</string>
-    <string name="emailContact">info@tiendadecampeones.com</string>
+    <string name="nameContactInput">Nombre</string>
+    <string name="lastnameContactInput">Apellido</string>
+    <string name="emailContactInput">Correo electronico</string>
+    <string name="messageContactInput">Mensaje</string>
+    <string name="additionalInfoTitle">Información adicinal</string>
+    <string name="additionalInfoText">Nos pondremos en contacto contigo dentro de las 24 a 48 horas hábiles. Gracias por confiar en Tienda de Campeones.</string>
+    <string name="sendFormContactButton">ENVIAR</string>
+    <string name="contSendContactButton">ENVIAR</string>
     <string name="knowOurProducts">Conoce Nuestros Productos</string>
     <string name="sendContactBtn">ENVIAR CORREO</string>
     <string name="buyContactBtn">IR A COMPRAR</string>
@@ -100,11 +107,26 @@
     <string name="order_tracking_msg">Seguí tu pedido acá con tu número de pedido</string>
     <string name="order_tracking_btn">Seguí tu pedido acá</string>
     <string name="cancel_button">Arrepentimiento</string>
+    <string name="contdes_end_bttn">Finalizar compra</string>
+    <string name="contdes_track_order">Segui tu pedido</string>
+    <string name="contdes_cancel">Arrepentimiento</string>
 
     <!-- Sección Dashboard-->
     <string name="searchV">Número de pedido o fecha</string>
     <string name="order_title_dashboard">Pedidos</string>
     <string name="no_orders_message">No tienes pedidos</string>
+    <string name="contdes_filter">Filtrar</string>
+
+    <!-- Sección Admin-->
+    <string name="order_title_admin">Pedido</string>
+    <string name="send_order_button">Enviar Pedido</string>
+    <string name="cancel_order_button">Cancelar Pedido</string>
+    <string name="order_tracking_btn_admin">Ver logistica de envío</string>
+    <string name="search_hint">Buscar por nombre o apellido</string>
+    <string name="user_list_title">Lista de Usuarios</string>
+    <string name="user_name_description">Nombre completo del usuario</string>
+    <string name="user_email_description">Correo electrónico del usuario</string>
+    <string name="user_role_description">Rol del usuario en el sistema</string>
 
     <!-- Sección Editar perfil -->
     <string name="disableAccount">desactivar cuenta</string>
@@ -159,7 +181,7 @@
     <string name="contdes_about_btn">Boton para conocer de la tienda</string>
     <string name="contdes_edit_btn">Boton para editar perfil</string>
     <string name="contdes_logout_btn">Boton para cerrar sesión</string>
-    <string name="contdes_add_cart_btn">Boton para cerrar sesión</string>
+    <string name="contdes_add_cart_btn">Boton para agregar al carro</string>
     <string name="contdes_image">Imagen de producto</string>
     <string name="comenzar">Comenzar</string>
 
@@ -178,4 +200,24 @@
     <string name="camisetas_de_argentina_illustration">Camisetas de Argentina_illustration</string>
     <string name="argentina_illustration">argentina_illustration</string>
 
+    <!--  Boton terminos y condiciones  -->
+    <string name="term_and_cond">Términos y condiciones</string>
+    <string name="contdes_term_bttn">Boton para redireccionar a Términos y condiciones</string>
+    <string name="terminos">Términos y Condiciones (Actualizado: 07/05/2025)
+
+Responsable: Tienda de Campeones, CUIT 12-34567890-1, Córdoba, Argentina.
+Contacto: tiendadecampeonescba@gmail.com
+
+Productos y precios: En pesos argentinos (ARS), con IVA. Sujetos a cambios sin previo aviso.
+
+Compras: Al confirmar una compra aceptás estos términos. Se acepta pago con tarjeta o transferencia.
+
+Envíos: Por Andreani. Entrega estimada entre 5 y 10 días hábiles.
+
+Devoluciones: Tenés 10 días para cancelar. Producto sin uso. Costo de envío a cargo del comprador.
+
+Datos personales: Usamos tus datos solo para fines comerciales conforme a la Ley 25.326.
+
+Jurisdicción: Aplica la ley argentina. Tribunales ordinarios de Córdoba Capital.</string>
+    <string name="addressNameContact">Apellido</string>
 </resources>

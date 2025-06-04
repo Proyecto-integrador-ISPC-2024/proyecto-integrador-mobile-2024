@@ -17,4 +17,10 @@
         android:layout_height="wrap_content"
         android:text="Fecha"
         android:textSize="14sp"/>
+    <TextView
+        android:id="@+id/order_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/colorSecondary"/>
 </LinearLayout>
