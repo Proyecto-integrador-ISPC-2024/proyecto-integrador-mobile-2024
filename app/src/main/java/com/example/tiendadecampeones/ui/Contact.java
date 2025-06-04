@@ -104,6 +104,11 @@ public class Contact extends AppCompatActivity {
             return false;
         }
 
+        if (mensaje.length() > 500) {
+            showError("El mensaje no debe superar los 500 caracteres");
+            return false;
+        }
+
         if (!isValidName(nombre) || !isValidName(apellido)) {
             showError("Nombre o apellido contienen caracteres no permitidos");
             return false;
@@ -171,9 +176,23 @@ public class Contact extends AppCompatActivity {
     }
 
     private boolean isValidMessage(String input) {
-        String pattern = "^[\\p{L}\\p{N}\\s.,!?¡¿'\"\\-:;()áéíóúÁÉÍÓÚñÑüÜ]+$";
+        String lower = input.toLowerCase();
+
+        String[] blacklist = {
+                "<script", "</script", "<img", "<iframe", "onerror", "onload",
+                "javascript:", "select *", "drop table", "insert into", "delete from"
+        };
+
+        for (String bad : blacklist) {
+            if (lower.contains(bad)) {
+                return false;
+            }
+        }
+
+        String pattern = "^[\\p{L}\\p{N}\\s.,!?¡¿'\"\\-:;()áéíóúÁÉÍÓÚñÑüÜ]*$";
         return input.matches(pattern);
     }
+
 
     private void showError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
