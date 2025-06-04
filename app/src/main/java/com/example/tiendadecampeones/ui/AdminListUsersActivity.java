@@ -236,6 +236,20 @@ public class AdminListUsersActivity extends AppCompatActivity implements UserAda
         startActivity(intent);
     }
 
+    public void registerUser(View view) {
+        Toast.makeText(this, "Registro de usuario", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, RegisterAdminActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            loadUsers();
+        }
+    }
+
     public void profileBtn(View view) {
         Toast.makeText(this, "Redirigiendo a tu perfil", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, Profile.class);

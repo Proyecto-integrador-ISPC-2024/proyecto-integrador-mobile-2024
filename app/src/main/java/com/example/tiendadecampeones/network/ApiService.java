@@ -86,4 +86,6 @@ public interface ApiService {
             @Query("fecha_inicio") String fechaInicio,
             @Query("fecha_fin") String fechaFin
     );
+    @POST("administrador/")
+    Call<RegisterResponse> createAdmin(@Body Map<String, String> userData);
 }
