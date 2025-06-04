@@ -47,8 +47,8 @@
             android:id="@+id/contactInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_below="@+id/topNavbar"
+            android:orientation="vertical"
             android:padding="16dp">
 
             <TextView
@@ -56,98 +56,98 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
+                android:contentDescription="@string/titleContact"
+                android:focusable="true"
                 android:text="@string/titleContact"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:focusable="true"
-                android:contentDescription="@string/titleContact"/>
+                android:textStyle="bold" />
 
             <!-- Dirección -->
             <TextView
                 android:id="@+id/addressLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/addressContact"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="5dp"
+                android:contentDescription="@string/addressContact"
                 android:focusable="true"
-                android:contentDescription= "@string/addressContact" />
+                android:text="@string/addressContact"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/addressText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/addressNameContact"
-                android:textSize="16sp"
+                android:contentDescription="@string/addressNameContact"
                 android:focusable="true"
-                android:contentDescription="@string/addressNameContact"/>
+                android:text="@string/addressNameContact"
+                android:textSize="16sp" />
 
             <!-- Teléfono -->
             <TextView
                 android:id="@+id/phoneLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/phoneContact"
-                android:textSize="16sp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/phoneContact"
                 android:focusable="true"
-                android:contentDescription="@string/phoneContact"/>
+                android:text="@string/phoneContact"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/phoneText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/numbersContact"
-                android:textSize="16sp"
+                android:contentDescription="@string/numbersContact"
                 android:focusable="true"
-                android:contentDescription="@string/numbersContact"/>
+                android:text="@string/numbersContact"
+                android:textSize="16sp" />
 
             <!-- Email -->
             <TextView
                 android:id="@+id/emailLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mailContact"
-                android:textSize="16sp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/mailContact"
                 android:focusable="true"
-                android:contentDescription="@string/mailContact"/>
+                android:text="@string/mailContact"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/emailText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/emailContact"
-                android:textSize="16sp"
+                android:contentDescription="@string/emailContact"
                 android:focusable="true"
-                android:contentDescription="@string/emailContact"/>
+                android:text="@string/emailContact"
+                android:textSize="16sp" />
 
             <!-- Botón para enviar correo -->
             <Button
                 android:id="@+id/emailButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sendContactBtn"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/colorSecondary"
-                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/bttns"
+                android:contentDescription="@string/contdes_mail_btn"
                 android:focusable="true"
-                android:contentDescription="@string/contdes_mail_btn"/>
+                android:text="@string/sendContactBtn"
+                android:textColor="@color/colorPrimary" />
 
             <!-- Productos recomendados (Scroll horizontal) -->
             <TextView
                 android:id="@+id/recommendedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/knowOurProducts"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="24dp"
-                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:contentDescription=""
                 android:focusable="true"
-                android:contentDescription=""/>
+                android:text="@string/knowOurProducts"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <HorizontalScrollView
                 android:id="@+id/recommendedScrollView"
@@ -166,30 +166,30 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="16dp"
-                        android:padding="8dp"
                         android:background="@color/colorSecondary"
+                        android:contentDescription="@string/contdes_productscroll_button"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
-                        android:contentDescription="@string/contdes_productscroll_button"
-                        android:nextFocusRight="@id/product_2">
+                        android:nextFocusRight="@id/product_2"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
                         <ImageView
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:src="@mipmap/argentina_1978_primera"
-                            android:contentDescription="@string/contdes_image1"/>
+                            android:contentDescription="@string/contdes_image1"
+                            android:src="@mipmap/argentina_1978_primera" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:contentDescription="@string/contdes_productname1"
                             android:text="@string/argContactProd"
                             android:textAlignment="center"
-                            android:textSize="16sp"
-                            android:layout_marginTop="8dp"
                             android:textColor="@color/colorPrimary"
-                            android:contentDescription="@string/contdes_productname1"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <!-- Producto 2 -->
@@ -197,28 +197,28 @@
                         android:id="@+id/product_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="16dp"
-                        android:padding="8dp"
                         android:background="@color/colorSecondary"
                         android:contentDescription="@string/contdes_productscroll_button"
-                        android:nextFocusRight="@id/product_3">
+                        android:nextFocusRight="@id/product_3"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
                         <ImageView
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:src="@mipmap/brasil_1958_primera"
-                            android:contentDescription="@string/contdes_image2"/>
+                            android:contentDescription="@string/contdes_image2"
+                            android:src="@mipmap/brasil_1958_primera" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:contentDescription="@string/contdes_productname2"
                             android:text="@string/brContactProd"
                             android:textAlignment="center"
-                            android:textSize="16sp"
-                            android:layout_marginTop="8dp"
                             android:textColor="@color/colorPrimary"
-                            android:contentDescription="@string/contdes_productname2"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
 
 
@@ -227,44 +227,66 @@
                         android:id="@+id/product_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginEnd="16dp"
-                        android:padding="8dp"
                         android:background="@color/colorSecondary"
-                        android:contentDescription="@string/contdes_productscroll_button">
+                        android:contentDescription="@string/contdes_productscroll_button"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
                         <ImageView
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:src="@mipmap/francia_1998_primera"
-                            android:contentDescription="@string/contdes_image3"/>
+                            android:contentDescription="@string/contdes_image3"
+                            android:src="@mipmap/francia_1998_primera" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:contentDescription="@string/contdes_productname3"
                             android:text="@string/frContactProd"
                             android:textAlignment="center"
-                            android:textSize="16sp"
-                            android:layout_marginTop="8dp"
                             android:textColor="@color/colorPrimary"
-                            android:contentDescription="@string/contdes_productname3"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
-
                 </LinearLayout>
+
             </HorizontalScrollView>
 
-            <!-- Botón para ir a comprar -->
-            <Button
-                android:id="@+id/comprarButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/buyContactBtn"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/colorSecondary"
-                android:textColor="@color/colorPrimary"
-                android:onClick="productClick"
-                android:focusable="true"
-                android:contentDescription="@string/contdes_buy_btn" />
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <!-- Botón para ir a comprar -->
+                <Button
+                    android:id="@+id/comprarButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="65dp"
+                    android:backgroundTint="@color/bttns"
+                    android:contentDescription="@string/contdes_buy_btn"
+                    android:focusable="true"
+                    android:onClick="productClick"
+                    android:text="@string/buyContactBtn"
+                    android:textColor="@color/colorPrimary" />
+
+                <!-- Botón terminos y condiciones -->
+                <Button
+                    android:id="@+id/termsBttn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/bttns"
+                    android:contentDescription="@string/contdes_term_bttn"
+                    android:focusable="true"
+                    android:onClick="termClick"
+                    android:text="@string/term_and_cond"
+                    android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

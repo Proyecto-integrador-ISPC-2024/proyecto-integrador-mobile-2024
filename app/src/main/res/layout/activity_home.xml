@@ -239,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="24dp"
-                    android:backgroundTint="@color/colorSecondary"
+                    android:backgroundTint="@color/bttns"
                     android:text="@string/homeBtn"
                     android:textColor="@color/colorPrimary"
                     android:contentDescription="@string/contdes_buy_btn"/>

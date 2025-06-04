@@ -68,5 +68,12 @@ public class Contact extends AppCompatActivity {
             }
         });
 
+        Button termButton = findViewById(R.id.termsBttn);
+        termButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Contact.this, TermsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

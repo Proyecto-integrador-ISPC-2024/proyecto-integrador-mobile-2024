@@ -57,5 +57,15 @@ public class AboutUs extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button termsButton = findViewById(R.id.termsBttn);
+        termsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String url = "https://github.com/Proyecto-integrador-ISPC-2024/proyecto-integrador-web-pp-2025.git";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(android.net.Uri.parse(url));
+                startActivity(intent);
+            }
+        });
     }
 }
