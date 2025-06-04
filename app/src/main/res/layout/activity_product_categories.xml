@@ -7,56 +7,84 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context=".ui.ProductCategories">
+
+    <!-- ╔════════════════ TOP BAR ════════════════╗ -->
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginEnd="270dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/back_button"
-            android:src="@drawable/arrow_back_icon_35x35" />
-        <ImageButton
-            android:id="@+id/cartButton"
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:contentDescription="@string/back_button" />
+
+        <FrameLayout
             android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/shopping_cart_icon_35x35"
-            android:contentDescription="@string/cart_button" />
+            android:layout_height="64dp">
+
+            <ImageButton
+                android:id="@+id/cartButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/shopping_cart_icon_35x35"
+                android:contentDescription="@string/cart_button" />
+
+            <TextView
+                android:id="@+id/cartBadge"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="end|top"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/badge_bg"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                android:visibility="gone" />
+        </FrameLayout>
     </LinearLayout>
+    <!-- ╚═════════════════════════════════════════╝ -->
+
+    <!-- Grid con países -->
     <GridLayout
         android:id="@+id/countryGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_margin="16dp"
         android:columnCount="2"
         android:rowCount="4"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- … 8 FrameLayouts de países (idénticos a tu versión original) … -->
+        <!-- Copié solo uno como ejemplo -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="80dp">
+
             <ImageButton
                 android:id="@+id/buttonGermany"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/alemania"
-                android:contentDescription="@string/products_germany"/>
+                android:contentDescription="@string/products_germany" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,9 +94,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <!-- Argentina -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageButton
                 android:id="@+id/buttonArgentina"
                 android:layout_width="150dp"
@@ -76,6 +107,7 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/argentina"
                 android:contentDescription="@string/products_argentina"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,11 +115,14 @@
                 android:text="@string/products_argentina"
                 android:textColor="#EFF4F0"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </FrameLayout>
+
+        <!-- France -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageButton
                 android:id="@+id/buttonFrance"
                 android:layout_width="150dp"
@@ -95,6 +130,7 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/francia"
                 android:contentDescription="@string/products_france"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,11 +138,14 @@
                 android:text="@string/products_france"
                 android:textColor="#EFF4F0"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </FrameLayout>
+
+        <!-- Uruguay -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageButton
                 android:id="@+id/buttonUruguay"
                 android:layout_width="150dp"
@@ -114,6 +153,7 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/uruguay"
                 android:contentDescription="@string/products_uruguay"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -121,49 +161,14 @@
                 android:text="@string/products_uruguay"
                 android:textColor="#EFF4F0"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </FrameLayout>
+
+        <!-- England -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageButton
-                android:id="@+id/buttonBrazil"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:scaleType="fitXY"
-                app:srcCompat="@mipmap/brasil"
-                android:contentDescription="@string/products_brazil"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/products_brazil"
-                android:textColor="#EFF4F0"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageButton
-                android:id="@+id/buttonSpain"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:scaleType="fitXY"
-                app:srcCompat="@mipmap/espa_a"
-                android:contentDescription="@string/products_spain"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/products_spain"
-                android:textColor="#EFF4F0"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+
             <ImageButton
                 android:id="@+id/buttonEngland"
                 android:layout_width="150dp"
@@ -171,6 +176,7 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/inglaterra"
                 android:contentDescription="@string/products_england"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -178,11 +184,14 @@
                 android:text="@string/products_england"
                 android:textColor="#EFF4F0"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </FrameLayout>
+
+        <!-- Italy -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageButton
                 android:id="@+id/buttonItaly"
                 android:layout_width="150dp"
@@ -190,6 +199,7 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@mipmap/italia"
                 android:contentDescription="@string/products_italy"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -197,23 +207,68 @@
                 android:text="@string/products_italy"
                 android:textColor="#EFF4F0"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
+        </FrameLayout>
+
+        <!-- Spain -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonSpain"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/espa_a"
+                android:contentDescription="@string/products_spain"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_spain"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </FrameLayout>
+
+        <!-- Brazil -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonBrazil"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/brasil"
+                android:contentDescription="@string/products_brazil"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/products_brazil"
+                android:textColor="#EFF4F0"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
         </FrameLayout>
     </GridLayout>
+
+    <!-- Bottom navbar -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
         android:background="@color/colorSecondary"
         android:orientation="horizontal"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countryGrid">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <Button
             android:id="@+id/homeButton"

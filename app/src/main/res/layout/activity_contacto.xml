@@ -47,8 +47,8 @@
             android:id="@+id/contactInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/topNavbar"
             android:orientation="vertical"
+            android:layout_below="@+id/topNavbar"
             android:padding="16dp">
 
             <TextView
@@ -56,85 +56,123 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
-                android:contentDescription="@string/titleContact"
-                android:focusable="true"
                 android:text="@string/titleContact"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <!-- Dirección -->
-            <TextView
-                android:id="@+id/addressLabel"
+            <!-- Botón para enviar correo
+            <Button
+                android:id="@+id/emailButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:contentDescription="@string/addressContact"
+                android:text="@string/sendContactBtn"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorSecondary"
+                android:textColor="@color/colorPrimary"
                 android:focusable="true"
-                android:text="@string/addressContact"
-                android:textSize="16sp" />
+                android:contentDescription="@string/contdes_mail_btn"/> -->
 
-            <TextView
-                android:id="@+id/addressText"
-                android:layout_width="wrap_content"
+            <!-- Formulario de contacto -->
+
+            <!-- Campo Nombre -->
+            <EditText
+                android:id="@+id/nameContactInput"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="givenName"
+                android:hint="@string/nameContactInput"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginTop="12dp" />
+
+            <!-- Campo Apellido -->
+            <EditText
+                android:id="@+id/lastnameContactInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="familyName"
+                android:hint="@string/lastnameContactInput"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginTop="12dp"
                 android:contentDescription="@string/addressNameContact"
                 android:focusable="true"
                 android:text="@string/addressNameContact"
                 android:textSize="16sp" />
 
-            <!-- Teléfono -->
-            <TextView
-                android:id="@+id/phoneLabel"
-                android:layout_width="wrap_content"
+            <!-- Campo Correo -->
+            <EditText
+                android:id="@+id/emailContactInput"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:contentDescription="@string/phoneContact"
-                android:focusable="true"
-                android:text="@string/phoneContact"
-                android:textSize="16sp" />
+                android:autofillHints="emailAddress"
+                android:hint="@string/emailContactInput"
+                android:inputType="textEmailAddress"
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginTop="12dp" />
 
-            <TextView
-                android:id="@+id/phoneText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/numbersContact"
-                android:focusable="true"
-                android:text="@string/numbersContact"
-                android:textSize="16sp" />
+            <!-- Campo Mensaje -->
+            <EditText
+                android:id="@+id/messageContactInput"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="@string/messageContactInput"
+                android:gravity="top"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginTop="12dp" />
 
-            <!-- Email -->
-            <TextView
-                android:id="@+id/emailLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:contentDescription="@string/mailContact"
-                android:focusable="true"
-                android:text="@string/mailContact"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/emailText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/emailContact"
-                android:focusable="true"
-                android:text="@string/emailContact"
-                android:textSize="16sp" />
-
-            <!-- Botón para enviar correo -->
+            <!-- Botón Enviar -->
             <Button
-                android:id="@+id/emailButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:id="@+id/sendFormContactButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/sendFormContactButton"
+                android:textAllCaps="true"
                 android:backgroundTint="@color/bttns"
-                android:contentDescription="@string/contdes_mail_btn"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/contSendContactButton" />
+
+            <!-- Información adicional -->
+            <TextView
+                android:id="@+id/additionalInfoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/additionalInfoTitle"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/black"
                 android:focusable="true"
-                android:text="@string/sendContactBtn"
-                android:textColor="@color/colorPrimary" />
+                android:contentDescription="@string/additionalInfoTitle" />
+
+            <TextView
+                android:id="@+id/additionalInfoText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/additionalInfoText"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4dp"
+                android:focusable="true"
+                android:contentDescription="@string/additionalInfoText" />
 
             <!-- Productos recomendados (Scroll horizontal) -->
             <TextView
@@ -149,131 +187,26 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <HorizontalScrollView
-                android:id="@+id/recommendedScrollView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:id="@+id/recommendedProductsLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <!-- Producto 1 -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:background="@color/colorSecondary"
-                        android:contentDescription="@string/contdes_productscroll_button"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:nextFocusRight="@id/product_2"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:contentDescription="@string/contdes_image1"
-                            android:src="@mipmap/argentina_1978_primera" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:contentDescription="@string/contdes_productname1"
-                            android:text="@string/argContactProd"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-
-                    <!-- Producto 2 -->
-                    <LinearLayout
-                        android:id="@+id/product_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:background="@color/colorSecondary"
-                        android:contentDescription="@string/contdes_productscroll_button"
-                        android:nextFocusRight="@id/product_3"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:contentDescription="@string/contdes_image2"
-                            android:src="@mipmap/brasil_1958_primera" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:contentDescription="@string/contdes_productname2"
-                            android:text="@string/brContactProd"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-
-
-                    <!-- Producto 3 -->
-                    <LinearLayout
-                        android:id="@+id/product_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:background="@color/colorSecondary"
-                        android:contentDescription="@string/contdes_productscroll_button"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:contentDescription="@string/contdes_image3"
-                            android:src="@mipmap/francia_1998_primera" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:contentDescription="@string/contdes_productname3"
-                            android:text="@string/frContactProd"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-            </HorizontalScrollView>
-
+            <!-- Botón para ir a comprar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <!-- Botón para ir a comprar -->
                 <Button
                     android:id="@+id/comprarButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="65dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="60dp"
                     android:backgroundTint="@color/bttns"
                     android:contentDescription="@string/contdes_buy_btn"
                     android:focusable="true"
-                    android:onClick="productClick"
                     android:text="@string/buyContactBtn"
                     android:textColor="@color/colorPrimary" />
 
-                <!-- Botón terminos y condiciones -->
                 <Button
                     android:id="@+id/termsBttn"
                     android:layout_width="wrap_content"
@@ -282,11 +215,13 @@
                     android:backgroundTint="@color/bttns"
                     android:contentDescription="@string/contdes_term_bttn"
                     android:focusable="true"
-                    android:onClick="termClick"
                     android:text="@string/term_and_cond"
                     android:textColor="@color/colorPrimary" />
 
+                <!-- Botón terminos y condiciones -->
+
             </LinearLayout>
+
 
         </LinearLayout>
 
