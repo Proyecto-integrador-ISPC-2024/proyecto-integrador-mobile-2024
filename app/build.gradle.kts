@@ -71,6 +71,8 @@ dependencies {
     // JavaMail para envío directo de correos
     implementation("com.sun.mail:android-mail:1.6.7")
     implementation("com.sun.mail:android-activation:1.6.7")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel:2.8.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata:2.8.1")
 
 
 }
