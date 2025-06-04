@@ -7,6 +7,7 @@ import com.example.tiendadecampeones.models.Pedido;
 import com.example.tiendadecampeones.models.Product;
 //import com.example.tiendadecampeones.models.Product.Talle;
 import com.example.tiendadecampeones.models.RefreshTokenRequest;
+import com.example.tiendadecampeones.models.SalesResponse;
 import com.example.tiendadecampeones.models.UserLogInResponse;
 import com.example.tiendadecampeones.models.UserProfile;
 import com.example.tiendadecampeones.models.RegisterResponse;
@@ -80,4 +81,9 @@ public interface ApiService {
     @DELETE("administrador/{id}/")
     Call<Void> deleteUserFromAdministrador(@Path("id") int idUsuario);
 
+    @GET("pedidos/calcular_ventas/")
+    Call<SalesResponse> calcularVentas(
+            @Query("fecha_inicio") String fechaInicio,
+            @Query("fecha_fin") String fechaFin
+    );
 }
