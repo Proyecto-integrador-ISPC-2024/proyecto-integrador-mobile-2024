@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.net.Uri;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +55,16 @@ public class AboutUs extends AppCompatActivity {
         contactButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutUs.this, Contact.class);
+                startActivity(intent);
+            }
+        });
+        // Botón para visitar la web
+        Button btnVisitarWeb = findViewById(R.id.btnVisitarWeb);
+        btnVisitarWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://github.com/Proyecto-integrador-ISPC-2024";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
