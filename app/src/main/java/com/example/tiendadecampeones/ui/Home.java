@@ -60,6 +60,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
+
         // Navegación lateral
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(item -> {
