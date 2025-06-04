@@ -233,16 +233,43 @@
 <!--                    </LinearLayout>-->
 <!--                </HorizontalScrollView>-->
 
-                <Button
-                    android:id="@+id/buyButton"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/botoneraInferior"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="24dp"
-                    android:backgroundTint="@color/colorSecondary"
-                    android:text="@string/homeBtn"
-                    android:textColor="@color/colorPrimary"
-                    android:contentDescription="@string/contdes_buy_btn"/>
+                    android:orientation="horizontal"
+                    android:layout_below="@id/aboutUsImageView"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal">
+
+
+                    <!-- Botón para Contacto -->
+                    <Button
+                        android:id="@+id/buyButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contactBtn"
+                        android:onClick="contactClick"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:textColor="@color/colorPrimary"
+                        android:contentDescription="@string/contdes_contact_btn"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true" />
+
+                    <!-- Botón que redirecciona a la Web -->
+                    <!--<Button
+                        android:id="@+id/btnVisitarWeb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Visita nuestra web"
+                        android:onClick="contactClick"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:textColor="@color/colorPrimary"
+                        android:contentDescription="@string/VisitarWeb"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true" /> -->
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
 
