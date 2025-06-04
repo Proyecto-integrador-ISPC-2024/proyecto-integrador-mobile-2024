@@ -167,7 +167,7 @@
                         android:id="@+id/buyButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/contactBtn"
+                        android:text="@string/homeBtn"
                         android:onClick="contactClick"
                         android:backgroundTint="@color/bttns"
                         android:textColor="@color/colorPrimary"
