@@ -158,7 +158,7 @@ public class Dashboard extends AppCompatActivity {
         });
     }
 
-    private void showFilterDialog() {
+    public void showFilterDialog() {
         final String[] estados = {"Todos", "Enviado", "Aceptado", "Cancelado"};
         int checkedStatus = 0;
         for (int i = 0; i < estados.length; i++) {
@@ -182,7 +182,6 @@ public class Dashboard extends AppCompatActivity {
             filterLabel.setText("Filtrando por: " + selectedStatus);
         }
     }
-
 
     @Override
     protected void onResume() {

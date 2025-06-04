@@ -46,6 +46,8 @@ public class Contact extends AppCompatActivity {
         EditText emailEditText = findViewById(R.id.emailContactInput);
         EditText messageEditText = findViewById(R.id.messageContactInput);
         Button sendButton = findViewById(R.id.sendFormContactButton);
+        Button termButton = findViewById(R.id.termsBttn);
+        Button productsButton = findViewById(R.id.comprarButton);
 
         sendButton.setOnClickListener(v -> {
             String nombre = nameEditText.getText().toString().trim();
@@ -56,6 +58,16 @@ public class Contact extends AppCompatActivity {
             if (validateForm(nombre, apellido, email, mensaje)) {
                 sendEmailDirectly(nombre, apellido, email, mensaje);
             }
+        });
+
+        termButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Contact.this, TermsActivity.class);
+            startActivity(intent);
+        });
+
+        productsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Contact.this, ProductCategories.class);
+            startActivity(intent);
         });
 
         setupNavigationButtons();
