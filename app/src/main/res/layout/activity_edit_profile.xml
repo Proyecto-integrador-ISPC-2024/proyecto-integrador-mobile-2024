@@ -111,6 +111,8 @@
             android:layout_marginHorizontal="64dp"
             android:onClick="onEditProfileClicked"
             android:text="@string/editProfile"
+            android:background="@color/colorSecondary"
+            android:textColor="@color/colorPrimary"
             android:contentDescription="@string/editProfile"
             />
 
@@ -122,9 +124,10 @@
             android:layout_marginHorizontal="64dp"
             android:onClick="onSaveChangesClicked"
             android:text="@string/saveChangesBtn"
-            android:background="@color/colorSecondary"
+            android:background="@color/bttns"
             android:textColor="@color/colorPrimary"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:contentDescription="@string/editProfile"/>
 
 
     </LinearLayout>

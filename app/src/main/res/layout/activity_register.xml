@@ -118,7 +118,8 @@
             android:layout_height="wrap_content"
             android:text="Registrate"
             android:layout_marginTop="15dp"
-            android:backgroundTint="@color/colorSecondary"
-            android:textColor="@color/colorPrimary"/>
+            android:backgroundTint="@color/bttns"
+            android:textColor="@color/colorPrimary"
+            android:contentDescription="@string/register_button_text"/>
     </LinearLayout>
 </LinearLayout>

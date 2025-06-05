@@ -86,9 +86,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/colorSecondary"
+                android:backgroundTint="@color/bttns"
                 android:text="Agregar"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:contentDescription="@string/product_addToCart"/>
 
         </LinearLayout>
 

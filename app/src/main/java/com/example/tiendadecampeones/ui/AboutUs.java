@@ -1,10 +1,10 @@
 package com.example.tiendadecampeones.ui;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-import android.net.Uri;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +65,16 @@ public class AboutUs extends AppCompatActivity {
             public void onClick(View v) {
                 String url = "https://github.com/Proyecto-integrador-ISPC-2024";
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        Button termsButton = findViewById(R.id.termsBttn);
+        termsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String url = "https://github.com/Proyecto-integrador-ISPC-2024/proyecto-integrador-web-pp-2025.git";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(android.net.Uri.parse(url));
                 startActivity(intent);
             }
         });

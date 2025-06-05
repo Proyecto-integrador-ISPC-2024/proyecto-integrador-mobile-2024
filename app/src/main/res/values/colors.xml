@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#1C1B1F</color>
-    <color name="colorPrimary">#F8F9Fa</color>
+    <color name="colorPrimary">#FFFFFF</color>
     <color name="colorSecondary">#376608</color>
+    <color name="bttns">#1e1169</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#00000080</color>
     <color name="red">#7D1010</color>

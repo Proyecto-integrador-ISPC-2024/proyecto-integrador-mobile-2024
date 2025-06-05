@@ -46,6 +46,8 @@ public class Contact extends AppCompatActivity {
         EditText emailEditText = findViewById(R.id.emailContactInput);
         EditText messageEditText = findViewById(R.id.messageContactInput);
         Button sendButton = findViewById(R.id.sendFormContactButton);
+        Button termButton = findViewById(R.id.termsBttn);
+        Button productsButton = findViewById(R.id.comprarButton);
 
         sendButton.setOnClickListener(v -> {
             String nombre = nameEditText.getText().toString().trim();
@@ -56,6 +58,16 @@ public class Contact extends AppCompatActivity {
             if (validateForm(nombre, apellido, email, mensaje)) {
                 sendEmailDirectly(nombre, apellido, email, mensaje);
             }
+        });
+
+        termButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Contact.this, TermsActivity.class);
+            startActivity(intent);
+        });
+
+        productsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Contact.this, ProductCategories.class);
+            startActivity(intent);
         });
 
         setupNavigationButtons();
@@ -89,6 +101,11 @@ public class Contact extends AppCompatActivity {
 
         if (mensaje.length() < 10) {
             showError("El mensaje debe tener al menos 10 caracteres");
+            return false;
+        }
+
+        if (mensaje.length() > 500) {
+            showError("El mensaje no debe superar los 500 caracteres");
             return false;
         }
 
@@ -159,9 +176,23 @@ public class Contact extends AppCompatActivity {
     }
 
     private boolean isValidMessage(String input) {
-        String pattern = "^[\\p{L}\\p{N}\\s.,!?¡¿'\"\\-:;()áéíóúÁÉÍÓÚñÑüÜ]+$";
+        String lower = input.toLowerCase();
+
+        String[] blacklist = {
+                "<script", "</script", "<img", "<iframe", "onerror", "onload",
+                "javascript:", "select *", "drop table", "insert into", "delete from"
+        };
+
+        for (String bad : blacklist) {
+            if (lower.contains(bad)) {
+                return false;
+            }
+        }
+
+        String pattern = "^[\\p{L}\\p{N}\\s.,!?¡¿'\"\\-:;()áéíóúÁÉÍÓÚñÑüÜ]*$";
         return input.matches(pattern);
     }
+
 
     private void showError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();

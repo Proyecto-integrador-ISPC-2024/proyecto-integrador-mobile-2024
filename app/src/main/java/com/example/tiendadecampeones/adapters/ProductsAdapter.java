@@ -28,6 +28,7 @@ import com.example.tiendadecampeones.models.CartItem;
 import com.example.tiendadecampeones.models.Product;
 import com.example.tiendadecampeones.models.Product.Talle;
 import com.example.tiendadecampeones.utils.SharedPrefManager;
+import com.example.tiendadecampeones.viewmodel.CartViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     private final List<Product> products;
     private final Context context;
 
-    public ProductsAdapter(List<Product> products, Context context) {
+    public ProductsAdapter(List<Product> products, CartViewModel cartVM, Context context) {
         this.products = products;
         this.context = context;
     }

@@ -1,120 +1,110 @@
 package com.example.tiendadecampeones.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.models.CartItem;
+import com.example.tiendadecampeones.viewmodel.CartViewModel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
 
 public class ProductCategories extends AppCompatActivity {
+
+    private CartViewModel cartVM;
+    private TextView cartBadge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_categories);
 
-        // Botones de navegación superior
-        ImageButton backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        /* ───── ViewModel + badge ───── */
+        cartVM    = new ViewModelProvider(this).get(CartViewModel.class);
+        cartBadge = findViewById(R.id.cartBadge);
         ImageButton cartButton = findViewById(R.id.cartButton);
-        cartButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(ProductCategories.this, Cart.class);
-                startActivity(intent);
-            }
-        });
 
-        // Botones de navegación inferior
-        Button homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(ProductCategories.this, Home.class);
-                startActivity(intent);
-            }
+        cartVM.getCount().observe(this, n -> {
+            if (n != null && n > 0) {
+                cartBadge.setText(String.valueOf(n));
+                cartBadge.setVisibility(View.VISIBLE);
+            } else { cartBadge.setVisibility(View.GONE); }
         });
-        Button productsButton = findViewById(R.id.productsButton);
-        productsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(ProductCategories.this, ProductCategories.class);
-                startActivity(intent);
-            }
-        });
-        Button profileButton = findViewById(R.id.profileButton);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(ProductCategories.this, Profile.class);
-                startActivity(intent);
-            }
-        });
+        refreshBadge();                                      // valor inicial
+        cartButton.setOnClickListener(v ->
+                startActivity(new Intent(this, Cart.class)));
 
-        // Captura de botones de categorías de países
-        ImageButton buttonGermany = findViewById(R.id.buttonGermany);
-        ImageButton buttonBrazil = findViewById(R.id.buttonBrazil);
-        ImageButton buttonSpain = findViewById(R.id.buttonSpain);
-        ImageButton buttonEngland = findViewById(R.id.buttonEngland);
-        ImageButton buttonItaly = findViewById(R.id.buttonItaly);
-        ImageButton buttonArgentina = findViewById(R.id.buttonArgentina);
-        ImageButton buttonFrance = findViewById(R.id.buttonFrance);
-        ImageButton buttonUruguay = findViewById(R.id.buttonUruguay);
+        /* ───── Navegación superior ───── */
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
 
-        // Agrego listeneres para cada botón
-        buttonGermany.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProductList("Alemania");
-            }
-        });
+        /* ───── Navegación inferior ───── */
+        findViewById(R.id.homeButton).setOnClickListener(
+                v -> startActivity(new Intent(this, Home.class)));
 
-        buttonArgentina.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProductList("Argentina");
-            }
-        });
+        findViewById(R.id.productsButton).setOnClickListener(
+                v -> startActivity(new Intent(this, ProductCategories.class)));
 
-        buttonFrance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProductList("Francia");
-            }
-        });
+        findViewById(R.id.profileButton).setOnClickListener(
+                v -> startActivity(new Intent(this, Profile.class)));
 
-        buttonUruguay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProductList("Uruguay");
-            }
-        });
-        buttonEngland.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { openProductList("Inglaterra");}
-        });
-        buttonItaly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { openProductList("Italia");}
-        });
-        buttonSpain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { openProductList("España");}
-        });
-        buttonBrazil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { openProductList("Brazil");}
-        });
-
+        /* ───── Botones de país ───── */
+        setupCountryButtons();
     }
 
-    // Renderizado de lista de productos según país elegido
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshBadge();
+    }
+
+    /* ---------- helpers ---------- */
+
+    private void refreshBadge() {
+        SharedPreferences sp = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
+        String json = sp.getString("cart_items", "[]");
+
+        List<CartItem> list = new Gson().fromJson(json,
+                new TypeToken<List<CartItem>>(){}.getType());
+        int qty = 0;
+        if (list != null) for (CartItem ci : list) qty += ci.getCantidadCompra();
+
+        cartVM.setCount(qty);
+    }
+
+    private void setupCountryButtons() {
+        /* Mapea ID ↔ País y registra listener */
+        int[][] mapping = {
+                {R.id.buttonGermany,  R.string.products_germany },
+                {R.id.buttonArgentina,R.string.products_argentina},
+                {R.id.buttonFrance,   R.string.products_france },
+                {R.id.buttonUruguay,  R.string.products_uruguay},
+                {R.id.buttonEngland,  R.string.products_england},
+                {R.id.buttonItaly,    R.string.products_italy  },
+                {R.id.buttonSpain,    R.string.products_spain  },
+                {R.id.buttonBrazil,   R.string.products_brazil }
+        };
+
+        for (int[] map : mapping) {
+            ImageButton btn = findViewById(map[0]);
+            String pais   = getString(map[1]);
+            btn.setOnClickListener(v -> openProductList(pais));
+        }
+    }
+
     private void openProductList(String pais) {
-        Intent intent = new Intent(ProductCategories.this, ProductsActivity.class);
-        intent.putExtra("pais", pais);
-        startActivity(intent);
+        Intent i = new Intent(this, ProductsActivity.class);
+        i.putExtra("pais", pais);
+        startActivity(i);
     }
 }

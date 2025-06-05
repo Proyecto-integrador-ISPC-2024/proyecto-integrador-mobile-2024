@@ -17,7 +17,6 @@
         android:supportsRtl="true"
         tools:targetApi="31">
 
-
         <!-- Actividades de la aplicación - en caso de necesitar testear sus actividades agreguen el filter como atributo de la actividad en la que estén trabajando para inicializar la app en ese punto -->
         <activity
             android:name=".ui.MainActivity"
@@ -33,89 +32,71 @@
             android:name=".ui.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.Register"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.Home"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.ProductCategories"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.ProductsActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.CartResume"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.Cart"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.PaymentMethodsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.Contact"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.AboutUs"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.Profile"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.ManageProfile"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.Dashboard"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.OrderActivity"
             android:exported="false"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.OrderAdminActivity"
             android:exported="false"
@@ -131,6 +112,20 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.SalesCalculatorActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.RegisterAdminActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.TermsActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
 
     </application>
 

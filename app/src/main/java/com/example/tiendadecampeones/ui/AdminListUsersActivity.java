@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
+import android.widget.Button;
 import retrofit2.Response;
 
 public class AdminListUsersActivity extends AppCompatActivity implements UserAdapter.OnUserActionListener {
@@ -29,7 +30,7 @@ public class AdminListUsersActivity extends AppCompatActivity implements UserAda
     private List<Usuario> usersList;
     private SearchView searchView;
     private ImageButton backButton;
-
+    private Button btnCalculator;
     private ApiService apiService;
     private List<Usuario> originalUsersList = new ArrayList<>();
     private String selectedRole = "Todos";
@@ -42,7 +43,7 @@ public class AdminListUsersActivity extends AppCompatActivity implements UserAda
         setContentView(R.layout.activity_admin_list_users);
 
         apiService = RetrofitClient.getClient(this).create(ApiService.class);
-
+        btnCalculator = findViewById(R.id.btnCalculator);
         recyclerView = findViewById(R.id.usersRecyclerView);
         searchView = findViewById(R.id.searchView);
         searchView.setQueryHint(getString(R.string.search_hint));
@@ -78,7 +79,7 @@ public class AdminListUsersActivity extends AppCompatActivity implements UserAda
         backButton.setOnClickListener(v -> finish());
         filterButton.setOnClickListener(v -> showFilterDialog());
 
-
+        btnCalculator.setOnClickListener(v -> setBtnCalculator(v));
         loadUsers();
     }
 
@@ -226,6 +227,26 @@ public class AdminListUsersActivity extends AppCompatActivity implements UserAda
     private void updateFilterLabel() {
         if (filterLabel != null) {
             filterLabel.setText("Filtrando por: " + selectedRole + " | " + selectedStatus);
+        }
+    }
+
+    public void setBtnCalculator(View view) {
+        Toast.makeText(this, "Calculadora de ventas", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, SalesCalculatorActivity.class);
+        startActivity(intent);
+    }
+
+    public void registerUser(View view) {
+        Toast.makeText(this, "Registro de usuario", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, RegisterAdminActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            loadUsers();
         }
     }
 
