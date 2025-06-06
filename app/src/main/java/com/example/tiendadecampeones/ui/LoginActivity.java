@@ -21,8 +21,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.models.UserLogInResponse;
-import com.example.tiendadecampeones.network.ApiService;
 import com.example.tiendadecampeones.network.RetrofitClient;
+import com.example.tiendadecampeones.utils.UIUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,9 +32,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Patterns;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tiendadecampeones.utils.UIUtils;
+import com.example.tiendadecampeones.R;
+
 
 
 public class LoginActivity extends AppCompatActivity {
+    private View mainView; // Declaramos la variable a nivel de clase
+    private TextView errorMessage;
 
     // métodos para validar que los campos no esten vacíos, mail y contrasña
     private boolean isValidEmail(String email) {
@@ -56,8 +72,11 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
+        mainView = findViewById(android.R.id.content);
+
         EditText emailField = findViewById(R.id.emailInput);
         EditText passwordField = findViewById(R.id.passwordInput);
+        errorMessage = findViewById(R.id.errorMessage);
 
         // Pantalla de Bienvenida a formulario de registro
         Button btn1 = findViewById(R.id.registerButton);
@@ -76,19 +95,31 @@ public class LoginActivity extends AppCompatActivity {
             String password = passwordField.getText().toString().trim();
 
             if (!areFieldsNotEmpty(email, password)) {
-                showAlert("Error", "Todos los campos son obligatorios");
-                btn2.setEnabled(true); // Reactiva el botón
+                showErrorMessage( "Todos los campos son obligatorios");
+                btn2.setEnabled(true);// Reactiva el botón
             } else if (!isValidEmail(email)) {
-                showAlert("Error", "Email no tiene formato válido");
+                showErrorMessage("Email no tiene formato válido");
                 btn2.setEnabled(true); // Reactiva el botón
             } else if (!isValidPassword(password)) {
-                showAlert("Error", "La contraseña debe tener un minimo de 8 caracteres y un maximo de 18, un número y un carácter especial");
+                showErrorMessage("La contraseña debe tener un minimo de 8 caracteres y un maximo de 18, un número y un carácter especial");
                 btn2.setEnabled(true); // Reactiva el botón
             } else {
                 loginUser(email, password, btn2);
+                errorMessage.setVisibility(View.GONE);
             }
+            btn2.setEnabled(true);
+
         });
     }
+
+    private void showErrorMessage(String message) {
+        errorMessage.setText(message);
+        errorMessage.setVisibility(View.VISIBLE);
+        errorMessage.setTextSize(22f); // Aumenta el tamaño del texto
+        errorMessage.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        errorMessage.postDelayed(() -> errorMessage.setVisibility(View.GONE), 3000);
+    }
+
 
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
