@@ -24,6 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.widget.LinearLayout;
 import android.app.AlertDialog;
+import android.widget.ProgressBar;
 
 public class OrderActivity extends AppCompatActivity {
     private TextView orderNumber;
@@ -40,6 +41,7 @@ public class OrderActivity extends AppCompatActivity {
     private OrderProductAdapter adapter;
     private TextView trackingTitle;
     private LinearLayout orderDetailsLayout;
+    private ProgressBar loadingSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +66,15 @@ public class OrderActivity extends AppCompatActivity {
         orderNumber = findViewById(R.id.orderNumber);
         orderDate = findViewById(R.id.orderDate);
         orderStatus = findViewById(R.id.orderStatus);
+        totalAmount = findViewById(R.id.totalAmount);
         paymentMethod = findViewById(R.id.paymentMethod);
         cardsMethod = findViewById(R.id.cardsMethod);
-        totalAmount = findViewById(R.id.totalAmount);
         backButton = findViewById(R.id.backButton);
-        cancelButton = findViewById(R.id.cancelButton);
         trackOrderButton = findViewById(R.id.trackOrderButton);
+        cancelButton = findViewById(R.id.cancelButton);
         trackingTitle = findViewById(R.id.orderTrackingText);
         orderDetailsLayout = findViewById(R.id.orderDetailsLayout);
+        loadingSpinner = findViewById(R.id.loadingSpinner);
         orderDetailsLayout.setVisibility(View.GONE);
         cancelButton.setVisibility(View.GONE);
         trackOrderButton.setVisibility(View.GONE);
@@ -79,6 +82,10 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     private void loadOrderDetails() {
+        loadingSpinner.setVisibility(View.VISIBLE);
+        orderDetailsLayout.setVisibility(View.GONE);
+        productsRecyclerView.setVisibility(View.GONE);
+
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         String token = preferences.getString("accessToken", null);
         int id_usuario = preferences.getInt("id_usuario", -1);
@@ -90,6 +97,10 @@ public class OrderActivity extends AppCompatActivity {
             call.enqueue(new Callback<List<Order>>() {
                 @Override
                 public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                    loadingSpinner.setVisibility(View.GONE);
+                    orderDetailsLayout.setVisibility(View.VISIBLE);
+                    productsRecyclerView.setVisibility(View.VISIBLE);
+
                     if (response.isSuccessful() && response.body() != null) {
                         List<Order> allOrders = response.body();
                         for (Order order : allOrders) {
@@ -105,10 +116,16 @@ public class OrderActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFailure(Call<List<Order>> call, Throwable t) {
+                    loadingSpinner.setVisibility(View.GONE);
+                    orderDetailsLayout.setVisibility(View.VISIBLE);
+                    productsRecyclerView.setVisibility(View.VISIBLE);
                     showToast("Error al cargar los detalles del pedido: " + t.getMessage());
                 }
             });
         } else {
+            loadingSpinner.setVisibility(View.GONE);
+            orderDetailsLayout.setVisibility(View.VISIBLE);
+            productsRecyclerView.setVisibility(View.VISIBLE);
             showToast("Usuario no autenticado. Inicie sesión.");
         }
     }

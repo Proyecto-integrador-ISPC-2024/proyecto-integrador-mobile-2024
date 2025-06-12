@@ -23,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.widget.LinearLayout;
 import android.app.AlertDialog;
+import android.widget.ProgressBar;
 
 public class OrderAdminActivity extends AppCompatActivity {
     private TextView orderNumber;
@@ -41,7 +42,7 @@ public class OrderAdminActivity extends AppCompatActivity {
     private OrderProductAdapter adapter;
     private LinearLayout orderDetailsLayout;
     private boolean isFirstLoad = true;
-
+    private ProgressBar loadingSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class OrderAdminActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancelButton);
         trackingTitle = findViewById(R.id.trackingTitle);
         orderDetailsLayout = findViewById(R.id.orderDetailsLayout);
+        loadingSpinner = findViewById(R.id.loadingSpinner);
         orderDetailsLayout.setVisibility(View.GONE);
         sendOrderBtn.setVisibility(View.GONE);
         trackOrderButton.setVisibility(View.GONE);
@@ -83,6 +85,10 @@ public class OrderAdminActivity extends AppCompatActivity {
     }
 
     private void loadOrderDetails() {
+        loadingSpinner.setVisibility(View.VISIBLE);
+        orderDetailsLayout.setVisibility(View.GONE);
+        productsRecyclerView.setVisibility(View.GONE);
+
         SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         String token = preferences.getString("accessToken", null);
 
@@ -93,6 +99,10 @@ public class OrderAdminActivity extends AppCompatActivity {
             call.enqueue(new Callback<List<Order>>() {
                 @Override
                 public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                    loadingSpinner.setVisibility(View.GONE);
+                    orderDetailsLayout.setVisibility(View.VISIBLE);
+                    productsRecyclerView.setVisibility(View.VISIBLE);
+
                     if (response.isSuccessful() && response.body() != null) {
                         List<Order> allOrders = response.body();
                         android.util.Log.d("OrderAdminActivity", "Pedidos recibidos: " + allOrders.size());
@@ -115,10 +125,16 @@ public class OrderAdminActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFailure(Call<List<Order>> call, Throwable t) {
+                    loadingSpinner.setVisibility(View.GONE);
+                    orderDetailsLayout.setVisibility(View.VISIBLE);
+                    productsRecyclerView.setVisibility(View.VISIBLE);
                     showToast("Error al cargar los detalles del pedido: " + t.getMessage());
                 }
             });
         } else {
+            loadingSpinner.setVisibility(View.GONE);
+            orderDetailsLayout.setVisibility(View.VISIBLE);
+            productsRecyclerView.setVisibility(View.VISIBLE);
             showToast("Usuario no autenticado. Inicie sesión.");
         }
     }
