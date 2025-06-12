@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import android.widget.ProgressBar;
 import com.example.tiendadecampeones.R;
 import com.example.tiendadecampeones.models.Order;
 import com.example.tiendadecampeones.adapters.OrderRecyclerAdapter;
@@ -34,6 +35,7 @@ public class Dashboard extends AppCompatActivity {
     private List<Order> originalOrdersList = new ArrayList<>();
     private TextView filterLabel;
     private SearchView searchView;
+    private ProgressBar loadingSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class Dashboard extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         searchView = findViewById(R.id.searchView);
         filterLabel = findViewById(R.id.filterLabel);
+        loadingSpinner = findViewById(R.id.loadingSpinner);
         ImageButton filterButton = findViewById(R.id.filterButton);
 
         backButton.setOnClickListener(v -> finish());
@@ -62,9 +65,15 @@ public class Dashboard extends AppCompatActivity {
     }
 
     private void loadOrders() {
+        loadingSpinner.setVisibility(View.VISIBLE);
+        ordersRecyclerView.setVisibility(View.GONE);
+        
         apiService.getOrders().enqueue(new Callback<List<Order>>() {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                loadingSpinner.setVisibility(View.GONE);
+                ordersRecyclerView.setVisibility(View.VISIBLE);
+                
                 if (response.isSuccessful() && response.body() != null) {
                     ordersList.clear();
                     originalOrdersList.clear();
@@ -83,6 +92,8 @@ public class Dashboard extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
+                loadingSpinner.setVisibility(View.GONE);
+                ordersRecyclerView.setVisibility(View.VISIBLE);
                 Toast.makeText(Dashboard.this,
                         "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }

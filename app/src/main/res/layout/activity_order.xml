@@ -53,6 +53,13 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavbar"
         android:padding="16dp">
 
+        <ProgressBar
+            android:id="@+id/loadingSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
         <LinearLayout
             android:id="@+id/orderDetailsLayout"
             android:layout_width="match_parent"

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +39,21 @@ public class CartResume extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_resume);
+
+        // Verificar si el usuario es admin o super admin
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String userRole = preferences.getString("userRole", "");
+        boolean isStaff = preferences.getBoolean("isStaff", false);
+        boolean isSuperuser = preferences.getBoolean("isSuperuser", false);
+
+        boolean isAdmin = "ADMIN".equals(userRole) && isStaff;
+        boolean isSuperAdmin = isAdmin && isSuperuser;
+
+        if (isAdmin || isSuperAdmin) {
+            Toast.makeText(this, "Los administradores no pueden realizar pedidos", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
         initializeUI();
 

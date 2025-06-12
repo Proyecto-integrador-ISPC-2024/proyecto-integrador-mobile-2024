@@ -23,6 +23,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import android.widget.ProgressBar;
 
 public class AdminOrdersActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -37,6 +38,7 @@ public class AdminOrdersActivity extends AppCompatActivity {
     private List<Order> originalOrdersList = new ArrayList<>();
     private TextView filterLabel;
     private SearchView searchView;
+    private ProgressBar loadingSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class AdminOrdersActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         searchView = findViewById(R.id.searchView);
         filterLabel = findViewById(R.id.filterLabel);
+        loadingSpinner = findViewById(R.id.loadingSpinner);
         ImageButton filterButton = findViewById(R.id.filterButton);
 
         backButton.setOnClickListener(v -> finish());
@@ -77,9 +80,15 @@ public class AdminOrdersActivity extends AppCompatActivity {
     }
 
     private void loadUserOrders() {
+        loadingSpinner.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        
         apiService.getOrders().enqueue(new Callback<List<Order>>() {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                loadingSpinner.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                
                 if (response.isSuccessful() && response.body() != null) {
                     ordersList.clear();
                     originalOrdersList.clear();
@@ -109,6 +118,8 @@ public class AdminOrdersActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
+                loadingSpinner.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
                 Toast.makeText(AdminOrdersActivity.this,
                         "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
