@@ -47,18 +47,20 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ScrollView
+        android:id="@+id/formScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintTop_toBottomOf="@id/titleTextView"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/registerButton">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="2dp">
 
             <EditText
                 android:id="@+id/nombreInput"
@@ -133,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="16dp">
 
                 <RadioButton
                     android:id="@+id/radioCliente"
@@ -151,17 +153,22 @@
                     android:text="Administrador" />
             </RadioGroup>
 
-            <Button
-                android:id="@+id/registerButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Registrar Usuario"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/rounded_button_default"
-                android:textColor="@android:color/black" />
-
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrar Usuario"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button_default"
+        android:textColor="@android:color/black"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavbar" />
+
     <LinearLayout
         android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"
