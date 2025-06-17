@@ -129,9 +129,10 @@
         android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorSecondary"
         android:orientation="horizontal"
+        android:background="@color/colorSecondary"
         android:padding="8dp"
+        android:contentDescription="@string/bottom_navbar_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -145,7 +146,8 @@
             android:onClick="homeButton"
             android:text="@string/home_button"
             android:textColor="@android:color/white"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_home_button" />
 
         <Button
             android:id="@+id/productsButton"
@@ -156,7 +158,8 @@
             android:onClick="productsButton"
             android:text="@string/products_button"
             android:textColor="@android:color/white"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_products_button" />
 
         <Button
             android:id="@+id/profileBtn"
@@ -167,7 +170,8 @@
             android:onClick="profileBtn"
             android:text="@string/account_button"
             android:textColor="@android:color/white"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_profile_button"  />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

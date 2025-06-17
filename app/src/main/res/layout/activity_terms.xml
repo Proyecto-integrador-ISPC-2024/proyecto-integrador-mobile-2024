@@ -21,61 +21,49 @@
                 android:background="@color/colorPrimary"
                 android:padding="10dp">
 
-                <Button
+                <ImageButton
                     android:id="@+id/backButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/back_button"
-                    android:textColor="@color/colorPrimary"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:drawableTop="@drawable/arrow_back_icon_35x35"
-                    android:drawablePadding="0dp"
+                    android:src="@drawable/arrow_back_icon_35x35"
+                    android:contentDescription="@string/back_button" />
+            </LinearLayout>
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/topNavbar">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
                     android:padding="8dp"
-                    android:layout_marginEnd="300dp"
-                    android:layout_gravity="center"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:contentDescription="@string/contdes_back_btn"
-                    />
-            </LinearLayout>
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:padding="10dp"
-                android:layout_margin="20dp"
-                android:layout_below="@+id/topNavbar"
-                android:layout_marginTop="40dp">
-
-            <TextView
-                android:id="@+id/terminos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:contentDescription="@string/term_and_cond"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:justificationMode="inter_word"
-                android:lineSpacingExtra="4dp"
-                android:text="@string/terminos"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="@+id/bottomNavbar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/topNavbar"
-                app:layout_constraintVertical_bias="0.5"
-                tools:targetApi="o" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/terminos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:contentDescription="Términos y condiciones"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:text="@string/terminos"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="normal"
+                        android:gravity="start"
+                        android:textAlignment="viewStart"
+                        android:justificationMode="inter_word"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+            </ScrollView>
 
             <!-- Navegación inferior -->
             <LinearLayout
@@ -84,56 +72,45 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/colorSecondary"
-                android:padding="10dp"
-                android:layout_alignParentBottom="true">
+                android:padding="8dp"
+                android:layout_alignParentBottom="true"
+                android:contentDescription="@string/bottom_navbar_description">
 
                 <Button
                     android:id="@+id/homeButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:drawableTop="@drawable/home_icon_35x35"
+                    android:onClick="homeButton"
                     android:text="@string/home_button"
                     android:textColor="@android:color/white"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:drawableTop="@drawable/home_icon_35x35"
-                    android:drawablePadding="0dp"
-                    android:padding="8dp"
-                    android:layout_gravity="center"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:contentDescription="@string/contdes_home_button"
-                    android:nextFocusRight="@id/productsButton"/>
+                    android:contentDescription="@string/contdes_home_button" />
 
                 <Button
                     android:id="@+id/productsButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:drawableTop="@drawable/shopping_bag_icon_35x35"
+                    android:onClick="productsButton"
                     android:text="@string/products_button"
                     android:textColor="@android:color/white"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:drawableTop="@drawable/shopping_bag_icon_35x35"
-                    android:drawablePadding="0dp"
-                    android:padding="8dp"
-                    android:layout_gravity="center"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:contentDescription="@string/contdes_products_button"
-                    android:nextFocusRight="@id/profileButton"/>
+                    android:contentDescription="@string/contdes_products_button" />
 
                 <Button
-                    android:id="@+id/profileButton"
+                    android:id="@+id/profileBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:drawableTop="@drawable/account_icon_35x35"
+                    android:onClick="profileBtn"
                     android:text="@string/account_button"
                     android:textColor="@android:color/white"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:drawableTop="@drawable/account_icon_35x35"
-                    android:drawablePadding="0dp"
-                    android:padding="8dp"
-                    android:layout_gravity="center"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:contentDescription="@string/contdes_profile_button"/>
-
+                    android:contentDescription="@string/contdes_profile_button"  />
             </LinearLayout>
 
         </RelativeLayout>

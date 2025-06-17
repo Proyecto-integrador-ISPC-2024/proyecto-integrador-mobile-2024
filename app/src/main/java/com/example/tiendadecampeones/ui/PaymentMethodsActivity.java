@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -70,7 +71,7 @@ public class PaymentMethodsActivity extends AppCompatActivity {
         cbuLabel = findViewById(R.id.cbuLabel);
         aliasLabel = findViewById(R.id.aliasLabel);
         totalTextView = findViewById(R.id.totalTextView);
-        Button backButton = findViewById(R.id.backButton);
+        ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
         Pedido pedido = orderIntent();
