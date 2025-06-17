@@ -137,6 +137,7 @@
     <string name="inputEmail">Email</string>
     <string name="inputPassword">Contraseña</string>
     <string name="saveChangesBtn">Guardar cambios</string>
+    <string name="configuracionPerfil">Configuracion de perfil</string>
 
     <!-- Sección Administrador -->
     <string name="order_screen_title">Nuestros Pedidos</string>
@@ -203,21 +204,23 @@
     <!--  Boton terminos y condiciones  -->
     <string name="term_and_cond">Términos y condiciones</string>
     <string name="contdes_term_bttn">Boton para redireccionar a Términos y condiciones</string>
-    <string name="terminos">Términos y Condiciones (Actualizado: 07/05/2025)
-
-Responsable: Tienda de Campeones, CUIT 12-34567890-1, Córdoba, Argentina.
-Contacto: tiendadecampeonescba@gmail.com
-
-Productos y precios: En pesos argentinos (ARS), con IVA. Sujetos a cambios sin previo aviso.
-
-Compras: Al confirmar una compra aceptás estos términos. Se acepta pago con tarjeta o transferencia.
-
-Envíos: Por Andreani. Entrega estimada entre 5 y 10 días hábiles.
-
-Devoluciones: Tenés 10 días para cancelar. Producto sin uso. Costo de envío a cargo del comprador.
-
-Datos personales: Usamos tus datos solo para fines comerciales conforme a la Ley 25.326.
-
-Jurisdicción: Aplica la ley argentina. Tribunales ordinarios de Córdoba Capital.</string>
     <string name="addressNameContact">Apellido</string>
+    <string name="terminos">Términos y Condiciones (Actualizado: 07/05/2025)\n
+        \n
+📄 Responsable: Tienda de Campeones, CUIT 12-34567890-1, Córdoba, Argentina.\n
+        \n
+📩 Contacto: tiendadecampeonescba@gmail.com\n
+        \n
+💲 Productos y precios: En pesos argentinos (ARS), con IVA. Sujetos a cambios sin previo aviso.\n
+        \n
+🛒 Compras: Al confirmar una compra aceptás estos términos. Se acepta pago con tarjeta o transferencia.\n
+        \n
+🚚 Envíos: Por Andreani. Entrega estimada entre 5 y 10 días hábiles.\n
+        \n
+📦 Devoluciones: Tenés 10 días para cancelar. Producto sin uso. Costo de envío a cargo del comprador.\n
+        \n
+🗂️ Datos personales: Usamos tus datos solo para fines comerciales conforme a la Ley 25.326.\n
+        \n
+⚖️ Jurisdicción: Aplica la ley argentina. Tribunales ordinarios de Córdoba Capital.</string>
+
 </resources>

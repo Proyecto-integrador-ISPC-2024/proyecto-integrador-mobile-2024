@@ -168,7 +168,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/homeBtn"
-                        android:onClick="contactClick"
                         android:backgroundTint="@color/bttns"
                         android:textColor="@color/colorPrimary"
                         android:contentDescription="@string/contdes_contact_btn"
@@ -181,49 +180,46 @@
         <!--    Navegación inferior    -->
         <LinearLayout
             android:id="@+id/bottomNavbar"
-            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorSecondary"
             android:orientation="horizontal"
-            android:padding="10dp"
+            android:background="@color/colorSecondary"
+            android:padding="8dp"
+            android:contentDescription="@string/bottom_navbar_description"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
                 android:id="@+id/homeButton"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/home_icon_35x35"
                 android:text="@string/home_button"
                 android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/contdes_home_button" />
 
             <Button
                 android:id="@+id/productsButton"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/shopping_bag_icon_35x35"
                 android:text="@string/products_button"
                 android:textColor="@android:color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/contdes_products_button" />
 
             <Button
                 android:id="@+id/profileBtn"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/account_icon_35x35"
                 android:text="@string/account_button"
                 android:textColor="@android:color/white"
-                android:contentDescription="@string/contdes_profile_button" />
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/contdes_profile_button"  />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

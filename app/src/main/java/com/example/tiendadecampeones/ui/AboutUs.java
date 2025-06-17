@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.example.tiendadecampeones.ui.TermsActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +21,7 @@ public class AboutUs extends AppCompatActivity {
         setContentView(R.layout.activity_about_us);
 
         // Botones de navegación superior
-        Button backButton = findViewById(R.id.backButton);
+        ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
@@ -42,8 +45,8 @@ public class AboutUs extends AppCompatActivity {
             }
         });
 
-        Button profileButton = findViewById(R.id.profileButton);
-        profileButton.setOnClickListener(new View.OnClickListener() {
+        Button profileBtn = findViewById(R.id.profileBtn);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutUs.this, Profile.class);
                 startActivity(intent);
@@ -72,11 +75,26 @@ public class AboutUs extends AppCompatActivity {
         Button termsButton = findViewById(R.id.termsBttn);
         termsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String url = "https://github.com/Proyecto-integrador-ISPC-2024/proyecto-integrador-web-pp-2025.git";
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(android.net.Uri.parse(url));
+                Intent intent = new Intent(AboutUs.this, TermsActivity.class);
                 startActivity(intent);
             }
         });
+    }
+    public void profileBtn(View view) {
+        Toast.makeText(this, "Redirigiendo a tu perfil", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+
+    public void homeButton(View v) {
+        Toast.makeText(this, "¡ Home !", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
+    public void productsButton(View v) {
+        Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductCategories.class);
+        startActivity(intent);
     }
 }

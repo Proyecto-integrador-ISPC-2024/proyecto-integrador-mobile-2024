@@ -55,7 +55,7 @@ public class ProductCategories extends AppCompatActivity {
         findViewById(R.id.productsButton).setOnClickListener(
                 v -> startActivity(new Intent(this, ProductCategories.class)));
 
-        findViewById(R.id.profileButton).setOnClickListener(
+        findViewById(R.id.profileBtn).setOnClickListener(
                 v -> startActivity(new Intent(this, Profile.class)));
 
         /* ───── Botones de país ───── */

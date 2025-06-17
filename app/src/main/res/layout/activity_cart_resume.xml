@@ -81,72 +81,68 @@
     <!-- Botón Confirmar Compra -->
     <Button
         android:id="@+id/confirmPurchaseButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorSecondary"
-        android:onClick="navigateToPaymentMethods"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
         android:padding="12dp"
+        android:layout_margin="16dp"
+        android:background="@color/bttns"
+        android:onClick="navigateToPaymentMethods"
         android:text="Confirmar compra"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/cartCard"
         app:layout_constraintBottom_toTopOf="@id/bottomNavbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Navegación inferior -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorSecondary"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:background="@color/colorSecondary"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/bottom_navbar_description">
 
         <Button
             android:id="@+id/homeButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/home_icon_35x35"
-            android:drawablePadding="0dp"
-            android:onClick="vHome"
-            android:padding="8dp"
+            android:onClick="homeButton"
             android:text="@string/home_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_home_button" />
 
         <Button
             android:id="@+id/productsButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/shopping_bag_icon_35x35"
-            android:drawablePadding="0dp"
-            android:onClick="vProducts"
-            android:padding="8dp"
+            android:onClick="productsButton"
             android:text="@string/products_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_products_button" />
 
         <Button
-            android:id="@+id/profileButton"
-            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/profileBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/account_icon_35x35"
-            android:drawablePadding="0dp"
-            android:onClick="vProfile"
-            android:padding="8dp"
+            android:onClick="profileBtn"
             android:text="@string/account_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_profile_button"  />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

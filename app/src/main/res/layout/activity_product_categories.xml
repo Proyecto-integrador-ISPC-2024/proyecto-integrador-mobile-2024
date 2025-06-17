@@ -295,7 +295,7 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/profileButton"
+            android:id="@+id/profileBtn"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -304,6 +304,6 @@
             android:drawableTop="@drawable/account_icon_35x35"
             android:gravity="center"
             android:text="@string/account_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

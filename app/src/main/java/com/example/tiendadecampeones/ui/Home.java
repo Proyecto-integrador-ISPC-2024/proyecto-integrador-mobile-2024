@@ -64,7 +64,7 @@ public class Home extends AppCompatActivity {
     }
 
     /* ╔══════════════════════════════════════════════╗
-       ║  Sincroniza ViewModel con SharedPreferences   ║
+       ║  Sincroniza ViewModel con SharedPreferences  ║
        ╚══════════════════════════════════════════════╝ */
     private void refreshBadgeFromPrefs() {
         SharedPreferences sp = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);

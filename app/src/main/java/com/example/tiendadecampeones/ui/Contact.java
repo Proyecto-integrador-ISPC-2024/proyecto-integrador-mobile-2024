@@ -166,7 +166,7 @@ public class Contact extends AppCompatActivity {
         findViewById(R.id.backButton).setOnClickListener(v -> finish());
         findViewById(R.id.homeButton).setOnClickListener(v -> startActivity(new Intent(this, Home.class)));
         findViewById(R.id.productsButton).setOnClickListener(v -> startActivity(new Intent(this, ProductCategories.class)));
-        findViewById(R.id.profileButton).setOnClickListener(v -> startActivity(new Intent(this, Profile.class)));
+        findViewById(R.id.profileBtn).setOnClickListener(v -> startActivity(new Intent(this, Profile.class)));
         findViewById(R.id.comprarButton).setOnClickListener(v -> startActivity(new Intent(this, ProductCategories.class)));
     }
 
@@ -192,7 +192,6 @@ public class Contact extends AppCompatActivity {
         String pattern = "^[\\p{L}\\p{N}\\s.,!?¡¿'\"\\-:;()áéíóúÁÉÍÓÚñÑüÜ]*$";
         return input.matches(pattern);
     }
-
 
     private void showError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();

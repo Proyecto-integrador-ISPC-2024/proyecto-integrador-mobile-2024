@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -153,6 +154,24 @@ public class CartResume extends AppCompatActivity {
         Intent intent = new Intent(CartResume.this, PaymentMethodsActivity.class);
         intent.putExtra("pedido", pedidoJson);
 
+        startActivity(intent);
+    }
+
+    public void profileBtn(View view) {
+        Toast.makeText(this, "Redirigiendo a tu perfil", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+
+    public void homeButton(View v) {
+        Toast.makeText(this, "¡ Home !", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
+    public void productsButton(View v) {
+        Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductCategories.class);
         startActivity(intent);
     }
 }
