@@ -73,7 +73,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/colorSecondary"
+            android:backgroundTint="@color/bttns"
             android:onClick="dashClick"
             android:text="@string/Dbtn"
             android:textColor="@color/btnText"
@@ -86,7 +86,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/colorSecondary"
+            android:backgroundTint="@color/bttns"
             android:onClick="webtn"
             android:text="@string/webtn"
             android:textColor="@color/btnText"
@@ -99,7 +99,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/colorSecondary"
+            android:backgroundTint="@color/bttns"
             android:onClick="settingsClick"
             android:text="Editar perfil"
             android:textColor="@color/btnText"
@@ -153,7 +153,7 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/profileButton"
+            android:id="@+id/profileBtn"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

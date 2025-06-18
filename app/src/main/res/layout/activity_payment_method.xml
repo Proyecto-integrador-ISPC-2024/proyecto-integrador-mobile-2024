@@ -7,6 +7,7 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context=".ui.PaymentMethodsActivity">
+
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -16,6 +17,7 @@
         android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:padding="16dp">
+
         <ImageView
             android:id="@+id/logoImageView"
             android:layout_width="wrap_content"
@@ -24,6 +26,7 @@
             android:contentDescription="@string/app_name"
             android:src="@mipmap/logo_activities" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/topNavbar"
         android:layout_width="match_parent"
@@ -31,16 +34,16 @@
         android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:padding="10dp">
-        <Button
+
+        <ImageButton
             android:id="@+id/backButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableStart="@drawable/arrow_back_icon_35x35"
-            android:text="@string/back_button"
-            android:textColor="@color/colorPrimary" />
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:contentDescription="@string/back_button" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -145,54 +148,51 @@
             android:layout_height="64dp"
             android:layout_gravity="center_horizontal"
             android:text="Confirmar pago"
-            android:backgroundTint="@color/colorSecondary"
-            android:textColor="@color/btnText" />
+            android:backgroundTint="@color/bttns"
+            android:textColor="@color/btnText"
+            android:contentDescription="@string/contdes_pay"/>
+
     </LinearLayout>
     <LinearLayout
         android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorSecondary"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:background="@color/colorSecondary"
+        android:padding="8dp"
+        android:layout_alignParentBottom="true">
+
         <Button
             android:id="@+id/homeButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/home_icon_35x35"
-            android:drawablePadding="0dp"
-            android:onClick="vHome"
-            android:padding="8dp"
             android:text="@string/home_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_home_button" />
+
         <Button
             android:id="@+id/productsButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/shopping_bag_icon_35x35"
-            android:drawablePadding="0dp"
-            android:onClick="vProducts"
-            android:padding="8dp"
             android:text="@string/products_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_products_button" />
+
         <Button
-            android:id="@+id/profileButton"
-            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/profileBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:drawableTop="@drawable/account_icon_35x35"
-            android:drawablePadding="0dp"
-            android:onClick="vProfile"
-            android:padding="8dp"
             android:text="@string/account_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_profile_button"  />
     </LinearLayout>
 </LinearLayout>

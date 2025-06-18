@@ -5,9 +5,11 @@ import static androidx.core.content.ContextCompat.startActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +35,7 @@ public class Register extends AppCompatActivity {
 
     private EditText etEmail, etPassword, etConfirmPassword, etNombre, etApellido, etDomicilio;
     private Button btnRegister;
+    private TextView errorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ public class Register extends AppCompatActivity {
         etPassword = findViewById(R.id.editTextPassword);
         etConfirmPassword = findViewById(R.id.editTextRepeatPassword);
         btnRegister = findViewById(R.id.btn_register);
+        errorMessage = findViewById(R.id.errorMessageRegister);
+        errorMessage.setVisibility(View.GONE);
 
         // Escucha del botón de registro
         btnRegister.setOnClickListener(v -> {
@@ -67,6 +72,7 @@ public class Register extends AppCompatActivity {
             }
         });
     }
+
 
     // Método para validar los campos
     private boolean validateFields() {

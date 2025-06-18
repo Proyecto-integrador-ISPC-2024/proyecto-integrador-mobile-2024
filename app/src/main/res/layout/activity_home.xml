@@ -52,14 +52,36 @@
                 android:layout_marginEnd="256dp"
                 android:contentDescription="@string/contdes_menu_desplegable" />
 
-            <ImageButton
-                android:id="@+id/cartButton"
+            <FrameLayout
+                android:id="@+id/cartContainer"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/shopping_cart_icon_35x35"
-                android:layout_weight="1"
-                android:contentDescription="@string/cart_button" />
+                android:layout_weight="1">
+
+                <!-- Icono (sigue siendo un ImageButton para mantener el ripple) -->
+                <ImageButton
+                    android:id="@+id/cartButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/shopping_cart_icon_35x35"
+                    android:contentDescription="@string/cart_button" />
+
+                <!-- Badge -->
+                <TextView
+                    android:id="@+id/cartBadge"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="end|top"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/badge_bg"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp"
+                    android:visibility="gone" />
+            </FrameLayout>
         </LinearLayout>
 
         <!--    Contenido principal    -->
@@ -121,12 +143,14 @@
                     android:textSize="16sp" />
 
 
+
                 <HorizontalScrollView
                     android:id="@+id/recommendedScrollView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:scrollbars="none">
+                    android:scrollbars="none"
+                    >
 
                     <LinearLayout
                         android:id="@+id/recommendedProductsLayout"
@@ -142,11 +166,11 @@
                             android:layout_marginEnd="16dp"
                             android:background="@color/colorSecondary"
                             android:contentDescription="@string/contdes_productscroll_button"
-                            android:focusable="true"
                             android:focusableInTouchMode="true"
                             android:nextFocusRight="@id/product_2"
                             android:orientation="vertical"
-                            android:padding="8dp">
+                            android:padding="8dp"
+                            android:gravity="center_horizontal">
 
                             <ImageView
                                 android:layout_width="120dp"
@@ -168,7 +192,6 @@
                                 android:id="@+id/buyButton1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="42dp"
-                                android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:contentDescription="@string/contdes_buy_btn"
                                 android:text="Comprar Ya"
@@ -178,14 +201,15 @@
                         <!-- Producto 2 -->
                         <LinearLayout
                             android:id="@+id/product_2"
-                            android:layout_width="142dp"
+                            android:layout_width="147dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="16dp"
                             android:background="@color/colorSecondary"
                             android:contentDescription="@string/contdes_productscroll_button"
                             android:nextFocusRight="@id/product_3"
                             android:orientation="vertical"
-                            android:padding="8dp">
+                            android:padding="8dp"
+                            android:gravity="center_horizontal">
 
                             <ImageView
                                 android:layout_width="120dp"
@@ -194,8 +218,8 @@
                                 android:src="@mipmap/argentina_2021_primera" />
 
                             <TextView
-                                android:layout_width="122dp"
-                                android:layout_height="22dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:contentDescription="Remera de Argentina 2021"
                                 android:text="Argentina 2021"
@@ -207,7 +231,6 @@
                                 android:id="@+id/buyButton2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="42dp"
-                                android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:contentDescription="@string/contdes_buy_btn"
                                 android:text="Comprar Ya"
@@ -217,13 +240,14 @@
                         <!-- Producto 3 -->
                         <LinearLayout
                             android:id="@+id/product_3"
-                            android:layout_width="138dp"
+                            android:layout_width="147dp"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="16dp"
                             android:background="@color/colorSecondary"
                             android:contentDescription="@string/contdes_productscroll_button"
                             android:orientation="vertical"
-                            android:padding="8dp">
+                            android:padding="8dp"
+                            android:gravity="center_horizontal">
 
                             <ImageView
                                 android:layout_width="120dp"
@@ -245,7 +269,6 @@
                                 android:id="@+id/buyButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="45dp"
-                                android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:contentDescription="@string/contdes_buy_btn"
                                 android:text="Comprar Ya"
@@ -255,6 +278,7 @@
                     </LinearLayout>
                 </HorizontalScrollView>
 
+
             </LinearLayout>
 
         </ScrollView>
@@ -262,18 +286,17 @@
         <!--    Navegación inferior    -->
         <LinearLayout
             android:id="@+id/bottomNavbar"
-            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorSecondary"
             android:orientation="horizontal"
+            android:background="@color/colorSecondary"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="0dp">
 
+
             <Button
                 android:id="@+id/homeButton"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -285,7 +308,6 @@
 
             <Button
                 android:id="@+id/productsButton"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -297,7 +319,6 @@
 
             <Button
                 android:id="@+id/profileBtn"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -306,6 +327,7 @@
                 android:drawableTop="@drawable/account_icon_35x35"
                 android:text="@string/account_button"
                 android:textColor="@android:color/white" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

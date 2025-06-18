@@ -21,7 +21,10 @@ import java.util.Comparator;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
+import android.widget.Button;
 import retrofit2.Response;
+import android.widget.ProgressBar;
+import android.os.Handler;
 
 public class AdminListUsersActivity extends AppCompatActivity implements UserAdapter.OnUserActionListener {
     private RecyclerView recyclerView;
@@ -29,12 +32,15 @@ public class AdminListUsersActivity extends AppCompatActivity implements UserAda
     private List<Usuario> usersList;
     private SearchView searchView;
     private ImageButton backButton;
-
+    private Button btnCalculator;
     private ApiService apiService;
     private List<Usuario> originalUsersList = new ArrayList<>();
     private String selectedRole = "Todos";
     private String selectedStatus = "Todos";
     private TextView filterLabel;
+    private ProgressBar loadingSpinner;
+    private static final long MIN_LOADING_TIME = 500; // 500ms mínimo de visualización
+    private long loadingStartTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +48,10 @@ public class AdminListUsersActivity extends AppCompatActivity implements UserAda
         setContentView(R.layout.activity_admin_list_users);
 
         apiService = RetrofitClient.getClient(this).create(ApiService.class);
-
+        btnCalculator = findViewById(R.id.btnCalculator);
         recyclerView = findViewById(R.id.usersRecyclerView);
         searchView = findViewById(R.id.searchView);
+        loadingSpinner = findViewById(R.id.loadingSpinner);
         searchView.setQueryHint(getString(R.string.search_hint));
         searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
@@ -78,44 +85,79 @@ public class AdminListUsersActivity extends AppCompatActivity implements UserAda
         backButton.setOnClickListener(v -> finish());
         filterButton.setOnClickListener(v -> showFilterDialog());
 
-
+        btnCalculator.setOnClickListener(v -> setBtnCalculator(v));
         loadUsers();
     }
 
     private void loadUsers() {
+        loadingStartTime = System.currentTimeMillis();
+        loadingSpinner.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+
         boolean incluirInactivos = selectedStatus.equals("Inactivos") || selectedStatus.equals("Todos");
         apiService.getAllUsuarios(incluirInactivos).enqueue(new Callback<List<Usuario>>() {
             @Override
             public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    originalUsersList.clear();
-                    originalUsersList.addAll(response.body());
-                    sortUsersByPriority(originalUsersList);
-                    usersList.clear();
-                    if (selectedStatus.equals("Activos")) {
-                        for (Usuario user : originalUsersList) {
-                            if (user.isActive()) usersList.add(user);
-                        }
-                    } else if (selectedStatus.equals("Inactivos")) {
-                        for (Usuario user : originalUsersList) {
-                            if (!user.isActive()) usersList.add(user);
-                        }
-                    } else {
-                        usersList.addAll(originalUsersList);
-                    }
-                    adapter.notifyDataSetChanged();
+                long loadingTime = System.currentTimeMillis() - loadingStartTime;
+                if (loadingTime < MIN_LOADING_TIME) {
+                    new Handler().postDelayed(() -> {
+                        hideLoadingAndShowContent();
+                        processResponse(response);
+                    }, MIN_LOADING_TIME - loadingTime);
                 } else {
-                    Toast.makeText(AdminListUsersActivity.this,
-                            "Error al cargar los usuarios: " + response.code(), Toast.LENGTH_SHORT).show();
+                    hideLoadingAndShowContent();
+                    processResponse(response);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                Toast.makeText(AdminListUsersActivity.this,
-                        "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                long loadingTime = System.currentTimeMillis() - loadingStartTime;
+                if (loadingTime < MIN_LOADING_TIME) {
+                    new Handler().postDelayed(() -> {
+                        hideLoadingAndShowContent();
+                        showError(t.getMessage());
+                    }, MIN_LOADING_TIME - loadingTime);
+                } else {
+                    hideLoadingAndShowContent();
+                    showError(t.getMessage());
+                }
             }
         });
+    }
+
+    private void hideLoadingAndShowContent() {
+        loadingSpinner.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    private void processResponse(Response<List<Usuario>> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            originalUsersList.clear();
+            originalUsersList.addAll(response.body());
+            sortUsersByPriority(originalUsersList);
+            usersList.clear();
+            if (selectedStatus.equals("Activos")) {
+                for (Usuario user : originalUsersList) {
+                    if (user.isActive()) usersList.add(user);
+                }
+            } else if (selectedStatus.equals("Inactivos")) {
+                for (Usuario user : originalUsersList) {
+                    if (!user.isActive()) usersList.add(user);
+                }
+            } else {
+                usersList.addAll(originalUsersList);
+            }
+            adapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(AdminListUsersActivity.this,
+                    "Error al cargar los usuarios: " + response.code(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void showError(String message) {
+        Toast.makeText(AdminListUsersActivity.this,
+                "Error de conexión: " + message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -226,6 +268,26 @@ public class AdminListUsersActivity extends AppCompatActivity implements UserAda
     private void updateFilterLabel() {
         if (filterLabel != null) {
             filterLabel.setText("Filtrando por: " + selectedRole + " | " + selectedStatus);
+        }
+    }
+
+    public void setBtnCalculator(View view) {
+        Toast.makeText(this, "Calculadora de ventas", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, SalesCalculatorActivity.class);
+        startActivity(intent);
+    }
+
+    public void registerUser(View view) {
+        Toast.makeText(this, "Registro de usuario", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, RegisterAdminActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            loadUsers();
         }
     }
 

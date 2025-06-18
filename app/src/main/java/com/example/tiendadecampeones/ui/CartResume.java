@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +40,21 @@ public class CartResume extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_resume);
+
+        // Verificar si el usuario es admin o super admin
+        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String userRole = preferences.getString("userRole", "");
+        boolean isStaff = preferences.getBoolean("isStaff", false);
+        boolean isSuperuser = preferences.getBoolean("isSuperuser", false);
+
+        boolean isAdmin = "ADMIN".equals(userRole) && isStaff;
+        boolean isSuperAdmin = isAdmin && isSuperuser;
+
+        if (isAdmin || isSuperAdmin) {
+            Toast.makeText(this, "Los administradores no pueden realizar pedidos", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
         initializeUI();
 
@@ -137,6 +154,24 @@ public class CartResume extends AppCompatActivity {
         Intent intent = new Intent(CartResume.this, PaymentMethodsActivity.class);
         intent.putExtra("pedido", pedidoJson);
 
+        startActivity(intent);
+    }
+
+    public void profileBtn(View view) {
+        Toast.makeText(this, "Redirigiendo a tu perfil", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+
+    public void homeButton(View v) {
+        Toast.makeText(this, "¡ Home !", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
+    public void productsButton(View v) {
+        Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductCategories.class);
         startActivity(intent);
     }
 }

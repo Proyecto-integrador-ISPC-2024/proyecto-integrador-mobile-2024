@@ -21,8 +21,8 @@ Este proyecto está desarrollado en **Android Studio**, utilizando Java como el 
 
 ## Equipo de Desarrollo
 La aplicación se desarrolla por el equipo de desarrolladores **DevTeamCba** integrado por:
-- Recabarren, Cristian Emanuel 
-- Toscano, Gustavo Ariel 
+- Recabarren, Cristian Emanuel (ex-integrante )
+- Toscano, Gustavo Ariel   (ex integrante )
 - Urcola, María Victoria 
 - Pena, Lautaro 
 - Tachini, Valentina
@@ -30,5 +30,6 @@ La aplicación se desarrolla por el equipo de desarrolladores **DevTeamCba** int
 - Negrete, Julieta de los Ángeles 
 - Caminos Picco, Albano Ezequiel
 - Sabeff, Denisse Araceli
+- Plaza, Leonardo 
 
 [![Logo del Equipo](https://github.com/Proyecto-Desarrollo-web-ISPC/Proyecto-Integrador-Modulo-FullStack_2023/blob/main/logoequipo.png)](URL_DEL_SITIO_WEB_DEL_EQUIPO)

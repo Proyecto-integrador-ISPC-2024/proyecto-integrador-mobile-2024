@@ -6,16 +6,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tiendadecampeones.R;
+import com.example.tiendadecampeones.models.CartItem;
+import com.example.tiendadecampeones.viewmodel.CartViewModel;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
 
 public class Home extends AppCompatActivity {
+
+    private CartViewModel cartVM;
+    private TextView cartBadge;
     private DrawerLayout drawerLayout;
 
     @Override
@@ -23,129 +35,141 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Recibimos el nombre de usuario
+        /* ───── ViewModel + badge ───── */
+        cartVM    = new ViewModelProvider(this).get(CartViewModel.class);
+        cartBadge = findViewById(R.id.cartBadge);
+        ImageButton cartButton = findViewById(R.id.cartButton);
+
+        cartVM.getCount().observe(this, n -> {
+            if (n != null && n > 0) {
+                cartBadge.setText(String.valueOf(n));
+                cartBadge.setVisibility(View.VISIBLE);
+            } else {
+                cartBadge.setVisibility(View.GONE);
+            }
+        });
+
+        refreshBadgeFromPrefs();                         // valor inicial
+        cartButton.setOnClickListener(v ->
+                startActivity(new Intent(this, Cart.class)));
+
+        /* ───── Resto de UI / navegación ───── */
+        setupMenusAndButtons();
+        Button buyButton1 = findViewById(R.id.buyButton1);
+        Button buyButton2 = findViewById(R.id.buyButton2);
+        Button buyButton3 = findViewById(R.id.buyButton);
+
+        View.OnClickListener goToCategories = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, ProductCategories.class);
+                startActivity(intent);
+            }
+        };
+
+        buyButton1.setOnClickListener(goToCategories);
+        buyButton2.setOnClickListener(goToCategories);
+        buyButton3.setOnClickListener(goToCategories);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshBadgeFromPrefs();                         // al volver de otras pantallas
+    }
+
+    /* ╔══════════════════════════════════════════════╗
+       ║  Sincroniza ViewModel con SharedPreferences  ║
+       ╚══════════════════════════════════════════════╝ */
+    private void refreshBadgeFromPrefs() {
+        SharedPreferences sp = getSharedPreferences("cart_shared_prefs", MODE_PRIVATE);
+        String json = sp.getString("cart_items", "[]");
+
+        List<CartItem> list = new Gson().fromJson(json,
+                new TypeToken<List<CartItem>>(){}.getType());
+
+        int qty = 0;
+        if (list != null)
+            for (CartItem ci : list) qty += ci.getCantidadCompra();
+
+        cartVM.setCount(qty);
+    }
+
+    /* ╔══════════════════════════════════════════════╗
+       ║   Código de navegación que ya tenías antes   ║
+       ╚══════════════════════════════════════════════╝ */
+    private void setupMenusAndButtons() {
+
+        // Mensaje de bienvenida (idéntico al original)
         Intent intent = getIntent();
         String nombreUsuario = intent.getStringExtra("nombreUsuario");
-
-        // Diálogo inicial
-        boolean mostrarBienvenida = intent.getBooleanExtra("mostrarBienvenida", false);
-        if (mostrarBienvenida) {
+        if (intent.getBooleanExtra("mostrarBienvenida", false)) {
             new AlertDialog.Builder(this)
                     .setTitle("Bienvenido de vuelta")
                     .setMessage("Hola, " + nombreUsuario + "!")
-                    .setPositiveButton("Continuar", (dialog, which) -> dialog.dismiss())
+                    .setPositiveButton("Continuar", (d, w) -> d.dismiss())
                     .show();
-
             intent.removeExtra("mostrarBienvenida");
         }
 
-        // Initialize the DrawerLayout
         drawerLayout = findViewById(R.id.main);
 
-        // Navegación lateral
+        /* ---- Top bar ---- */
         ImageButton sideNavButton = findViewById(R.id.sideNavButton);
         sideNavButton.setOnClickListener(v -> {
-            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START))
                 drawerLayout.closeDrawer(GravityCompat.START);
-            } else {
+            else
                 drawerLayout.openDrawer(GravityCompat.START);
-            }
         });
 
-        ImageButton cartButton = findViewById(R.id.cartButton);
-        cartButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, Cart.class);
-                startActivity(intent);
-            }
-        });
-
-
-        // Navegación lateral
+        /* ---- Navigation Drawer ---- */
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_products) {
-                startActivity(new Intent(Home.this, ProductCategories.class));
-            } else if (id == R.id.nav_cart) {
-                startActivity(new Intent(Home.this, Cart.class));
-            } else if (id == R.id.nav_about) {
-                startActivity(new Intent(Home.this, AboutUs.class));
-            } else if (id == R.id.nav_contact) {
-                startActivity(new Intent(Home.this, Contact.class));
-            } else if (id == R.id.nav_profile) {
-                startActivity(new Intent(Home.this, Profile.class));
-            } else if (id == R.id.nav_dashboard) {
-                SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-                String userRole = preferences.getString("userRole", "");
-                boolean isStaff = preferences.getBoolean("isStaff", false);
-                boolean isSuperuser = preferences.getBoolean("isSuperuser", false);
-                // Verificar si el usuario es admin o super admin
-                boolean isAdmin = "ADMIN".equals(userRole) && isStaff;
-                boolean isSuperAdmin = isAdmin && isSuperuser;
-
-                if (isAdmin || isSuperAdmin) {
-                    Toast.makeText(this, "Redireccionando al panel de administración", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Home.this, AdminListUsersActivity.class));
-                } else {
-                    Toast.makeText(this, "Redireccionando a tu dashboard", Toast.LENGTH_SHORT).show();
-                    Intent dashboardIntent = new Intent(Home.this, Dashboard.class);
-                    dashboardIntent.putExtra("ORIGIN", "HOME");
-                    startActivity(dashboardIntent);
-                }
-            }
+            if (id == R.id.nav_products)           startActivity(new Intent(this, ProductCategories.class));
+            else if (id == R.id.nav_cart)          startActivity(new Intent(this, Cart.class));
+            else if (id == R.id.nav_about)         startActivity(new Intent(this, AboutUs.class));
+            else if (id == R.id.nav_contact)       startActivity(new Intent(this, Contact.class));
+            else if (id == R.id.nav_profile)       startActivity(new Intent(this, Profile.class));
+            else if (id == R.id.nav_dashboard)     openDashboardOrAdmin();
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
 
-        // Navegación central
-        Button buyButton = findViewById(R.id.buyButton);
-        buyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, ProductCategories.class);
-                startActivity(intent);
-            }
-        });
+        /* ---- Botón central ---- */
+        findViewById(R.id.buyButton).setOnClickListener(
+                v -> startActivity(new Intent(this, ProductCategories.class)));
 
-        // Botones de navegación inferior
-        Button homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                System.out.println("Actualmente en home");
-            }
-        });
-        Button productsButton = findViewById(R.id.productsButton);
-        productsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, ProductCategories.class);
-                startActivity(intent);
-            }
-        });
-        Button profileButton = findViewById(R.id.profileBtn);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, Profile.class);
-                startActivity(intent);
-            }
-        });
+        /* ---- Bottom Navigation ---- */
+        findViewById(R.id.homeButton).setOnClickListener(
+                v -> Toast.makeText(this, "Actualmente en home", Toast.LENGTH_SHORT).show());
+
+        findViewById(R.id.productsButton).setOnClickListener(
+                v -> startActivity(new Intent(this, ProductCategories.class)));
+
+        findViewById(R.id.profileBtn).setOnClickListener(
+                v -> startActivity(new Intent(this, Profile.class)));
     }
 
-    // Navegación inferior
-    public void profileBtn(View view) {
-        Toast.makeText(this, "Redirigiendo a tu perfil", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
-    }
+    /* Helper admin/dashboard */
+    private void openDashboardOrAdmin() {
+        SharedPreferences prefs = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String role = prefs.getString("userRole", "");
+        boolean isStaff = prefs.getBoolean("isStaff", false);
+        boolean isSuperuser = prefs.getBoolean("isSuperuser", false);
 
-    public void homeButton(View v) {
-        Toast.makeText(this, "¡ Home !", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-    }
+        boolean isAdmin      = "ADMIN".equals(role) && isStaff;
+        boolean isSuperAdmin = isAdmin && isSuperuser;
 
-    public void productsButton(View v) {
-        Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, ProductCategories.class);
-        startActivity(intent);
+        if (isAdmin || isSuperAdmin) {
+            Toast.makeText(this, "Redireccionando al panel de administración", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, AdminListUsersActivity.class));
+        } else {
+            Toast.makeText(this, "Redireccionando a tu dashboard", Toast.LENGTH_SHORT).show();
+            Intent dash = new Intent(this, Dashboard.class);
+            dash.putExtra("ORIGIN", "HOME");
+            startActivity(dash);
+        }
     }
 }

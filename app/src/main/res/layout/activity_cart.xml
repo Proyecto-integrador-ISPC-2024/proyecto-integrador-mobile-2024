@@ -80,54 +80,62 @@
 
     <Button
         android:id="@+id/endShop"
-        android:layout_width="200dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@color/gray_400"
-        android:text="@string/finalizar_compra"
-        android:textColor="@color/black"
         android:layout_gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@color/bttns"
+        android:contentDescription="@string/contdes_end_bttn"
+        android:text="@string/finalizar_compra"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
 
+    <!-- Navegación inferior -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/colorSecondary"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:contentDescription="@string/bottom_navbar_description">
 
         <Button
             android:id="@+id/homeButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawableTop="@drawable/home_icon_35x35"
+            android:onClick="homeButton"
             android:text="@string/home_button"
             android:textColor="@android:color/white"
-            android:drawableTop="@drawable/home_icon_35x35"
-            android:gravity="center"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_home_button" />
 
         <Button
             android:id="@+id/productsButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
+            android:onClick="productsButton"
             android:text="@string/products_button"
             android:textColor="@android:color/white"
-            android:drawableTop="@drawable/shopping_bag_icon_35x35"
-            android:gravity="center"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_products_button" />
 
         <Button
-            android:id="@+id/profileButton"
+            android:id="@+id/profileBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawableTop="@drawable/account_icon_35x35"
+            android:onClick="profileBtn"
             android:text="@string/account_button"
             android:textColor="@android:color/white"
-            android:drawableTop="@drawable/account_icon_35x35"
-            android:gravity="center"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/contdes_profile_button"  />
     </LinearLayout>
 
 </LinearLayout>
