@@ -18,21 +18,14 @@
         android:padding="10dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/back_button"
-            android:textColor="@color/colorPrimary"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/arrow_back_icon_35x35"
-            android:drawablePadding="0dp"
-            android:padding="8dp"
-            android:layout_gravity="center"
-            style="?android:attr/buttonBarButtonStyle"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:contentDescription="@string/contdes_back_btn"/>
+            android:src="@drawable/arrow_back_icon_35x35"
+            android:contentDescription="@string/back_button" />
+
     </LinearLayout>
 
     <!-- Contenido scrollable -->
@@ -183,14 +176,15 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Navbar inferior fija -->
+    <!-- Navegación inferior -->
     <LinearLayout
         android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/colorSecondary"
-        android:padding="10dp"
+        android:padding="8dp"
+        android:contentDescription="@string/bottom_navbar_description"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
@@ -198,46 +192,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawableTop="@drawable/home_icon_35x35"
             android:text="@string/home_button"
             android:textColor="@android:color/white"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/home_icon_35x35"
-            android:drawablePadding="0dp"
-            android:padding="8dp"
-            android:layout_gravity="center"
-            style="?android:attr/buttonBarButtonStyle"
-            android:contentDescription="@string/contdes_home_button"
-            android:nextFocusRight="@id/productsButton" />
+            android:contentDescription="@string/contdes_home_button" />
 
         <Button
             android:id="@+id/productsButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawableTop="@drawable/shopping_bag_icon_35x35"
             android:text="@string/products_button"
             android:textColor="@android:color/white"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/shopping_bag_icon_35x35"
-            android:drawablePadding="0dp"
-            android:padding="8dp"
-            android:layout_gravity="center"
-            style="?android:attr/buttonBarButtonStyle"
-            android:contentDescription="@string/contdes_products_button"
-            android:nextFocusRight="@id/profileButton" />
+            android:contentDescription="@string/contdes_products_button" />
 
         <Button
-            android:id="@+id/profileButton"
+            android:id="@+id/profileBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawableTop="@drawable/account_icon_35x35"
             android:text="@string/account_button"
             android:textColor="@android:color/white"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:drawableTop="@drawable/account_icon_35x35"
-            android:drawablePadding="0dp"
-            android:padding="8dp"
-            android:layout_gravity="center"
-            style="?android:attr/buttonBarButtonStyle"
-            android:contentDescription="@string/contdes_profile_button" />
+            android:contentDescription="@string/contdes_profile_button"  />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -118,4 +118,22 @@ public class Cart extends AppCompatActivity {
         totalTextView.setText("Total: $" + String.format("%.2f", total));
         checkoutButton.setEnabled(total > 0);
     }
+
+    public void profileBtn(View view) {
+        Toast.makeText(this, "Redirigiendo a tu perfil", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+
+    public void homeButton(View v) {
+        Toast.makeText(this, "¡ Home !", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
+    public void productsButton(View v) {
+        Toast.makeText(this, "¡ Nuestros Productos !", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductCategories.class);
+        startActivity(intent);
+    }
 }

@@ -22,20 +22,14 @@
         android:padding="10dp"
         android:layout_alignParentTop="true">
 
-      <Button
+      <ImageButton
           android:id="@+id/backButton"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/back_button"
-          android:textColor="@color/colorPrimary"
+          android:layout_width="48dp"
+          android:layout_height="48dp"
           android:background="?attr/selectableItemBackgroundBorderless"
-          android:drawableTop="@drawable/arrow_back_icon_35x35"
-          android:drawablePadding="0dp"
-          android:padding="8dp"
-          android:focusable="true"
-          android:focusableInTouchMode="true"
-          android:contentDescription="@string/contdes_back_btn"
-          style="?android:attr/buttonBarButtonStyle"/>
+          android:src="@drawable/arrow_back_icon_35x35"
+          android:contentDescription="@string/back_button" />
+
     </LinearLayout>
 
     <!-- Contenido centrado -->
@@ -108,7 +102,6 @@
               android:contentDescription="@string/contdes_contact_btn"
               android:focusable="true"
               android:focusableInTouchMode="true"
-              android:onClick="contactClick"
               android:text="@string/contactBtn"
               android:textColor="@color/colorPrimary" />
 
@@ -120,7 +113,6 @@
               android:backgroundTint="@color/bttns"
               android:contentDescription="@string/contdes_term_bttn"
               android:focusable="true"
-              android:onClick="termClick"
               android:text="@string/term_and_cond"
               android:textColor="@color/colorPrimary" />
         </LinearLayout>
@@ -135,7 +127,6 @@
             android:layout_below="@id/aboutUsImageView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:onClick="contactClick"
             android:backgroundTint="@color/bttns"
             android:textColor="@color/colorPrimary"
             android:contentDescription="@string/VisitarWeb"
@@ -153,7 +144,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/colorSecondary"
-        android:padding="10dp"
+        android:padding="8dp"
         android:layout_alignParentBottom="true"
         android:contentDescription="@string/bottom_navbar_description">
 
@@ -162,47 +153,33 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
+          android:drawableTop="@drawable/home_icon_35x35"
+          android:onClick="homeButton"
           android:text="@string/home_button"
           android:textColor="@android:color/white"
-          android:background="?attr/selectableItemBackgroundBorderless"
-          android:drawableTop="@drawable/home_icon_35x35"
-          android:drawablePadding="0dp"
-          android:padding="8dp"
-          android:layout_gravity="center"
-          style="?android:attr/buttonBarButtonStyle"
-          android:contentDescription="@string/contdes_home_button"
-          android:nextFocusRight="@id/productsButton"/>
+          android:background="?attr/selectableItemBackgroundBorderless" />
 
       <Button
           android:id="@+id/productsButton"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
+          android:drawableTop="@drawable/shopping_bag_icon_35x35"
+          android:onClick="productsButton"
           android:text="@string/products_button"
           android:textColor="@android:color/white"
-          android:background="?attr/selectableItemBackgroundBorderless"
-          android:drawableTop="@drawable/shopping_bag_icon_35x35"
-          android:drawablePadding="0dp"
-          android:padding="8dp"
-          android:layout_gravity="center"
-          style="?android:attr/buttonBarButtonStyle"
-          android:contentDescription="@string/contdes_products_button"
-          android:nextFocusRight="@id/profileButton"/>
+          android:background="?attr/selectableItemBackgroundBorderless" />
 
       <Button
-          android:id="@+id/profileButton"
+          android:id="@+id/profileBtn"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
+          android:drawableTop="@drawable/account_icon_35x35"
+          android:onClick="profileBtn"
           android:text="@string/account_button"
           android:textColor="@android:color/white"
-          android:background="?attr/selectableItemBackgroundBorderless"
-          android:drawableTop="@drawable/account_icon_35x35"
-          android:drawablePadding="0dp"
-          android:padding="8dp"
-          android:layout_gravity="center"
-          android:contentDescription="@string/contdes_profile_button"
-          style="?android:attr/buttonBarButtonStyle" />
+          android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 
   </RelativeLayout>
